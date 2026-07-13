@@ -1,0 +1,398 @@
+---
+const gumroadUrl = "https://aghhol.gumroad.com/l/DIET-COACH-ai-fitness";
+---
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Diet Coach — Ton coach minceur IA, même sans internet</title>
+  <meta name="description" content="Plans minceur 7/14/30 jours, coach IA hors-ligne, scanner de repas et suivi complet. Fonctionne sans connexion internet." />
+  <link rel="icon" href="/images/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #FBEAD9;
+      --peach: #F4CBA0;
+      --navy: #0E1A3A;
+      --navy-soft: #182548;
+      --flame: #E85A2B;
+      --flame-light: #F3823E;
+      --sage: #3FA66D;
+      --sand-line: #E3C7A6;
+      --ink: #24160B;
+      font-family: Inter, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    h1, h2, h3, .display {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--navy);
+      margin: 0;
+    }
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--flame);
+      font-weight: 700;
+    }
+    a { color: inherit; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: Inter, sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 26px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-primary {
+      background: var(--flame);
+      color: #FFF8F1;
+      box-shadow: 0 6px 20px rgba(232, 90, 43, 0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(232, 90, 43, 0.42); }
+    .btn-ghost {
+      border: 1.5px solid var(--navy);
+      color: var(--navy);
+    }
+    .btn-ghost:hover { background: var(--navy); color: var(--cream); }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(251, 234, 217, 0.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--sand-line);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: "Fraunces", serif; font-weight: 600; font-size: 1.1rem; color: var(--navy); text-decoration: none; }
+    .brand img { width: 34px; height: 34px; border-radius: 9px; }
+    .nav-links { display: flex; gap: 30px; font-size: 0.92rem; font-weight: 500; }
+    .nav-links a { text-decoration: none; color: var(--navy-soft); }
+    .nav-links a:hover { color: var(--flame); }
+    .nav-cta { display: flex; gap: 12px; }
+    @media (max-width: 780px) { .nav-links { display: none; } }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 40px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+    .hero h1 { font-size: clamp(2.3rem, 4.4vw, 3.4rem); line-height: 1.05; margin: 14px 0 20px; }
+    .hero h1 em { font-style: italic; color: var(--flame); }
+    .hero p.lede { font-size: 1.12rem; line-height: 1.6; color: var(--navy-soft); max-width: 480px; margin-bottom: 30px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+    .trust-line { font-size: 0.85rem; color: var(--navy-soft); font-family: "JetBrains Mono", monospace; }
+    .trust-line strong { color: var(--flame); }
+
+    .hero-visual { position: relative; display: flex; justify-content: center; }
+    .ring-halo {
+      position: absolute;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: conic-gradient(var(--sage) 0deg, var(--sage) 248deg, #ffffff55 248deg, #ffffff55 360deg);
+      filter: blur(2px);
+      opacity: 0.5;
+      animation: spin 22s linear infinite;
+      top: 50%; left: 50%; transform: translate(-50%, -55%);
+    }
+    @keyframes spin { to { transform: translate(-50%, -55%) rotate(360deg); } }
+    .phone-frame {
+      position: relative;
+      width: 260px;
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(14, 26, 58, 0.28);
+      border: 6px solid var(--navy);
+    }
+    @media (prefers-reduced-motion: reduce) { .ring-halo { animation: none; } }
+
+    /* Pain points band */
+    .band-navy { background: var(--navy); color: var(--cream); padding: 56px 0; }
+    .band-navy .eyebrow { color: var(--flame-light); }
+    .band-navy h2 { color: var(--cream); font-size: 1.7rem; margin: 10px 0 30px; max-width: 620px; }
+    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media (max-width: 780px) { .pain-grid { grid-template-columns: 1fr; } }
+    .pain-card { background: var(--navy-soft); border-radius: 16px; padding: 24px; border: 1px solid #2A3862; }
+    .pain-card .num { font-family: "JetBrains Mono", monospace; color: var(--flame-light); font-weight: 700; font-size: 0.85rem; }
+    .pain-card p { color: #D9DFEF; line-height: 1.55; margin-top: 10px; font-size: 0.95rem; }
+
+    /* Features */
+    .feature-section { padding: 100px 0; }
+    .feature-row {
+      display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center;
+      margin-bottom: 110px;
+    }
+    .feature-row.reverse { grid-template-columns: 1.1fr 0.9fr; }
+    .feature-row.reverse .feature-copy { order: 2; }
+    .feature-row.reverse .feature-shot { order: 1; }
+    @media (max-width: 860px) {
+      .feature-row, .feature-row.reverse { grid-template-columns: 1fr; }
+      .feature-row.reverse .feature-copy, .feature-row.reverse .feature-shot { order: unset; }
+    }
+    .feature-shot { display: flex; justify-content: center; }
+    .feature-shot img {
+      width: 100%; max-width: 300px; border-radius: 26px;
+      box-shadow: 0 24px 48px rgba(14,26,58,0.18);
+      border: 5px solid #fff;
+    }
+    .feature-copy h3 { font-size: 1.7rem; margin: 12px 0 16px; }
+    .feature-copy p { color: var(--navy-soft); line-height: 1.65; font-size: 1.02rem; max-width: 440px; }
+    .feature-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .feature-tags span {
+      font-family: "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.04em;
+      background: var(--peach); color: var(--ink); padding: 6px 12px; border-radius: 100px;
+    }
+
+    /* Offline band */
+    .band-flame {
+      background: linear-gradient(120deg, var(--flame) 0%, var(--flame-light) 100%);
+      color: #fff8f1; padding: 64px 0; text-align: center;
+    }
+    .band-flame .eyebrow { color: #FFE3D3; }
+    .band-flame h2 { color: #fff8f1; font-size: clamp(1.7rem, 3vw, 2.3rem); margin: 12px auto 14px; max-width: 640px; }
+    .band-flame p { max-width: 560px; margin: 0 auto; line-height: 1.6; color: #FFE9DC; }
+
+    /* Pricing */
+    .pricing-section { padding: 100px 0; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr 1.1fr; gap: 28px; align-items: start; margin-top: 46px; }
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+    .plan-card { background: #fff; border: 1px solid var(--sand-line); border-radius: 20px; padding: 30px; }
+    .plan-card.premium { background: var(--navy); color: var(--cream); border: none; position: relative; }
+    .plan-card .tag { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--flame); }
+    .plan-card.premium .tag { color: var(--flame-light); }
+    .plan-card .price { font-family: "Fraunces", serif; font-size: 2.4rem; margin: 10px 0 4px; }
+    .plan-card .price span { font-size: 1rem; font-family: Inter, sans-serif; font-weight: 500; color: var(--navy-soft); }
+    .plan-card.premium .price span { color: #B9C2DE; }
+    .plan-card ul { list-style: none; padding: 0; margin: 20px 0 26px; }
+    .plan-card li { padding: 8px 0; font-size: 0.94rem; border-top: 1px solid var(--sand-line); }
+    .plan-card.premium li { border-top: 1px solid #2A3862; color: #E4E8F5; }
+    .plan-card li:first-child { border-top: none; }
+    .plan-shot img { border-radius: 20px; box-shadow: 0 24px 48px rgba(14,26,58,0.18); }
+
+    /* Guarantee */
+    .guarantee { padding: 0 0 100px; }
+    .guarantee-box {
+      background: var(--peach); border-radius: 24px; padding: 46px; text-align: center;
+    }
+    .guarantee-box h2 { font-size: 1.6rem; margin: 10px 0 12px; }
+    .guarantee-box p { max-width: 560px; margin: 0 auto; color: var(--ink); line-height: 1.6; }
+
+    /* Final CTA */
+    .final-cta { background: var(--navy); color: var(--cream); padding: 90px 0; text-align: center; }
+    .final-cta h2 { color: var(--cream); font-size: clamp(1.9rem, 3.4vw, 2.6rem); margin: 10px 0 16px; }
+    .final-cta p { color: #C7CFE6; max-width: 480px; margin: 0 auto 30px; }
+    .lang-row { margin-top: 34px; font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: #92A0C7; letter-spacing: 0.05em; }
+
+    footer { padding: 34px 0; text-align: center; font-size: 0.85rem; color: var(--navy-soft); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top">
+        <img src="/images/icon.png" alt="Logo AI Diet Coach" />
+        Diet Coach
+      </a>
+      <nav class="nav-links">
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#offline">Hors-ligne</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#garantie">Garantie</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Essayer maintenant</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Coach IA · Hors-ligne · FR / EN / AR</span>
+        <h1>Perds du poids <em>même sans réseau</em>, jour après jour.</h1>
+        <p class="lede">Un plan minceur sur 7, 14 ou 30 jours, un coach IA qui répond par texte ou par voix, et un scanner qui analyse ton assiette en une photo — sans avoir besoin d'internet.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger l'app</a>
+          <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
+        </div>
+        <p class="trust-line">100% remboursé si ça ne marche pas pour toi · <strong>0 connexion requise</strong></p>
+      </div>
+      <div class="hero-visual">
+        <div class="ring-halo"></div>
+        <div class="phone-frame">
+          <img src="/images/screen-home.png" alt="Résumé calorique quotidien dans l'application" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-navy">
+    <div class="wrap">
+      <span class="eyebrow">Le problème</span>
+      <h2>Trois raisons pour lesquelles les régimes classiques ne tiennent pas.</h2>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="num">01</div>
+          <p>Trop d'applications à jongler : un podomètre, un compteur de calories, une app d'eau — jamais connectées entre elles.</p>
+        </div>
+        <div class="pain-card">
+          <div class="num">02</div>
+          <p>Le réseau lâche au pire moment, et le coaching s'arrête net alors que la motivation était là.</p>
+        </div>
+        <div class="pain-card">
+          <div class="num">03</div>
+          <p>Une envie de grignoter survient, personne pour t'aider tout de suite à prendre la bonne décision.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section" id="fonctionnalites">
+    <div class="wrap">
+
+      <div class="feature-row">
+        <div class="feature-shot">
+          <img src="/images/tab-logmeal.png" alt="Identification d'un repas par IA" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Scanner de repas</span>
+          <h3>Une photo suffit pour connaître les calories.</h3>
+          <p>Prends ton assiette en photo, l'IA identifie les aliments et calcule calories, protéines, glucides et lipides. Fini les calculs à la main.</p>
+          <div class="feature-tags"><span>IDENTIFICATION IA</span><span>SCAN CODE-BARRES</span><span>RECETTES</span></div>
+        </div>
+      </div>
+
+      <div class="feature-row reverse">
+        <div class="feature-shot">
+          <img src="/images/tab-coach-chat.png" alt="Discussion avec le coach IA" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Coach IA hors-ligne</span>
+          <h3>Un vrai coach, disponible même sans réseau.</h3>
+          <p>Pose tes questions par texte ou par voix : suggestion de repas, conseils nutrition, ajustement de ton plan. Le coach répond, connecté ou non.</p>
+          <div class="feature-tags"><span>TEXTE & VOIX</span><span>100% HORS-LIGNE</span></div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-shot">
+          <img src="/images/tab-sos.png" alt="Mode SOS Hunger pour gérer les fringales" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Mode SOS Faim</span>
+          <h3>Une fringale ? L'app t'aide à comprendre pourquoi.</h3>
+          <p>Stress, ennui, vraie faim ou fatigue : l'app t'aide à identifier ce que tu ressens vraiment et te propose une réponse adaptée sur le moment.</p>
+          <div class="feature-tags"><span>GESTION DES ENVIES</span><span>SUGGESTIONS INSTANTANÉES</span></div>
+        </div>
+      </div>
+
+      <div class="feature-row reverse">
+        <div class="feature-shot">
+          <img src="/images/screen-community.png" alt="Communauté et partage des progrès" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Motivation & communauté</span>
+          <h3>Points, défis et classement pour rester régulier.</h3>
+          <p>Partage tes progrès, rejoins des défis et grimpe dans le classement mondial. La régularité devient un jeu plutôt qu'une contrainte.</p>
+          <div class="feature-tags"><span>POINTS QUOTIDIENS</span><span>DÉFIS</span><span>CLASSEMENT</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="band-flame" id="offline">
+    <div class="wrap">
+      <span class="eyebrow">Sans connexion internet</span>
+      <h2>Conçu pour fonctionner là où le réseau ne suit pas toujours.</h2>
+      <p>Plans, coach et suivi restent accessibles hors-ligne — pensé pour un usage réel, pas seulement pour les zones bien connectées.</p>
+    </div>
+  </section>
+
+  <section class="pricing-section" id="tarifs">
+    <div class="wrap">
+      <span class="eyebrow">Tarifs</span>
+      <h2 style="font-size: 2rem; margin: 10px 0 6px;">Commence gratuitement, passe au Premium quand tu es prêt.</h2>
+      <div class="pricing-grid">
+        <div class="plan-card">
+          <div class="tag">Free plan</div>
+          <div class="price">0 $ <span>/ mois</span></div>
+          <ul>
+            <li>Suivi calorique de base</li>
+            <li>Journal d'hydratation</li>
+          </ul>
+          <a class="btn btn-ghost" href={gumroadUrl} target="_blank" rel="noopener">Commencer gratuitement</a>
+        </div>
+        <div class="plan-card premium">
+          <div class="tag">Premium · recommandé</div>
+          <div class="price">9,99 $ <span>/ mois</span></div>
+          <ul>
+            <li>Coaching IA illimité, 24/7</li>
+            <li>Plans de repas personnalisés</li>
+            <li>Scanner de repas illimité</li>
+          </ul>
+          <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Passer au Premium</a>
+        </div>
+        <div class="plan-shot">
+          <img src="/images/tab-pricing.png" alt="Écran des tarifs de l'application" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="guarantee" id="garantie">
+    <div class="wrap">
+      <div class="guarantee-box">
+        <span class="eyebrow">Garantie</span>
+        <h2>100% remboursé, sans question posée.</h2>
+        <p>Si l'application ne t'aide pas à perdre du poids ou à adopter de meilleures habitudes, tu es intégralement remboursé — aucune justification à donner.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="wrap">
+      <span class="eyebrow">Prêt à commencer ?</span>
+      <h2>Ton coach minceur t'attend, connecté ou non.</h2>
+      <p>Télécharge l'app et démarre ton premier plan dès aujourd'hui.</p>
+      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger AI Diet Coach</a>
+      <div class="lang-row">DISPONIBLE EN FRANÇAIS · ENGLISH · العربية</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© {new Date().getFullYear()} AGH Data Agency Holding — AI Diet Coach. Tous droits réservés.</div>
+  </footer>
+
+</body>
+</html>
