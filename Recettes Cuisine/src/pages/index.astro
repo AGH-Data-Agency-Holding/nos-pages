@@ -1,0 +1,289 @@
+---
+const gumroadUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
+---
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recettes Cuisine — Le chef IA hors-ligne anti-gaspi</title>
+  <meta name="description" content="Dites ce qu'il reste dans votre frigo, l'IA hors-ligne propose la recette parfaite. Cuisine marocaine et internationale, zéro connexion requise." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #FDEEE1;
+      --peach: #FBD9BE;
+      --ink: #241608;
+      --charcoal: #2B1D10;
+      --flame: #E8622A;
+      --flame-dark: #C94A1A;
+      --sage: #3F9B5E;
+      --line: #F0C9A6;
+      font-family: Inter, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--cream); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    h1, h2, h3, .display { font-family: "Fraunces", serif; font-weight: 600; letter-spacing: -0.01em; color: var(--charcoal); margin: 0; }
+    .eyebrow { font-family: "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--flame-dark); font-weight: 700; }
+    a { color: inherit; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; padding: 14px 26px; border-radius: 100px; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
+    .btn-primary { background: var(--flame); color: #FFF6ED; box-shadow: 0 8px 22px rgba(232,98,42,.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(232,98,42,.42); }
+    .btn-ghost { border: 1.5px solid var(--charcoal); color: var(--charcoal); }
+    .btn-ghost:hover { background: var(--charcoal); color: var(--cream); }
+
+    header { position: sticky; top: 0; z-index: 40; background: rgba(253,238,225,.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: "Fraunces", serif; font-weight: 700; font-size: 1.15rem; color: var(--charcoal); text-decoration: none; }
+    .brand svg { width: 32px; height: 32px; }
+    .nav-links { display: flex; gap: 30px; font-size: .92rem; font-weight: 500; }
+    .nav-links a { text-decoration: none; color: var(--ink); }
+    .nav-links a:hover { color: var(--flame); }
+    @media (max-width: 780px) { .nav-links { display: none; } }
+
+    .hero { padding: 70px 0 30px; }
+    .hero-photo {
+      position: relative; border-radius: 28px; overflow: hidden; min-height: 460px;
+      background: linear-gradient(180deg, rgba(20,12,4,.15) 0%, rgba(20,12,4,.7) 100%), url('/images/screen-recipe-detail.png');
+      background-size: cover; background-position: center 20%;
+      display: flex; align-items: flex-end; padding: 46px;
+    }
+    .hero-photo .inner { max-width: 520px; }
+    .hero-photo h1 { color: #FFF6ED; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.08; margin-bottom: 16px; }
+    .hero-photo p { color: #F3E1D2; font-size: 1.02rem; line-height: 1.6; margin-bottom: 26px; max-width: 440px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .band-white { padding: 90px 0; text-align: center; }
+    .band-white h2 { font-size: clamp(1.8rem, 3vw, 2.3rem); }
+    .band-white > .wrap > p.sub { max-width: 560px; margin: 14px auto 46px; color: #5A4632; line-height: 1.6; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; text-align: left; }
+    @media (max-width: 780px) { .steps { grid-template-columns: 1fr; } }
+    .step-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+    .step-card .icon { width: 44px; height: 44px; border-radius: 50%; background: var(--peach); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 1.2rem; }
+    .step-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+    .step-card p { color: #5A4632; font-size: .93rem; line-height: 1.55; margin: 0; }
+
+    .feature-section { padding: 20px 0 100px; }
+    .feature-row { display: grid; grid-template-columns: .9fr 1.1fr; gap: 54px; align-items: center; margin-bottom: 100px; }
+    .feature-row.reverse { grid-template-columns: 1.1fr .9fr; }
+    .feature-row.reverse .feature-copy { order: 2; }
+    .feature-row.reverse .feature-shot { order: 1; }
+    @media (max-width: 860px) {
+      .feature-row, .feature-row.reverse { grid-template-columns: 1fr; }
+      .feature-row.reverse .feature-copy, .feature-row.reverse .feature-shot { order: unset; }
+    }
+    .feature-shot { display: flex; justify-content: center; }
+    .feature-shot img { width: 100%; max-width: 280px; border-radius: 24px; box-shadow: 0 24px 48px rgba(43,29,16,.18); border: 5px solid #fff; }
+    .feature-copy h3 { font-size: 1.6rem; margin: 12px 0 14px; }
+    .feature-copy p { color: #5A4632; line-height: 1.65; font-size: 1rem; max-width: 420px; }
+    .feature-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .feature-tags span { font-family: "JetBrains Mono", monospace; font-size: .7rem; letter-spacing: .03em; background: var(--peach); color: var(--ink); padding: 6px 12px; border-radius: 100px; }
+
+    .band-flame { background: linear-gradient(120deg, var(--flame) 0%, var(--flame-dark) 100%); color: #FFF6ED; padding: 60px 0; text-align: center; }
+    .band-flame .eyebrow { color: #FFDCC4; }
+    .band-flame h2 { color: #FFF6ED; font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 12px auto 14px; max-width: 640px; }
+    .band-flame p { max-width: 540px; margin: 0 auto; color: #FFE7D6; line-height: 1.6; }
+
+    .price-section { padding: 90px 0; text-align: center; }
+    .price-card { max-width: 380px; margin: 40px auto 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 34px; }
+    .price-card .price { font-family: "Fraunces", serif; font-size: 2.6rem; margin: 10px 0 4px; }
+    .price-card .price span { font-size: 1rem; font-family: Inter, sans-serif; font-weight: 500; color: #5A4632; }
+    .price-card ul { list-style: none; padding: 0; margin: 22px 0 26px; text-align: left; }
+    .price-card li { padding: 8px 0; font-size: .94rem; border-top: 1px solid var(--line); }
+    .price-card li:first-child { border-top: none; }
+
+    .guarantee { padding: 0 0 100px; }
+    .guarantee-box { background: var(--peach); border-radius: 24px; padding: 46px; text-align: center; }
+    .guarantee-box h2 { font-size: 1.5rem; margin: 10px 0 12px; }
+    .guarantee-box p { max-width: 560px; margin: 0 auto; color: var(--ink); line-height: 1.6; }
+
+    .final-cta { background: var(--charcoal); color: var(--cream); padding: 90px 0; text-align: center; }
+    .final-cta h2 { color: #FFF6ED; font-size: clamp(1.8rem, 3.2vw, 2.5rem); margin: 10px 0 16px; }
+    .final-cta p { color: #E3C9AF; max-width: 480px; margin: 0 auto 30px; }
+    .lang-row { margin-top: 32px; font-family: "JetBrains Mono", monospace; font-size: .78rem; color: #B99C7C; letter-spacing: .05em; }
+
+    footer { padding: 34px 0; text-align: center; font-size: .85rem; color: #6B563E; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 6c-6 0-9 5-9 10 0 3 1.3 5 3 6.5-2 1-3 3-3 5.5v4h18v-4c0-2.5-1-4.5-3-5.5 1.7-1.5 3-3.5 3-6.5 0-5-3-10-9-10Z" fill="#E8622A"/>
+          <rect x="15" y="34" width="18" height="4" rx="2" fill="#E8622A"/>
+        </svg>
+        Recettes Cuisine
+      </a>
+      <nav class="nav-links">
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#comment">Comment ça marche</a>
+        <a href="#tarif">Tarif</a>
+        <a href="#garantie">Garantie</a>
+      </nav>
+      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger</a>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-photo">
+        <div class="inner">
+          <span class="eyebrow" style="color:#FFDCC4">IA hors-ligne · Anti-gaspi</span>
+          <h1>Ce qu'il reste dans le frigo devient votre prochain bon plat.</h1>
+          <p>Dites à l'IA ce qu'il vous reste, elle propose une recette marocaine ou internationale adaptée — sans connexion internet, sans publicité, sans attente.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger l'app</a>
+            <a class="btn btn-ghost" style="border-color:#fff;color:#fff" href="#fonctionnalites">Voir les fonctionnalités</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-white" id="comment">
+    <div class="wrap">
+      <span class="eyebrow">Comment ça marche</span>
+      <h2 style="margin-top:10px;">De vos restes de frigo à l'assiette, en trois étapes.</h2>
+      <p class="sub">Pas besoin de réseau pour bien manger — le générateur IA fonctionne même en mode avion.</p>
+      <div class="steps">
+        <div class="step-card">
+          <div class="icon">🥕</div>
+          <h3>1. Listez vos ingrédients</h3>
+          <p>Tapez ce qu'il vous reste au frigo — même trois ingrédients suffisent à démarrer.</p>
+        </div>
+        <div class="step-card">
+          <div class="icon">🤖</div>
+          <h3>2. L'IA propose une recette</h3>
+          <p>Le moteur hors-ligne trouve un plat marocain ou international adapté, sans connexion requise.</p>
+        </div>
+        <div class="step-card">
+          <div class="icon">⭐</div>
+          <h3>3. Cuisinez et sauvegardez</h3>
+          <p>Suivez la méthode pas à pas, puis gardez vos coups de cœur en favoris pour la prochaine fois.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section" id="fonctionnalites">
+    <div class="wrap">
+
+      <div class="feature-row">
+        <div class="feature-shot">
+          <img src="/images/screen-explore.png" alt="Écran d'accueil et exploration des recettes" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Cuisine marocaine & du monde</span>
+          <h3>Des centaines de recettes, faciles et adaptées à votre budget.</h3>
+          <p>Parcourez les recettes populaires par pays, filtrez selon vos envies, et gardez vos favorites à portée de main.</p>
+          <div class="feature-tags"><span>RECHERCHE PAR PAYS</span><span>FAVORIS</span></div>
+        </div>
+      </div>
+
+      <div class="feature-row reverse">
+        <div class="feature-shot">
+          <img src="/images/screen-chat-offline.png" alt="Assistant recettes hors-ligne" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Assistant 100% hors-ligne</span>
+          <h3>Posez vos questions, même sans une barre de réseau.</h3>
+          <p>L'assistant recettes répond directement depuis votre téléphone — utile en cuisine, en voyage ou dans les zones peu connectées.</p>
+          <div class="feature-tags"><span>ZÉRO WI-FI</span><span>CHAT INTÉGRÉ</span></div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-shot">
+          <img src="/images/screen-recipe-detail.png" alt="Détail d'une recette avec méthode précise" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Méthode claire</span>
+          <h3>Des étapes précises, des mesures exactes.</h3>
+          <p>Chaque recette détaille la préparation pas à pas avec des quantités précises — pas d'approximation qui gâche le plat.</p>
+          <div class="feature-tags"><span>ÉTAPES DÉTAILLÉES</span><span>MESURES PRÉCISES</span></div>
+        </div>
+      </div>
+
+      <div class="feature-row reverse">
+        <div class="feature-shot">
+          <img src="/images/screen-gamification.png" alt="Système de gamification, niveaux et défis" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Motivation</span>
+          <h3>Des défis pour progresser en cuisine, un plat à la fois.</h3>
+          <p>Gagnez des points, montez de niveau et débloquez des badges au fil de vos réussites en cuisine — de "Chef Débutant" à des défis plus ambitieux.</p>
+          <div class="feature-tags"><span>NIVEAUX</span><span>DÉFIS</span><span>BADGES</span></div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-shot">
+          <img src="/images/screen-community.png" alt="Communauté et groupes de cuisine" />
+        </div>
+        <div class="feature-copy">
+          <span class="eyebrow">Communauté</span>
+          <h3>Rejoignez des groupes de cuisine et partagez vos réussites.</h3>
+          <p>Cuisine végé, pâtisserie, batch cooking ou cuisine du monde : rejoignez un groupe qui vous correspond et échangez avec d'autres passionnés.</p>
+          <div class="feature-tags"><span>GROUPES</span><span>PARTAGE</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="band-flame">
+    <div class="wrap">
+      <span class="eyebrow">Zéro connexion requise</span>
+      <h2>Fonctionne même en mode avion, jusque dans votre cuisine.</h2>
+      <p>Le générateur IA, l'assistant et vos recettes favorites restent accessibles sans réseau — pensé pour un usage réel, pas seulement en ville bien connectée.</p>
+    </div>
+  </section>
+
+  <section class="price-section" id="tarif">
+    <span class="eyebrow">Tarif</span>
+    <h2 style="margin-top:10px;">Un prix simple, pas d'abonnement caché.</h2>
+    <div class="price-card">
+      <div class="eyebrow">Recettes Cuisine</div>
+      <div class="price">2 $ <span>/ paiement unique</span></div>
+      <ul>
+        <li>Générateur IA anti-gaspi hors-ligne</li>
+        <li>Centaines de recettes marocaines & internationales</li>
+        <li>Assistant recettes hors-ligne</li>
+        <li>Favoris, défis et communauté</li>
+      </ul>
+      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener" style="width:100%; justify-content:center;">Télécharger maintenant</a>
+    </div>
+  </section>
+
+  <section class="guarantee" id="garantie">
+    <div class="wrap">
+      <div class="guarantee-box">
+        <span class="eyebrow">Garantie</span>
+        <h2>100% remboursé, sans question posée.</h2>
+        <p>Si l'application ne vous aide pas à découvrir de nouvelles recettes ou à gagner du temps en cuisine, vous êtes intégralement remboursé, sans justification à donner.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="wrap">
+      <span class="eyebrow" style="color:#F0A87C">Prêt à cuisiner autrement ?</span>
+      <h2>Vos restes de frigo méritent mieux qu'une recherche Google.</h2>
+      <p>Téléchargez Recettes Cuisine et générez votre première recette dès ce soir.</p>
+      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger Recettes Cuisine</a>
+      <div class="lang-row">DISPONIBLE EN FRANÇAIS · ENGLISH · العربية</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© 2026 AGH Data Agency Holding — Recettes Cuisine. Tous droits réservés.</div>
+  </footer>
+
+</body>
+</html>
