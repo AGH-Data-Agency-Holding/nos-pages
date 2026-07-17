@@ -1,0 +1,595 @@
+---
+const price = "2 $";
+const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calmenow — Votre coach IA de bien-être mental, 24h/24</title>
+  <meta name="description" content="Calmenow (Mindful AI) : votre compagnon IA pour le bien-être mental, disponible 24h/24. Suivi d'humeur, respiration guidée, méditations et journal, basés sur la TCC, 100% privé et chiffré." />
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">
+        <img src="/images/logo.png" alt="Calmenow" class="brand-mark" />
+        <span class="brand-name">Calme<em>now</em></span>
+      </a>
+      <nav class="nav">
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#confidentialite">Confidentialité</a>
+        <a href="#tarif">Tarif</a>
+      </nav>
+      <a href={gumroadUrl} class="btn btn-primary btn-small" target="_blank" rel="noopener">Essayer — {price}</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="blob blob-1" aria-hidden="true"></div>
+      <div class="blob blob-2" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Votre IA pour le bien-être mental</p>
+          <h1>Retrouvez votre <span class="ink">équilibre</span>, un instant à la fois.</h1>
+          <p class="hero-sub">
+            Stress, anxiété, ou simplement besoin d'être écouté : Calmenow est un compagnon IA disponible 24h/24, conçu pour comprendre votre culture, vos valeurs et votre langue — sans jugement, avec des méthodes reconnues comme la TCC.
+          </p>
+          <div class="hero-ctas">
+            <a href={gumroadUrl} class="btn btn-primary" target="_blank" rel="noopener">Commencer maintenant</a>
+            <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
+          </div>
+          <p class="hero-microcopy">Application offline-first · Disponible en français, anglais, arabe et espagnol</p>
+        </div>
+        <div class="hero-visual">
+          <img src="/images/phone_hero.png" alt="Application Calmenow, votre IA de bien-être mental" class="hero-phone" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS BAND -->
+    <section class="stats-band">
+      <div class="wrap stats-inner">
+        <div class="stat">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">un compagnon IA toujours disponible</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">60+</span>
+          <span class="stat-label">langues et cultures prises en compte</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">30</span>
+          <span class="stat-label">jours pour construire une résilience durable</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">privé et chiffré</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="fonctionnalites" class="features">
+      <div class="wrap">
+        <p class="eyebrow center">Fonctionnalités clés</p>
+        <h2 class="section-title center">Un espace complet pour prendre soin de votre esprit</h2>
+      </div>
+
+      <!-- Feature 1: Mood tracking -->
+      <div class="feature-row wrap">
+        <div class="feature-text">
+          <span class="feature-tag">Suivi d'humeur quotidien</span>
+          <h3>Un check-in rapide, chaque jour</h3>
+          <p>En quelques secondes, notez comment vous vous sentez et suivez l'évolution de votre humeur sur la semaine. Calmenow vous aide à repérer les tendances avant qu'elles ne deviennent un problème.</p>
+          <ul class="feature-list">
+            <li>Check-in d'humeur en un tap (triste, ok, bien, super, calme)</li>
+            <li>Graphique d'évolution sur les 7 derniers jours</li>
+            <li>Rappels personnalisés pour votre routine bien-être</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/phone_mood.png" alt="Suivi d'humeur quotidien dans Calmenow" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 2: Journal -->
+      <div class="feature-row wrap reverse">
+        <div class="feature-text">
+          <span class="feature-tag">Journal guidé par IA</span>
+          <h3>Écrivez librement, avec un peu d'aide</h3>
+          <p>Quand les mots manquent, des questions générées par l'IA vous aident à explorer ce que vous ressentez — "Pourquoi vous sentez-vous ainsi ?", "Qu'est-ce qui a déclenché cette émotion ?" — et à tagger vos émotions pour mieux les comprendre.</p>
+          <ul class="feature-list">
+            <li>Suggestions IA pour débloquer l'écriture</li>
+            <li>Tags d'émotions (stress, anxiété, calme, joie...)</li>
+            <li>Entrées privées, visibles par vous seul</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/phone_journal.png" alt="Journal guidé par IA dans Calmenow" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 3: Meditation -->
+      <div class="feature-row wrap">
+        <div class="feature-text">
+          <span class="feature-tag">Méditations & respiration guidée</span>
+          <h3>Un calme immédiat, à portée de main</h3>
+          <p>Des séances de méditation guidées avec des voix familières et des exercices de respiration pour un apaisement instantané — le matin pour bien démarrer, le soir pour relâcher la journée.</p>
+          <ul class="feature-list">
+            <li>Bibliothèque de méditations guidées (matin, calme, sommeil)</li>
+            <li>Exercices de respiration pour un soulagement immédiat</li>
+            <li>Voix locales et familières, adaptées à votre culture</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/phone_meditation.png" alt="Séance de méditation guidée dans Calmenow" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CALLOUT / PRIVACY -->
+    <section id="confidentialite" class="callout">
+      <div class="wrap callout-inner">
+        <div class="callout-image">
+          <img src="/images/illustration_privacy.png" alt="Confidentialité et chiffrement des données Calmenow" loading="lazy" />
+        </div>
+        <div class="callout-text">
+          <h2>Vos pensées vous appartiennent</h2>
+          <p>Tout ce que vous partagez avec Calmenow — votre humeur, votre journal, vos conversations — est entièrement chiffré et reste privé. Aucun jugement, aucun partage : juste un espace sûr pour vous.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="tarif" class="pricing">
+      <div class="wrap pricing-inner">
+        <div class="pricing-card">
+          <p class="eyebrow">Accès complet</p>
+          <h2>Calmenow</h2>
+          <p class="price"><span class="price-amount">{price}</span></p>
+          <p class="price-sub">Application offline-first — aucun abonnement caché</p>
+          <ul class="pricing-list">
+            <li>Compagnon IA disponible 24h/24, basé sur la TCC</li>
+            <li>Suivi d'humeur et graphique d'évolution</li>
+            <li>Journal guidé par IA avec tags d'émotions</li>
+            <li>Méditations et exercices de respiration guidée</li>
+            <li>Données 100% chiffrées et privées</li>
+            <li>Disponible en français, anglais, arabe et espagnol</li>
+          </ul>
+          <a href={gumroadUrl} class="btn btn-primary btn-full" target="_blank" rel="noopener">Obtenir Calmenow — {price}</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUARANTEE -->
+    <section class="guarantee">
+      <div class="wrap guarantee-inner">
+        <div class="guarantee-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40">
+            <path d="M24 4 L42 11 V22 C42 33 34.5 41.5 24 44 C13.5 41.5 6 33 6 22 V11 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M16 24 L21.5 29.5 L33 17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Livraison instantanée par Gumroad</h3>
+          <p>Votre achat est traité de façon sécurisée sur Gumroad. Vous recevez votre accès immédiatement après le paiement, sans compte à créer sur un store tiers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+      <div class="wrap final-cta-inner">
+        <h2>Prenez un moment pour votre santé mentale, aujourd'hui.</h2>
+        <p>Rejoignez Calmenow et commencez à construire une résilience durable, à votre rythme et dans votre langue.</p>
+        <a href={gumroadUrl} class="btn btn-light" target="_blank" rel="noopener">Commencer maintenant — {price}</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <img src="/images/logo.png" alt="Calmenow" class="brand-mark" />
+        <span class="brand-name">Calme<em>now</em></span>
+      </div>
+      <p class="footer-note">Calmenow est un outil de bien-être et ne remplace pas un avis médical ou psychologique professionnel. En cas de détresse, consultez un professionnel de santé ou un service d'urgence.</p>
+      <p class="footer-copy">© {new Date().getFullYear()} AGH Data Agency Holding SA. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <style>
+    :root {
+      --ink: #17252B;
+      --teal: #0E6E55;
+      --teal-deep: #0A4A3A;
+      --purple: #6C5CE7;
+      --navy: #12283B;
+      --mint: #EAFBF3;
+      --cream: #FAFAF8;
+      --paper: #FFFFFF;
+      --slate: #5A6B66;
+      --line: #E2E8E4;
+      --radius: 20px;
+      --shadow: 0 14px 34px -14px rgba(14, 110, 85, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    p { margin: 0; color: var(--slate); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    img { max-width: 100%; display: block; }
+    em { font-style: normal; color: var(--teal); }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.96rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 8px 20px -8px rgba(14, 110, 85, 0.55);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -8px rgba(14, 110, 85, 0.6); }
+    .btn-small { padding: 10px 20px; font-size: 0.86rem; }
+    .btn-ghost {
+      border: 1.5px solid var(--line);
+      color: var(--ink);
+      background: transparent;
+    }
+    .btn-ghost:hover { border-color: var(--teal); background: rgba(14,110,85,0.05); }
+    .btn-full { width: 100%; margin-top: 22px; }
+    .btn-light {
+      background: #fff;
+      color: var(--teal-deep);
+      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.3);
+    }
+    .btn-light:hover { transform: translateY(-2px); }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 250, 248, 0.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark { width: 32px; height: 32px; object-fit: contain; }
+    .brand-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.1rem; }
+    .nav { display: flex; gap: 30px; }
+    .nav a { font-size: 0.92rem; font-weight: 500; color: var(--slate); }
+    .nav a:hover { color: var(--teal); }
+
+    /* Hero */
+    .hero { position: relative; padding: 76px 0 40px; overflow: hidden; }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .blob-1 {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, var(--mint) 0%, transparent 70%);
+      top: -160px; left: -140px;
+    }
+    .blob-2 {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(108,92,231,0.16) 0%, transparent 70%);
+      top: 60px; right: -160px;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .eyebrow.center { text-align: center; }
+    h1 { font-size: clamp(2.4rem, 4.2vw, 3.4rem); font-weight: 700; }
+    h1 .ink { color: var(--teal); }
+    .hero-sub {
+      margin-top: 22px;
+      font-size: 1.1rem;
+      max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+    .hero-microcopy {
+      margin-top: 18px;
+      font-size: 0.85rem;
+      color: #8B9A94;
+    }
+
+    .hero-visual { display: flex; justify-content: center; }
+    .hero-phone {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Stats band */
+    .stats-band {
+      background: var(--navy);
+      padding: 40px 0;
+    }
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stat { text-align: center; color: #fff; }
+    .stat-num {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 2.2rem;
+      color: #6EE7B7;
+    }
+    .stat-label {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: #C3D0CB;
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Features */
+    .features { padding: 90px 0 30px; }
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 700;
+      max-width: 640px;
+      margin: 10px auto 0;
+    }
+    .section-title.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 64px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .feature-row:last-child { border-bottom: none; }
+    .feature-row.reverse .feature-text { order: 2; }
+    .feature-row.reverse .feature-image { order: 1; }
+
+    .feature-tag {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+    .feature-text h3 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .feature-text > p { font-size: 1.02rem; margin-bottom: 20px; }
+    .feature-list li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 12px;
+      font-size: 0.96rem;
+      color: var(--slate);
+    }
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+    .feature-image img {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+    /* Callout / Privacy */
+    .callout {
+      background: linear-gradient(180deg, var(--mint) 0%, #FFFFFF 100%);
+      padding: 80px 0;
+      margin: 40px 0;
+    }
+    .callout-inner {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .callout-image img {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .callout-text h2 {
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 700;
+    }
+    .callout-text p {
+      margin-top: 18px;
+      font-size: 1.05rem;
+    }
+
+    /* Pricing */
+    .pricing { padding: 30px 0 90px; }
+    .pricing-inner { display: flex; justify-content: center; }
+    .pricing-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 48px 44px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .pricing-card h2 { font-size: 1.6rem; margin-top: 6px; }
+    .price { margin-top: 20px; }
+    .price-amount {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 3.2rem;
+      color: var(--teal);
+    }
+    .price-sub { margin-top: 6px; font-size: 0.88rem; }
+    .pricing-list {
+      text-align: left;
+      margin-top: 30px;
+      border-top: 1px solid var(--line);
+      padding-top: 26px;
+    }
+    .pricing-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+    .pricing-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* Guarantee */
+    .guarantee { padding: 0 0 90px; }
+    .guarantee-inner {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      background: #EFF3F1;
+      border-radius: var(--radius);
+      padding: 34px 40px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .guarantee-icon { color: var(--teal); flex-shrink: 0; }
+    .guarantee h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .guarantee p { font-size: 0.92rem; }
+
+    /* Final CTA */
+    .final-cta {
+      background: var(--navy);
+      padding: 90px 0;
+    }
+    .final-cta-inner { text-align: center; max-width: 640px; margin: 0 auto; }
+    .final-cta h2 { color: #fff; font-size: clamp(1.7rem, 3vw, 2.4rem); }
+    .final-cta p { color: #C3D0CB; margin-top: 18px; font-size: 1.05rem; }
+    .final-cta .btn { margin-top: 32px; }
+
+    /* Footer */
+    .site-footer { padding: 44px 0; }
+    .footer-inner { text-align: center; }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-note {
+      font-size: 0.82rem;
+      max-width: 540px;
+      margin: 0 auto 10px;
+      color: #8B9A94;
+    }
+    .footer-copy { font-size: 0.8rem; color: #A3AFA9; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { order: -1; margin-bottom: 10px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .feature-row { grid-template-columns: 1fr; gap: 30px; padding: 44px 0; }
+      .feature-row.reverse .feature-text,
+      .feature-row.reverse .feature-image { order: initial; }
+      .callout-inner { grid-template-columns: 1fr; text-align: center; }
+      .nav { display: none; }
+      .guarantee-inner { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .pricing-card { padding: 36px 26px; }
+    }
+  </style>
+</body>
+</html>
