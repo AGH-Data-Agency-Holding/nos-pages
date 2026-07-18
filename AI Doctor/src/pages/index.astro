@@ -1,0 +1,590 @@
+---
+const price = "2 $";
+const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEDICAL AI — Votre assistant santé IA, disponible 24h/24</title>
+  <meta name="description" content="MEDICAL AI (Your Doctor AI) : assistant santé IA 24h/24 pour diagnostic préliminaire, suivi de vos symptômes et prise de rendez-vous. Conforme RGPD et HIPAA, fonctionne à 97% hors-ligne." />
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">
+        <img src="/images/logo.png" alt="MEDICAL AI" class="brand-mark" />
+        <span class="brand-name">MEDICAL <em>AI</em></span>
+      </a>
+      <nav class="nav">
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#confidentialite">Confidentialité</a>
+        <a href="#tarif">Tarif</a>
+      </nav>
+      <a href={gumroadUrl} class="btn btn-primary btn-small" target="_blank" rel="noopener">Essayer — {price}</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Votre assistant santé IA</p>
+          <h1>Comprenez vos symptômes, <span class="ink">sans attendre</span>.</h1>
+          <p class="hero-sub">
+            MEDICAL AI fait le pont entre l'incertitude d'une recherche sur internet et la visite chez le médecin. Analysez vos symptômes, suivez votre carnet de santé numérique et préparez vos consultations, avec une IA médicale disponible 24h/24.
+          </p>
+          <div class="hero-ctas">
+            <a href={gumroadUrl} class="btn btn-primary" target="_blank" rel="noopener">Démarrer mon bilan santé</a>
+            <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
+          </div>
+          <p class="hero-microcopy">Disponible en 50+ langues · Conforme RGPD et HIPAA</p>
+        </div>
+        <div class="hero-visual">
+          <img src="/images/phone_home.png" alt="Écran d'accueil de MEDICAL AI" class="hero-phone" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS BAND -->
+    <section class="stats-band">
+      <div class="wrap stats-inner">
+        <div class="stat">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">assistant santé IA toujours disponible</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">50+</span>
+          <span class="stat-label">langues prises en charge</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">97%</span>
+          <span class="stat-label">fonctionne hors-ligne</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">RGPD</span>
+          <span class="stat-label">& HIPAA, données jamais partagées ni vendues</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="fonctionnalites" class="features">
+      <div class="wrap">
+        <p class="eyebrow center">Fonctionnalités clés</p>
+        <h2 class="section-title center">Un compagnon santé complet, du symptôme au rendez-vous</h2>
+      </div>
+
+      <!-- Feature 1: Symptom checker -->
+      <div class="feature-row wrap">
+        <div class="feature-text">
+          <span class="feature-tag">Analyseur de symptômes IA</span>
+          <h3>Décrivez, ou montrez simplement où ça fait mal</h3>
+          <p>Décrivez vos symptômes avec vos propres mots, ou touchez directement la zone douloureuse sur un schéma du corps. Notre IA analyse votre état à partir de bases de données médicales reconnues pour vous orienter immédiatement.</p>
+          <ul class="feature-list">
+            <li>Interface conversationnelle intuitive</li>
+            <li>Sélection de la zone de douleur sur le corps</li>
+            <li>Orientation santé immédiate et personnalisée</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/phone_start_diagnosis.png" alt="Démarrer une analyse de symptômes dans MEDICAL AI" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 2: Medical history -->
+      <div class="feature-row wrap reverse">
+        <div class="feature-text">
+          <span class="feature-tag">Carnet de santé numérique</span>
+          <h3>Tout votre historique, classé et accessible</h3>
+          <p>Chaque évaluation est enregistrée avec son niveau d'urgence (stable, modéré, urgent), la date et les symptômes déclarés. Exportez ou partagez votre historique en un tap avant un rendez-vous médical.</p>
+          <ul class="feature-list">
+            <li>Historique classé par niveau d'urgence</li>
+            <li>Export et partage en un clic</li>
+            <li>Rapports prêts à présenter à votre médecin</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/phone_medical_history.png" alt="Historique médical dans MEDICAL AI" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 3: Medical profile -->
+      <div class="feature-row wrap">
+        <div class="feature-text">
+          <span class="feature-tag">Profil médical personnalisé</span>
+          <h3>Une IA qui connaît votre contexte</h3>
+          <p>Antécédents médicaux, traitements en cours, allergies connues : renseignez votre profil pour que l'IA affine chaque analyse en fonction de votre situation réelle, pas d'une moyenne générique.</p>
+          <ul class="feature-list">
+            <li>Antécédents (diabète, hypertension, maladies cardiaques...)</li>
+            <li>Traitements en cours et allergies</li>
+            <li>Profils multiples pour toute la famille</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/phone_medical_profile.png" alt="Profil médical personnalisé dans MEDICAL AI" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 4: Privacy -->
+      <div class="feature-row wrap reverse" id="confidentialite">
+        <div class="feature-text">
+          <span class="feature-tag">IA intelligente, confidentialité totale</span>
+          <h3>Vos données de santé restent les vôtres</h3>
+          <p>MEDICAL AI fonctionne à 97% hors-ligne : vos données de santé restent sur votre appareil, jamais partagées, jamais vendues. Une conformité stricte aux réglementations RGPD et HIPAA protège vos informations les plus sensibles.</p>
+          <ul class="feature-list">
+            <li>97% des fonctionnalités disponibles hors-ligne</li>
+            <li>Chiffrement de bout en bout de vos données</li>
+            <li>Conformité RGPD et HIPAA</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/phone_onboard_privacy.png" alt="Confidentialité des données dans MEDICAL AI" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 5: Always available -->
+      <div class="feature-row wrap">
+        <div class="feature-text">
+          <span class="feature-tag">Disponible à toute heure</span>
+          <h3>Un avis médical préliminaire, où que vous soyez</h3>
+          <p>Que ce soit à 3h du matin ou en voyage à l'étranger, votre assistant santé IA reste disponible pour évaluer vos symptômes en quelques secondes et vous orienter vers les bons soins.</p>
+          <ul class="feature-list">
+            <li>Analyse en quelques secondes, à toute heure</li>
+            <li>Recherche de spécialistes et prise de rendez-vous</li>
+            <li>Accès rapide aux numéros d'urgence locaux</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/phone_onboard_doctor.png" alt="Assistant santé IA toujours disponible dans MEDICAL AI" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CALLOUT -->
+    <section class="callout">
+      <div class="wrap callout-inner">
+        <h2>Le pont entre la recherche en ligne et le cabinet médical</h2>
+        <p>MEDICAL AI ne remplace pas votre médecin — il vous aide à mieux comprendre ce que votre corps essaie de vous dire, et à arriver à votre rendez-vous préparé, avec les bonnes informations.</p>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="tarif" class="pricing">
+      <div class="wrap pricing-inner">
+        <div class="pricing-card">
+          <p class="eyebrow">Accès complet</p>
+          <h2>MEDICAL AI</h2>
+          <p class="price"><span class="price-amount">{price}</span></p>
+          <p class="price-sub">Application unique — aucun abonnement caché</p>
+          <ul class="pricing-list">
+            <li>Analyseur de symptômes IA en conversation</li>
+            <li>Carnet de santé numérique et historique classé</li>
+            <li>Profils médicaux pour toute la famille</li>
+            <li>Recherche de praticiens et prise de rendez-vous</li>
+            <li>Accès rapide aux numéros d'urgence</li>
+            <li>97% hors-ligne, conforme RGPD et HIPAA</li>
+          </ul>
+          <a href={gumroadUrl} class="btn btn-primary btn-full" target="_blank" rel="noopener">Obtenir MEDICAL AI — {price}</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUARANTEE -->
+    <section class="guarantee">
+      <div class="wrap guarantee-inner">
+        <div class="guarantee-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40">
+            <path d="M24 4 L42 11 V22 C42 33 34.5 41.5 24 44 C13.5 41.5 6 33 6 22 V11 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M16 24 L21.5 29.5 L33 17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Livraison instantanée par Gumroad</h3>
+          <p>Votre achat est traité de façon sécurisée sur Gumroad. Vous recevez votre accès immédiatement après le paiement, sans compte à créer sur un store tiers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+      <div class="wrap final-cta-inner">
+        <h2>Prenez le contrôle de votre santé, dès aujourd'hui.</h2>
+        <p>Un assistant médical préliminaire dans votre poche, prêt quand vous en avez besoin.</p>
+        <a href={gumroadUrl} class="btn btn-light" target="_blank" rel="noopener">Commencer maintenant — {price}</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <img src="/images/logo.png" alt="MEDICAL AI" class="brand-mark" />
+        <span class="brand-name">MEDICAL <em>AI</em></span>
+      </div>
+      <p class="footer-note">MEDICAL AI fournit une orientation santé préliminaire et ne remplace pas un diagnostic médical professionnel. En cas d'urgence, contactez immédiatement les services d'urgence locaux.</p>
+      <p class="footer-copy">© {new Date().getFullYear()} AGH Data Agency Holding SA. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <style>
+    :root {
+      --ink: #10142B;
+      --blue: #1B22E0;
+      --blue-deep: #0F1560;
+      --purple: #8B6BE8;
+      --green: #22A559;
+      --cream: #F7F8FC;
+      --paper: #FFFFFF;
+      --slate: #565A75;
+      --line: #E4E5F0;
+      --radius: 18px;
+      --shadow: 0 12px 32px -12px rgba(16, 20, 43, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      margin: 0;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    p { margin: 0; color: var(--slate); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    img { max-width: 100%; display: block; }
+    em { font-style: normal; color: var(--purple); }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.96rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 8px 20px -8px rgba(27, 34, 224, 0.5);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -8px rgba(27, 34, 224, 0.55); }
+    .btn-small { padding: 10px 20px; font-size: 0.86rem; }
+    .btn-ghost {
+      border: 1.5px solid var(--line);
+      color: var(--ink);
+      background: transparent;
+    }
+    .btn-ghost:hover { border-color: var(--blue); background: rgba(27,34,224,0.05); }
+    .btn-full { width: 100%; margin-top: 22px; }
+    .btn-light {
+      background: #fff;
+      color: var(--blue-deep);
+      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.3);
+    }
+    .btn-light:hover { transform: translateY(-2px); }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 248, 252, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark { width: 32px; height: 32px; object-fit: contain; }
+    .brand-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.05rem; }
+    .nav { display: flex; gap: 30px; }
+    .nav a { font-size: 0.92rem; font-weight: 500; color: var(--slate); }
+    .nav a:hover { color: var(--blue); }
+
+    /* Hero */
+    .hero { padding: 76px 0 40px; overflow: hidden; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .eyebrow {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .eyebrow.center { text-align: center; }
+    h1 { font-size: clamp(2.4rem, 4.2vw, 3.4rem); font-weight: 700; }
+    h1 .ink { color: var(--blue); }
+    .hero-sub {
+      margin-top: 22px;
+      font-size: 1.1rem;
+      max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+    .hero-microcopy {
+      margin-top: 18px;
+      font-size: 0.85rem;
+      color: #8B8FA8;
+    }
+
+    .hero-visual { display: flex; justify-content: center; }
+    .hero-phone {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    /* Stats band */
+    .stats-band {
+      background: var(--ink);
+      padding: 40px 0;
+    }
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stat { text-align: center; color: #fff; }
+    .stat-num {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 2.1rem;
+      color: #8B9CFF;
+    }
+    .stat-label {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: #B7BAD0;
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Features */
+    .features { padding: 90px 0 30px; }
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 700;
+      max-width: 640px;
+      margin: 10px auto 0;
+    }
+    .section-title.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 64px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .feature-row:last-child { border-bottom: none; }
+    .feature-row.reverse .feature-text { order: 2; }
+    .feature-row.reverse .feature-image { order: 1; }
+
+    .feature-tag {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+    .feature-text h3 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .feature-text > p { font-size: 1.02rem; margin-bottom: 20px; }
+    .feature-list li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 12px;
+      font-size: 0.96rem;
+      color: var(--slate);
+    }
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+    .feature-image { display: flex; justify-content: center; }
+    .feature-image img {
+      max-width: 280px;
+    }
+
+    /* Callout */
+    .callout {
+      background: var(--blue-deep);
+      padding: 70px 0;
+      margin: 40px 0;
+    }
+    .callout-inner { max-width: 780px; text-align: center; margin: 0 auto; }
+    .callout h2 {
+      color: #fff;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      font-weight: 700;
+    }
+    .callout p {
+      color: #C9CBEA;
+      margin-top: 18px;
+      font-size: 1.05rem;
+    }
+
+    /* Pricing */
+    .pricing { padding: 30px 0 90px; }
+    .pricing-inner { display: flex; justify-content: center; }
+    .pricing-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 48px 44px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .pricing-card h2 { font-size: 1.6rem; margin-top: 6px; }
+    .price { margin-top: 20px; }
+    .price-amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 3.2rem;
+      color: var(--blue);
+    }
+    .price-sub { margin-top: 6px; font-size: 0.88rem; }
+    .pricing-list {
+      text-align: left;
+      margin-top: 30px;
+      border-top: 1px solid var(--line);
+      padding-top: 26px;
+    }
+    .pricing-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+    .pricing-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* Guarantee */
+    .guarantee { padding: 0 0 90px; }
+    .guarantee-inner {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      background: #EEF0FA;
+      border-radius: var(--radius);
+      padding: 34px 40px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .guarantee-icon { color: var(--blue-deep); flex-shrink: 0; }
+    .guarantee h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .guarantee p { font-size: 0.92rem; }
+
+    /* Final CTA */
+    .final-cta {
+      background: var(--ink);
+      padding: 90px 0;
+    }
+    .final-cta-inner { text-align: center; max-width: 640px; margin: 0 auto; }
+    .final-cta h2 { color: #fff; font-size: clamp(1.7rem, 3vw, 2.4rem); }
+    .final-cta p { color: #B7BAD0; margin-top: 18px; font-size: 1.05rem; }
+    .final-cta .btn { margin-top: 32px; }
+
+    /* Footer */
+    .site-footer { padding: 44px 0; }
+    .footer-inner { text-align: center; }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-note {
+      font-size: 0.82rem;
+      max-width: 560px;
+      margin: 0 auto 10px;
+      color: #8B8FA8;
+    }
+    .footer-copy { font-size: 0.8rem; color: #A0A3BC; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { order: -1; margin-bottom: 10px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .feature-row { grid-template-columns: 1fr; gap: 30px; padding: 44px 0; }
+      .feature-row.reverse .feature-text,
+      .feature-row.reverse .feature-image { order: initial; }
+      .nav { display: none; }
+      .guarantee-inner { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .pricing-card { padding: 36px 26px; }
+    }
+  </style>
+</body>
+</html>
