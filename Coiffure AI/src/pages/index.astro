@@ -1,5 +1,5 @@
 ---
-const price = "2 $";
+const price = "26,22 €";
 const gumroadUrl = "https://aghhol.gumroad.com/l/haircut-hairstyle-ai";
 ---
 <!doctype html>
@@ -47,7 +47,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/haircut-hairstyle-ai";
             <a href={gumroadUrl} class="btn btn-primary" target="_blank" rel="noopener">Commencer ma transformation</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
           </div>
-          <p class="hero-microcopy">Toutes textures de cheveux · Garantie 100% satisfait ou remboursé</p>
+          <p class="hero-microcopy">Toutes textures de cheveux · Garantie de remboursement de 6 mois</p>
         </div>
         <div class="hero-visual">
           <img src="/images/frame_home.png" alt="Écran d'accueil de Hair Changer" class="hero-phone" />
@@ -68,7 +68,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/haircut-hairstyle-ai";
         </div>
         <div class="stat">
           <span class="stat-num">100%</span>
-          <span class="stat-label">satisfait ou remboursé, sans condition</span>
+          <span class="stat-label">Garantie de remboursement de 6 mois</span>
         </div>
         <div class="stat">
           <span class="stat-num">Toutes</span>
@@ -181,39 +181,32 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/haircut-hairstyle-ai";
     <!-- PRICING -->
     <section id="tarif" class="pricing">
       <div class="wrap pricing-inner">
-        <div class="pricing-card">
-          <p class="eyebrow">Accès complet</p>
-          <h2>Hair Changer</h2>
-          <p class="price"><span class="price-amount">{price}</span></p>
-          <p class="price-sub">Application unique — aucun abonnement caché</p>
-          <ul class="pricing-list">
-            <li>Essayage RA en temps réel, coupes et couleurs</li>
-            <li>Recommandations IA selon votre morphologie</li>
-            <li>Carte et réservation de salons partenaires 24/7</li>
-            <li>Archive et comparaison de vos essais</li>
-            <li>Communauté pour partager et s'inspirer</li>
-            <li>Compatible toutes textures de cheveux</li>
-          </ul>
-          <a href={gumroadUrl} class="btn btn-primary btn-full" target="_blank" rel="noopener">Obtenir Hair Changer — {price}</a>
+        <div class="price-card">
+          <p class="price-amount">Licence d'un mois</p>
+          <p class="price">26,22 €</p>
+          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
         </div>
-      </div>
-    </section>
-
-    <!-- GUARANTEE -->
-    <section class="guarantee">
-      <div class="wrap guarantee-inner">
-        <div class="guarantee-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" width="40" height="40">
-            <path d="M24 4 L42 11 V22 C42 33 34.5 41.5 24 44 C13.5 41.5 6 33 6 22 V11 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="M16 24 L21.5 29.5 L33 17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <div class="price-card">
+          <p class="price-amount">Licence de 3 mois</p>
+          <p class="price">52,45 €</p>
+          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
         </div>
-        <div>
-          <h3>100% satisfait ou remboursé</h3>
-          <p>Testez Hair Changer sans risque. Si l'application ou les résultats virtuels ne vous conviennent pas, demandez un remboursement complet, sans question posée. Achat sécurisé traité par Gumroad.</p>
+        <div class="price-card">
+          <p class="price-amount">Licence de 6 mois</p>
+          <p class="price">104,91 €</p>
+          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
         </div>
-      </div>
-    </section>
+        <div class="price-card">
+          <p class="price-amount">Licence de 12 mois</p>
+          <p class="price">174,86 €</p>
+          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
+        </div>
+        <div class="price-card">
+          <p class="price-amount">Durée de vie</p>
+          <p class="price">349,73 €</p>
+          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
+        </div>
+      
 
     <!-- FINAL CTA -->
     <section class="final-cta">
