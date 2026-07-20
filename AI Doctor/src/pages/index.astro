@@ -1,5 +1,5 @@
 ---
-const price = "26,22 €";
+const price = "9,99 €";
 const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
 ---
 <!doctype html>
@@ -181,32 +181,35 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
     <!-- PRICING -->
     <section id="tarif" class="pricing">
       <div class="wrap pricing-inner">
-        <div class="price-card">
-          <p class="price-amount">Licence d'un mois</p>
-          <p class="price">26,22 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
+        <div class="tier-card">
+          <p class="eyebrow center">Tarif</p>
+          <h2 class="section-title center" style="font-size:1.6rem;">Un prix simple, pas d'abonnement caché.</h2>
+          <div class="tier-list">
+            <div class="tier-row">
+              <div class="tier-name">Licence d'un mois</div>
+              <div class="tier-price">9,99 €</div>
+            </div>
+            <div class="tier-row">
+              <div class="tier-name">Licence de 3 mois</div>
+              <div class="tier-price">24,99 €</div>
+            </div>
+            <div class="tier-row">
+              <div class="tier-name">Licence de 6 mois</div>
+              <div class="tier-price">44,99 €</div>
+            </div>
+            <div class="tier-row featured">
+              <div class="tier-name">Licence de 12 mois<span class="tier-badge">Le plus choisi</span></div>
+              <div class="tier-price">69,99 €</div>
+            </div>
+            <div class="tier-row">
+              <div class="tier-name">Durée de vie</div>
+              <div class="tier-price">129,99 €</div>
+            </div>
+          </div>
+          <a href={gumroadUrl} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
         </div>
-        <div class="price-card">
-          <p class="price-amount">Licence de 3 mois</p>
-          <p class="price">52,45 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Licence de 6 mois</p>
-          <p class="price">104,91 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Licence de 12 mois</p>
-          <p class="price">174,86 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Durée de vie</p>
-          <p class="price">349,73 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-      
+      </div>
+    </section>
 
     <!-- FINAL CTA -->
     <section class="final-cta">
@@ -479,45 +482,30 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
     /* Pricing */
     .pricing { padding: 30px 0 90px; }
     .pricing-inner { display: flex; justify-content: center; }
-    .pricing-card {
+    .tier-card {
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 24px;
-      padding: 48px 44px;
+      padding: 44px;
       max-width: 460px;
       width: 100%;
       box-shadow: var(--shadow);
       text-align: center;
     }
-    .pricing-card h2 { font-size: 1.6rem; margin-top: 6px; }
-    .price { margin-top: 20px; }
-    .price-amount {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 3.2rem;
-      color: var(--blue);
+    .tier-list { display: flex; flex-direction: column; gap: 10px; margin: 26px 0 28px; text-align: left; }
+    .tier-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-radius: 14px; border: 1px solid var(--line);
+      background: var(--cream);
     }
-    .price-sub { margin-top: 6px; font-size: 0.88rem; }
-    .pricing-list {
-      text-align: left;
-      margin-top: 30px;
-      border-top: 1px solid var(--line);
-      padding-top: 26px;
+    .tier-row.featured { border: 1.5px solid var(--blue); background: rgba(27,34,224,0.06); }
+    .tier-name { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+    .tier-badge {
+      display: block; margin-top: 2px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.62rem; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--blue); font-weight: 700;
     }
-    .pricing-list li {
-      position: relative;
-      padding-left: 28px;
-      margin-bottom: 14px;
-      font-size: 0.95rem;
-      color: var(--ink);
-    }
-    .pricing-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--green);
-      font-weight: 700;
-    }
+    .tier-price { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--blue); white-space: nowrap; }
 
     /* Guarantee */
     .guarantee { padding: 0 0 90px; }
