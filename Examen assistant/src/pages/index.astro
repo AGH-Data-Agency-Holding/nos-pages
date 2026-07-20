@@ -87,12 +87,30 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/zclcjl";
     .band-indigo p { max-width: 540px; margin: 0 auto; color: #D9D6FF; line-height: 1.6; }
 
     .price-section { padding: 90px 0; text-align: center; }
-    .price-card { max-width: 380px; margin: 40px auto 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 34px; }
+    .price-card { max-width: 440px; margin: 40px auto 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 34px; }
     .price-card .price { font-family: "Fraunces", serif; font-size: 2.6rem; margin: 10px 0 4px; }
     .price-card .price span { font-size: 1rem; font-family: Inter, sans-serif; font-weight: 500; color: #4A4A63; }
     .price-card ul { list-style: none; padding: 0; margin: 22px 0 26px; text-align: left; }
     .price-card li { padding: 8px 0; font-size: .94rem; border-top: 1px solid var(--line); }
     .price-card li:first-child { border-top: none; }
+
+
+    .tier-list { display: flex; flex-direction: column; gap: 10px; margin: 24px 0 28px; }
+    .tier-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-radius: 14px; border: 1px solid rgba(0,0,0,.08);
+      background: #fff;
+    }
+    .tier-row.featured {
+      border: 1.5px solid #5B4FE0; background: #5B4FE010;
+      position: relative;
+    }
+    .tier-name { font-size: .95rem; font-weight: 600; }
+    .tier-badge {
+      font-family: "JetBrains Mono", monospace; font-size: .62rem; letter-spacing: .04em;
+      text-transform: uppercase; color: #5B4FE0; font-weight: 700; display: block; margin-top: 2px;
+    }
+    .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #3F35B0; white-space: nowrap; }
 
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: var(--lavender); border-radius: 24px; padding: 46px; text-align: center; }
@@ -134,7 +152,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/zclcjl";
           <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger l'app</a>
           <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
-        <p class="trust-line">Garantie de remboursement de 6 mois · <strong>zéro Wi-Fi requis</strong></p>
+        <p class="trust-line">100% remboursé si l'app ne t'aide pas · <strong>zéro Wi-Fi requis</strong></p>
       </div>
       <div class="hero-visual">
         <div class="glow"></div>
@@ -231,42 +249,37 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/zclcjl";
   <section class="price-section" id="tarif">
     <span class="eyebrow">Tarif</span>
     <h2 style="margin-top:10px;">Un prix simple, pas d'abonnement caché.</h2>
-    <div class="price-card" style="max-width: 760px; margin: 40px auto 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 18px; text-align: left;">
-      <div class="plan-row" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 8px; border-top: none; flex-wrap: wrap;">
-        <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.4rem; margin: 0; color: var(--ink); min-width: 120px;">26,22 €</div>
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-          <div style="font-weight: 600; color: var(--ink);">Licence d'un mois</div>
-          <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener" style="padding: 10px 16px; font-size: 0.9rem;">Télécharger maintenant</a>
+    <div class="price-card">
+      <div class="eyebrow">Exam Assistant</div>
+      <div class="tier-list">
+        <div class="tier-row">
+          <div class="tier-name">Licence d'un mois</div>
+          <div class="tier-price">5,99 €</div>
+        </div>
+        <div class="tier-row">
+          <div class="tier-name">Licence de 3 mois</div>
+          <div class="tier-price">14,99 €</div>
+        </div>
+        <div class="tier-row">
+          <div class="tier-name">Licence de 6 mois</div>
+          <div class="tier-price">26,99 €</div>
+        </div>
+        <div class="tier-row featured">
+          <div class="tier-name">Licence de 12 mois<span class="tier-badge">Le plus choisi</span></div>
+          <div class="tier-price">89,99 €</div>
+        </div>
+        <div class="tier-row">
+          <div class="tier-name">Durée de vie</div>
+          <div class="tier-price">129,99 €</div>
         </div>
       </div>
-      <div class="plan-row" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 8px; border-top: 1px solid var(--line); flex-wrap: wrap;">
-        <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.4rem; margin: 0; color: var(--ink); min-width: 120px;">52,45 €</div>
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-          <div style="font-weight: 600; color: var(--ink);">Licence de 3 mois</div>
-          <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener" style="padding: 10px 16px; font-size: 0.9rem;">Télécharger maintenant</a>
-        </div>
-      </div>
-      <div class="plan-row" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 8px; border-top: 1px solid var(--line); flex-wrap: wrap;">
-        <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.4rem; margin: 0; color: var(--ink); min-width: 120px;">104,91 €</div>
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-          <div style="font-weight: 600; color: var(--ink);">Licence de 6 mois</div>
-          <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener" style="padding: 10px 16px; font-size: 0.9rem;">Télécharger maintenant</a>
-        </div>
-      </div>
-      <div class="plan-row" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 8px; border-top: 1px solid var(--line); flex-wrap: wrap;">
-        <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.4rem; margin: 0; color: var(--ink); min-width: 120px;">174,86 €</div>
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-          <div style="font-weight: 600; color: var(--ink);">Licence de 12 mois</div>
-          <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener" style="padding: 10px 16px; font-size: 0.9rem;">Télécharger maintenant</a>
-        </div>
-      </div>
-      <div class="plan-row" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 8px; border-top: 1px solid var(--line); flex-wrap: wrap;">
-        <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.4rem; margin: 0; color: var(--ink); min-width: 120px;">349,73 €</div>
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-          <div style="font-weight: 600; color: var(--ink);">Durée de vie (accès à vie)</div>
-          <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener" style="padding: 10px 16px; font-size: 0.9rem;">Télécharger maintenant</a>
-        </div>
-      </div>
+      <ul>
+        <li>QCM & quiz générés par IA</li>
+        <li>Tuteur IA 100% hors-ligne</li>
+        <li>Suivi de progression intelligent</li>
+        <li>Favoris pour le sprint final</li>
+      </ul>
+      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener" style="width:100%; justify-content:center;">Télécharger maintenant</a>
     </div>
   </section>
 
@@ -274,7 +287,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/zclcjl";
     <div class="wrap">
       <div class="guarantee-box">
         <span class="eyebrow">Garantie</span>
-        <h2>Garantie de remboursement de 6 mois.</h2>
+        <h2>100% remboursé, sans question posée.</h2>
         <p>Si l'application ne t'aide pas à mieux réviser, tu es intégralement remboursé, sans justification à donner.</p>
       </div>
     </div>
