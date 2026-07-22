@@ -1,16 +1,16 @@
 ---
-const gumroadUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
+const paymentUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
 
-// Chaque tarif = un lien Overlay Gumroad distinct, avec sa propre variante préselectionnée.
+// Chaque tarif = un lien de paiement direct distinct, avec sa propre variante préselectionnée.
 // ⚠️ IMPORTANT : la valeur "variant" doit correspondre EXACTEMENT au nom de la version
-// configurée dans l'onglet "Versions" du produit sur Gumroad. Les valeurs ci-dessous sont
+// configurée dans l'onglet "Versions" du produit sur la plateforme de paiement. Les valeurs ci-dessous sont
 // une hypothèse basée sur les libellés affichés — à vérifier/corriger avec le nom réel.
 const tiers = [
-  { name: "Licence d'un mois", price: "6,99 €", variant: "1 mois", featured: false },
-  { name: "Licence de 3 mois", price: "17,99 €", variant: "3 mois", featured: false },
-  { name: "Licence de 6 mois", price: "34,99 €", variant: "6 mois", featured: false },
-  { name: "Licence de 12 mois", price: "49,99 €", variant: "12 mois", featured: true, badge: "Le plus choisi" },
-  { name: "Durée de vie", price: "129,99 €", variant: "Durée de vie", featured: false },
+  { name: "Licence d'un mois", price: "6,99 €", variant: "1 Month License", featured: false },
+  { name: "Licence de 3 mois", price: "17,99 €", variant: "3 Months License", featured: false },
+  { name: "Licence de 6 mois", price: "34,99 €", variant: "6 Months License", featured: false },
+  { name: "Licence de 12 mois", price: "49,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
 ];
 ---
 <html lang="fr">
@@ -108,7 +108,7 @@ const tiers = [
     .price-hint { font-size: .82rem; color: #8a6f52; margin: 0 0 18px; }
 
     /* Chaque ligne de tarif est maintenant un lien cliquable qui ouvre l'Overlay
-       directement sur la version correspondante (voir data-gumroad-overlay-checkout). */
+       directement sur la version correspondante. */
     .tier-list { display: flex; flex-direction: column; gap: 10px; margin: 24px 0 4px; }
     .tier-row {
       display: flex; align-items: center; justify-content: space-between;
@@ -158,7 +158,7 @@ const tiers = [
         <a href="#tarif">Tarif</a>
         <a href="#garantie">Garantie</a>
       </nav>
-      <a class="btn btn-primary gumroad-button" href={gumroadUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
+      <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
 
@@ -170,7 +170,7 @@ const tiers = [
           <h1>Ce qu'il reste dans le frigo devient votre prochain bon plat.</h1>
           <p>Scannez ce qu'il reste dans votre frigo avec la caméra, l'IA reconnaît vos ingrédients et propose une recette marocaine ou internationale adaptée — sans connexion internet, sans publicité, sans même taper un mot.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary gumroad-button" href={gumroadUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
+            <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
             <a class="btn btn-ghost" style="border-color:#fff;color:#fff" href="#fonctionnalites">Voir les fonctionnalités</a>
           </div>
         </div>
@@ -287,8 +287,8 @@ const tiers = [
       <div class="tier-list">
         {tiers.map((tier) => (
           <a
-            class={`tier-row gumroad-button ${tier.featured ? "featured" : ""}`}
-            href={`${gumroadUrl}?variant=${encodeURIComponent(tier.variant)}`}
+            class={`tier-row ${tier.featured ? "featured" : ""}`}
+            href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
             data-gumroad-overlay-checkout="true"
           >
             <div class="tier-name">
@@ -327,7 +327,7 @@ const tiers = [
       <span class="eyebrow" style="color:#F0A87C">Prêt à cuisiner autrement ?</span>
       <h2>Vos restes de frigo méritent mieux qu'une recherche Google.</h2>
       <p>Téléchargez Recettes Cuisine et générez votre première recette dès ce soir.</p>
-      <a class="btn btn-primary gumroad-button" href={gumroadUrl} data-gumroad-overlay-checkout="true">Télécharger Recettes Cuisine</a>
+      <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger Recettes Cuisine</a>
       <div class="lang-row">DISPONIBLE EN FRANÇAIS · ENGLISH · العربية</div>
     </div>
   </section>
@@ -336,8 +336,10 @@ const tiers = [
     <div class="wrap">© 2026 AGH Data Agency Holding — Recettes Cuisine. Tous droits réservés.</div>
   </footer>
 
-  <!-- Script officiel Gumroad : intercepte les clics sur les liens class="gumroad-button" et ouvre l'Overlay -->
-  <script src="https://gumroad.com/js/gumroad.js"></script>
+  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up (pas de classe "gumroad-button" ici, pour garder un bouton 100% personnalisé sans logo) -->
+  <!-- is:inline est OBLIGATOIRE ici : sans ça, Astro bundle ce script externe via Vite,
+       ce qui provoque une erreur CORS au chargement (voir diagnostic DevTools). -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
 
 </body>
 </html>
