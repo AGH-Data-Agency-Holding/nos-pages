@@ -1,5 +1,17 @@
 ---
 const gumroadUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
+
+// Chaque tarif = un lien Overlay Gumroad distinct, avec sa propre variante préselectionnée.
+// ⚠️ IMPORTANT : la valeur "variant" doit correspondre EXACTEMENT au nom de la version
+// configurée dans l'onglet "Versions" du produit sur Gumroad. Les valeurs ci-dessous sont
+// une hypothèse basée sur les libellés affichés — à vérifier/corriger avec le nom réel.
+const tiers = [
+  { name: "Licence d'un mois", price: "6,99 €", variant: "1 mois", featured: false },
+  { name: "Licence de 3 mois", price: "17,99 €", variant: "3 mois", featured: false },
+  { name: "Licence de 6 mois", price: "34,99 €", variant: "6 mois", featured: false },
+  { name: "Licence de 12 mois", price: "49,99 €", variant: "12 mois", featured: true, badge: "Le plus choisi" },
+  { name: "Durée de vie", price: "129,99 €", variant: "Durée de vie", featured: false },
+];
 ---
 <html lang="fr">
 <head>
@@ -89,30 +101,32 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
     .band-flame p { max-width: 540px; margin: 0 auto; color: #FFE7D6; line-height: 1.6; }
 
     .price-section { padding: 90px 0; text-align: center; }
-    .price-card { max-width: 440px; margin: 40px auto 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 34px; }
-    .price-card .price { font-family: "Fraunces", serif; font-size: 2.6rem; margin: 10px 0 4px; }
-    .price-card .price span { font-size: 1rem; font-family: Inter, sans-serif; font-weight: 500; color: #5A4632; }
+    .price-card { max-width: 460px; margin: 40px auto 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 34px; }
     .price-card ul { list-style: none; padding: 0; margin: 22px 0 26px; text-align: left; }
     .price-card li { padding: 8px 0; font-size: .94rem; border-top: 1px solid var(--line); }
     .price-card li:first-child { border-top: none; }
+    .price-hint { font-size: .82rem; color: #8a6f52; margin: 0 0 18px; }
 
-
-    .tier-list { display: flex; flex-direction: column; gap: 10px; margin: 24px 0 28px; }
+    /* Chaque ligne de tarif est maintenant un lien cliquable qui ouvre l'Overlay
+       directement sur la version correspondante (voir data-gumroad-overlay-checkout). */
+    .tier-list { display: flex; flex-direction: column; gap: 10px; margin: 24px 0 4px; }
     .tier-row {
       display: flex; align-items: center; justify-content: space-between;
       padding: 16px 20px; border-radius: 14px; border: 1px solid rgba(0,0,0,.08);
-      background: #fff;
+      background: #fff; text-decoration: none; color: inherit; cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
     }
-    .tier-row.featured {
-      border: 1.5px solid #E8622A; background: #E8622A10;
-      position: relative;
-    }
+    .tier-row:hover { border-color: var(--flame); background: #FFF6ED; transform: translateY(-1px); }
+    .tier-row.featured { border: 1.5px solid #E8622A; background: #E8622A10; position: relative; }
+    .tier-row.featured:hover { background: #E8622A18; }
     .tier-name { font-size: .95rem; font-weight: 600; }
     .tier-badge {
       font-family: "JetBrains Mono", monospace; font-size: .62rem; letter-spacing: .04em;
       text-transform: uppercase; color: #E8622A; font-weight: 700; display: block; margin-top: 2px;
     }
+    .tier-right { display: flex; align-items: center; gap: 10px; }
     .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #C94A1A; white-space: nowrap; }
+    .tier-arrow { font-size: 1.1rem; color: #C94A1A; }
 
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: var(--peach); border-radius: 24px; padding: 46px; text-align: center; }
@@ -144,7 +158,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
         <a href="#tarif">Tarif</a>
         <a href="#garantie">Garantie</a>
       </nav>
-      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger</a>
+      <a class="btn btn-primary gumroad-button" href={gumroadUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
 
@@ -156,7 +170,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
           <h1>Ce qu'il reste dans le frigo devient votre prochain bon plat.</h1>
           <p>Scannez ce qu'il reste dans votre frigo avec la caméra, l'IA reconnaît vos ingrédients et propose une recette marocaine ou internationale adaptée — sans connexion internet, sans publicité, sans même taper un mot.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger l'app</a>
+            <a class="btn btn-primary gumroad-button" href={gumroadUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
             <a class="btn btn-ghost" style="border-color:#fff;color:#fff" href="#fonctionnalites">Voir les fonctionnalités</a>
           </div>
         </div>
@@ -265,38 +279,36 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
 
   <section class="price-section" id="tarif">
     <span class="eyebrow">Tarif</span>
-    <h2 style="margin-top:10px;">Un prix simple, pas d'abonnement caché.</h2>
+    <h2 style="margin-top:10px;">Choisissez la durée qui vous convient.</h2>
     <div class="price-card">
       <div class="eyebrow">Recettes Cuisine</div>
+      <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+
       <div class="tier-list">
-        <div class="tier-row">
-          <div class="tier-name">Licence d'un mois</div>
-          <div class="tier-price">6,99 €</div>
-        </div>
-        <div class="tier-row">
-          <div class="tier-name">Licence de 3 mois</div>
-          <div class="tier-price">17,99 €</div>
-        </div>
-        <div class="tier-row">
-          <div class="tier-name">Licence de 6 mois</div>
-          <div class="tier-price">34,99 €</div>
-        </div>
-        <div class="tier-row featured">
-          <div class="tier-name">Licence de 12 mois<span class="tier-badge">Le plus choisi</span></div>
-          <div class="tier-price">49,99 €</div>
-        </div>
-        <div class="tier-row">
-          <div class="tier-name">Durée de vie</div>
-          <div class="tier-price">129,99 €</div>
-        </div>
+        {tiers.map((tier) => (
+          <a
+            class={`tier-row gumroad-button ${tier.featured ? "featured" : ""}`}
+            href={`${gumroadUrl}?variant=${encodeURIComponent(tier.variant)}`}
+            data-gumroad-overlay-checkout="true"
+          >
+            <div class="tier-name">
+              {tier.name}
+              {tier.badge && <span class="tier-badge">{tier.badge}</span>}
+            </div>
+            <div class="tier-right">
+              <div class="tier-price">{tier.price}</div>
+              <div class="tier-arrow">→</div>
+            </div>
+          </a>
+        ))}
       </div>
+
       <ul>
         <li>Générateur IA anti-gaspi hors-ligne</li>
         <li>Centaines de recettes marocaines & internationales</li>
         <li>Assistant recettes hors-ligne</li>
         <li>Favoris, défis et communauté</li>
       </ul>
-      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener" style="width:100%; justify-content:center;">Télécharger maintenant</a>
     </div>
   </section>
 
@@ -315,7 +327,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
       <span class="eyebrow" style="color:#F0A87C">Prêt à cuisiner autrement ?</span>
       <h2>Vos restes de frigo méritent mieux qu'une recherche Google.</h2>
       <p>Téléchargez Recettes Cuisine et générez votre première recette dès ce soir.</p>
-      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger Recettes Cuisine</a>
+      <a class="btn btn-primary gumroad-button" href={gumroadUrl} data-gumroad-overlay-checkout="true">Télécharger Recettes Cuisine</a>
       <div class="lang-row">DISPONIBLE EN FRANÇAIS · ENGLISH · العربية</div>
     </div>
   </section>
@@ -323,6 +335,9 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
   <footer>
     <div class="wrap">© 2026 AGH Data Agency Holding — Recettes Cuisine. Tous droits réservés.</div>
   </footer>
+
+  <!-- Script officiel Gumroad : intercepte les clics sur les liens class="gumroad-button" et ouvre l'Overlay -->
+  <script src="https://gumroad.com/js/gumroad.js"></script>
 
 </body>
 </html>
