@@ -1,5 +1,16 @@
 ---
-const gumroadUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai";
+const paymentUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai";
+
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+// À CONFIRMER via l'onglet "Versions" du produit "dropshopping-winning-product-ai" sur Gumroad
+// avant de considérer cette intégration comme validée.
+const tiers = [
+  { name: "Licence d'un mois", price: "14,99 €", variant: "1 Month License", featured: false },
+  { name: "Licence de 3 mois", price: "37,99 €", variant: "3 Months License", featured: false },
+  { name: "Licence de 6 mois", price: "74,99 €", variant: "6 Months License", featured: false },
+  { name: "Licence de 12 mois", price: "99,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+];
 ---
 <html lang="fr">
 <head>
@@ -87,30 +98,30 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai
     .band-orange p { max-width: 540px; margin: 0 auto; color: #FFE9D3; line-height: 1.6; }
 
     .price-section { padding: 90px 0; text-align: center; }
-    .price-card { max-width: 440px; margin: 40px auto 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 34px; }
-    .price-card .price { font-family: "Fraunces", serif; font-size: 2.6rem; margin: 10px 0 4px; }
-    .price-card .price span { font-size: 1rem; font-family: Inter, sans-serif; font-weight: 500; color: #5A4632; }
+    .price-card { max-width: 460px; margin: 40px auto 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 34px; }
     .price-card ul { list-style: none; padding: 0; margin: 22px 0 26px; text-align: left; }
     .price-card li { padding: 8px 0; font-size: .94rem; border-top: 1px solid var(--line); }
     .price-card li:first-child { border-top: none; }
+    .price-hint { font-size: .82rem; color: #8A7156; margin: 0 0 18px; }
 
-
-    .tier-list { display: flex; flex-direction: column; gap: 10px; margin: 24px 0 28px; }
+    .tier-list { display: flex; flex-direction: column; gap: 10px; margin: 24px 0 4px; }
     .tier-row {
       display: flex; align-items: center; justify-content: space-between;
       padding: 16px 20px; border-radius: 14px; border: 1px solid rgba(0,0,0,.08);
-      background: #fff;
+      background: #fff; text-decoration: none; color: inherit; cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
     }
-    .tier-row.featured {
-      border: 1.5px solid #F2740A; background: #F2740A10;
-      position: relative;
-    }
+    .tier-row:hover { border-color: var(--orange); background: #FBF3EA; transform: translateY(-1px); }
+    .tier-row.featured { border: 1.5px solid #F2740A; background: #F2740A10; position: relative; }
+    .tier-row.featured:hover { background: #F2740A18; }
     .tier-name { font-size: .95rem; font-weight: 600; }
     .tier-badge {
       font-family: "JetBrains Mono", monospace; font-size: .62rem; letter-spacing: .04em;
       text-transform: uppercase; color: #F2740A; font-weight: 700; display: block; margin-top: 2px;
     }
+    .tier-right { display: flex; align-items: center; gap: 10px; }
     .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #C25807; white-space: nowrap; }
+    .tier-arrow { font-size: 1.1rem; color: #C25807; }
 
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: var(--sand); border-radius: 24px; padding: 46px; text-align: center; }
@@ -138,7 +149,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai
         <a href="#tarif">Tarif</a>
         <a href="#garantie">Garantie</a>
       </nav>
-      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger</a>
+      <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
 
@@ -149,7 +160,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai
         <h1>Trouve ton prochain <em>produit gagnant</em>, sans y passer des heures.</h1>
         <p class="lede">Winning Items analyse les tendances du marché et te propose des idées de produits rentables grâce à une IA embarquée — aucune connexion internet requise pour chercher.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger l'app</a>
+          <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
           <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
         <p class="trust-line">100% remboursé si l'app ne t'aide pas · <strong>fonctionne hors-ligne</strong></p>
@@ -248,31 +259,30 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai
 
   <section class="price-section" id="tarif">
     <span class="eyebrow">Tarif</span>
-    <h2 style="margin-top:10px;">Un prix simple, pas d'abonnement caché.</h2>
+    <h2 style="margin-top:10px;">Choisissez la durée qui vous convient.</h2>
     <div class="price-card">
       <div class="eyebrow">Winning Items</div>
+      <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+
       <div class="tier-list">
-        <div class="tier-row">
-          <div class="tier-name">Licence d'un mois</div>
-          <div class="tier-price">14,99 €</div>
-        </div>
-        <div class="tier-row">
-          <div class="tier-name">Licence de 3 mois</div>
-          <div class="tier-price">37,99 €</div>
-        </div>
-        <div class="tier-row">
-          <div class="tier-name">Licence de 6 mois</div>
-          <div class="tier-price">74,99 €</div>
-        </div>
-        <div class="tier-row featured">
-          <div class="tier-name">Licence de 12 mois<span class="tier-badge">Le plus choisi</span></div>
-          <div class="tier-price">99,99 €</div>
-        </div>
-        <div class="tier-row">
-          <div class="tier-name">Durée de vie</div>
-          <div class="tier-price">129,99 €</div>
-        </div>
+        {tiers.map((tier) => (
+          <a
+            class={`tier-row ${tier.featured ? "featured" : ""}`}
+            href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+            data-gumroad-overlay-checkout="true"
+          >
+            <div class="tier-name">
+              {tier.name}
+              {tier.badge && <span class="tier-badge">{tier.badge}</span>}
+            </div>
+            <div class="tier-right">
+              <div class="tier-price">{tier.price}</div>
+              <div class="tier-arrow">→</div>
+            </div>
+          </a>
+        ))}
       </div>
+
       <ul>
         <li>Suggestions de produits par IA hors-ligne</li>
         <li>Analyse de tendances et de niches</li>
@@ -280,7 +290,6 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai
         <li>Catégories multiples et variées</li>
         <li>Mises à jour régulières</li>
       </ul>
-      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener" style="width:100%; justify-content:center;">Télécharger maintenant</a>
     </div>
   </section>
 
@@ -299,7 +308,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai
       <span class="eyebrow" style="color:#8A7658">Prêt à trouver ton best-seller ?</span>
       <h2>Ton prochain produit gagnant t'attend.</h2>
       <p>Télécharge Winning Items et lance ta première recherche dès aujourd'hui.</p>
-      <a class="btn btn-primary" href={gumroadUrl} target="_blank" rel="noopener">Télécharger Winning Items</a>
+      <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger Winning Items</a>
       <div class="lang-row">DISPONIBLE EN FRANÇAIS · ENGLISH · العربية · ESPAÑOL</div>
     </div>
   </section>
@@ -307,6 +316,10 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai
   <footer>
     <div class="wrap">© 2026 AGH Data Agency Holding — Winning Items. Tous droits réservés.</div>
   </footer>
+
+  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
 
 </body>
 </html>

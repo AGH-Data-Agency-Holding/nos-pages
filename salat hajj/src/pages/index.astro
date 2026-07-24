@@ -1,6 +1,17 @@
 ---
 const price = "6,99 €";
-const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
+const paymentUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
+
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+// À CONFIRMER via l'onglet "Versions" du produit "salat-hajj-ai" sur Gumroad
+// avant de considérer cette intégration comme validée.
+const tiers = [
+  { label: "Licence d'un mois", amount: "6,99 €", variant: "1 Month License", featured: false },
+  { label: "Licence de 3 mois", amount: "17,99 €", variant: "3 Months License", featured: false },
+  { label: "Licence de 6 mois", amount: "34,99 €", variant: "6 Months License", featured: false },
+  { label: "Licence de 12 mois", amount: "49,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { label: "Accès à vie", amount: "129,99 €", variant: "LIFETIME", featured: false },
+];
 ---
 <!doctype html>
 <html lang="fr">
@@ -28,7 +39,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
         <a href="#hajj">Guide du Hajj</a>
         <a href="#tarif">Tarif</a>
       </nav>
-      <a href={gumroadUrl} class="btn btn-primary btn-small" target="_blank" rel="noopener">Essayer — {price}</a>
+      <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
     </div>
   </header>
 
@@ -44,7 +55,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
             Salat & Hajj AI apprend vos habitudes pour vous rappeler chaque prière au bon moment, selon votre fuseau horaire et votre Madhab — et vous accompagne pas à pas dans la préparation du Hajj et de la Omra.
           </p>
           <div class="hero-ctas">
-            <a href={gumroadUrl} class="btn btn-primary" target="_blank" rel="noopener">Télécharger l'application</a>
+            <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Télécharger l'application</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Découvrir les fonctionnalités</a>
           </div>
           <p class="hero-microcopy">Compatible Hanafi, Maliki, Shafi'i et Hanbali · 100% hors-ligne</p>
@@ -167,32 +178,25 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
         <div class="pricing-card">
           <p class="eyebrow center">Tarif</p>
           <h2 class="section-title center">Un prix simple, pas d'abonnement caché.</h2>
+          <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
           <div class="price-list">
-            <div class="price-row">
-              <span class="price-row-label">Licence d'un mois</span>
-              <span class="price-row-amount">6,99 €</span>
-            </div>
-            <div class="price-row">
-              <span class="price-row-label">Licence de 3 mois</span>
-              <span class="price-row-amount">17,99 €</span>
-            </div>
-            <div class="price-row">
-              <span class="price-row-label">Licence de 6 mois</span>
-              <span class="price-row-amount">34,99 €</span>
-            </div>
-            <div class="price-row featured">
-              <span class="price-row-label-wrap">
-                <span class="price-row-label">Licence de 12 mois</span>
-                <span class="price-row-badge">Le plus choisi</span>
-              </span>
-              <span class="price-row-amount">49,99 €</span>
-            </div>
-            <div class="price-row">
-              <span class="price-row-label">Durée de vie</span>
-              <span class="price-row-amount">129,99 €</span>
-            </div>
+            {tiers.map((tier) => (
+              <a
+                class={`price-row ${tier.featured ? "featured" : ""}`}
+                href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+                data-gumroad-overlay-checkout="true"
+              >
+                <span class="price-row-label-wrap">
+                  <span class="price-row-label">{tier.label}</span>
+                  {tier.badge && <span class="price-row-badge">{tier.badge}</span>}
+                </span>
+                <span class="price-row-right">
+                  <span class="price-row-amount">{tier.amount}</span>
+                  <span class="price-row-arrow">→</span>
+                </span>
+              </a>
+            ))}
           </div>
-          <a href={gumroadUrl} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
         </div>
       </div>
     </section>
@@ -218,7 +222,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
       <div class="wrap final-cta-inner">
         <h2>Organisez votre vie spirituelle<br/>dès aujourd'hui.</h2>
         <p>Prières, Hajj, Zakat et questions de Fiqh : tout dans une seule application, à votre rythme.</p>
-        <a href={gumroadUrl} class="btn btn-light" target="_blank" rel="noopener">Commencer maintenant — {price}</a>
+        <a href={paymentUrl} class="btn btn-light" data-gumroad-overlay-checkout="true">Commencer maintenant — {price}</a>
       </div>
     </section>
 
@@ -306,7 +310,6 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
       background: transparent;
     }
     .btn-ghost:hover { border-color: var(--green); background: rgba(23,169,104,0.05); }
-    .btn-full { width: 100%; margin-top: 22px; }
     .btn-light {
       background: var(--gold);
       color: var(--ink);
@@ -494,8 +497,9 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
     }
     .pricing-card .eyebrow.center { margin-bottom: 10px; }
     .pricing-card .section-title.center { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
+    .price-hint { text-align: center; font-size: 0.85rem; color: #8A968F; margin-top: 12px; }
     .price-list {
-      margin-top: 32px;
+      margin-top: 24px;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -508,11 +512,17 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
       border: 1px solid var(--line);
       border-radius: 14px;
       background: var(--cream);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
     }
+    .price-row:hover { border-color: var(--green); transform: translateY(-1px); }
     .price-row.featured {
       border: 1.5px solid var(--green);
       background: rgba(23, 169, 104, 0.06);
     }
+    .price-row.featured:hover { background: rgba(23, 169, 104, 0.1); }
     .price-row-label {
       font-weight: 600;
       font-size: 1rem;
@@ -530,6 +540,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
       text-transform: uppercase;
       color: var(--green-deep);
     }
+    .price-row-right { display: flex; align-items: center; gap: 10px; }
     .price-row-amount {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 800;
@@ -537,7 +548,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
       color: var(--green);
       white-space: nowrap;
     }
-    .pricing-card .btn-full { margin-top: 30px; }
+    .price-row-arrow { font-size: 1.1rem; color: var(--green); }
 
     /* Guarantee */
     .guarantee { padding: 0 0 90px; }
@@ -602,5 +613,10 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/salat-hajj-ai";
       .price-row { padding: 14px 16px; }
     }
   </style>
+
+  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
 </body>
 </html>

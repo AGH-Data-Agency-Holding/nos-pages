@@ -1,6 +1,17 @@
 ---
 const price = "7,99 €";
-const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
+const paymentUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
+
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+// À CONFIRMER via l'onglet "Versions" du produit "mental-heath-ai" sur Gumroad
+// avant de considérer cette intégration comme validée.
+const tiers = [
+  { label: "Licence d'un mois", amount: "7,99 €", variant: "1 Month License", featured: false },
+  { label: "Licence de 3 mois", amount: "19,99 €", variant: "3 Months License", featured: false },
+  { label: "Licence de 6 mois", amount: "39,99 €", variant: "6 Months License", featured: false },
+  { label: "Licence de 12 mois", amount: "59,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { label: "Accès à vie", amount: "129,99 €", variant: "LIFETIME", featured: false },
+];
 ---
 <!doctype html>
 <html lang="fr">
@@ -28,7 +39,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
         <a href="#confidentialite">Confidentialité</a>
         <a href="#tarif">Tarif</a>
       </nav>
-      <a href={gumroadUrl} class="btn btn-primary btn-small" target="_blank" rel="noopener">Essayer — {price}</a>
+      <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
     </div>
   </header>
 
@@ -46,7 +57,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
             Stress, anxiété, ou simplement besoin d'être écouté : Calmenow est un compagnon IA disponible 24h/24, conçu pour comprendre votre culture, vos valeurs et votre langue — sans jugement, avec des méthodes reconnues comme la TCC.
           </p>
           <div class="hero-ctas">
-            <a href={gumroadUrl} class="btn btn-primary" target="_blank" rel="noopener">Commencer maintenant</a>
+            <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer maintenant</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
           </div>
           <p class="hero-microcopy">Application offline-first · Disponible en français, anglais, arabe et espagnol</p>
@@ -157,32 +168,25 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
         <div class="pricing-card">
           <p class="eyebrow center">Tarif</p>
           <h2 class="section-title center">Un prix simple, pas d'abonnement caché.</h2>
+          <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
           <div class="price-list">
-            <div class="price-row">
-              <span class="price-row-label">Licence d'un mois</span>
-              <span class="price-row-amount">7,99 €</span>
-            </div>
-            <div class="price-row">
-              <span class="price-row-label">Licence de 3 mois</span>
-              <span class="price-row-amount">19,99 €</span>
-            </div>
-            <div class="price-row">
-              <span class="price-row-label">Licence de 6 mois</span>
-              <span class="price-row-amount">39,99 €</span>
-            </div>
-            <div class="price-row featured">
-              <span class="price-row-label-wrap">
-                <span class="price-row-label">Licence de 12 mois</span>
-                <span class="price-row-badge">Le plus choisi</span>
-              </span>
-              <span class="price-row-amount">59,99 €</span>
-            </div>
-            <div class="price-row">
-              <span class="price-row-label">Durée de vie</span>
-              <span class="price-row-amount">129,99 €</span>
-            </div>
+            {tiers.map((tier) => (
+              <a
+                class={`price-row ${tier.featured ? "featured" : ""}`}
+                href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+                data-gumroad-overlay-checkout="true"
+              >
+                <span class="price-row-label-wrap">
+                  <span class="price-row-label">{tier.label}</span>
+                  {tier.badge && <span class="price-row-badge">{tier.badge}</span>}
+                </span>
+                <span class="price-row-right">
+                  <span class="price-row-amount">{tier.amount}</span>
+                  <span class="price-row-arrow">→</span>
+                </span>
+              </a>
+            ))}
           </div>
-          <a href={gumroadUrl} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
         </div>
       </div>
     </section>
@@ -208,7 +212,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
       <div class="wrap final-cta-inner">
         <h2>Prenez un moment pour votre santé mentale, aujourd'hui.</h2>
         <p>Rejoignez Calmenow et commencez à construire une résilience durable, à votre rythme et dans votre langue.</p>
-        <a href={gumroadUrl} class="btn btn-light" target="_blank" rel="noopener">Commencer maintenant — {price}</a>
+        <a href={paymentUrl} class="btn btn-light" data-gumroad-overlay-checkout="true">Commencer maintenant — {price}</a>
       </div>
     </section>
 
@@ -298,7 +302,6 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
       background: transparent;
     }
     .btn-ghost:hover { border-color: var(--teal); background: rgba(14,110,85,0.05); }
-    .btn-full { width: 100%; margin-top: 22px; }
     .btn-light {
       background: #fff;
       color: var(--teal-deep);
@@ -516,8 +519,9 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
     }
     .pricing-card .eyebrow.center { margin-bottom: 10px; }
     .pricing-card .section-title.center { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
+    .price-hint { text-align: center; font-size: 0.85rem; color: #8B9A94; margin-top: 12px; }
     .price-list {
-      margin-top: 32px;
+      margin-top: 24px;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -530,11 +534,17 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
       border: 1px solid var(--line);
       border-radius: 14px;
       background: var(--cream);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
     }
+    .price-row:hover { border-color: var(--teal); transform: translateY(-1px); }
     .price-row.featured {
       border: 1.5px solid var(--teal);
       background: rgba(14, 110, 85, 0.06);
     }
+    .price-row.featured:hover { background: rgba(14, 110, 85, 0.1); }
     .price-row-label {
       font-weight: 600;
       font-size: 1rem;
@@ -552,6 +562,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
       text-transform: uppercase;
       color: var(--teal-deep);
     }
+    .price-row-right { display: flex; align-items: center; gap: 10px; }
     .price-row-amount {
       font-family: 'Poppins', sans-serif;
       font-weight: 800;
@@ -559,7 +570,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
       color: var(--teal);
       white-space: nowrap;
     }
-    .pricing-card .btn-full { margin-top: 30px; }
+    .price-row-arrow { font-size: 1.1rem; color: var(--teal); }
 
     /* Guarantee */
     .guarantee { padding: 0 0 90px; }
@@ -625,5 +636,10 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
       .price-row { padding: 14px 16px; }
     }
   </style>
+
+  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
 </body>
 </html>

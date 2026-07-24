@@ -1,6 +1,19 @@
 ---
 // Esthetique AI — landing page
 // Copy source: https://aghhol.gumroad.com/l/makeup-skincare-ai (French version of the Gumroad listing)
+
+const paymentUrl = "https://aghhol.gumroad.com/l/makeup-skincare-ai";
+
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+// À CONFIRMER via l'onglet "Versions" du produit "makeup-skincare-ai" sur Gumroad
+// avant de considérer cette intégration comme validée.
+const tiers = [
+  { label: "Licence d'un mois", amount: "7,99 €", variant: "1 Month License" },
+  { label: "Licence de 3 mois", amount: "19,99 €", variant: "3 Months License" },
+  { label: "Licence de 6 mois", amount: "39,99 €", variant: "6 Months License" },
+  { label: "Licence de 12 mois", amount: "59,99 €", variant: "12 Months License" },
+  { label: "Durée de vie (accès à vie)", amount: "129,99 €", variant: "LIFETIME" },
+];
 ---
 
 <html lang="fr">
@@ -29,7 +42,7 @@
 				<a href="#marketplace">Marketplace</a>
 				<a href="#prix">Tarif</a>
 			</nav>
-			<a href="https://aghhol.gumroad.com/l/makeup-skincare-ai" class="btn btn-header">Essayer maintenant</a>
+			<a href={paymentUrl} class="btn btn-header" data-gumroad-overlay-checkout="true">Essayer maintenant</a>
 		</div>
 	</header>
 
@@ -47,7 +60,7 @@
 						et les pores — puis découvrez une routine sur mesure adaptée à votre type de peau et à votre budget.
 					</p>
 					<div class="hero-cta-row">
-						<a href="https://aghhol.gumroad.com/l/makeup-skincare-ai" class="btn btn-primary">Commencer le diagnostic — 2&nbsp;$</a>
+						<a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer le diagnostic</a>
 						<span class="hero-cta-note">Garantie de remboursement de 6 mois</span>
 					</div>
 				</div>
@@ -259,38 +272,25 @@
 		<!-- ===== PRICING ===== -->
 		<section class="pricing" id="prix">
 			<div class="wrap">
-				<h2 class="pricing-title">Un tarif d'accès unique</h2>
+				<h2 class="pricing-title">Choisissez la durée qui vous convient</h2>
 				<div class="pricing-card">
 					<div class="pricing-card-head">
 						<span class="pricing-name">Tarif</span>
-						<span class="pricing-note">paiement unique</span>
+						<span class="pricing-note">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</span>
 					</div>
 					<ul class="pricing-list">
-						<li style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
-							<span style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--ink);">7,99 €</span>
-							<span style="flex:1; text-align:right;">Licence d'un mois</span>
-							<a href="https://aghhol.gumroad.com/l/makeup-skincare-ai" class="btn btn-primary btn-full" style="margin-top:0; width:auto; padding: 10px 16px; font-size: 0.85rem;">Télécharger maintenant</a>
-						</li>
-						<li style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
-							<span style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--ink);">19,99 €</span>
-							<span style="flex:1; text-align:right;">Licence de 3 mois</span>
-							<a href="https://aghhol.gumroad.com/l/makeup-skincare-ai" class="btn btn-primary btn-full" style="margin-top:0; width:auto; padding: 10px 16px; font-size: 0.85rem;">Télécharger maintenant</a>
-						</li>
-						<li style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
-							<span style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--ink);">39,99 €</span>
-							<span style="flex:1; text-align:right;">Licence de 6 mois</span>
-							<a href="https://aghhol.gumroad.com/l/makeup-skincare-ai" class="btn btn-primary btn-full" style="margin-top:0; width:auto; padding: 10px 16px; font-size: 0.85rem;">Télécharger maintenant</a>
-						</li>
-						<li style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
-							<span style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--ink);">59,99 €</span>
-							<span style="flex:1; text-align:right;">Licence de 12 mois</span>
-							<a href="https://aghhol.gumroad.com/l/makeup-skincare-ai" class="btn btn-primary btn-full" style="margin-top:0; width:auto; padding: 10px 16px; font-size: 0.85rem;">Télécharger maintenant</a>
-						</li>
-						<li style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
-							<span style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--ink);">129,99 €</span>
-							<span style="flex:1; text-align:right;">Durée de vie (accès à vie)</span>
-							<a href="https://aghhol.gumroad.com/l/makeup-skincare-ai" class="btn btn-primary btn-full" style="margin-top:0; width:auto; padding: 10px 16px; font-size: 0.85rem;">Télécharger maintenant</a>
-						</li>
+						{tiers.map((tier) => (
+							<li style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+								<span style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--ink);">{tier.amount}</span>
+								<span style="flex:1; text-align:right;">{tier.label}</span>
+								<a
+									href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+									class="btn btn-primary btn-full"
+									style="margin-top:0; width:auto; padding: 10px 16px; font-size: 0.85rem;"
+									data-gumroad-overlay-checkout="true"
+								>Télécharger maintenant</a>
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>
@@ -315,7 +315,7 @@
 			<div class="wrap final-cta-inner">
 				<h2>Prête à voir votre peau différemment ?</h2>
 				<p>30 secondes suffisent pour votre premier diagnostic.</p>
-				<a href="https://aghhol.gumroad.com/l/makeup-skincare-ai" class="btn btn-primary btn-lg">Commencer le diagnostic — 2&nbsp;$</a>
+				<a href={paymentUrl} class="btn btn-primary btn-lg" data-gumroad-overlay-checkout="true">Commencer le diagnostic</a>
 			</div>
 		</section>
 
@@ -329,7 +329,6 @@
 				<span class="brand-name">Esthetique AI</span>
 			</div>
 			<p class="footer-note">Un produit du portefeuille AGH Data Agency Holding SA.</p>
-			<a href="https://aghhol.gumroad.com/l/makeup-skincare-ai" class="footer-link">aghhol.gumroad.com/l/makeup-skincare-ai</a>
 		</div>
 	</footer>
 
@@ -639,7 +638,7 @@
 		margin-bottom: 44px;
 	}
 	.pricing-card {
-		max-width: 400px;
+		max-width: 420px;
 		margin: 0 auto;
 		background: var(--card-white);
 		border: 1px solid var(--border-soft);
@@ -658,14 +657,6 @@
 		font-weight: 600;
 		margin-bottom: 10px;
 	}
-	.pricing-amount {
-		font-family: var(--font-display);
-		font-size: 3.2rem;
-		font-weight: 600;
-		color: var(--ink);
-	}
-	.pricing-amount .currency { font-size: 1.6rem; vertical-align: super; }
-	.pricing-amount .cents { font-size: 1.6rem; }
 	.pricing-note {
 		display: block;
 		font-size: 0.82rem;
@@ -682,21 +673,6 @@
 		gap: 14px;
 		border-top: 1px solid var(--border-soft);
 		padding-top: 24px;
-	}
-	.pricing-list li {
-		position: relative;
-		padding-left: 24px;
-		font-size: 0.92rem;
-		color: var(--purple-deep);
-		font-weight: 600;
-	}
-	.pricing-list li::before {
-		content: '✓';
-		position: absolute;
-		left: 0;
-		top: 0;
-		color: var(--teal-data);
-		font-weight: 800;
 	}
 
 	/* ===== GUARANTEE ===== */
@@ -755,8 +731,6 @@
 	}
 	.footer-brand { display: flex; align-items: center; gap: 10px; }
 	.footer-note { font-size: 0.85rem; color: #7a6795; margin: 0; }
-	.footer-link { font-family: var(--font-mono); font-size: 0.82rem; color: var(--purple-deep); text-decoration: none; }
-	.footer-link:hover { color: var(--coral); }
 
 	/* ===== RESPONSIVE ===== */
 	@media (max-width: 860px) {
@@ -770,5 +744,10 @@
 		.guarantee-inner { flex-direction: column; text-align: center; padding: 40px 28px; }
 	}
 </style>
+
+<!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+     is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+<script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
 </body>
 </html>

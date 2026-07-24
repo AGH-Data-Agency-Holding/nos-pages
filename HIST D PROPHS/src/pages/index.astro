@@ -1,6 +1,17 @@
 ---
-const price = "26,22 €";
-const gumroadUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
+const price = "5,99 €";
+const paymentUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
+
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+// À CONFIRMER via l'onglet "Versions" du produit "Stories-of-Prophets-ai" sur Gumroad
+// avant de considérer cette intégration comme validée.
+const tiers = [
+  { name: "Licence d'un mois", price: "5,99 €", variant: "1 Month License", featured: false },
+  { name: "Licence de 3 mois", price: "14,99 €", variant: "3 Months License", featured: false },
+  { name: "Licence de 6 mois", price: "29,99 €", variant: "6 Months License", featured: false },
+  { name: "Licence de 12 mois", price: "44,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+];
 ---
 <!doctype html>
 <html lang="fr">
@@ -28,7 +39,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
         <a href="#parcours">Comment ça marche</a>
         <a href="#tarif">Tarif</a>
       </nav>
-      <a href={gumroadUrl} class="btn btn-primary btn-small" target="_blank" rel="noopener">Essayer — {price}</a>
+      <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
     </div>
   </header>
 
@@ -46,7 +57,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
             Qisas AI transforme les récits coraniques en aventures simples et captivantes pour vos enfants — dans un environnement 100% sûr, sans publicité, sans internet requis, même en mode avion.
           </p>
           <div class="hero-ctas">
-            <a href={gumroadUrl} class="btn btn-primary" target="_blank" rel="noopener">Télécharger Qisas AI</a>
+            <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Télécharger Qisas AI</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Découvrir l'application</a>
           </div>
           <p class="hero-microcopy">Disponible en français, anglais, arabe et espagnol · Garantie de remboursement de 6 mois</p>
@@ -196,32 +207,30 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
     <!-- PRICING -->
     <section id="tarif" class="pricing">
       <div class="wrap pricing-inner">
-        <div class="price-card">
-          <p class="price-amount">Licence d'un mois</p>
-          <p class="price">5,99 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
+        <p class="eyebrow center">Tarif</p>
+        <h2 class="section-title center">Choisissez la durée qui vous convient</h2>
+        <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+
+        <div class="tier-list">
+          {tiers.map((tier) => (
+            <a
+              class={`tier-row ${tier.featured ? "featured" : ""}`}
+              href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+              data-gumroad-overlay-checkout="true"
+            >
+              <div class="tier-name">
+                {tier.name}
+                {tier.badge && <span class="tier-badge">{tier.badge}</span>}
+              </div>
+              <div class="tier-right">
+                <div class="tier-price">{tier.price}</div>
+                <div class="tier-arrow">→</div>
+              </div>
+            </a>
+          ))}
         </div>
-        <div class="price-card">
-          <p class="price-amount">Licence de 3 mois</p>
-          <p class="price">14,99 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Licence de 6 mois</p>
-          <p class="price">29,99 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Licence de 12 mois</p>
-          <p class="price">44,99 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Durée de vie</p>
-          <p class="price">129,99 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-      
+      </div>
+    </section>
 
     <!-- GUARANTEE -->
     <section class="guarantee">
@@ -244,7 +253,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
       <div class="wrap final-cta-inner">
         <h2>Offrez à votre enfant une bibliothèque<br/>de sagesse, partout où vous allez.</h2>
         <p>Sans Wi-Fi, sans publicité, sans compromis sur les valeurs que vous voulez transmettre.</p>
-        <a href={gumroadUrl} class="btn btn-light" target="_blank" rel="noopener">Commencer maintenant — {price}</a>
+        <a href={paymentUrl} class="btn btn-light" data-gumroad-overlay-checkout="true">Commencer maintenant — {price}</a>
       </div>
     </section>
 
@@ -330,7 +339,6 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
       background: transparent;
     }
     .btn-ghost:hover { border-color: var(--green); background: rgba(11,68,35,0.05); }
-    .btn-full { width: 100%; margin-top: 22px; }
     .btn-light {
       background: var(--gold-light);
       color: var(--green-deep);
@@ -559,47 +567,36 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
 
     /* Pricing */
     .pricing { padding: 30px 0 90px; }
-    .pricing-inner { display: flex; justify-content: center; }
-    .pricing-card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 48px 44px;
-      max-width: 460px;
-      width: 100%;
+    .price-hint { text-align: center; font-size: 0.86rem; color: #8B9186; font-family: 'Karla', sans-serif; margin-top: 10px; }
+
+    .tier-list {
+      display: flex; flex-direction: column; gap: 12px;
+      max-width: 560px; margin: 40px auto 0;
+    }
+    .tier-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 26px; border-radius: var(--radius); border: 1px solid var(--line);
+      background: var(--paper); text-decoration: none; color: inherit; cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
       box-shadow: var(--shadow);
-      text-align: center;
     }
-    .pricing-card h2 { font-size: 1.9rem; margin-top: 6px; }
-    .price { margin-top: 20px; }
-    .price-amount {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-size: 3.4rem;
-      color: var(--green);
+    .tier-row:hover { border-color: var(--green); transform: translateY(-2px); }
+    .tier-row.featured { border: 1.5px solid var(--gold); background: #FFF8EA; }
+    .tier-row.featured:hover { background: #FFF3D9; }
+    .tier-name {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; color: var(--ink);
     }
-    .price-sub { margin-top: 6px; font-size: 0.86rem; font-family: 'Karla', sans-serif; }
-    .pricing-list {
-      text-align: left;
-      margin-top: 30px;
-      border-top: 1px solid var(--line);
-      padding-top: 26px;
+    .tier-badge {
+      display: block; margin-top: 4px; font-family: 'Karla', sans-serif;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--gold);
     }
-    .pricing-list li {
-      position: relative;
-      padding-left: 28px;
-      margin-bottom: 14px;
-      font-size: 0.95rem;
-      color: var(--ink);
-      font-family: 'Karla', sans-serif;
+    .tier-right { display: flex; align-items: center; gap: 12px; }
+    .tier-price {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.4rem; color: var(--green);
+      white-space: nowrap;
     }
-    .pricing-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--green);
-      font-weight: 700;
-    }
+    .tier-arrow { font-size: 1.1rem; color: var(--green); }
 
     /* Guarantee */
     .guarantee { padding: 0 0 90px; }
@@ -662,8 +659,12 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
     @media (max-width: 560px) {
       .stats-inner { grid-template-columns: 1fr 1fr; }
       .journey-grid { grid-template-columns: 1fr; }
-      .pricing-card { padding: 36px 26px; }
     }
   </style>
+
+  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
 </body>
 </html>

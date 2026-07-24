@@ -1,6 +1,17 @@
 ---
 const price = "9,99 €";
-const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
+const paymentUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
+
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+// À CONFIRMER via l'onglet "Versions" du produit "doctor-healthcare" sur Gumroad
+// avant de considérer cette intégration comme validée.
+const tiers = [
+  { name: "Licence d'un mois", price: "9,99 €", variant: "1 Month License", featured: false },
+  { name: "Licence de 3 mois", price: "24,99 €", variant: "3 Months License", featured: false },
+  { name: "Licence de 6 mois", price: "44,99 €", variant: "6 Months License", featured: false },
+  { name: "Licence de 12 mois", price: "69,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+];
 ---
 <!doctype html>
 <html lang="fr">
@@ -28,7 +39,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
         <a href="#confidentialite">Confidentialité</a>
         <a href="#tarif">Tarif</a>
       </nav>
-      <a href={gumroadUrl} class="btn btn-primary btn-small" target="_blank" rel="noopener">Essayer — {price}</a>
+      <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
     </div>
   </header>
 
@@ -44,7 +55,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
             MEDICAL AI fait le pont entre l'incertitude d'une recherche sur internet et la visite chez le médecin. Analysez vos symptômes, suivez votre carnet de santé numérique et préparez vos consultations, avec une IA médicale disponible 24h/24.
           </p>
           <div class="hero-ctas">
-            <a href={gumroadUrl} class="btn btn-primary" target="_blank" rel="noopener">Démarrer mon bilan santé</a>
+            <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Démarrer mon bilan santé</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
           </div>
           <p class="hero-microcopy">Disponible en 50+ langues · Conforme RGPD et HIPAA</p>
@@ -183,30 +194,42 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
       <div class="wrap pricing-inner">
         <div class="tier-card">
           <p class="eyebrow center">Tarif</p>
-          <h2 class="section-title center" style="font-size:1.6rem;">Un prix simple, pas d'abonnement caché.</h2>
+          <h2 class="section-title center" style="font-size:1.6rem;">Choisissez la durée qui vous convient.</h2>
+          <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
           <div class="tier-list">
-            <div class="tier-row">
-              <div class="tier-name">Licence d'un mois</div>
-              <div class="tier-price">9,99 €</div>
-            </div>
-            <div class="tier-row">
-              <div class="tier-name">Licence de 3 mois</div>
-              <div class="tier-price">24,99 €</div>
-            </div>
-            <div class="tier-row">
-              <div class="tier-name">Licence de 6 mois</div>
-              <div class="tier-price">44,99 €</div>
-            </div>
-            <div class="tier-row featured">
-              <div class="tier-name">Licence de 12 mois<span class="tier-badge">Le plus choisi</span></div>
-              <div class="tier-price">69,99 €</div>
-            </div>
-            <div class="tier-row">
-              <div class="tier-name">Durée de vie</div>
-              <div class="tier-price">129,99 €</div>
-            </div>
+            {tiers.map((tier) => (
+              <a
+                class={`tier-row ${tier.featured ? "featured" : ""}`}
+                href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+                data-gumroad-overlay-checkout="true"
+              >
+                <div class="tier-name">
+                  {tier.name}
+                  {tier.badge && <span class="tier-badge">{tier.badge}</span>}
+                </div>
+                <div class="tier-right">
+                  <div class="tier-price">{tier.price}</div>
+                  <div class="tier-arrow">→</div>
+                </div>
+              </a>
+            ))}
           </div>
-          <a href={gumroadUrl} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUARANTEE (reconstruite : absente du fichier source original, CSS déjà présent) -->
+    <section class="guarantee">
+      <div class="wrap guarantee-inner">
+        <div class="guarantee-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40">
+            <path d="M24 4 L42 11 V22 C42 33 34.5 41.5 24 44 C13.5 41.5 6 33 6 22 V11 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M16 24 L21.5 29.5 L33 17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Livraison instantanée par Gumroad</h3>
+          <p>Votre achat est traité de façon sécurisée sur Gumroad. Vous recevez votre accès immédiatement après le paiement, sans compte à créer sur un store tiers.</p>
         </div>
       </div>
     </section>
@@ -216,7 +239,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
       <div class="wrap final-cta-inner">
         <h2>Prenez le contrôle de votre santé, dès aujourd'hui.</h2>
         <p>Un assistant médical préliminaire dans votre poche, prêt quand vous en avez besoin.</p>
-        <a href={gumroadUrl} class="btn btn-light" target="_blank" rel="noopener">Commencer maintenant — {price}</a>
+        <a href={paymentUrl} class="btn btn-light" data-gumroad-overlay-checkout="true">Commencer maintenant — {price}</a>
       </div>
     </section>
 
@@ -303,7 +326,6 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
       background: transparent;
     }
     .btn-ghost:hover { border-color: var(--blue); background: rgba(27,34,224,0.05); }
-    .btn-full { width: 100%; margin-top: 22px; }
     .btn-light {
       background: #fff;
       color: var(--blue-deep);
@@ -487,25 +509,31 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
       border: 1px solid var(--line);
       border-radius: 24px;
       padding: 44px;
-      max-width: 460px;
+      max-width: 480px;
       width: 100%;
       box-shadow: var(--shadow);
       text-align: center;
     }
-    .tier-list { display: flex; flex-direction: column; gap: 10px; margin: 26px 0 28px; text-align: left; }
+    .price-hint { font-size: 0.85rem; color: #8B8FA8; margin-top: 10px; }
+    .tier-list { display: flex; flex-direction: column; gap: 10px; margin: 24px 0 4px; text-align: left; }
     .tier-row {
       display: flex; align-items: center; justify-content: space-between;
       padding: 16px 20px; border-radius: 14px; border: 1px solid var(--line);
-      background: var(--cream);
+      background: var(--cream); text-decoration: none; color: inherit; cursor: pointer;
+      transition: border-color .15s ease, transform .15s ease;
     }
+    .tier-row:hover { border-color: var(--blue); transform: translateY(-1px); }
     .tier-row.featured { border: 1.5px solid var(--blue); background: rgba(27,34,224,0.06); }
+    .tier-row.featured:hover { background: rgba(27,34,224,0.1); }
     .tier-name { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
     .tier-badge {
       display: block; margin-top: 2px;
       font-family: 'Space Grotesk', sans-serif; font-size: 0.62rem; letter-spacing: 0.04em;
       text-transform: uppercase; color: var(--blue); font-weight: 700;
     }
+    .tier-right { display: flex; align-items: center; gap: 10px; }
     .tier-price { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--blue); white-space: nowrap; }
+    .tier-arrow { font-size: 1.1rem; color: var(--blue); }
 
     /* Guarantee */
     .guarantee { padding: 0 0 90px; }
@@ -564,8 +592,12 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/doctor-healthcare";
     }
     @media (max-width: 560px) {
       .stats-inner { grid-template-columns: 1fr 1fr; }
-      .pricing-card { padding: 36px 26px; }
     }
   </style>
+
+  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
 </body>
 </html>
