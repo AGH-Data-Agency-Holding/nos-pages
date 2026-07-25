@@ -4,13 +4,16 @@
 
 const paymentUrl = "https://aghhol.gumroad.com/l/betob";
 
-// ⚠️ INCOHÉRENCE DÉTECTÉE DANS LE FICHIER SOURCE : le hero et la carte tarif affichaient
-// "12,99 €" tandis que la bande stats et le CTA final affichaient "2 $" (probablement
-// l'ancien prix fixe avant le passage à la grille 5 tarifs utilisée sur les autres apps).
-// J'ai uniformisé sur 12,99 € partout — À CONFIRMER que c'est bien le prix réel.
-// Ce produit n'a PAS la grille 5 tarifs (1/3/6/12 mois + à vie) des autres apps : à décider
-// si on la met en place ici aussi, avec les vrais montants Gumroad.
-const price = "12,99 €";
+// Grille 5 tarifs (remplace l'ancien prix unique) — montants réels fournis.
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les autres apps).
+// À CONFIRMER via l'onglet "Versions" du produit sur Gumroad avant validation finale.
+const tiers = [
+  { label: "Licence d'un mois", amount: "12,99 €", variant: "1 Month License", featured: false },
+  { label: "Licence de 3 mois", amount: "32,99 €", variant: "3 Months License", featured: false },
+  { label: "Licence de 6 mois", amount: "62,99 €", variant: "6 Months License", featured: false },
+  { label: "Licence de 12 mois", amount: "89,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { label: "Accès à vie", amount: "129,99 €", variant: "LIFETIME", featured: false },
+];
 ---
 
 <html lang="fr">
@@ -70,7 +73,7 @@ const price = "12,99 €";
 						de 5 minutes — zellige, tapis berbères et mobilier artisanal compris.
 					</p>
 					<div class="hero-cta-row">
-						<a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Créer mon design — {price}</a>
+						<a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Créer mon design</a>
 						<span class="hero-cta-note">Rendus 3D en moins de 5 minutes</span>
 					</div>
 				</div>
@@ -98,8 +101,8 @@ const price = "12,99 €";
 					<span class="stat-label">artisans locaux vérifiés</span>
 				</div>
 				<div class="stat">
-					<span class="stat-num">{price}</span>
-					<span class="stat-label">accès complet, paiement unique</span>
+					<span class="stat-num">Dès 12,99 €</span>
+					<span class="stat-label">licence flexible, sans abonnement caché</span>
 				</div>
 			</div>
 		</section>
@@ -277,12 +280,29 @@ const price = "12,99 €";
 		<!-- ===== PRICING ===== -->
 		<section class="pricing" id="prix">
 			<div class="wrap">
-				<h2 class="pricing-title">Un tarif d'accès unique</h2>
+				<h2 class="pricing-title">Choisissez la durée qui vous convient</h2>
 				<div class="pricing-card">
 					<div class="pricing-card-head">
 						<span class="pricing-name">Smart Deco AI</span>
-						<span class="pricing-amount">{price}</span>
-						<span class="pricing-note">paiement unique — accès à l'APK</span>
+						<span class="pricing-note">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</span>
+					</div>
+					<div class="tier-list">
+						{tiers.map((tier) => (
+							<a
+								class={`tier-row ${tier.featured ? "featured" : ""}`}
+								href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+								data-gumroad-overlay-checkout="true"
+							>
+								<span class="tier-name-wrap">
+									<span class="tier-name">{tier.label}</span>
+									{tier.badge && <span class="tier-badge">{tier.badge}</span>}
+								</span>
+								<span class="tier-right">
+									<span class="tier-amount">{tier.amount}</span>
+									<span class="tier-arrow">→</span>
+								</span>
+							</a>
+						))}
 					</div>
 					<ul class="pricing-list">
 						<li>Décorateur IA conversationnel illimité</li>
@@ -291,7 +311,6 @@ const price = "12,99 €";
 						<li>Marketplace de grandes marques et artisans locaux</li>
 						<li>Planificateur de budget et de projet</li>
 					</ul>
-					<a href={paymentUrl} class="btn btn-primary btn-full" data-gumroad-overlay-checkout="true">Obtenir l'application</a>
 				</div>
 			</div>
 		</section>
@@ -302,7 +321,7 @@ const price = "12,99 €";
 			<div class="wrap final-cta-inner">
 				<h2>Prête à réinventer votre intérieur ?</h2>
 				<p>Scannez, générez, essayez en AR — puis commandez auprès d'artisans vérifiés.</p>
-				<a href={paymentUrl} class="btn btn-primary btn-lg" data-gumroad-overlay-checkout="true">Créer mon design — {price}</a>
+				<a href={paymentUrl} class="btn btn-primary btn-lg" data-gumroad-overlay-checkout="true">Créer mon design</a>
 			</div>
 		</section>
 
@@ -697,6 +716,49 @@ const price = "12,99 €";
 		color: var(--sage);
 		font-weight: 800;
 	}
+
+	/* ===== TIER LIST (grille de tarifs cliquable) ===== */
+	.tier-list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		margin-top: 24px;
+	}
+	.tier-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 16px 20px;
+		border-radius: 14px;
+		border: 1px solid var(--border-soft);
+		background: var(--cream);
+		text-decoration: none;
+		color: inherit;
+		cursor: pointer;
+		transition: border-color .15s ease, background .15s ease, transform .15s ease;
+	}
+	.tier-row:hover { border-color: var(--periwinkle); background: var(--mist); transform: translateY(-1px); }
+	.tier-row.featured { border: 1.5px solid var(--periwinkle); background: rgba(124,136,201,0.08); }
+	.tier-row.featured:hover { background: rgba(124,136,201,0.14); }
+	.tier-name-wrap { display: flex; flex-direction: column; gap: 2px; }
+	.tier-name { font-weight: 700; font-size: 0.98rem; color: var(--ink); }
+	.tier-badge {
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--terracotta);
+	}
+	.tier-right { display: flex; align-items: center; gap: 10px; }
+	.tier-amount {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.2rem;
+		color: var(--periwinkle);
+		white-space: nowrap;
+	}
+	.tier-arrow { font-size: 1.1rem; color: var(--periwinkle); }
 
 	/* ===== FINAL CTA ===== */
 	.final-cta {

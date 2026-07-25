@@ -1,5 +1,5 @@
 ---
-const gumroadUrl = "https://aghhol.gumroad.com/l/coran-ai-hifz";
+const paymentUrl = "https://aghhol.gumroad.com/l/coran-ai-hifz";
 ---
 <!doctype html>
 <html lang="fr">
@@ -25,9 +25,8 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/coran-ai-hifz";
       <nav class="nav">
         <a href="#fonctionnalites">Fonctionnalités</a>
         <a href="#communaute">Communauté</a>
-        <a href="#tarif">Gratuit</a>
       </nav>
-      <a href={gumroadUrl} class="btn btn-primary btn-small" target="_blank" rel="noopener">Télécharger — Gratuit</a>
+      <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Télécharger — Gratuit</a>
     </div>
   </header>
 
@@ -43,7 +42,7 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/coran-ai-hifz";
             Vous n'avez pas de professeur ou de connexion Wi-Fi ? My Quran écoute votre récitation et vous corrige en temps réel, entièrement hors-ligne et en toute confidentialité — pour progresser à votre rythme, sans jugement.
           </p>
           <div class="hero-ctas">
-            <a href={gumroadUrl} class="btn btn-primary" target="_blank" rel="noopener">Commencer ma récitation</a>
+            <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer ma récitation</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
           </div>
           <p class="hero-microcopy">100% gratuit · Aucun abonnement · Aucun suivi de données</p>
@@ -201,42 +200,12 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/coran-ai-hifz";
       </div>
     </section>
 
-    <!-- PRICING / FREE -->
-    <section id="tarif" class="pricing">
-      <div class="wrap pricing-inner">
-        <div class="price-card">
-          <p class="price-amount">Licence d'un mois</p>
-          <p class="price">26,22 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Licence de 3 mois</p>
-          <p class="price">52,45 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Licence de 6 mois</p>
-          <p class="price">104,91 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Licence de 12 mois</p>
-          <p class="price">174,86 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-        <div class="price-card">
-          <p class="price-amount">Durée de vie</p>
-          <p class="price">349,73 €</p>
-          <a href={{gumroadUrl}} class="btn btn-primary btn-full" target="_blank" rel="noopener">Télécharger maintenant</a>
-        </div>
-      
-
     <!-- FINAL CTA -->
     <section class="final-cta">
       <div class="wrap final-cta-inner">
         <h2>Prenez le temps de progresser<br/>dans votre récitation, dès aujourd'hui.</h2>
         <p>📖 Un espace calme et exigeant, rien que pour vous et le Coran. 🤲</p>
-        <a href={gumroadUrl} class="btn btn-light" target="_blank" rel="noopener">Télécharger My Quran — Gratuit</a>
+        <a href={paymentUrl} class="btn btn-light" data-gumroad-overlay-checkout="true">Télécharger My Quran — Gratuit</a>
       </div>
     </section>
 
@@ -322,7 +291,6 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/coran-ai-hifz";
       background: transparent;
     }
     .btn-ghost:hover { border-color: var(--green-bright); background: rgba(27,138,52,0.05); }
-    .btn-full { width: 100%; margin-top: 22px; }
     .btn-light {
       background: var(--gold);
       color: var(--ink);
@@ -552,49 +520,6 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/coran-ai-hifz";
       box-shadow: 0 20px 40px -12px rgba(0,0,0,0.4);
     }
 
-    /* Pricing */
-    .pricing { padding: 30px 0 90px; }
-    .pricing-inner { display: flex; justify-content: center; }
-    .pricing-card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 48px 44px;
-      max-width: 460px;
-      width: 100%;
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-    .pricing-card h2 { font-size: 1.6rem; margin-top: 6px; }
-    .price { margin-top: 20px; }
-    .price-amount {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 800;
-      font-size: 2.6rem;
-      color: var(--green-bright);
-    }
-    .price-sub { margin-top: 6px; font-size: 0.88rem; }
-    .pricing-list {
-      text-align: left;
-      margin-top: 30px;
-      border-top: 1px solid var(--line);
-      padding-top: 26px;
-    }
-    .pricing-list li {
-      position: relative;
-      padding-left: 28px;
-      margin-bottom: 14px;
-      font-size: 0.95rem;
-      color: var(--ink);
-    }
-    .pricing-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--green-bright);
-      font-weight: 700;
-    }
-
     /* Final CTA */
     .final-cta {
       background: var(--ink);
@@ -637,8 +562,13 @@ const gumroadUrl = "https://aghhol.gumroad.com/l/coran-ai-hifz";
     }
     @media (max-width: 560px) {
       .stats-inner { grid-template-columns: 1fr 1fr; }
-      .pricing-card { padding: 36px 26px; }
     }
   </style>
+
+  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+       Même pour un produit gratuit, Gumroad utilise le même flux de "checkout" à 0 € (pas de saisie de carte requise).
+       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
 </body>
 </html>
