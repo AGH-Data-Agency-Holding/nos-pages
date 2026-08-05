@@ -5,11 +5,17 @@ const paymentUrl = "https://aghhol.gumroad.com/l/ramadan-halal-pray-ai";
 // À CONFIRMER via l'onglet "Versions" du produit "ramadan-halal-pray-ai" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Licence d'un mois", price: "8,99 €", variant: "1 Month License", featured: false },
-  { name: "Licence de 3 mois", price: "22,99 €", variant: "3 Months License", featured: false },
-  { name: "Licence de 6 mois", price: "44,99 €", variant: "6 Months License", featured: false },
-  { name: "Licence de 12 mois", price: "59,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Lumière 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Lumière 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Lumière 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Lumière 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Lumière À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "MA", profile: "Mariam", profession: "Infirmière", problem: "Je cherchais un accompagnement simple pour mieux organiser mes journées de Ramadan.", benefit: "L'app rassemble mes repères essentiels au même endroit et m'aide à rester sereine." },
+  { initials: "IB", profile: "Ibrahim", profession: "Entrepreneur", problem: "Je perdais vite le fil entre mes prières, mes objectifs et mes bonnes actions.", benefit: "Le parcours me motive à rester régulier et à suivre mes progrès jour après jour." },
+  { initials: "ZA", profile: "Zahra", profession: "Enseignante", problem: "Je pensais qu'un assistant IA ne pourrait pas respecter mes besoins religieux.", benefit: "Les fonctions de l'app sont pratiques et l'accès hors-ligne est très rassurant." },
 ];
 ---
 <html lang="fr">
@@ -127,6 +133,17 @@ const tiers = [
     .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #7B5FD9; white-space: nowrap; }
     .tier-arrow { font-size: 1.1rem; color: #7B5FD9; }
 
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: #fff; border: 1px solid var(--sand); border-radius: 18px; padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--sand); color: var(--teal); font-family: "JetBrains Mono", monospace; font-size: .78rem; font-weight: 700; }
+    .testimonial-name { color: var(--teal); font-weight: 700; }
+    .testimonial-profession { display: block; color: var(--teal-soft); font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--lavender); letter-spacing: .1em; }
+    .testimonial-card p { color: var(--teal-soft); line-height: 1.55; }
+    @media (max-width: 780px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: var(--sand); border-radius: 24px; padding: 46px; text-align: center; }
     .guarantee-box h2 { font-size: 1.5rem; margin: 10px 0 12px; }
@@ -151,6 +168,8 @@ const tiers = [
         <a href="#fonctionnalites">Fonctionnalités</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a class="btn btn-ghost" href="#">Essai gratuit 7j</a>
       <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
@@ -158,14 +177,15 @@ const tiers = [
   <section class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">Coach IA · Scanner Halal · Zakat</span>
+        <span class="eyebrow">Un Ramadan mieux organisé · IA hors-ligne</span>
         <h1>Vivez un Ramadan <em>plus serein</em>, jour après jour.</h1>
         <p class="lede">Un coach IA prédictif pour votre Suhoor et Iftar, un scanner qui vérifie l'origine halal de vos aliments en un instant, et un parcours gamifié sur 30 jours pour rester motivé jusqu'à l'Aïd.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
           <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
-        <p class="trust-line">Coach et scanner 100% hors-ligne · marketplace et classement communautaire nécessitent une connexion · <strong>30 jours de parcours guidé</strong></p>
+        <p class="trust-line">Coach et scanner 100% hors-ligne · <strong>Satisfait ou remboursé sous 30 jours</strong></p>
+        <p class="trust-line">Essayez gratuitement pendant 7 jours</p>
       </div>
       <div class="hero-visual">
         <div class="crescent"></div>
@@ -202,35 +222,37 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-dashboard.png" alt="Tableau de bord quotidien avec compte à rebours Iftar" />
+          <img src="/images/screen-dashboard.png" alt="Tableau de bord quotidien avec compte à rebours Iftar" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Coach de jeûne IA</span>
-          <h3>Un coach prédictif pour optimiser Suhoor et Iftar.</h3>
+          <span class="eyebrow">Garde ton énergie</span>
+          <h3>Aborde Suhoor et Iftar avec des repères adaptés.</h3>
           <p>Le coach IA anticipe vos besoins nutritionnels avec 92% de précision pour gérer les fringales et maintenir votre énergie tout au long du jeûne.</p>
           <div class="feature-tags"><span>PRÉCISION 92%</span><span>SUHOOR & IFTAR</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-scanner.png" alt="Scanner halal des produits alimentaires" />
+          <img src="/images/screen-scanner.png" alt="Scanner halal des produits alimentaires" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Scanner Halal AR</span>
-          <h3>Vérifiez plus de 50 000 ingrédients et codes-E, instantanément.</h3>
+          <span class="eyebrow">Achète en confiance</span>
+          <h3>Comprends tes étiquettes sans recherche interminable.</h3>
           <p>Un simple scan déchiffre les étiquettes complexes pour garantir que votre alimentation reste strictement halal, sans doute ni recherche manuelle.</p>
           <div class="feature-tags"><span>SCAN INSTANTANÉ</span><span>CODES-E</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-coins.png" alt="Système de Pièces Halal et récompenses" />
+          <img src="/images/screen-coins.png" alt="Système de Pièces Halal et récompenses" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Parcours gamifié 30 jours</span>
-          <h3>Un avatar évolutif, des badges Taraweeh, des Pièces Halal.</h3>
+          <span class="eyebrow">Avance avec constance</span>
+          <h3>Rends chaque bonne action visible et motivante.</h3>
           <p>Chaque prière, chaque scan, chaque bonne action rapporte des points. Votre progression spirituelle devient visible, jour après jour.</p>
           <div class="feature-tags"><span>AVATAR 3D</span><span>BADGES</span><span>PIÈCES HALAL</span></div>
         </div>
@@ -238,11 +260,11 @@ const tiers = [
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-community.png" alt="Classement et communauté locale" />
+          <img src="/images/screen-community.png" alt="Classement et communauté locale" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Communauté</span>
-          <h3>Restez motivé grâce au classement de votre communauté.</h3>
+          <span class="eyebrow">Ne reste pas seul</span>
+          <h3>Partage ton parcours avec une communauté qui te comprend.</h3>
           <p>Comparez votre progression à celle des membres de votre mosquée ou de vos amis, et partagez vos réussites du mois sacré.</p>
           <div class="feature-tags"><span>CLASSEMENT LOCAL</span><span>DÉFIS</span></div>
         </div>
@@ -250,11 +272,11 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-zakat.png" alt="Calcul et don pour la Zakat" />
+          <img src="/images/screen-zakat.png" alt="Calcul et don pour la Zakat" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Zakat & dons</span>
-          <h3>Le calcul de la Zakat, automatisé et sans erreur.</h3>
+          <span class="eyebrow">Donne l'esprit tranquille</span>
+          <h3>Prépare tes dons avec un calcul clair et pratique.</h3>
           <p>Un outil intégré calcule vos obligations religieuses financières et simplifie vos dons annuels — pour une tranquillité d'esprit complète.</p>
           <div class="feature-tags"><span>CALCUL AUTOMATIQUE</span><span>DONS</span></div>
         </div>
@@ -277,6 +299,7 @@ const tiers = [
     <div class="price-card">
       <div class="eyebrow">Ramadan Halal AI</div>
       <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+      <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
 
       <div class="tier-list">
         {tiers.map((tier) => (
@@ -306,6 +329,31 @@ const tiers = [
       </ul>
     </div>
   </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <span class="eyebrow">Preuve sociale</span>
+      <h2 style="text-align:center; margin-top:10px;">Un accompagnement qui suit ton quotidien.</h2>
+      <div class="testimonials-grid">
+        {testimonialProfiles.map((testimonial) => (
+          <article class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+              <div>
+                <div class="testimonial-name">{testimonial.profile}</div>
+                <span class="testimonial-profession">{testimonial.profession}</span>
+              </div>
+            </div>
+            <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+            <p>{testimonial.problem}</p>
+            <p>{testimonial.benefit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
 <section class="final-cta">
     <div class="wrap">

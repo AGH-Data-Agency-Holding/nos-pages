@@ -1,16 +1,22 @@
 ---
-const price = "6,99 €";
+const price = "19,99 €";
 const paymentUrl = "https://aghhol.gumroad.com/l/haircut-hairstyle-ai";
 
 // ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
 // À CONFIRMER via l'onglet "Versions" du produit "haircut-hairstyle-ai" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Licence d'un mois", price: "6,99 €", variant: "1 Month License", featured: false },
-  { name: "Licence de 3 mois", price: "17,99 €", variant: "3 Months License", featured: false },
-  { name: "Licence de 6 mois", price: "34,99 €", variant: "6 Months License", featured: false },
-  { name: "Licence de 12 mois", price: "49,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Hair Icon 1 mois", price: "19,99 €", variant: "1 Month License", featured: false },
+  { name: "Hair Icon 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Hair Icon 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Hair Icon 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Hair Icon À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "SA", profile: "Sara", profession: "Chargée de communication", problem: "J'avais peur de changer de coupe sans savoir si elle m'irait vraiment.", benefit: "Je peux maintenant tester plusieurs styles avant de prendre rendez-vous." },
+  { initials: "TI", profile: "Théo", profession: "Photographe", problem: "Je changeais souvent de look sans garder une trace de ce qui me plaisait.", benefit: "L'archive m'aide à comparer mes idées et à retrouver mes favoris." },
+  { initials: "AM", profile: "Amel", profession: "Entrepreneuse", problem: "Je pensais qu'une IA ne pourrait pas comprendre ma texture de cheveux.", benefit: "Les suggestions sont plus personnalisées et m'aident à choisir avec confiance." },
 ];
 ---
 <!doctype html>
@@ -39,6 +45,8 @@ const tiers = [
         <a href="#salons">Salons</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a href="#" class="btn btn-ghost btn-small">Essai gratuit 7j</a>
       <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
     </div>
   </header>
@@ -49,7 +57,7 @@ const tiers = [
     <section class="hero">
       <div class="wrap hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">Essayage de coiffure IA / RA</p>
+          <p class="eyebrow">Un nouveau look en confiance · IA hors-ligne</p>
           <h1>Trouvez votre <span class="ink">match parfait</span>, sans risque.</h1>
           <p class="hero-sub">
             Une IA d'analyse morphologique rencontre l'expertise des meilleurs salons. Essayez des centaines de coiffures et couleurs en réalité augmentée, en temps réel, directement sur votre visage — quelle que soit votre texture de cheveux.
@@ -58,7 +66,7 @@ const tiers = [
             <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer ma transformation</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
           </div>
-          <p class="hero-microcopy">Essayage RA 100% hors-ligne · réservation de salon et communauté nécessitent une connexion · Toutes textures de cheveux</p>
+          <p class="hero-microcopy">Essayage RA 100% hors-ligne · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
         </div>
         <div class="hero-visual">
           <img src="/images/frame_home.png" alt="Écran d'accueil de Hair Changer" class="hero-phone" />
@@ -98,14 +106,15 @@ const tiers = [
       <!-- Feature 1: AR try-on -->
       <div class="feature-row wrap">
         <div class="feature-text">
-          <span class="feature-tag">Essayage en réalité augmentée</span>
-          <h3>Essayez, directement sur votre visage</h3>
+          <span class="feature-tag">Visualisez avant de choisir</span>
+          <h3>Testez votre prochain look directement sur votre visage.</h3>
           <p>Notre moteur RA en temps réel utilise un tracking facial de haute précision pour appliquer instantanément une nouvelle coupe ou couleur sur votre visage — coupe, couleur, longueur et volume, tout est ajustable à la volée.</p>
           <ul class="feature-list">
             <li>Tracking facial IA en temps réel</li>
             <li>Bibliothèque de styles, couleurs et longueurs personnalisables</li>
             <li>Enregistrement de votre look en un tap</li>
           </ul>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
         <div class="feature-image">
           <img src="/images/phone_ar_camera.png" alt="Essayage de coiffure en réalité augmentée dans Hair Changer" loading="lazy" />
@@ -115,14 +124,15 @@ const tiers = [
       <!-- Feature 2: AI Suggestions -->
       <div class="feature-row wrap reverse">
         <div class="feature-text">
-          <span class="feature-tag">Recommandations IA personnalisées</span>
-          <h3>Des suggestions calibrées pour votre visage</h3>
+          <span class="feature-tag">Trouvez ce qui vous va</span>
+          <h3>Recevez des idées adaptées à votre visage et à votre style.</h3>
           <p>Notre IA analyse la symétrie de votre visage, votre sous-ton de peau et la forme de votre mâchoire pour vous proposer les coupes les plus flatteuses, avec un score de compatibilité pour chaque suggestion.</p>
           <ul class="feature-list">
             <li>Détection automatique de la forme du visage</li>
             <li>Score de compatibilité pour chaque style suggéré</li>
             <li>Recommandations mises à jour selon vos essais</li>
           </ul>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
         <div class="feature-image">
           <img src="/images/frame_ai_suggestions.png" alt="Suggestions IA personnalisées dans Hair Changer" loading="lazy" />
@@ -132,8 +142,8 @@ const tiers = [
       <!-- Feature 3: Salon booking -->
       <div class="feature-row wrap" id="salons">
         <div class="feature-text">
-          <span class="feature-tag">Réservation de salon</span>
-          <h3>Du virtuel au fauteuil du coiffeur</h3>
+          <span class="feature-tag">Passez à l'action</span>
+          <h3>Arrivez au salon en sachant exactement quoi demander.</h3>
           <p>Trouvez le salon idéal grâce à la carte interactive, consultez les avis et le portfolio des coiffeurs, puis envoyez votre aperçu RA en HD avant votre rendez-vous pour un résultat exactement conforme à vos attentes.</p>
           <ul class="feature-list">
             <li>Carte interactive et réservation 24h/24</li>
@@ -149,8 +159,8 @@ const tiers = [
       <!-- Feature 4: Archive -->
       <div class="feature-row wrap reverse">
         <div class="feature-text">
-          <span class="feature-tag">Archive esthétique</span>
-          <h3>Gardez une trace de tous vos essais</h3>
+          <span class="feature-tag">Gardez vos meilleures idées</span>
+          <h3>Comparez vos essais avant de prendre votre décision.</h3>
           <p>Retrouvez l'historique complet de vos sessions RA, comparez plusieurs looks côte à côte et ressortez vos favoris avant de vous décider définitivement.</p>
           <ul class="feature-list">
             <li>Historique complet de vos essais précédents</li>
@@ -166,8 +176,8 @@ const tiers = [
       <!-- Feature 5: Community -->
       <div class="feature-row wrap">
         <div class="feature-text">
-          <span class="feature-tag">Communauté</span>
-          <h3>Partagez vos looks, inspirez les autres</h3>
+          <span class="feature-tag">Inspirez-vous</span>
+          <h3>Découvrez des looks qui donnent envie d'oser.</h3>
           <p>Publiez vos transformations, découvrez comment d'autres réinventent leur style, et testez directement les looks qui vous inspirent dans le fil de la communauté.</p>
           <ul class="feature-list">
             <li>Fil communautaire avec stories et publications</li>
@@ -195,6 +205,7 @@ const tiers = [
         <p class="eyebrow center">Tarif</p>
         <h2 class="section-title center">Choisissez la durée qui vous convient</h2>
         <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+        <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
 
         <div class="tier-list">
           {tiers.map((tier) => (
@@ -216,6 +227,31 @@ const tiers = [
         </div>
       </div>
     </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="wrap">
+        <p class="eyebrow center">Preuve sociale</p>
+        <h2 class="section-title center">Un changement réfléchi, sans regret.</h2>
+        <div class="testimonials-grid">
+          {testimonialProfiles.map((testimonial) => (
+            <article class="testimonial-card">
+              <div class="testimonial-head">
+                <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+                <div>
+                  <div class="testimonial-name">{testimonial.profile}</div>
+                  <span class="testimonial-profession">{testimonial.profession}</span>
+                </div>
+              </div>
+              <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+              <p>{testimonial.problem}</p>
+              <p>{testimonial.benefit}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+    <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
     <!-- FINAL CTA -->
     <section class="final-cta">
@@ -545,6 +581,18 @@ const tiers = [
     .guarantee-icon { color: var(--purple-deep); flex-shrink: 0; }
     .guarantee h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
     .guarantee p { font-size: 0.92rem; }
+
+    /* Testimonials */
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--lavender); color: var(--purple-deep); font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700; }
+    .testimonial-name { color: var(--ink); font-weight: 700; }
+    .testimonial-profession { display: block; color: var(--slate); font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--pink); letter-spacing: .1em; }
+    .testimonial-card p { color: var(--slate); line-height: 1.55; margin-top: 12px; }
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
 
     /* Final CTA */
     .final-cta {

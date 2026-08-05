@@ -1,16 +1,22 @@
 ---
-const price = "5,99 €";
+const price = "19,99 €";
 const paymentUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
 
 // ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
 // À CONFIRMER via l'onglet "Versions" du produit "Stories-of-Prophets-ai" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Licence d'un mois", price: "5,99 €", variant: "1 Month License", featured: false },
-  { name: "Licence de 3 mois", price: "14,99 €", variant: "3 Months License", featured: false },
-  { name: "Licence de 6 mois", price: "29,99 €", variant: "6 Months License", featured: false },
-  { name: "Licence de 12 mois", price: "44,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Savant 1 mois", price: "19,99 €", variant: "1 Month License", featured: false },
+  { name: "Savant 3 mois", price: "39,99 €", variant: "3 Months License", featured: false },
+  { name: "Savant 6 mois", price: "69,99 €", variant: "6 Months License", featured: false },
+  { name: "Savant 12 mois", price: "129,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Savant À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "NA", profile: "Nadia", profession: "Maman et éducatrice", problem: "Je cherchais une manière simple de partager ces récits avec mes enfants sans les exposer aux distractions du web.", benefit: "Qisas AI est devenu un moment calme de lecture et d'écoute dans notre routine." },
+  { initials: "YA", profile: "Yassine", profession: "Étudiant en histoire", problem: "Je voulais mieux retenir les récits et les leçons importantes sans relire de longues pages.", benefit: "Les résumés et les favoris m'aident à apprendre à mon rythme et à retrouver mes passages préférés." },
+  { initials: "LI", profile: "Lina", profession: "Animatrice jeunesse", problem: "Je pensais qu'une IA ne pourrait pas rendre ces histoires accessibles tout en restant respectueuse.", benefit: "Le contenu est clair, pratique et disponible même quand je n'ai pas de connexion." },
 ];
 ---
 <!doctype html>
@@ -39,6 +45,8 @@ const tiers = [
         <a href="#parcours">Comment ça marche</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a href="#" class="btn btn-ghost btn-small">Essai gratuit 7j</a>
       <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
     </div>
   </header>
@@ -51,7 +59,7 @@ const tiers = [
       <div class="ornament ornament-right" aria-hidden="true"></div>
       <div class="wrap hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">Compagnon islamique pour enfants · 100% hors-ligne</p>
+          <p class="eyebrow">Apprendre en famille · 100% hors-ligne</p>
           <h1>L'histoire des<br/><span class="ink">prophètes</span>,<br/>sans écran de trop.</h1>
           <p class="hero-sub">
             Qisas AI transforme les récits coraniques en aventures simples et captivantes pour vos enfants — dans un environnement 100% sûr, sans publicité, sans internet requis, même en mode avion.
@@ -60,7 +68,7 @@ const tiers = [
             <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Télécharger Qisas AI</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Découvrir l'application</a>
           </div>
-          <p class="hero-microcopy">Disponible en français, anglais, arabe et espagnol</p>
+          <p class="hero-microcopy">Disponible en français, anglais, arabe et espagnol · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
         </div>
         <div class="hero-visual">
           <img src="/images/phone_home.png" alt="Écran d'accueil de l'application Qisas AI" class="hero-phone" />
@@ -100,8 +108,8 @@ const tiers = [
       <!-- Feature 1: Home / Kids mode -->
       <div class="feature-row wrap">
         <div class="feature-text">
-          <span class="feature-tag">Récits adaptés aux enfants</span>
-          <h3>Des histoires complexes, simplifiées avec soin</h3>
+          <span class="feature-tag">Des récits à leur portée</span>
+          <h3>Partagez des histoires qui donnent envie d'apprendre.</h3>
           <p>Les récits des prophètes sont transformés en aventures faciles à comprendre pour les plus jeunes, avec un Mode Enfant dédié : histoires ludiques et petits quiz pensés pour leur âge.</p>
           <ul class="feature-list">
             <li>Mode Enfant avec histoires et quiz amusants</li>
@@ -117,14 +125,15 @@ const tiers = [
       <!-- Feature 2: Offline AI -->
       <div class="feature-row wrap reverse">
         <div class="feature-text">
-          <span class="feature-tag">IA 100% hors-ligne</span>
-          <h3>Résumés intelligents, même en mode avion</h3>
+          <span class="feature-tag">Comprendre plus facilement</span>
+          <h3>Retrouvez l'essentiel, même sans connexion.</h3>
           <p>Notre assistant IA intégré fonctionne entièrement hors-ligne : il génère des résumés clairs et des mini-quiz sans jamais avoir besoin de Wi-Fi. Vos enfants apprennent, concentrés, sans notification ni distraction.</p>
           <ul class="feature-list">
             <li>Assistant IA disponible sans connexion internet</li>
             <li>Résumés et mini-quiz générés automatiquement</li>
             <li>Zéro publicité, environnement 100% sécurisé</li>
           </ul>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
         <div class="feature-image">
           <img src="/images/phone_summary.png" alt="Résumé d'une histoire de prophète dans Qisas AI" loading="lazy" />
@@ -134,8 +143,8 @@ const tiers = [
       <!-- Feature 3: Audio -->
       <div class="feature-row wrap">
         <div class="feature-text">
-          <span class="feature-tag">Écoute audio</span>
-          <h3>Le rituel du soir, prêt en un tap</h3>
+          <span class="feature-tag">Un moment de calme</span>
+          <h3>Transformez l'écoute en rituel du soir.</h3>
           <p>Chaque histoire peut être écoutée comme un livre audio, chapitre par chapitre, avec téléchargement pour une écoute hors-ligne — parfait pour accompagner le coucher de votre enfant.</p>
           <ul class="feature-list">
             <li>Lecture audio chapitrée de chaque histoire</li>
@@ -151,8 +160,8 @@ const tiers = [
       <!-- Feature 4: Bookmarks -->
       <div class="feature-row wrap reverse">
         <div class="feature-text">
-          <span class="feature-tag">Favoris & suivi</span>
-          <h3>Retrouvez facilement les histoires préférées</h3>
+          <span class="feature-tag">Gardez le fil</span>
+          <h3>Retrouvez leurs histoires préférées en un instant.</h3>
           <p>Enregistrez les récits marquants pour les relire ou les réécouter — pratique pour construire une vraie routine de lecture du soir, sans jamais perdre le fil de l'histoire en cours.</p>
           <ul class="feature-list">
             <li>Liste de favoris pour les histoires et les questions</li>
@@ -210,6 +219,7 @@ const tiers = [
         <p class="eyebrow center">Tarif</p>
         <h2 class="section-title center">Choisissez la durée qui vous convient</h2>
         <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+        <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
 
         <div class="tier-list">
           {tiers.map((tier) => (
@@ -231,6 +241,31 @@ const tiers = [
         </div>
       </div>
     </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="wrap">
+        <p class="eyebrow center">Preuve sociale</p>
+        <h2 class="section-title center">Un apprentissage qui trouve sa place dans la famille.</h2>
+        <div class="testimonials-grid">
+          {testimonialProfiles.map((testimonial) => (
+            <article class="testimonial-card">
+              <div class="testimonial-head">
+                <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+                <div>
+                  <div class="testimonial-name">{testimonial.profile}</div>
+                  <span class="testimonial-profession">{testimonial.profession}</span>
+                </div>
+              </div>
+              <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+              <p>{testimonial.problem}</p>
+              <p>{testimonial.benefit}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+    <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
     <!-- FINAL CTA -->
     <section class="final-cta">
@@ -597,6 +632,18 @@ const tiers = [
     .guarantee-icon { color: var(--green); flex-shrink: 0; }
     .guarantee h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
     .guarantee p { font-size: 0.92rem; font-family: 'Karla', sans-serif; }
+
+    /* Testimonials */
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: #EAF2E8; color: var(--green); font-family: 'Karla', sans-serif; font-size: .82rem; font-weight: 700; }
+    .testimonial-name { color: var(--ink); font-weight: 700; }
+    .testimonial-profession { display: block; color: var(--slate); font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--gold); letter-spacing: .1em; }
+    .testimonial-card p { color: var(--slate); line-height: 1.55; margin-top: 12px; }
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
 
     /* Final CTA */
     .final-cta {

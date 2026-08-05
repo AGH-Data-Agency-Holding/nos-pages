@@ -5,11 +5,17 @@ const paymentUrl = "https://aghhol.gumroad.com/l/zclcjl";
 // À CONFIRMER via l'onglet "Versions" du produit "zclcjl" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Licence d'un mois", price: "5,99 €", variant: "1 Month License", featured: false },
-  { name: "Licence de 3 mois", price: "14,99 €", variant: "3 Months License", featured: false },
-  { name: "Licence de 6 mois", price: "26,99 €", variant: "6 Months License", featured: false },
-  { name: "Licence de 12 mois", price: "89,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Genius 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Genius 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Genius 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Genius 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Genius À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "HU", profile: "Hugo", profession: "Étudiant en droit", problem: "Je cherchais une méthode simple pour réviser sans passer mes soirées à relire mes notes.", benefit: "Les quiz me permettent de commencer rapidement et de voir ce que je dois vraiment travailler." },
+  { initials: "SA", profile: "Salma", profession: "Étudiante en médecine", problem: "J'avais du mal à rester régulière entre les cours et les révisions.", benefit: "Les objectifs quotidiens m'aident à garder un rythme jusqu'à mes examens." },
+  { initials: "ID", profile: "Idriss", profession: "Candidat à un concours", problem: "Je pensais qu'un tuteur IA donnerait des réponses trop vagues.", benefit: "Il m'explique les notions simplement et répond à mes questions même hors connexion." },
 ];
 ---
 <html lang="fr">
@@ -123,6 +129,17 @@ const tiers = [
     .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #3F35B0; white-space: nowrap; }
     .tier-arrow { font-size: 1.1rem; color: #3F35B0; }
 
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--lavender); color: var(--indigo-dark); font-family: "JetBrains Mono", monospace; font-size: .78rem; font-weight: 700; }
+    .testimonial-name { color: var(--navy); font-weight: 700; }
+    .testimonial-profession { display: block; color: #4A4A63; font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--orange); letter-spacing: .1em; }
+    .testimonial-card p { color: #4A4A63; line-height: 1.55; }
+    @media (max-width: 780px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: var(--lavender); border-radius: 24px; padding: 46px; text-align: center; }
     .guarantee-box h2 { font-size: 1.5rem; margin: 10px 0 12px; }
@@ -148,6 +165,8 @@ const tiers = [
         <a href="#fonctionnalites">Fonctionnalités</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a class="btn btn-ghost" href="#">Essai gratuit 7j</a>
       <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
@@ -155,14 +174,15 @@ const tiers = [
   <section class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">Tuteur IA · 100% hors-ligne</span>
+        <span class="eyebrow">Des révisions plus efficaces · IA hors-ligne</span>
         <h1>Révise plus <em>intelligemment</em>, pas plus longtemps.</h1>
         <p class="lede">Un tuteur IA dans ta poche, disponible 24/7 même en mode avion. Des QCM générés instantanément, des résumés clairs, et un suivi qui repère tes points faibles avant l'examen.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
           <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
-        <p class="trust-line"><strong>zéro Wi-Fi requis</strong></p>
+        <p class="trust-line"><strong>zéro Wi-Fi requis</strong> · Satisfait ou remboursé sous 30 jours</p>
+        <p class="trust-line">Essayez gratuitement pendant 7 jours</p>
       </div>
       <div class="hero-visual">
         <div class="glow"></div>
@@ -199,47 +219,50 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-quiz.png" alt="QCM généré pour réviser une leçon" />
+          <img src="/images/screen-quiz.png" alt="QCM généré pour réviser une leçon" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">QCM & quiz intelligents</span>
-          <h3>Teste tes connaissances instantanément.</h3>
+          <span class="eyebrow">Vérifie ce que tu sais</span>
+          <h3>Transforme tes notes en entraînement utile.</h3>
           <p>L'app génère des questions à choix multiples sur n'importe quel sujet pour mémoriser 10 fois plus vite qu'en relisant simplement tes notes.</p>
           <div class="feature-tags"><span>QCM INSTANTANÉS</span><span>CORRECTION IMMÉDIATE</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-ai-chat.png" alt="Tuteur IA hors-ligne qui répond aux questions" />
+          <img src="/images/screen-ai-chat.png" alt="Tuteur IA hors-ligne qui répond aux questions" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Tuteur IA 100% hors-ligne</span>
-          <h3>Pose tes questions, même sans une barre de réseau.</h3>
+          <span class="eyebrow">Comprends enfin les notions difficiles</span>
+          <h3>Obtiens une explication claire, même sans réseau.</h3>
           <p>Demande une explication, un résumé ou un exemple — le tuteur répond directement depuis ton téléphone, aucune connexion nécessaire.</p>
           <div class="feature-tags"><span>ZÉRO WI-FI</span><span>RÉPONSES INSTANTANÉES</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-analytics.png" alt="Suivi de progression et statistiques de révision" />
+          <img src="/images/screen-analytics.png" alt="Suivi de progression et statistiques de révision" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Suivi de progression intelligent</span>
-          <h3>Repère tes points faibles avant qu'ils ne coûtent des points.</h3>
+          <span class="eyebrow">Concentre tes efforts</span>
+          <h3>Repère les notions à revoir avant le jour de l'examen.</h3>
           <p>Temps de révision, taux de réussite par matière, progression hebdomadaire — tout est visible pour concentrer ton effort là où il compte.</p>
           <div class="feature-tags"><span>STATISTIQUES</span><span>PAR MATIÈRE</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-missions.png" alt="Missions quotidiennes et objectifs de révision" />
+          <img src="/images/screen-missions.png" alt="Missions quotidiennes et objectifs de révision" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Missions & régularité</span>
-          <h3>Un objectif clair chaque jour, pour ne jamais décrocher.</h3>
+          <span class="eyebrow">Avance sans te disperser</span>
+          <h3>Un objectif clair chaque jour pour garder le rythme.</h3>
           <p>Des petites missions quotidiennes (flashcards, lecture, quiz) et une série de jours actifs pour garder la motivation jusqu'au jour J.</p>
           <div class="feature-tags"><span>OBJECTIFS QUOTIDIENS</span><span>SÉRIE ACTIVE</span></div>
         </div>
@@ -262,6 +285,7 @@ const tiers = [
     <div class="price-card">
       <div class="eyebrow">Exam Assistant</div>
       <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+      <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
 
       <div class="tier-list">
         {tiers.map((tier) => (
@@ -290,6 +314,31 @@ const tiers = [
       </ul>
     </div>
   </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <span class="eyebrow">Preuve sociale</span>
+      <h2 style="text-align:center; margin-top:10px;">Des révisions plus claires et plus régulières.</h2>
+      <div class="testimonials-grid">
+        {testimonialProfiles.map((testimonial) => (
+          <article class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+              <div>
+                <div class="testimonial-name">{testimonial.profile}</div>
+                <span class="testimonial-profession">{testimonial.profession}</span>
+              </div>
+            </div>
+            <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+            <p>{testimonial.problem}</p>
+            <p>{testimonial.benefit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
 <section class="final-cta">
     <div class="wrap">

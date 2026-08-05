@@ -1,16 +1,22 @@
 ---
-const price = "7,99 €";
+const price = "29,99 €";
 const paymentUrl = "https://aghhol.gumroad.com/l/bjwrxx";
 
 // ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
 // À CONFIRMER via l'onglet "Versions" du produit "bjwrxx" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { label: "Licence d'un mois", amount: "7,99 €", variant: "1 Month License", featured: false },
-  { label: "Licence de 3 mois", amount: "19,99 €", variant: "3 Months License", featured: false },
-  { label: "Licence de 6 mois", amount: "39,99 €", variant: "6 Months License", featured: false },
-  { label: "Licence de 12 mois", amount: "59,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { label: "Accès à vie", amount: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Champion Libre 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Champion Libre 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Champion Libre 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Champion Libre 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Champion Libre À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "AL", profile: "Alex", profession: "Technicien support", problem: "Je voulais arrêter la vape mais je ne savais pas comment gérer les envies au quotidien.", benefit: "Le parcours me donne des étapes simples et des outils accessibles au moment où j'en ai besoin." },
+  { initials: "JU", profile: "Julie", profession: "Assistante de direction", problem: "Je réduisais ma consommation quelques jours avant de reprendre mes anciennes habitudes.", benefit: "Le suivi m'aide à voir mes progrès et à rester engagée dans la durée." },
+  { initials: "OM", profile: "Omar", profession: "Livreur indépendant", problem: "Je pensais qu'un coach IA ne comprendrait pas mes déclencheurs ni mon rythme de travail.", benefit: "Les conseils sont concrets, personnalisés et disponibles même hors connexion." },
 ];
 ---
 <!doctype html>
@@ -39,6 +45,8 @@ const tiers = [
         <a href="#parcours">Le parcours</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a href="#" class="btn btn-ghost btn-small">Essai gratuit 7j</a>
       <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Commencer — {price}</a>
     </div>
   </header>
@@ -58,7 +66,7 @@ const tiers = [
             <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Démarrer mon sevrage</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
           </div>
-          <p class="hero-microcopy">Application offline-first · Disponible en français, anglais, arabe et espagnol</p>
+          <p class="hero-microcopy">Application offline-first · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
         </div>
         <div class="hero-visual">
           <div class="breath-rings" aria-hidden="true">
@@ -103,14 +111,15 @@ const tiers = [
       <!-- Feature 1: Coach IA -->
       <div class="feature-row wrap">
         <div class="feature-text">
-          <span class="feature-tag">Coach IA anti-craving</span>
-          <h3>Un mot suffit à démarrer la conversation</h3>
+          <span class="feature-tag">Reprenez le contrôle des envies</span>
+          <h3>Obtenez une aide concrète dès que l'envie arrive.</h3>
           <p>Dites simplement comment vous vous sentez — "j'ai envie de vapoter", "je suis stressé" — et votre coach répond aussitôt avec des conseils validés par des experts, dans un ton adapté à votre culture et à votre langue.</p>
           <ul class="feature-list">
             <li>Réponses instantanées, disponibles 24h/24</li>
             <li>Suggestions concrètes : respiration guidée, distraction, rappel de vos motivations</li>
             <li>Scripts culturellement adaptés selon votre région</li>
           </ul>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
         <div class="feature-image">
           <img src="/images/phone_coach.png" alt="Conversation avec le coach IA de Vape Stopper" loading="lazy" />
@@ -120,8 +129,8 @@ const tiers = [
       <!-- Feature 2: Tracker -->
       <div class="feature-row wrap reverse">
         <div class="feature-text">
-          <span class="feature-tag">Suivi & économies</span>
-          <h3>Voyez votre progrès — et votre argent économisé</h3>
+          <span class="feature-tag">Rendez vos progrès visibles</span>
+          <h3>Suivez votre évolution et les économies réalisées.</h3>
           <p>Chaque jour sans vapoter est compté, chaque baisse de consommation est visible sur un graphique clair. Vape Stopper calcule automatiquement l'argent que vous économisez, dans votre monnaie locale.</p>
           <ul class="feature-list">
             <li>Journal de consommation et des déclencheurs (triggers)</li>
@@ -137,8 +146,8 @@ const tiers = [
       <!-- Feature 3: SOS -->
       <div class="feature-row wrap">
         <div class="feature-text">
-          <span class="feature-tag">Mode SOS Craving</span>
-          <h3>Pour les envies fortes, une aide immédiate</h3>
+          <span class="feature-tag">Un soutien dans les moments difficiles</span>
+          <h3>Traversez les envies fortes avec les bons réflexes.</h3>
           <p>Un accès en un clic à des outils d'urgence, même hors connexion. Respiration guidée, exercices de recentrage et rappel que l'envie va passer — pour tenir bon dans les moments les plus difficiles.</p>
           <ul class="feature-list">
             <li>Fonctionne même hors ligne</li>
@@ -154,8 +163,8 @@ const tiers = [
       <!-- Feature 4: Community -->
       <div class="feature-row wrap reverse">
         <div class="feature-text">
-          <span class="feature-tag">Communautés de soutien</span>
-          <h3>Vous n'êtes pas seul dans ce parcours</h3>
+          <span class="feature-tag">Avancez entouré</span>
+          <h3>Trouvez du soutien auprès de personnes qui comprennent votre parcours.</h3>
           <p>Rejoignez des groupes segmentés par langue, âge et profil pour échanger avec des personnes qui vivent la même chose que vous — un espace bienveillant, sans jugement.</p>
           <ul class="feature-list">
             <li>Fil d'actualité, réussites, questions et groupes thématiques</li>
@@ -171,8 +180,8 @@ const tiers = [
       <!-- Feature 5: Progressive plan -->
       <div class="feature-row wrap">
         <div class="feature-text">
-          <span class="feature-tag">Sevrage progressif guidé</span>
-          <h3>Un plan qui s'ajuste à votre rythme, pas l'inverse</h3>
+          <span class="feature-tag">Un parcours à votre rythme</span>
+          <h3>Suivez un plan qui s'adapte à votre quotidien.</h3>
           <p>Contrairement aux applications anti-tabac génériques, Vape Stopper gère spécifiquement les dosages de nicotine, les arômes et la gestuelle propres à la vape. Le plan de réduction s'étale sur 8 à 12 semaines et s'adapte dynamiquement à vos réactions pour éviter les rechutes.</p>
           <ul class="feature-list">
             <li>Techniques de thérapie cognitivo-comportementale (TCC) et de pleine conscience</li>
@@ -231,6 +240,7 @@ const tiers = [
           <p class="eyebrow center">Tarif</p>
           <h2 class="section-title center">Un prix simple, pas d'abonnement caché.</h2>
           <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+          <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
           <div class="price-list">
             {tiers.map((tier) => (
               <a
@@ -239,11 +249,11 @@ const tiers = [
                 data-gumroad-overlay-checkout="true"
               >
                 <span class="price-row-label-wrap">
-                  <span class="price-row-label">{tier.label}</span>
+                  <span class="price-row-label">{tier.name}</span>
                   {tier.badge && <span class="price-row-badge">{tier.badge}</span>}
                 </span>
                 <span class="price-row-right">
-                  <span class="price-row-amount">{tier.amount}</span>
+                  <span class="price-row-amount">{tier.price}</span>
                   <span class="price-row-arrow">→</span>
                 </span>
               </a>
@@ -252,6 +262,31 @@ const tiers = [
         </div>
       </div>
     </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="wrap">
+        <p class="eyebrow center">Preuve sociale</p>
+        <h2 class="section-title center">Un parcours qui avance à votre rythme.</h2>
+        <div class="testimonials-grid">
+          {testimonialProfiles.map((testimonial) => (
+            <article class="testimonial-card">
+              <div class="testimonial-head">
+                <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+                <div>
+                  <div class="testimonial-name">{testimonial.profile}</div>
+                  <span class="testimonial-profession">{testimonial.profession}</span>
+                </div>
+              </div>
+              <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+              <p>{testimonial.problem}</p>
+              <p>{testimonial.benefit}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+    <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
     <!-- GUARANTEE -->
     <section class="guarantee">
@@ -671,6 +706,18 @@ const tiers = [
     .guarantee-icon { color: var(--navy); flex-shrink: 0; }
     .guarantee h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
     .guarantee p { font-size: 0.92rem; }
+
+    /* Testimonials */
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: #EFF3F8; color: var(--navy); font-family: 'Sora', sans-serif; font-size: .78rem; font-weight: 700; }
+    .testimonial-name { color: var(--ink); font-weight: 700; }
+    .testimonial-profession { display: block; color: var(--slate); font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--coral); letter-spacing: .1em; }
+    .testimonial-card p { color: var(--slate); line-height: 1.55; margin-top: 12px; }
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
 
     /* Final CTA */
     .final-cta {

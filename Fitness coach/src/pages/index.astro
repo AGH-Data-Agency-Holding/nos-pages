@@ -5,11 +5,17 @@ const paymentUrl = "https://aghhol.gumroad.com/l/fitness-coach-smart-ai";
 // À CONFIRMER via l'onglet "Versions" du produit "fitness-coach-smart-ai" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Licence d'un mois", price: "9,99 €", variant: "1 Month License", featured: false },
-  { name: "Licence de 3 mois", price: "24,99 €", variant: "3 Months License", featured: false },
-  { name: "Licence de 6 mois", price: "47,99 €", variant: "6 Months License", featured: false },
-  { name: "Licence de 12 mois", price: "69,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Elite Coach 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Elite Coach 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Elite Coach 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Elite Coach 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Elite Coach À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "NO", profile: "Noé", profession: "Développeur web", problem: "Je voulais m'entraîner chez moi sans suivre un programme impossible à tenir.", benefit: "L'app m'aide à adapter mes séances à mon emploi du temps et à rester régulier." },
+  { initials: "FA", profile: "Fatou", profession: "Responsable boutique", problem: "Je faisais du sport par périodes, sans voir de vraie progression.", benefit: "Le suivi me permet de voir mes efforts et de garder une routine semaine après semaine." },
+  { initials: "RY", profile: "Rayan", profession: "Chauffeur indépendant", problem: "Je pensais qu'un coach IA ne pourrait pas comprendre mes contraintes.", benefit: "Les conseils sont concrets, personnalisés et accessibles même sans connexion." },
 ];
 ---
 <html lang="fr">
@@ -122,6 +128,17 @@ const tiers = [
     .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #1FC2B0; white-space: nowrap; }
     .tier-arrow { font-size: 1.1rem; color: #1FC2B0; }
 
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: #fff; border: 1px solid #DEE6F0; border-radius: 18px; padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: #E4EEF9; color: var(--blue); font-family: "JetBrains Mono", monospace; font-size: .78rem; font-weight: 700; }
+    .testimonial-name { color: var(--navy); font-weight: 700; }
+    .testimonial-profession { display: block; color: #47526B; font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--teal); letter-spacing: .1em; }
+    .testimonial-card p { color: #47526B; line-height: 1.55; }
+    @media (max-width: 780px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: #E4EEF9; border-radius: 24px; padding: 46px; text-align: center; }
     .guarantee-box h2 { font-size: 1.5rem; margin: 10px 0 12px; }
@@ -147,6 +164,8 @@ const tiers = [
         <a href="#fonctionnalites">Fonctionnalités</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a class="btn btn-ghost" href="#">Essai gratuit 7j</a>
       <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
@@ -154,14 +173,15 @@ const tiers = [
   <section class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">Coach IA · Chez toi · Sans salle de sport</span>
+        <span class="eyebrow">Un entraînement qui s'adapte · IA hors-ligne</span>
         <h1>Ton coach fitness, <em>adapté à ta vie</em>, pas l'inverse.</h1>
         <p class="lede">Pas de salle de sport, pas de matériel ? Aucun problème. MARCO construit un programme qui respecte tes contraintes, ton emploi du temps et même le Ramadan.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
           <a class="btn btn-ghost" style="border-color:#fff;color:#fff" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
-        <p class="trust-line"><strong>fonctionne hors-ligne</strong></p>
+        <p class="trust-line"><strong>fonctionne hors-ligne</strong> · Satisfait ou remboursé sous 30 jours</p>
+        <p class="trust-line">Essayez gratuitement pendant 7 jours</p>
       </div>
       <div class="hero-visual">
         <div class="glow"></div>
@@ -198,23 +218,24 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-coach-chat.png" alt="Discussion avec le coach IA" />
+          <img src="/images/screen-coach-chat.png" alt="Discussion avec le coach IA" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Coach IA conversationnel</span>
-          <h3>Pose tes questions par texte, en temps réel.</h3>
+          <span class="eyebrow">Ne reste jamais bloqué</span>
+          <h3>Obtiens le conseil dont tu as besoin au bon moment.</h3>
           <p>Adapte ton entraînement, demande un conseil nutrition ou un coup de motivation — ton coach répond instantanément, dans ta langue.</p>
           <div class="feature-tags"><span>TEXTE</span><span>MULTILINGUE</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-library.png" alt="Bibliothèque d'exercices vidéo" />
+          <img src="/images/screen-library.png" alt="Bibliothèque d'exercices vidéo" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Bibliothèque d'exercices</span>
-          <h3>Plus de 150 exercices vidéo, filtrables par muscle et niveau.</h3>
+          <span class="eyebrow">Trouve le bon mouvement</span>
+          <h3>Choisis une séance adaptée à ton niveau et à ton objectif.</h3>
           <p>Chaque mouvement est démontré en vidéo HD avec des instructions claires, pour progresser sans te blesser, même sans coach en salle.</p>
           <div class="feature-tags"><span>150+ VIDÉOS</span><span>FILTRES PAR MUSCLE</span></div>
         </div>
@@ -222,23 +243,24 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-progress.png" alt="Analyse graphique des progrès et calories" />
+          <img src="/images/screen-progress.png" alt="Analyse graphique des progrès et calories" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Suivi détaillé</span>
-          <h3>Visualise tes calories, ta fréquence cardiaque et ta progression.</h3>
+          <span class="eyebrow">Vois tes progrès</span>
+          <h3>Comprends ton évolution et ajuste tes efforts au bon moment.</h3>
           <p>Un graphique clair de ton évolution, jour après jour, pour rester motivé et ajuster ton programme au bon moment.</p>
           <div class="feature-tags"><span>CALORIES</span><span>FRÉQUENCE CARDIAQUE</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-schedule.png" alt="Gestion des entraînements et programmes" />
+          <img src="/images/screen-schedule.png" alt="Gestion des entraînements et programmes" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Programmes & planning</span>
-          <h3>Gère tes séances de la semaine, sans y penser.</h3>
+          <span class="eyebrow">Reste constant</span>
+          <h3>Organise ta semaine et avance sans perdre le fil.</h3>
           <p>Musculation, cardio, running : retrouve toutes tes séances passées et à venir, avec la possibilité de les refaire en un tap.</p>
           <div class="feature-tags"><span>PLANNING HEBDO</span><span>HISTORIQUE</span></div>
         </div>
@@ -261,6 +283,7 @@ const tiers = [
     <div class="price-card">
       <div class="eyebrow">MARCO — AI Fitness Coach</div>
       <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+      <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
 
       <div class="tier-list">
         {tiers.map((tier) => (
@@ -290,6 +313,31 @@ const tiers = [
       </ul>
     </div>
   </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <span class="eyebrow">Preuve sociale</span>
+      <h2 style="text-align:center; margin-top:10px;">Un entraînement qui trouve sa place dans ta vie.</h2>
+      <div class="testimonials-grid">
+        {testimonialProfiles.map((testimonial) => (
+          <article class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+              <div>
+                <div class="testimonial-name">{testimonial.profile}</div>
+                <span class="testimonial-profession">{testimonial.profession}</span>
+              </div>
+            </div>
+            <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+            <p>{testimonial.problem}</p>
+            <p>{testimonial.benefit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
 <section class="final-cta">
     <div class="wrap">

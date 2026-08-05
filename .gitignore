@@ -1,3 +1,8 @@
-echo node_modules/ > .gitignore
-echo dist/ >> .gitignore
-echo .astro/ >> .gitignore
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+.DS_Store
+.vscode/

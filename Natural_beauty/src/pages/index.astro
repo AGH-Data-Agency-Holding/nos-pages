@@ -5,11 +5,17 @@ const paymentUrl = "https://aghhol.gumroad.com/l/skin-natural-beauty-ai";
 // À CONFIRMER via l'onglet "Versions" du produit "skin-natural-beauty-ai" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Licence d'un mois", price: "6,99 €", variant: "1 Month License", featured: false },
-  { name: "Licence de 3 mois", price: "17,99 €", variant: "3 Months License", featured: false },
-  { name: "Licence de 6 mois", price: "34,99 €", variant: "6 Months License", featured: false },
-  { name: "Licence de 12 mois", price: "49,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Beauty Guru 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Beauty Guru 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Beauty Guru 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Beauty Guru 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Beauty Guru À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "IM", profile: "Inès", profession: "Graphiste freelance", problem: "Je cherchais une routine simple sans accumuler les produits.", benefit: "L'app m'aide à trouver des soins naturels adaptés à ce que j'ai déjà chez moi." },
+  { initials: "SA", profile: "Samir", profession: "Chef de projet", problem: "Je commençais souvent une routine sans réussir à rester régulier.", benefit: "Le suivi m'aide à garder le rythme et à voir les progrès de ma routine." },
+  { initials: "EL", profile: "Élodie", profession: "Photographe", problem: "Je doutais qu'une IA puisse vraiment comprendre les besoins de ma peau.", benefit: "Les suggestions sont concrètes et personnalisées, même sans connexion." },
 ];
 ---
 <html lang="fr">
@@ -123,6 +129,17 @@ const tiers = [
     .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #A81760; white-space: nowrap; }
     .tier-arrow { font-size: 1.1rem; color: #A81760; }
 
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--blush); color: var(--pink-dark); font-family: "JetBrains Mono", monospace; font-size: .78rem; font-weight: 700; }
+    .testimonial-name { color: var(--ink); font-weight: 700; }
+    .testimonial-profession { display: block; color: #5C4552; font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--pink); letter-spacing: .1em; }
+    .testimonial-card p { color: #5C4552; line-height: 1.55; }
+    @media (max-width: 780px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: var(--blush); border-radius: 24px; padding: 46px; text-align: center; }
     .guarantee-box h2 { font-size: 1.5rem; margin: 10px 0 12px; }
@@ -151,6 +168,8 @@ const tiers = [
         <a href="#fonctionnalites">Fonctionnalités</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a class="btn btn-ghost" href="#">Essai gratuit 7j</a>
       <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
@@ -158,14 +177,15 @@ const tiers = [
   <section class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">Recettes DIY · IA hors-ligne</span>
-        <h1>Ta beauté naturelle, <em>même sans réseau</em>.</h1>
+        <span class="eyebrow">Une routine qui te ressemble · IA hors-ligne</span>
+        <h1>Révèle ta beauté naturelle, <em>même sans réseau</em>.</h1>
         <p class="lede">Des centaines de recettes maison pour la peau, les cheveux et le corps, avec un assistant IA qui te conseille instantanément — même en avion, même sans Wi-Fi.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
           <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
-        <p class="trust-line"><strong>zéro connexion requise</strong></p>
+        <p class="trust-line"><strong>zéro connexion requise</strong> · Satisfait ou remboursé sous 30 jours</p>
+        <p class="trust-line">Essayez gratuitement pendant 7 jours</p>
       </div>
       <div class="hero-visual">
         <div class="glow"></div>
@@ -198,23 +218,24 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-scan.png" alt="Analyse instantanée de la peau" />
+          <img src="/images/screen-scan.png" alt="Analyse instantanée de la peau" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Analyse instantanée</span>
-          <h3>Une photo suffit pour connaître les besoins de ta peau.</h3>
+          <span class="eyebrow">Comprends mieux ta peau</span>
+          <h3>Découvre les besoins de ta peau à partir d'une simple photo.</h3>
           <p>Prends une photo rapide pour révéler ton type de peau et tes besoins spécifiques, puis reçois des solutions naturelles personnalisées.</p>
           <div class="feature-tags"><span>ANALYSE PHOTO</span><span>PERSONNALISÉ</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-photo-choice.png" alt="Prendre ou choisir une photo pour l'analyse" />
+          <img src="/images/screen-photo-choice.png" alt="Prendre ou choisir une photo pour l'analyse" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Simple d'utilisation</span>
-          <h3>Prends une photo ou choisis-en une existante.</h3>
+          <span class="eyebrow">Commence en quelques secondes</span>
+          <h3>Lance ta routine avec la photo que tu as déjà.</h3>
           <p>Que tu prennes une photo sur le moment ou que tu utilises une image déjà sur ton téléphone, l'analyse démarre en un tap.</p>
           <div class="feature-tags"><span>APPAREIL PHOTO</span><span>GALERIE</span></div>
         </div>
@@ -222,23 +243,24 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-home.png" alt="Tableau de bord et niveau de beauté" />
+          <img src="/images/screen-home.png" alt="Tableau de bord et niveau de beauté" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Ton niveau de beauté</span>
-          <h3>Suis ta progression et découvre de nouvelles inspirations chaque jour.</h3>
+          <span class="eyebrow">Reste motivé</span>
+          <h3>Garde une routine régulière et trouve de nouvelles inspirations.</h3>
           <p>Un tableau de bord clair pour visualiser ta routine, accéder à l'assistant IA, et découvrir des idées beauté fraîches régulièrement.</p>
           <div class="feature-tags"><span>SUIVI DE ROUTINE</span><span>INSPIRATIONS</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-profile.png" alt="Profil avec allergies et statistiques" />
+          <img src="/images/screen-profile.png" alt="Profil avec allergies et statistiques" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Profil personnalisé</span>
-          <h3>Renseigne tes allergies, l'app s'adapte à toi.</h3>
+          <span class="eyebrow">Des conseils plus sûrs pour toi</span>
+          <h3>Indique tes allergies pour recevoir des idées qui te conviennent.</h3>
           <p>Type de peau, allergies, historique de recettes testées — l'app garde tout en mémoire pour ne te proposer que ce qui te convient vraiment.</p>
           <div class="feature-tags"><span>ALLERGIES</span><span>HISTORIQUE</span></div>
         </div>
@@ -261,6 +283,7 @@ const tiers = [
     <div class="price-card">
       <div class="eyebrow">Natural Beauty</div>
       <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+      <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
 
       <div class="tier-list">
         {tiers.map((tier) => (
@@ -290,6 +313,31 @@ const tiers = [
       </ul>
     </div>
   </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <span class="eyebrow">Preuve sociale</span>
+      <h2 style="text-align:center; margin-top:10px;">Une routine beauté qui s'adapte à ta vie.</h2>
+      <div class="testimonials-grid">
+        {testimonialProfiles.map((testimonial) => (
+          <article class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+              <div>
+                <div class="testimonial-name">{testimonial.profile}</div>
+                <span class="testimonial-profession">{testimonial.profession}</span>
+              </div>
+            </div>
+            <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+            <p>{testimonial.problem}</p>
+            <p>{testimonial.benefit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
 <section class="final-cta">
     <div class="wrap">

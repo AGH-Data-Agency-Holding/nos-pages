@@ -5,11 +5,17 @@ const paymentUrl = "https://aghhol.gumroad.com/l/Styliste-Dresser-ai";
 // À CONFIRMER via l'onglet "Versions" du produit "Styliste-Dresser-ai" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Licence d'un mois", price: "7,99 €", variant: "1 Month License", featured: false },
-  { name: "Licence de 3 mois", price: "19,99 €", variant: "3 Months License", featured: false },
-  { name: "Licence de 6 mois", price: "39,99 €", variant: "6 Months License", featured: false },
-  { name: "Licence de 12 mois", price: "54,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Fashion Icon 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Fashion Icon 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Fashion Icon 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Fashion Icon 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Fashion Icon À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "RO", profile: "Romy", profession: "Architecte", problem: "Je perdais du temps chaque matin à chercher une tenue qui me ressemble.", benefit: "L'app m'aide à composer rapidement des looks avec les vêtements que je possède déjà." },
+  { initials: "KA", profile: "Kamel", profession: "Responsable commercial", problem: "Je préparais mes tenues au dernier moment pour mes rendez-vous.", benefit: "Je peux maintenant retrouver des idées adaptées à chaque occasion et mieux m'organiser." },
+  { initials: "MA", profile: "Maëlle", profession: "Étudiante en design", problem: "Je doutais qu'un styliste IA puisse comprendre mon style personnel.", benefit: "Les suggestions sont surprenantes, personnalisées et faciles à adapter." },
 ];
 ---
 <html lang="fr">
@@ -121,6 +127,17 @@ const tiers = [
     .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #E8829E; white-space: nowrap; }
     .tier-arrow { font-size: 1.1rem; color: #E8829E; }
 
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--lilac); color: var(--purple-dark); font-family: "JetBrains Mono", monospace; font-size: .78rem; font-weight: 700; }
+    .testimonial-name { color: var(--ink); font-weight: 700; }
+    .testimonial-profession { display: block; color: #55486E; font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--pink); letter-spacing: .1em; }
+    .testimonial-card p { color: #55486E; line-height: 1.55; margin-top: 12px; }
+    @media (max-width: 780px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 46px; text-align: center; }
     .guarantee-box h2 { font-size: 1.5rem; margin: 10px 0 12px; }
@@ -155,6 +172,8 @@ const tiers = [
         <a href="#fonctionnalites">Fonctionnalités</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a class="btn btn-ghost" href="#">Essai gratuit 7j</a>
       <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
@@ -162,14 +181,15 @@ const tiers = [
   <section class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">Styliste IA · 50+ langues</span>
+        <span class="eyebrow">Un style plus simple · IA hors-ligne</span>
         <h1>Fini le dilemme du <em>"qu'est-ce que je mets"</em>, chaque matin.</h1>
         <p class="lede">Dresser AI scanne ta garde-robe, comprend ta morphologie et te propose des tenues adaptées à la météo, à l'occasion et à ton humeur — un vrai styliste, disponible 24/7.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
           <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
-        <p class="trust-line">Styliste et scan de garde-robe 100% hors-ligne · assistant shopping nécessite une connexion · <strong>réduit le stress matinal de 50%</strong></p>
+        <p class="trust-line">Styliste et scan de garde-robe 100% hors-ligne · <strong>Satisfait ou remboursé sous 30 jours</strong></p>
+        <p class="trust-line">Essayez gratuitement pendant 7 jours</p>
       </div>
       <div class="hero-visual">
         <div class="glow"></div>
@@ -206,35 +226,37 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-generate.png" alt="Génération de tenue avec la garde-robe virtuelle" />
+          <img src="/images/screen-generate.png" alt="Génération de tenue avec la garde-robe virtuelle" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Générateur de tenues</span>
-          <h3>Compose une tenue à partir de ce que tu possèdes déjà.</h3>
+          <span class="eyebrow">Habille-toi sans hésiter</span>
+          <h3>Découvre des tenues avec les pièces que tu as déjà.</h3>
           <p>Mixe vestes, hauts, bas et chaussures de ta propre garde-robe pour découvrir des combinaisons que tu n'aurais jamais imaginées toi-même.</p>
           <div class="feature-tags"><span>MIX & MATCH</span><span>GARDE-ROBE VIRTUELLE</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-ai-stylist.png" alt="Discussion avec le styliste IA" />
+          <img src="/images/screen-ai-stylist.png" alt="Discussion avec le styliste IA" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Styliste IA conversationnel</span>
-          <h3>Demande une tenue pour une réunion, une sortie ou un mariage.</h3>
+          <span class="eyebrow">Prépare chaque occasion</span>
+          <h3>Obtiens une idée de look adaptée à ton agenda.</h3>
           <p>Décris l'occasion, et le styliste IA te propose instantanément plusieurs looks complets, adaptés à ton style et à la météo du jour.</p>
           <div class="feature-tags"><span>TEXTE & PHOTO</span><span>50+ LANGUES</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-wardrobe-tops.png" alt="Organisation de la garde-robe par catégorie" />
+          <img src="/images/screen-wardrobe-tops.png" alt="Organisation de la garde-robe par catégorie" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Garde-robe organisée</span>
-          <h3>Toute ta garde-robe, triée et cataloguée automatiquement.</h3>
+          <span class="eyebrow">Retrouve tes pièces</span>
+          <h3>Garde une vue claire sur tout ce que tu peux porter.</h3>
           <p>Hauts, bas, robes, chaussures : chaque vêtement scanné est classé pour que tu retrouves tout en un instant, sans jamais fouiller ton placard.</p>
           <div class="feature-tags"><span>SCAN PHOTO</span><span>TRI AUTOMATIQUE</span></div>
         </div>
@@ -242,11 +264,11 @@ const tiers = [
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-wardrobe-shoes.png" alt="Catalogue de chaussures dans la garde-robe" />
+          <img src="/images/screen-wardrobe-shoes.png" alt="Catalogue de chaussures dans la garde-robe" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Mode multiculturelle</span>
-          <h3>Des tenues qui respectent tes traditions autant que les tendances.</h3>
+          <span class="eyebrow">Exprime ton identité</span>
+          <h3>Adopte un style qui respecte tes goûts et tes traditions.</h3>
           <p>L'IA comprend aussi bien le streetwear moderne que les tenues traditionnelles comme le kaftan ou le sari, pour un style qui te ressemble vraiment.</p>
           <div class="feature-tags"><span>INCLUSIF</span><span>TOUTES MORPHOLOGIES</span></div>
         </div>
@@ -269,6 +291,7 @@ const tiers = [
     <div class="price-card">
       <div class="eyebrow">Dresser AI</div>
       <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+      <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
 
       <div class="tier-list">
         {tiers.map((tier) => (
@@ -298,6 +321,31 @@ const tiers = [
       </ul>
     </div>
   </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <span class="eyebrow">Preuve sociale</span>
+      <h2 style="text-align:center; margin-top:10px;">Un style plus simple, chaque matin.</h2>
+      <div class="testimonials-grid">
+        {testimonialProfiles.map((testimonial) => (
+          <article class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+              <div>
+                <div class="testimonial-name">{testimonial.profile}</div>
+                <span class="testimonial-profession">{testimonial.profession}</span>
+              </div>
+            </div>
+            <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+            <p>{testimonial.problem}</p>
+            <p>{testimonial.benefit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
 <section class="final-cta">
     <div class="wrap">

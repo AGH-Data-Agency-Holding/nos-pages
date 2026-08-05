@@ -6,11 +6,17 @@ const paymentUrl = "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai";
 // configurée dans l'onglet "Versions" du produit sur la plateforme de paiement. Les valeurs ci-dessous sont
 // une hypothèse basée sur les libellés affichés — à vérifier/corriger avec le nom réel.
 const tiers = [
-  { name: "Licence d'un mois", price: "6,99 €", variant: "1 Month License", featured: false },
-  { name: "Licence de 3 mois", price: "17,99 €", variant: "3 Months License", featured: false },
-  { name: "Licence de 6 mois", price: "34,99 €", variant: "6 Months License", featured: false },
-  { name: "Licence de 12 mois", price: "49,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Master Chef 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Master Chef 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Master Chef 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Master Chef 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Master Chef À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { photo: "/images/avatar-youssef.jpg", profile: "Youssef", profession: "Technicien réseau", problem: "Je ne savais jamais quoi cuisiner avec ce qu'il me restait.", benefit: "L'app me propose des idées simples sans me demander de tout planifier." },
+  { photo: "/images/avatar-noura.jpg", profile: "Noura", profession: "Entrepreneuse e-commerce", problem: "Je commandais souvent à manger après une longue journée.", benefit: "Je trouve maintenant rapidement une recette adaptée à mes ingrédients." },
+  { photo: "/images/avatar-lucas.jpg", profile: "Lucas", profession: "Architecte d'intérieur", problem: "Je pensais que l'IA ne comprendrait pas vraiment mes habitudes en cuisine.", benefit: "L'assistant me donne des suggestions concrètes, même quand je n'ai pas de réseau." },
 ];
 ---
 <html lang="fr">
@@ -128,6 +134,17 @@ const tiers = [
     .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #C94A1A; white-space: nowrap; }
     .tier-arrow { font-size: 1.1rem; color: #C94A1A; }
 
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: block; flex: 0 0 auto; border-radius: 50%; object-fit: cover; border: 2px solid var(--peach); }
+    .testimonial-name { color: var(--charcoal); font-weight: 700; }
+    .testimonial-profession { display: block; color: #5A4632; font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--flame); letter-spacing: .1em; }
+    .testimonial-card p { color: #5A4632; line-height: 1.55; }
+    @media (max-width: 780px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: var(--peach); border-radius: 24px; padding: 46px; text-align: center; }
     .guarantee-box h2 { font-size: 1.5rem; margin: 10px 0 12px; }
@@ -157,6 +174,8 @@ const tiers = [
         <a href="#comment">Comment ça marche</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a class="btn btn-ghost" href="#">Essai gratuit 7j</a>
       <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
@@ -172,6 +191,7 @@ const tiers = [
             <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
             <a class="btn btn-ghost" style="border-color:#fff;color:#fff" href="#fonctionnalites">Voir les fonctionnalités</a>
           </div>
+          <p class="trust-line" style="color:#F3E1D2; margin: 18px 0 0;">Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
         </div>
       </div>
     </div>
@@ -207,11 +227,11 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-explore.png" alt="Écran d'accueil et exploration des recettes" />
+          <img src="/images/screen-explore.png" alt="Écran d'accueil et exploration des recettes" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Cuisine marocaine & du monde</span>
-          <h3>Des centaines de recettes, faciles et adaptées à votre budget.</h3>
+          <span class="eyebrow">Trouvez votre prochaine idée</span>
+          <h3>Cuisinez facilement selon vos envies et vos ingrédients.</h3>
           <p>Parcourez les recettes populaires par pays, filtrez selon vos envies, et gardez vos favorites à portée de main.</p>
           <div class="feature-tags"><span>RECHERCHE PAR PAYS</span><span>FAVORIS</span></div>
         </div>
@@ -219,23 +239,24 @@ const tiers = [
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-chat-offline.png" alt="Assistant recettes hors-ligne" />
+          <img src="/images/screen-chat-offline.png" alt="Assistant recettes hors-ligne" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Assistant 100% hors-ligne</span>
-          <h3>Posez vos questions, même sans une barre de réseau.</h3>
+          <span class="eyebrow">Cuisinez sans attendre</span>
+          <h3>Obtenez une idée de recette, même sans réseau.</h3>
           <p>L'assistant recettes répond directement depuis votre téléphone — utile en cuisine, en voyage ou dans les zones peu connectées.</p>
           <div class="feature-tags"><span>ZÉRO WI-FI</span><span>CHAT INTÉGRÉ</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-recipe-detail.png" alt="Détail d'une recette avec méthode précise" />
+          <img src="/images/screen-recipe-detail.png" alt="Détail d'une recette avec méthode précise" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Méthode claire</span>
-          <h3>Des étapes précises, des mesures exactes.</h3>
+          <span class="eyebrow">Réussissez votre plat</span>
+          <h3>Suivez chaque étape sans vous poser de questions.</h3>
           <p>Chaque recette détaille la préparation pas à pas avec des quantités précises — pas d'approximation qui gâche le plat.</p>
           <div class="feature-tags"><span>ÉTAPES DÉTAILLÉES</span><span>MESURES PRÉCISES</span></div>
         </div>
@@ -243,11 +264,11 @@ const tiers = [
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-gamification.png" alt="Système de gamification, niveaux et défis" />
+          <img src="/images/screen-gamification.png" alt="Système de gamification, niveaux et défis" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Motivation</span>
-          <h3>Des défis pour progresser en cuisine, un plat à la fois.</h3>
+          <span class="eyebrow">Gardez l'envie de cuisiner</span>
+          <h3>Progressez en cuisine, un plat réussi à la fois.</h3>
           <p>Gagnez des points, montez de niveau et débloquez des badges au fil de vos réussites en cuisine — de "Chef Débutant" à des défis plus ambitieux.</p>
           <div class="feature-tags"><span>NIVEAUX</span><span>DÉFIS</span><span>BADGES</span></div>
         </div>
@@ -255,11 +276,11 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-community.png" alt="Communauté et groupes de cuisine" />
+          <img src="/images/screen-community.png" alt="Communauté et groupes de cuisine" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Communauté</span>
-          <h3>Rejoignez des groupes de cuisine et partagez vos réussites.</h3>
+          <span class="eyebrow">Cuisinez avec plaisir</span>
+          <h3>Trouvez une communauté qui partage vos envies.</h3>
           <p>Cuisine végé, pâtisserie, batch cooking ou cuisine du monde : rejoignez un groupe qui vous correspond et échangez avec d'autres passionnés.</p>
           <div class="feature-tags"><span>GROUPES</span><span>PARTAGE</span></div>
         </div>
@@ -282,6 +303,7 @@ const tiers = [
     <div class="price-card">
       <div class="eyebrow">Recettes Cuisine</div>
       <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+      <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
 
       <div class="tier-list">
         {tiers.map((tier) => (
@@ -310,6 +332,31 @@ const tiers = [
       </ul>
     </div>
   </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <span class="eyebrow">Preuve sociale</span>
+      <h2 style="text-align:center; margin-top:10px;">Une cuisine plus simple, au quotidien.</h2>
+      <div class="testimonials-grid">
+        {testimonialProfiles.map((testimonial) => (
+          <article class="testimonial-card">
+            <div class="testimonial-head">
+              <img class="testimonial-avatar" src={testimonial.photo} alt={`Avatar illustratif de ${testimonial.profile}`} loading="lazy" />
+              <div>
+                <div class="testimonial-name">{testimonial.profile}</div>
+                <span class="testimonial-profession">{testimonial.profession}</span>
+              </div>
+            </div>
+            <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+            <p>{testimonial.problem}</p>
+            <p>{testimonial.benefit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
 <section class="final-cta">
     <div class="wrap">

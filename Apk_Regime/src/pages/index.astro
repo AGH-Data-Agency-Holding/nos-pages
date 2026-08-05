@@ -11,6 +11,38 @@ const variants = {
   twelveMonths: "12 Months License",
   lifetime: "LIFETIME",
 };
+
+const tiers = [
+  { name: "Champion 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Champion 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Champion 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Champion 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Champion À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  {
+    initials: "AM",
+    profile: "Amina",
+    profession: "Assistante administrative",
+    problem: "Avant, je ne savais jamais quoi manger ni par où commencer.",
+    benefit: "L'app m'a proposé un plan simple et facile à suivre, même sans connexion.",
+  },
+  {
+    initials: "KA",
+    profile: "Karim",
+    profession: "Commercial",
+    problem: "Mes repas étaient souvent improvisés et je perdais vite ma motivation.",
+    benefit: "Le suivi m'aide à rester régulier et à mieux contrôler mes portions au quotidien.",
+  },
+  {
+    initials: "SO",
+    profile: "Sophie",
+    profession: "Professeure",
+    problem: "Je pensais que l'IA allait donner des conseils trop généraux.",
+    benefit: "Elle analyse mes repas et répond à mes questions de façon vraiment pratique.",
+  },
+];
 ---
 <html lang="fr">
 <head>
@@ -57,7 +89,24 @@ const variants = {
     .nav-links a { text-decoration: none; color: var(--navy-soft); }
     .nav-links a:hover { color: var(--flame); }
     .nav-cta { display: flex; gap: 12px; }
-    @media (max-width: 780px) { .nav-links { display: none; } }
+    .nav-cta .btn-trial {
+      border: 1.5px solid var(--flame);
+      background: rgba(244, 203, 160, 0.38);
+      color: var(--flame);
+      box-shadow: 0 4px 14px rgba(232, 90, 43, 0.14);
+    }
+    .nav-cta .btn-trial:hover {
+      background: var(--flame);
+      color: #FFF8F1;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(232, 90, 43, 0.28);
+    }
+    @media (max-width: 780px) {
+      .nav-links { display: none; }
+      .nav { flex-wrap: wrap; }
+      .nav-cta { width: 100%; flex-direction: column; gap: 8px; }
+      .nav-cta .btn { justify-content: center; }
+    }
 
     .hero { position: relative; overflow: hidden; padding: 88px 0 40px; }
     .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
@@ -113,6 +162,20 @@ const variants = {
     .plan-card .price { font-family: "Fraunces", serif; font-size: 2.4rem; margin: 10px 0 4px; }
     .plan-card .price span { font-size: 1rem; font-family: Inter, sans-serif; font-weight: 500; color: var(--navy-soft); }
     .plan-card.premium .price span { color: #B9C2DE; }
+    .plan-card .badge { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--flame); }
+    .plan-card.premium .badge { color: var(--flame-light); }
+
+    .testimonials { padding: 0 0 100px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: #fff; border: 1px solid var(--sand-line); border-radius: 18px; padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--navy); color: var(--cream); font-family: "JetBrains Mono", monospace; font-size: 0.78rem; font-weight: 700; }
+    .testimonial-name { color: var(--navy); font-weight: 700; }
+    .testimonial-profession { display: block; color: var(--navy-soft); font-size: 0.78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--flame); letter-spacing: 0.1em; }
+    .testimonial-card p { color: var(--navy-soft); line-height: 1.55; min-height: 76px; }
+    .testimonial-card small { color: var(--navy-soft); font-weight: 600; }
+    @media (max-width: 780px) { .testimonials-grid { grid-template-columns: 1fr; } }
 
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: var(--peach); border-radius: 24px; padding: 46px; text-align: center; }
@@ -141,7 +204,8 @@ const variants = {
         <a href="#tarifs">Tarifs</a>
       </nav>
       <div class="nav-cta">
-        <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Essayer maintenant</a>
+        <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+        <a class="btn btn-trial" href="#">Essai gratuit 7j</a>
       </div>
     </div>
   </header>
@@ -156,7 +220,8 @@ const variants = {
           <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
           <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
-        <p class="trust-line"><strong>0 connexion requise</strong></p>
+        <p class="trust-line"><strong>0 connexion requise</strong> · Satisfait ou remboursé sous 30 jours</p>
+        <p class="trust-line">Essayez gratuitement pendant 7 jours</p>
       </div>
       <div class="hero-visual">
         <div class="ring-halo"></div>
@@ -193,35 +258,37 @@ const variants = {
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/tab-logmeal.png" alt="Identification d'un repas par IA" />
+          <img src="/images/tab-logmeal.png" alt="Identification d'un repas par IA" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Scanner de repas</span>
-          <h3>Une photo suffit pour connaître les calories.</h3>
+          <span class="eyebrow">Mange plus sereinement</span>
+          <h3>Comprends ton assiette en quelques secondes.</h3>
           <p>Prends ton assiette en photo, l'IA identifie les aliments et calcule calories, protéines, glucides et lipides. Fini les calculs à la main.</p>
           <div class="feature-tags"><span>IDENTIFICATION IA</span><span>SCAN CODE-BARRES</span><span>RECETTES</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/tab-coach-chat.png" alt="Discussion avec le coach IA" />
+          <img src="/images/tab-coach-chat.png" alt="Discussion avec le coach IA" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Coach IA hors-ligne</span>
-          <h3>Un vrai coach, disponible même sans réseau.</h3>
+          <span class="eyebrow">Ne reste jamais seul</span>
+          <h3>Obtiens le bon conseil au moment où tu en as besoin.</h3>
           <p>Pose tes questions par texte  : suggestion de repas, conseils nutrition, ajustement de ton plan. Le coach répond, connecté ou non.</p>
           <div class="feature-tags"><span>TEXTE</span><span>100% HORS-LIGNE</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/tab-sos.png" alt="Mode SOS Hunger pour gérer les fringales" />
+          <img src="/images/tab-sos.png" alt="Mode SOS Hunger pour gérer les fringales" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Mode SOS Faim</span>
-          <h3>Une fringale ? L'app t'aide à comprendre pourquoi.</h3>
+          <span class="eyebrow">Reprends le contrôle</span>
+          <h3>Traverse une fringale sans abandonner tes efforts.</h3>
           <p>Stress, ennui, vraie faim ou fatigue : l'app t'aide à identifier ce que tu ressens vraiment et te propose une réponse adaptée sur le moment.</p>
           <div class="feature-tags"><span>GESTION DES ENVIES</span><span>SUGGESTIONS INSTANTANÉES</span></div>
         </div>
@@ -229,11 +296,11 @@ const variants = {
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-community.png" alt="Communauté et partage des progrès" />
+          <img src="/images/screen-community.png" alt="Communauté et partage des progrès" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Motivation & communauté</span>
-          <h3>Points, défis et classement pour rester régulier.</h3>
+          <span class="eyebrow">Reste motivé</span>
+          <h3>Transforme ta régularité en progrès visibles.</h3>
           <p>Partage tes progrès, rejoins des défis et grimpe dans le classement mondial. La régularité devient un jeu plutôt qu'une contrainte.</p>
           <div class="feature-tags"><span>POINTS QUOTIDIENS</span><span>DÉFIS</span><span>CLASSEMENT</span></div>
         </div>
@@ -254,45 +321,48 @@ const variants = {
     <div class="wrap">
       <span class="eyebrow">Tarifs</span>
       <h2 style="font-size: 2rem; margin: 10px 0 6px;">Choisis la durée qui te convient.</h2>
+      <p class="trust-line">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
       <div style="display: flex; flex-direction: column; gap: 14px; align-items: stretch; margin-top: 46px;">
-        <div class="plan-card" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 20px 24px;">
-          <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.35rem; margin: 0; color: var(--navy);">12,99 €</div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-            <div style="font-weight: 600; color: var(--navy);">Licence d'un mois</div>
-            <a class="btn btn-ghost" href={`${paymentUrl}?variant=${encodeURIComponent(variants.oneMonth)}`} data-gumroad-overlay-checkout="true">Télécharger maintenant</a>
+        {tiers.map((tier) => (
+          <div class:list={["plan-card", tier.featured && "premium"]} style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 20px 24px;">
+            <div>
+              {tier.badge && <div class="badge">{tier.badge}</div>}
+              <div class="price" style={`font-family: 'Fraunces', serif; font-size: 1.35rem; margin: 0; color: ${tier.featured ? 'var(--cream)' : 'var(--navy)'};`}>{tier.price}</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
+              <div style={`font-weight: 600; color: ${tier.featured ? 'var(--cream)' : 'var(--navy)'};`}>{tier.name}</div>
+              <a class:list={["btn", tier.featured ? "btn-primary" : "btn-ghost"]} href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`} data-gumroad-overlay-checkout="true">Télécharger maintenant</a>
+            </div>
           </div>
-        </div>
-        <div class="plan-card" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 20px 24px;">
-          <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.35rem; margin: 0; color: var(--navy);">32,99 €</div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-            <div style="font-weight: 600; color: var(--navy);">Licence de 3 mois</div>
-            <a class="btn btn-ghost" href={`${paymentUrl}?variant=${encodeURIComponent(variants.threeMonths)}`} data-gumroad-overlay-checkout="true">Télécharger maintenant</a>
-          </div>
-        </div>
-        <div class="plan-card" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 20px 24px;">
-          <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.35rem; margin: 0; color: var(--navy);">64,99 €</div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-            <div style="font-weight: 600; color: var(--navy);">Licence de 6 mois</div>
-            <a class="btn btn-ghost" href={`${paymentUrl}?variant=${encodeURIComponent(variants.sixMonths)}`} data-gumroad-overlay-checkout="true">Télécharger maintenant</a>
-          </div>
-        </div>
-        <div class="plan-card" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 20px 24px;">
-          <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.35rem; margin: 0; color: var(--navy);">89,99 €</div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-            <div style="font-weight: 600; color: var(--navy);">Licence de 12 mois</div>
-            <a class="btn btn-ghost" href={`${paymentUrl}?variant=${encodeURIComponent(variants.twelveMonths)}`} data-gumroad-overlay-checkout="true">Télécharger maintenant</a>
-          </div>
-        </div>
-        <div class="plan-card premium" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 20px 24px;">
-          <div class="price" style="font-family: 'Fraunces', serif; font-size: 1.35rem; margin: 0; color: var(--cream);">129,99 €</div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 18px; flex: 1; flex-wrap: wrap;">
-            <div style="font-weight: 600; color: var(--cream);">Accès à vie</div>
-            <a class="btn btn-primary" href={`${paymentUrl}?variant=${encodeURIComponent(variants.lifetime)}`} data-gumroad-overlay-checkout="true">Télécharger maintenant</a>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <span class="eyebrow">Preuve sociale</span>
+      <h2 style="font-size: 2rem; margin: 10px 0 6px;">Une routine plus simple, au quotidien.</h2>
+      <div class="testimonials-grid">
+        {testimonialProfiles.map((testimonial) => (
+          <article class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+              <div>
+                <div class="testimonial-name">{testimonial.profile}</div>
+                <span class="testimonial-profession">{testimonial.profession}</span>
+              </div>
+            </div>
+            <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+            <p>{testimonial.problem}</p>
+            <p>{testimonial.benefit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
 <section class="final-cta">
     <div class="wrap">

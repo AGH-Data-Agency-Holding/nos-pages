@@ -8,11 +8,17 @@ const paymentUrl = "https://aghhol.gumroad.com/l/Baby-child-health";
 // ⚠️ Noms de "variant" par hypothèse (même schéma que les autres apps).
 // À CONFIRMER via l'onglet "Versions" du produit sur Gumroad avant validation finale.
 const tiers = [
-  { label: "Licence d'un mois", amount: "5,99 €", variant: "1 Month License", featured: false },
-  { label: "Licence de 3 mois", amount: "14,99 €", variant: "3 Months License", featured: false },
-  { label: "Licence de 6 mois", amount: "29,99 €", variant: "6 Months License", featured: false },
-  { label: "Licence de 12 mois", amount: "44,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { label: "Accès à vie", amount: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Super Parent 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Super Parent 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Super Parent 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Super Parent 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Super Parent À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "MA", profile: "Malika", profession: "Assistante administrative", problem: "Je cherchais une façon simple d'organiser les premiers repas de mon enfant.", benefit: "Le calendrier me donne des idées claires et m'aide à préparer chaque étape sereinement." },
+  { initials: "LO", profile: "Loris", profession: "Conducteur de travaux", problem: "Entre le travail et les repas, je manquais de temps pour varier les menus.", benefit: "Les recettes et le planning me font gagner du temps tout en gardant des repas adaptés." },
+  { initials: "SA", profile: "Sana", profession: "Illustratrice indépendante", problem: "J'étais sceptique sur l'utilité d'une IA pour les questions de nutrition bébé.", benefit: "L'assistant répond rapidement et m'aide à prendre de meilleures décisions au quotidien." },
 ];
 ---
 
@@ -42,7 +48,9 @@ const tiers = [
 				<a href="#croissance">Croissance</a>
 				<a href="#prix">Tarif</a>
 			</nav>
-			<a href={paymentUrl} class="btn btn-header" data-gumroad-overlay-checkout="true">Essayer maintenant</a>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a href="#" class="btn btn-ghost">Essai gratuit 7j</a>
+      <a href={paymentUrl} class="btn btn-header" data-gumroad-overlay-checkout="true">Essayer maintenant</a>
 		</div>
 	</header>
 
@@ -54,8 +62,8 @@ const tiers = [
 			<span class="blob blob-hero-2" aria-hidden="true"></span>
 			<div class="wrap hero-inner">
 				<div class="hero-copy">
-					<p class="eyebrow">Guide de diversification alimentaire — propulsé par l'IA</p>
-					<h1>La diversification, enfin <em>sans stress</em>.</h1>
+					<p class="eyebrow">Des repas plus simples, guidés par l'IA</p>
+					<h1>Accompagnez chaque repas <em>sereinement</em>.</h1>
 					<p class="hero-sub">
 						Que vous commenciez tout juste la diversification ou cherchiez à mieux organiser l'alimentation de
 						votre bébé, Baby Food vous accompagne à chaque étape. Nous associons les recommandations de l'OMS
@@ -64,13 +72,13 @@ const tiers = [
 					</p>
 					<div class="hero-cta-row">
 						<a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer maintenant</a>
-						<span class="hero-cta-note">Fonctionne 100% hors-ligne · communauté et défis nécessitent une connexion</span>
+						<span class="hero-cta-note">Fonctionne 100% hors-ligne · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</span>
 					</div>
 				</div>
 			</div>
 			<div class="hero-visual-wrap">
 				<div class="wrap">
-					<img src="/images/dashboard.png" alt="Tableau de bord Baby Food avec planning de repas du jour" class="dashboard-mock" />
+						<img src="/images/dashboard.png" alt="Tableau de bord Baby Food avec planning de repas du jour" class="dashboard-mock" />
 				</div>
 			</div>
 		</section>
@@ -116,7 +124,7 @@ const tiers = [
 				</div>
 				<div class="feature-visual">
 					<div class="phone-frame">
-						<img src="/images/mealplan.png" alt="Écran de planification des repas Baby Food" />
+						<img src="/images/mealplan.png" alt="Écran de planification des repas Baby Food" loading="lazy" />
 					</div>
 				</div>
 			</div>
@@ -127,7 +135,7 @@ const tiers = [
 			<div class="wrap feature-inner">
 				<div class="feature-visual">
 					<div class="phone-frame">
-						<img src="/images/recipes.png" alt="Bibliothèque de recettes Baby Food" />
+						<img src="/images/recipes.png" alt="Bibliothèque de recettes Baby Food" loading="lazy" />
 					</div>
 				</div>
 				<div class="feature-copy">
@@ -166,7 +174,7 @@ const tiers = [
 				</div>
 				<div class="feature-visual">
 					<div class="phone-frame">
-						<img src="/images/growth.png" alt="Suivi de croissance selon les courbes OMS" />
+						<img src="/images/growth.png" alt="Suivi de croissance selon les courbes OMS" loading="lazy" />
 					</div>
 				</div>
 			</div>
@@ -177,7 +185,7 @@ const tiers = [
 			<div class="wrap feature-inner">
 				<div class="feature-visual">
 					<div class="phone-frame">
-						<img src="/images/aichat.png" alt="Assistant nutrition IA disponible 24h/24" />
+						<img src="/images/aichat.png" alt="Assistant nutrition IA disponible 24h/24" loading="lazy" />
 					</div>
 				</div>
 				<div class="feature-copy">
@@ -193,6 +201,7 @@ const tiers = [
 						<li>Scanner intelligent pour analyser les étiquettes de produits pour bébé</li>
 						<li>Questions ouvertes par texte, photo ou message vocal</li>
 					</ul>
+					<!-- TODO: visuel IA manquant pour cette section, à fournir -->
 				</div>
 			</div>
 		</section>
@@ -203,11 +212,11 @@ const tiers = [
 				<h3 class="mosaic-title">Tout pour accompagner sereinement chaque repas</h3>
 				<div class="mosaic-grid">
 					<figure>
-						<img src="/images/home.png" alt="Tableau de bord de l'application Baby Food" />
+						<img src="/images/home.png" alt="Tableau de bord de l'application Baby Food" loading="lazy" />
 						<figcaption>Tableau de bord quotidien</figcaption>
 					</figure>
 					<figure>
-						<img src="/images/onboarding.png" alt="Écran de bienvenue Baby Food" />
+						<img src="/images/onboarding.png" alt="Écran de bienvenue Baby Food" loading="lazy" />
 						<figcaption>Prise en main immédiate</figcaption>
 					</figure>
 				</div>
@@ -245,6 +254,7 @@ const tiers = [
 					<div class="pricing-card-head">
 						<span class="pricing-name">Baby Food</span>
 						<span class="pricing-note">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</span>
+						<span class="pricing-note">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</span>
 					</div>
 					<div class="tier-list">
 						{tiers.map((tier) => (
@@ -254,11 +264,11 @@ const tiers = [
 								data-gumroad-overlay-checkout="true"
 							>
 								<span class="tier-name-wrap">
-									<span class="tier-name">{tier.label}</span>
+									<span class="tier-name">{tier.name}</span>
 									{tier.badge && <span class="tier-badge">{tier.badge}</span>}
 								</span>
 								<span class="tier-right">
-									<span class="tier-amount">{tier.amount}</span>
+									<span class="tier-amount">{tier.price}</span>
 									<span class="tier-arrow">→</span>
 								</span>
 							</a>
@@ -272,6 +282,31 @@ const tiers = [
 						<li>Scanner d'étiquettes et communauté de parents</li>
 					</ul>
 				</div>
+			</div>
+		</section>
+
+		<!-- TESTIMONIALS -->
+		<section class="testimonials">
+			<div class="wrap">
+				<p class="eyebrow testimonials-eyebrow">Preuve sociale</p>
+				<h2 class="pricing-title">Des repas plus simples au quotidien.</h2>
+				<div class="testimonials-grid">
+					{testimonialProfiles.map((testimonial) => (
+						<article class="testimonial-card">
+							<div class="testimonial-head">
+								<div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+								<div>
+									<strong>{testimonial.profile}</strong>
+									<span>{testimonial.profession}</span>
+								</div>
+							</div>
+							<div class="testimonial-stars" aria-label="Note : 5 sur 5">★★★★★</div>
+							<p>{testimonial.problem}</p>
+							<p>{testimonial.benefit}</p>
+						</article>
+					))}
+				</div>
+				<!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 			</div>
 		</section>
 
@@ -291,7 +326,7 @@ const tiers = [
 	<footer class="site-footer">
 		<div class="wrap footer-inner">
 			<div class="footer-brand">
-				<img src="/images/logo-mark.png" alt="Baby Food" class="brand-mark" />
+				<img src="/images/logo-mark.png" alt="Baby Food" class="brand-mark" loading="lazy" />
 				<span class="brand-name">Baby <em>Food</em></span>
 			</div>
 			<p class="footer-note">Un produit du portefeuille AGH Data Agency Holding SA.</p>
@@ -733,6 +768,40 @@ const tiers = [
 	}
 	.tier-arrow { font-size: 1.1rem; color: var(--forest); }
 
+	/* ===== TESTIMONIALS ===== */
+	.testimonials { padding: 0 0 100px; }
+	.testimonials-eyebrow { text-align: center; }
+	.testimonials-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 18px;
+	}
+	.testimonial-card {
+		background: var(--card-white);
+		border: 1px solid var(--border-soft);
+		border-radius: 22px;
+		padding: 24px;
+		box-shadow: 0 18px 40px -26px rgba(14, 107, 79, 0.28);
+	}
+	.testimonial-head { display: flex; align-items: center; gap: 12px; }
+	.testimonial-avatar {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--mist);
+		color: var(--forest-deep);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 800;
+	}
+	.testimonial-head strong,
+	.testimonial-head span { display: block; }
+	.testimonial-head strong { font-size: 0.95rem; }
+	.testimonial-head span { margin-top: 3px; color: #4a6b5f; font-size: 0.78rem; }
+	.testimonial-stars { color: var(--coral-orange); letter-spacing: 0.12em; margin: 18px 0 12px; }
+	.testimonial-card p { color: #4a6b5f; font-size: 0.9rem; line-height: 1.6; margin: 0 0 10px; }
+
 	/* ===== FINAL CTA ===== */
 	.final-cta {
 		position: relative;
@@ -773,6 +842,7 @@ const tiers = [
 		.feature-visual { order: -1; }
 		.mosaic-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
 		.community-inner { padding: 40px 28px; }
+		.testimonials-grid { grid-template-columns: 1fr; }
 	}
 </style>
 

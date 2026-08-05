@@ -1,16 +1,22 @@
 ---
-const price = "7,99 €";
+const price = "29,99 €";
 const paymentUrl = "https://aghhol.gumroad.com/l/mental-heath-ai";
 
 // ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
 // À CONFIRMER via l'onglet "Versions" du produit "mental-heath-ai" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { label: "Licence d'un mois", amount: "7,99 €", variant: "1 Month License", featured: false },
-  { label: "Licence de 3 mois", amount: "19,99 €", variant: "3 Months License", featured: false },
-  { label: "Licence de 6 mois", amount: "39,99 €", variant: "6 Months License", featured: false },
-  { label: "Licence de 12 mois", amount: "59,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { label: "Accès à vie", amount: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Serein 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Serein 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Serein 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Serein 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Serein À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "IM", profile: "Inès", profession: "Responsable boutique", problem: "Je cherchais un espace simple pour mettre des mots sur mes journées difficiles.", benefit: "Les exercices guidés m'aident à retrouver un peu de calme sans bouleverser mon quotidien." },
+  { initials: "TH", profile: "Thomas", profession: "Développeur web", problem: "Mon stress revenait souvent et je ne savais pas comment suivre son évolution.", benefit: "Le suivi d'humeur et le journal m'aident à repérer ce qui me fait du bien et à rester régulier." },
+  { initials: "YA", profile: "Yasmine", profession: "Photographe indépendante", problem: "Je doutais qu'un assistant IA puisse vraiment comprendre mes préoccupations.", benefit: "Les échanges sont accessibles et les suggestions m'aident à avancer à mon rythme." },
 ];
 ---
 <!doctype html>
@@ -39,6 +45,8 @@ const tiers = [
         <a href="#confidentialite">Confidentialité</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a href="#" class="btn btn-ghost btn-small">Essai gratuit 7j</a>
       <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
     </div>
   </header>
@@ -51,8 +59,8 @@ const tiers = [
       <div class="blob blob-2" aria-hidden="true"></div>
       <div class="wrap hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">Votre IA pour le bien-être mental</p>
-          <h1>Retrouvez votre <span class="ink">équilibre</span>, un instant à la fois.</h1>
+          <p class="eyebrow">Un quotidien plus apaisé, guidé par l'IA</p>
+          <h1>Retrouvez votre <span class="ink">équilibre</span>, à votre rythme.</h1>
           <p class="hero-sub">
             Stress, anxiété, ou simplement besoin d'être écouté : Calmenow est un compagnon IA disponible 24h/24, conçu pour comprendre votre culture, vos valeurs et votre langue — sans jugement, avec des méthodes reconnues comme la TCC.
           </p>
@@ -60,7 +68,7 @@ const tiers = [
             <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer maintenant</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
           </div>
-          <p class="hero-microcopy">Application offline-first · Disponible en français, anglais, arabe et espagnol</p>
+          <p class="hero-microcopy">Application offline-first · Disponible en français, anglais, arabe et espagnol · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
         </div>
         <div class="hero-visual">
           <img src="/images/phone_hero.png" alt="Application Calmenow, votre IA de bien-être mental" class="hero-phone" />
@@ -125,6 +133,7 @@ const tiers = [
             <li>Tags d'émotions (stress, anxiété, calme, joie...)</li>
             <li>Entrées privées, visibles par vous seul</li>
           </ul>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
         <div class="feature-image">
           <img src="/images/phone_journal.png" alt="Journal guidé par IA dans Calmenow" loading="lazy" />
@@ -169,6 +178,7 @@ const tiers = [
           <p class="eyebrow center">Tarif</p>
           <h2 class="section-title center">Un prix simple, pas d'abonnement caché.</h2>
           <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+          <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
           <div class="price-list">
             {tiers.map((tier) => (
               <a
@@ -177,11 +187,11 @@ const tiers = [
                 data-gumroad-overlay-checkout="true"
               >
                 <span class="price-row-label-wrap">
-                  <span class="price-row-label">{tier.label}</span>
+                  <span class="price-row-label">{tier.name}</span>
                   {tier.badge && <span class="price-row-badge">{tier.badge}</span>}
                 </span>
                 <span class="price-row-right">
-                  <span class="price-row-amount">{tier.amount}</span>
+                  <span class="price-row-amount">{tier.price}</span>
                   <span class="price-row-arrow">→</span>
                 </span>
               </a>
@@ -207,6 +217,31 @@ const tiers = [
       </div>
     </section>
 
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="wrap">
+        <p class="eyebrow center">Preuve sociale</p>
+        <h2 class="section-title center">Un peu plus de calme au quotidien.</h2>
+        <div class="testimonials-grid">
+          {testimonialProfiles.map((testimonial) => (
+            <article class="testimonial-card">
+              <div class="testimonial-head">
+                <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+                <div>
+                  <strong>{testimonial.profile}</strong>
+                  <span>{testimonial.profession}</span>
+                </div>
+              </div>
+              <div class="testimonial-stars" aria-label="Note : 5 sur 5">★★★★★</div>
+              <p>{testimonial.problem}</p>
+              <p>{testimonial.benefit}</p>
+            </article>
+          ))}
+        </div>
+        <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
+      </div>
+    </section>
+
     <!-- FINAL CTA -->
     <section class="final-cta">
       <div class="wrap final-cta-inner">
@@ -222,7 +257,7 @@ const tiers = [
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-brand">
-        <img src="/images/logo.png" alt="Calmenow" class="brand-mark" />
+        <img src="/images/logo.png" alt="Calmenow" class="brand-mark" loading="lazy" />
         <span class="brand-name">Calme<em>now</em></span>
       </div>
       <p class="footer-note">Calmenow est un outil de bien-être et ne remplace pas un avis médical ou psychologique professionnel. En cas de détresse, consultez un professionnel de santé ou un service d'urgence.</p>
@@ -588,6 +623,39 @@ const tiers = [
     .guarantee h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
     .guarantee p { font-size: 0.92rem; }
 
+    /* Testimonials */
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 16px 36px -26px rgba(23, 37, 43, 0.32);
+    }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #EFF3F1;
+      color: var(--teal-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+    .testimonial-head strong,
+    .testimonial-head span { display: block; }
+    .testimonial-head strong { font-size: 0.95rem; }
+    .testimonial-head span { margin-top: 3px; color: #71827B; font-size: 0.78rem; }
+    .testimonial-stars { color: var(--teal); letter-spacing: 0.12em; margin: 18px 0 12px; }
+    .testimonial-card p { color: #52625E; font-size: 0.9rem; line-height: 1.6; margin: 0 0 10px; }
+
     /* Final CTA */
     .final-cta {
       background: var(--navy);
@@ -627,6 +695,7 @@ const tiers = [
       .callout-inner { grid-template-columns: 1fr; text-align: center; }
       .nav { display: none; }
       .guarantee-inner { flex-direction: column; text-align: center; }
+      .testimonials-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .stats-inner { grid-template-columns: 1fr 1fr; }

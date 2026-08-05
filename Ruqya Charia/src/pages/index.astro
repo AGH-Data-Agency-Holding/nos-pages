@@ -1,16 +1,22 @@
 ---
-const price = "7,99 €";
+const price = "29,99 €";
 const paymentUrl = "https://aghhol.gumroad.com/l/rokia-charia-ai";
 
 // ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
 // À CONFIRMER via l'onglet "Versions" du produit "rokia-charia-ai" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { label: "Licence d'un mois", amount: "7,99 €", variant: "1 Month License", featured: false },
-  { label: "Licence de 3 mois", amount: "19,99 €", variant: "3 Months License", featured: false },
-  { label: "Licence de 6 mois", amount: "37,99 €", variant: "6 Months License", featured: false },
-  { label: "Licence de 12 mois", amount: "59,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { label: "Accès à vie", amount: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "Baraka 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Baraka 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Baraka 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Baraka 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Baraka À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "NA", profile: "Nawal", profession: "Bibliothécaire", problem: "Je cherchais un cadre calme pour mieux comprendre ce que je ressentais au quotidien.", benefit: "Les ressources et le parcours guidé m'aident à avancer avec plus de sérénité." },
+  { initials: "ID", profile: "Idriss", profession: "Comptable", problem: "Je voulais suivre mon évolution sans mélanger mes notes et mes différentes étapes.", benefit: "L'historique me permet de voir mes progrès et de rester régulier dans ma démarche." },
+  { initials: "SA", profile: "Salma", profession: "Graphiste freelance", problem: "J'étais sceptique face à une IA qui prétendrait comprendre les dimensions spirituelles.", benefit: "L'approche croisée est claire et m'aide à réfléchir sans remplacer l'accompagnement professionnel." },
 ];
 ---
 <!doctype html>
@@ -39,6 +45,8 @@ const tiers = [
         <a href="#diagnostic">Le diagnostic</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a href="#" class="btn btn-ghost btn-small">Essai gratuit 7j</a>
       <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
     </div>
   </header>
@@ -49,8 +57,8 @@ const tiers = [
     <section class="hero">
       <div class="wrap hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">Sciences islamiques × psychologie moderne</p>
-          <h1>Comprenez ce que <span class="ink">votre âme</span> essaie de vous dire.</h1>
+          <p class="eyebrow">Un chemin plus apaisé, guidé par l'IA</p>
+          <h1>Comprenez ce que <span class="ink">vous ressentez</span>, à votre rythme.</h1>
           <p class="hero-sub">
             Épuisement spirituel, mal-être émotionnel, anxiété sans cause apparente : plutôt que de deviner, Ruqya Charia IA analyse vos expressions faciales et croise les résultats avec des questionnaires psychologiques cliniques pour vous offrir un diagnostic spirituel précis — et des récitations coraniques de Ruqya adaptées à votre état.
           </p>
@@ -58,7 +66,7 @@ const tiers = [
             <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer mon diagnostic</a>
             <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
           </div>
-          <p class="hero-microcopy">Disponible en français, anglais et arabe · Confidentialité totale</p>
+          <p class="hero-microcopy">Disponible en français, anglais et arabe · Confidentialité totale · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
         </div>
         <div class="hero-visual">
           <img src="/images/phone_home.png" alt="Écran d'accueil de Ruqya Charia IA" class="hero-phone" />
@@ -106,6 +114,7 @@ const tiers = [
             <li>Analyse 100% locale sur votre appareil</li>
             <li>Résultat en 1 à 2 minutes seulement</li>
           </ul>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
         <div class="feature-image">
           <img src="/images/phone_scanning.png" alt="Analyse faciale par IA dans Ruqya Charia IA" loading="lazy" />
@@ -196,6 +205,7 @@ const tiers = [
           <p class="eyebrow center">Tarif</p>
           <h2 class="section-title center">Un prix simple, pas d'abonnement caché.</h2>
           <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+          <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
           <div class="price-list">
             {tiers.map((tier) => (
               <a
@@ -204,11 +214,11 @@ const tiers = [
                 data-gumroad-overlay-checkout="true"
               >
                 <span class="price-row-label-wrap">
-                  <span class="price-row-label">{tier.label}</span>
+                  <span class="price-row-label">{tier.name}</span>
                   {tier.badge && <span class="price-row-badge">{tier.badge}</span>}
                 </span>
                 <span class="price-row-right">
-                  <span class="price-row-amount">{tier.amount}</span>
+                  <span class="price-row-amount">{tier.price}</span>
                   <span class="price-row-arrow">→</span>
                 </span>
               </a>
@@ -229,8 +239,33 @@ const tiers = [
         </div>
         <div>
           <h3>Livraison instantanée par Gumroad</h3>
-          <p>Votre achat est traité de façon sécurisée sur Gumroad. Vous recevez votre accès immédiatement après le paiement, sans compte à créer sur un store tiers.</p>
+          <p>Votre achat est traité de façon sécurisée sur Gumroad. Vous recevez votre accès immédiatement après le paiement, sans compte à créer sur un store tiers. Satisfait ou remboursé sous 30 jours.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="wrap">
+        <p class="eyebrow center">Preuve sociale</p>
+        <h2 class="section-title center">Un accompagnement plus serein, jour après jour.</h2>
+        <div class="testimonials-grid">
+          {testimonialProfiles.map((testimonial) => (
+            <article class="testimonial-card">
+              <div class="testimonial-head">
+                <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+                <div>
+                  <strong>{testimonial.profile}</strong>
+                  <span>{testimonial.profession}</span>
+                </div>
+              </div>
+              <div class="testimonial-stars" aria-label="Note : 5 sur 5">★★★★★</div>
+              <p>{testimonial.problem}</p>
+              <p>{testimonial.benefit}</p>
+            </article>
+          ))}
+        </div>
+        <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
       </div>
     </section>
 
@@ -249,7 +284,7 @@ const tiers = [
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-brand">
-        <img src="/images/logo.png" alt="Ruqya Charia IA" class="brand-mark" />
+        <img src="/images/logo.png" alt="Ruqya Charia IA" class="brand-mark" loading="lazy" />
         <span class="brand-name">Ruqya Charia <em>IA</em></span>
       </div>
       <p class="footer-note">Ruqya Charia IA propose un accompagnement psycho-spirituel et ne remplace pas un diagnostic médical, psychologique ou religieux établi par un professionnel qualifié. En cas de détresse importante, consultez un professionnel de santé.</p>
@@ -585,6 +620,39 @@ const tiers = [
     .guarantee h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
     .guarantee p { font-size: 0.92rem; font-family: 'Inter', sans-serif; }
 
+    /* Testimonials */
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 16px 36px -26px rgba(16, 27, 46, 0.32);
+    }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #EEF1F7;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+    .testimonial-head strong,
+    .testimonial-head span { display: block; }
+    .testimonial-head strong { font-size: 0.95rem; }
+    .testimonial-head span { margin-top: 3px; color: #788092; font-size: 0.78rem; }
+    .testimonial-stars { color: var(--gold); letter-spacing: 0.12em; margin: 18px 0 12px; }
+    .testimonial-card p { color: #596477; font-size: 0.9rem; line-height: 1.6; margin: 0 0 10px; }
+
     /* Final CTA */
     .final-cta {
       background: var(--ink);
@@ -623,6 +691,7 @@ const tiers = [
       .feature-row.reverse .feature-image { order: initial; }
       .nav { display: none; }
       .guarantee-inner { flex-direction: column; text-align: center; }
+      .testimonials-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .stats-inner { grid-template-columns: 1fr 1fr; }

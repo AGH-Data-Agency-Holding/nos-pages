@@ -5,11 +5,17 @@ const paymentUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai
 // À CONFIRMER via l'onglet "Versions" du produit "dropshopping-winning-product-ai" sur Gumroad
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Licence d'un mois", price: "14,99 €", variant: "1 Month License", featured: false },
-  { name: "Licence de 3 mois", price: "37,99 €", variant: "3 Months License", featured: false },
-  { name: "Licence de 6 mois", price: "74,99 €", variant: "6 Months License", featured: false },
-  { name: "Licence de 12 mois", price: "99,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Accès à vie", price: "129,99 €", variant: "LIFETIME", featured: false },
+  { name: "ECommerce Pro 1 mois", price: "39,99 €", variant: "1 Month License", featured: false },
+  { name: "ECommerce Pro 3 mois", price: "99,99 €", variant: "3 Months License", featured: false },
+  { name: "ECommerce Pro 6 mois", price: "179,99 €", variant: "6 Months License", featured: false },
+  { name: "ECommerce Pro 12 mois", price: "299,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "ECommerce Pro À vie", price: "699,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "LE", profile: "Lina", profession: "Créatrice de contenu", problem: "Je ne savais pas comment repérer un produit intéressant sans passer des heures à chercher.", benefit: "L'app m'aide à trier les idées rapidement et à me concentrer sur les plus prometteuses." },
+  { initials: "MO", profile: "Mehdi", profession: "Vendeur en ligne", problem: "Je testais des produits au hasard et je manquais de visibilité sur leur potentiel.", benefit: "Les fiches et le suivi m'aident à prendre des décisions plus structurées." },
+  { initials: "CL", profile: "Clara", profession: "Consultante indépendante", problem: "Je pensais qu'une IA ne pourrait pas vraiment m'aider à analyser un marché.", benefit: "Les informations sont regroupées clairement et m'aident à avancer plus vite." },
 ];
 ---
 <html lang="fr">
@@ -123,6 +129,17 @@ const tiers = [
     .tier-price { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; color: #C25807; white-space: nowrap; }
     .tier-arrow { font-size: 1.1rem; color: #C25807; }
 
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--sand); color: var(--orange-dark); font-family: "JetBrains Mono", monospace; font-size: .78rem; font-weight: 700; }
+    .testimonial-name { color: var(--navy); font-weight: 700; }
+    .testimonial-profession { display: block; color: #5A4632; font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--orange); letter-spacing: .1em; }
+    .testimonial-card p { color: #5A4632; line-height: 1.55; }
+    @media (max-width: 780px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
     .guarantee { padding: 0 0 100px; }
     .guarantee-box { background: var(--sand); border-radius: 24px; padding: 46px; text-align: center; }
     .guarantee-box h2 { font-size: 1.5rem; margin: 10px 0 12px; }
@@ -148,6 +165,8 @@ const tiers = [
         <a href="#fonctionnalites">Fonctionnalités</a>
         <a href="#tarif">Tarif</a>
       </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a class="btn btn-ghost" href="#">Essai gratuit 7j</a>
       <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
     </div>
   </header>
@@ -155,14 +174,15 @@ const tiers = [
   <section class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">IA hors-ligne · Dropshipping</span>
+        <span class="eyebrow">Des décisions plus rapides · IA hors-ligne</span>
         <h1>Trouve ton prochain <em>produit gagnant</em>, sans y passer des heures.</h1>
         <p class="lede">Winning Items analyse les tendances du marché et te propose des idées de produits rentables grâce à une IA embarquée — aucune connexion internet requise pour chercher.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
           <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
-        <p class="trust-line"><strong>fonctionne hors-ligne</strong></p>
+        <p class="trust-line"><strong>fonctionne hors-ligne</strong> · Satisfait ou remboursé sous 30 jours</p>
+        <p class="trust-line">Essayez gratuitement pendant 7 jours</p>
       </div>
       <div class="hero-visual">
         <div class="glow"></div>
@@ -199,47 +219,50 @@ const tiers = [
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-search.png" alt="Recherche de produit gagnant par mot-clé et filtres" />
+          <img src="/images/screen-search.png" alt="Recherche de produit gagnant par mot-clé et filtres" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Recherche intelligente</span>
-          <h3>Filtre par catégories tendance, marge élevée ou score de viralité.</h3>
+          <span class="eyebrow">Trouve plus vite une opportunité</span>
+          <h3>Réduis ta recherche aux produits qui correspondent à ta stratégie.</h3>
           <p>Trouve rapidement les produits qui correspondent à ta stratégie, sans te noyer dans des centaines de résultats non pertinents.</p>
           <div class="feature-tags"><span>FILTRES AVANCÉS</span><span>SCORE DE VIRALITÉ</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-benchmark.png" alt="Benchmark produit avec marge et données de vente" />
+          <img src="/images/screen-benchmark.png" alt="Benchmark produit avec marge et données de vente" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Fiches produit détaillées</span>
-          <h3>Marge, prix fournisseur, ventes mensuelles — tout au même endroit.</h3>
+          <span class="eyebrow">Décide avec plus de clarté</span>
+          <h3>Évalue chaque produit avec les informations qui comptent.</h3>
           <p>Chaque produit suggéré vient avec une fiche complète : prix de vente recommandé, marge nette, tendance et niveau de concurrence.</p>
           <div class="feature-tags"><span>MARGE NETTE</span><span>DONNÉES DE VENTE</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row">
         <div class="feature-shot">
-          <img src="/images/screen-dashboard.png" alt="Tableau de bord avec statistiques de recherche" />
+          <img src="/images/screen-dashboard.png" alt="Tableau de bord avec statistiques de recherche" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Suivi de ton activité</span>
-          <h3>Visualise le temps que tu économises et ta progression.</h3>
+          <span class="eyebrow">Pilote ton activité</span>
+          <h3>Garde une vue claire sur tes recherches et tes décisions.</h3>
           <p>Fiches produits analysées, temps de recherche économisé, taux de succès — un tableau de bord clair pour mesurer l'impact réel de l'app sur ton activité.</p>
           <div class="feature-tags"><span>STATISTIQUES</span><span>GAIN DE TEMPS</span></div>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
         </div>
       </div>
 
       <div class="feature-row reverse">
         <div class="feature-shot">
-          <img src="/images/screen-profile.png" alt="Profil utilisateur avec favoris et statistiques" />
+          <img src="/images/screen-profile.png" alt="Profil utilisateur avec favoris et statistiques" loading="lazy" />
         </div>
         <div class="feature-copy">
-          <span class="eyebrow">Ton espace personnel</span>
-          <h3>Garde tes produits favoris et suis ton score de recherche.</h3>
+          <span class="eyebrow">Ne perds plus tes idées</span>
+          <h3>Retrouve tes favoris et affine ta stratégie au fil du temps.</h3>
           <p>Retrouve tes produits sauvegardés, ton nombre de vues et ton score global pour affiner ta stratégie au fil du temps.</p>
           <div class="feature-tags"><span>FAVORIS</span><span>HISTORIQUE</span></div>
         </div>
@@ -262,6 +285,7 @@ const tiers = [
     <div class="price-card">
       <div class="eyebrow">Winning Items</div>
       <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+      <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
 
       <div class="tier-list">
         {tiers.map((tier) => (
@@ -291,6 +315,31 @@ const tiers = [
       </ul>
     </div>
   </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <span class="eyebrow">Preuve sociale</span>
+      <h2 style="text-align:center; margin-top:10px;">Passe de la recherche à l'action plus sereinement.</h2>
+      <div class="testimonials-grid">
+        {testimonialProfiles.map((testimonial) => (
+          <article class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+              <div>
+                <div class="testimonial-name">{testimonial.profile}</div>
+                <span class="testimonial-profession">{testimonial.profession}</span>
+              </div>
+            </div>
+            <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+            <p>{testimonial.problem}</p>
+            <p>{testimonial.benefit}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
 
 <section class="final-cta">
     <div class="wrap">
