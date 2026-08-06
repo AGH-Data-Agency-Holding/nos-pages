@@ -250,10 +250,10 @@ const testimonialProfiles = [
         <p class="eyebrow center">Preuve sociale</p>
         <h2 class="section-title center">Un accompagnement plus serein, jour après jour.</h2>
         <div class="testimonials-grid">
-          {testimonialProfiles.map((testimonial) => (
+          {testimonialProfiles.map((testimonial, index) => (
             <article class="testimonial-card">
               <div class="testimonial-head">
-                <div class="testimonial-avatar" aria-hidden="true">{testimonial.initials}</div>
+          <img class="testimonial-avatar" src={`https://i.pravatar.cc/96?img=${43 + index}`} alt={`Photo de profil de ${testimonial.profile}`} loading="lazy" />
                 <div>
                   <strong>{testimonial.profile}</strong>
                   <span>{testimonial.profession}</span>
