@@ -151,6 +151,13 @@ const testimonialProfiles = [
     .lang-row { margin-top: 32px; font-family: "JetBrains Mono", monospace; font-size: .78rem; color: #7A79AE; letter-spacing: .05em; }
 
     footer { padding: 34px 0; text-align: center; font-size: .85rem; color: #4A4A63; }
+    @media (max-width: 640px) {
+      /* Sticky header responsive: hide pill badge, keep primary CTA on mobile */
+      .nav .btn-ghost { display: none; }
+      .nav .btn-primary { padding: 10px 15px; font-size: 0.84rem; white-space: nowrap; }
+    }
+    html, body { overflow-x: hidden; }
+
   </style>
 </head>
 <body>

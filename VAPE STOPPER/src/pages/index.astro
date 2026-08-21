@@ -751,6 +751,12 @@ const testimonialProfiles = [
       .pricing-card { padding: 32px 24px; }
       .price-row { padding: 14px 16px; }
     }
+    @media (max-width: 640px) {
+      /* Sticky header responsive: hide pill badge, keep primary CTA on mobile */
+      .header-inner .btn-ghost { display: none; }
+      .header-inner .btn-primary { padding: 9px 16px; font-size: 0.84rem; white-space: nowrap; }
+    }
+
   </style>
 
   <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.

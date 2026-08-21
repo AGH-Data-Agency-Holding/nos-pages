@@ -1,0 +1,19 @@
+﻿C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\AI Doctor\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Apk_Regime\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Coiffure AI\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Dresser ai\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\DROPSHIPPING\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Esthétique\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Examen assistant\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Fitness coach\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\HIST D PROPHS\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Mental health\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\My Quran\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Natural_beauty\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Nutrtition KIds\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Ramada Halal\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Recettes Cuisine\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Ruqya Charia\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\salat hajj\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\Smart_Deco\src\pages\index.astro
+C:\Users\abdou\OneDrive\Bureau\Dépot Github\Landing-pages\VAPE STOPPER\src\pages\index.astro
