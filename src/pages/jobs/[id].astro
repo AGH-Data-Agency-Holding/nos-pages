@@ -1,3 +1,9 @@
+---
+export function getStaticPaths() {
+  const ids = ['flutter-dev', 'django-dev', 'ai-engineer', 'cybersec-analyst', 'marketing-lead'];
+  return ids.map((id) => ({ params: { id } }));
+}
+---
 <!doctype html>
 <html lang="fr">
   <head>
@@ -79,3 +85,4 @@
 
   </body>
 </html>
+

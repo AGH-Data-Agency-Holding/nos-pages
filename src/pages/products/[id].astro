@@ -1,3 +1,9 @@
+---
+export function getStaticPaths() {
+  const ids = ['ai-doctor', 'weight-loss', 'bio-skin-care', 'baby-food', 'food-recipes', 'halal-recipes', 'home-design', 'home-workout', 'prayer-guide', 'quit-vaping', 'quran-majeed', 'study-helper', 'therapy-ai', 'winning-items', 'prophets-stories', 'darija-quest', 'dressing-try-on', 'fun-x-rush', 'haircuts-coach', 'makeup-coach', 'ruqya-assistant'];
+  return ids.map((id) => ({ params: { id } }));
+}
+---
 <!doctype html>
 <html lang="fr">
   <head>
@@ -79,3 +85,4 @@
 
   </body>
 </html>
+
