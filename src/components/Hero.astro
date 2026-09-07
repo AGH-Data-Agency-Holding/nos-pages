@@ -1,0 +1,110 @@
+---
+interface Props {
+  eyebrow: string;
+  headline: string;
+  subheadline: string;
+  primaryCtaText: string;
+  secondaryCtaText?: string;
+  paymentUrl: string;
+  trustBadge: string;
+  bgImage: string;
+}
+
+const {
+  eyebrow,
+  headline,
+  subheadline,
+  primaryCtaText,
+  secondaryCtaText = "Voir les fonctionnalités",
+  paymentUrl,
+  trustBadge,
+  bgImage,
+} = Astro.props;
+---
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-photo" style={`background-image: linear-gradient(180deg, rgba(20,12,4,.15) 0%, rgba(20,12,4,.75) 100%), url('${bgImage}')`}>
+      <div class="inner">
+        <span class="eyebrow-hero">{eyebrow}</span>
+        <h1>{headline}</h1>
+        <p>{subheadline}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">{primaryCtaText}</a>
+          {secondaryCtaText && (
+            <a class="btn btn-ghost hero-btn-ghost" href="#fonctionnalites">{secondaryCtaText}</a>
+          )}
+        </div>
+        <p class="trust-line">{trustBadge}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 70px 0 30px;
+  }
+  .hero-photo {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    min-height: 460px;
+    background-size: cover;
+    background-position: center 20%;
+    display: flex;
+    align-items: flex-end;
+    padding: 46px;
+    box-shadow: 0 16px 40px rgba(43, 29, 16, 0.12);
+  }
+  .inner {
+    max-width: 540px;
+  }
+  .eyebrow-hero {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #FFDCC4;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .hero-photo h1 {
+    color: #FFF6ED;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero-photo p {
+    color: #F3E1D2;
+    font-size: 1.02rem;
+    line-height: 1.6;
+    margin-bottom: 26px;
+    max-width: 480px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .hero-btn-ghost {
+    border-color: #fff;
+    color: #fff;
+  }
+  .hero-btn-ghost:hover {
+    background: #fff;
+    color: var(--charcoal);
+  }
+  .trust-line {
+    color: #F3E1D2;
+    margin: 18px 0 0;
+    font-size: 0.88rem;
+  }
+  @media (max-width: 640px) {
+    .hero-photo {
+      padding: 30px 20px;
+      min-height: 400px;
+    }
+  }
+</style>

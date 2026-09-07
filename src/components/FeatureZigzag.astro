@@ -1,0 +1,111 @@
+---
+import type { ProductFeature } from '../data/products';
+
+interface Props {
+  features: ProductFeature[];
+}
+
+const { features } = Astro.props;
+---
+
+<section class="feature-section" id="fonctionnalites">
+  <div class="wrap">
+    {features.map((feature, index) => {
+      const isReverse = index % 2 === 1;
+      return (
+        <div class={`feature-row ${isReverse ? 'reverse' : ''}`}>
+          <div class="feature-shot">
+            <img src={feature.image} alt={feature.imageAlt} loading="lazy" />
+          </div>
+          <div class="feature-copy">
+            <span class="eyebrow">{feature.eyebrow}</span>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+            {feature.tags && feature.tags.length > 0 && (
+              <div class="feature-tags">
+                {feature.tags.map((tag) => (
+                  <span>{tag}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .feature-section {
+    padding: 20px 0 100px;
+  }
+  .feature-row {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 54px;
+    align-items: center;
+    margin-bottom: 100px;
+  }
+  .feature-row:last-child {
+    margin-bottom: 20px;
+  }
+  .feature-row.reverse {
+    grid-template-columns: 1.1fr .9fr;
+  }
+  .feature-row.reverse .feature-copy {
+    order: 2;
+  }
+  .feature-row.reverse .feature-shot {
+    order: 1;
+  }
+  @media (max-width: 860px) {
+    .feature-row,
+    .feature-row.reverse {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 70px;
+    }
+    .feature-row.reverse .feature-copy,
+    .feature-row.reverse .feature-shot {
+      order: unset;
+    }
+  }
+  .feature-shot {
+    display: flex;
+    justify-content: center;
+  }
+  .feature-shot img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 24px;
+    box-shadow: 0 24px 48px rgba(43, 29, 16, .18);
+    border: 5px solid #fff;
+  }
+  .feature-copy h3 {
+    font-size: 1.6rem;
+    margin: 12px 0 14px;
+    color: var(--charcoal);
+  }
+  .feature-copy p {
+    color: #5A4632;
+    line-height: 1.65;
+    font-size: 1rem;
+    max-width: 440px;
+  }
+  .feature-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .feature-tags span {
+    font-family: "JetBrains Mono", monospace;
+    font-size: .7rem;
+    letter-spacing: .03em;
+    background: var(--peach);
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+</style>

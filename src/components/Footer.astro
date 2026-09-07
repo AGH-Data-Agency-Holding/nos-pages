@@ -1,0 +1,28 @@
+---
+interface Props {
+  productName: string;
+}
+
+const { productName } = Astro.props;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© {currentYear} AGH Data Agency Holding — {productName}. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding: 38px 0;
+    text-align: center;
+    font-size: .86rem;
+    color: #6B563E;
+    border-top: 1px solid var(--line);
+    background: var(--cream);
+  }
+  .site-footer p {
+    margin: 0;
+  }
+</style>

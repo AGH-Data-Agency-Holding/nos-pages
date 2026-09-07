@@ -1,0 +1,92 @@
+---
+import type { ProductStep } from '../data/products';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  steps: ProductStep[];
+}
+
+const { eyebrow, title, subtitle, steps } = Astro.props;
+---
+
+<section class="band-white" id="comment">
+  <div class="wrap">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2>{title}</h2>
+    <p class="sub">{subtitle}</p>
+    <div class="steps">
+      {steps.map((step) => (
+        <div class="step-card">
+          <div class="icon" aria-hidden="true">{step.icon}</div>
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .band-white {
+    padding: 90px 0;
+    text-align: center;
+  }
+  .band-white h2 {
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+    margin-top: 10px;
+  }
+  .band-white > .wrap > p.sub {
+    max-width: 580px;
+    margin: 14px auto 46px;
+    color: #5A4632;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    text-align: left;
+  }
+  .step-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 4px 16px rgba(43, 29, 16, 0.04);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(43, 29, 16, 0.08);
+  }
+  .step-card .icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--peach);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+  }
+  .step-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    color: var(--charcoal);
+  }
+  .step-card p {
+    color: #5A4632;
+    font-size: .93rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+  @media (max-width: 780px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

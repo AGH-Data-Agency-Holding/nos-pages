@@ -1,0 +1,42 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+}
+
+const { eyebrow, title, description } = Astro.props;
+---
+
+<section class="band-flame">
+  <div class="wrap">
+    <span class="eyebrow eyebrow-banner">{eyebrow}</span>
+    <h2>{title}</h2>
+    <p>{description}</p>
+  </div>
+</section>
+
+<style>
+  .band-flame {
+    background: linear-gradient(120deg, var(--flame) 0%, var(--flame-dark) 100%);
+    color: #FFF6ED;
+    padding: 65px 0;
+    text-align: center;
+  }
+  .eyebrow-banner {
+    color: #FFDCC4 !important;
+  }
+  .band-flame h2 {
+    color: #FFF6ED;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin: 12px auto 14px;
+    max-width: 640px;
+  }
+  .band-flame p {
+    max-width: 560px;
+    margin: 0 auto;
+    color: #FFE7D6;
+    line-height: 1.6;
+    font-size: 1.02rem;
+  }
+</style>

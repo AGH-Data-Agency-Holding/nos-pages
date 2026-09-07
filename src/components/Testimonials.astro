@@ -1,0 +1,133 @@
+---
+import type { ProductTestimonial } from '../data/products';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  testimonials: ProductTestimonial[];
+}
+
+const { eyebrow, title, testimonials } = Astro.props;
+---
+
+<section class="testimonials">
+  <div class="wrap">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2>{title}</h2>
+    <div class="testimonials-grid">
+      {testimonials.map((testimonial, index) => (
+        <article class="testimonial-card">
+          <div class="testimonial-head">
+            {testimonial.photo ? (
+              <img
+                class="testimonial-avatar"
+                src={testimonial.photo}
+                alt={`Photo de profil de ${testimonial.profile}`}
+                loading="lazy"
+              />
+            ) : (
+              <div class="testimonial-avatar-fallback">
+                {testimonial.initials || testimonial.profile.slice(0, 2).toUpperCase()}
+              </div>
+            )}
+            <div>
+              <div class="testimonial-name">{testimonial.profile}</div>
+              <span class="testimonial-profession">{testimonial.profession}</span>
+            </div>
+          </div>
+          <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+          <p class="testimonial-problem">{testimonial.problem}</p>
+          <p class="testimonial-benefit">{testimonial.benefit}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    padding: 0 0 90px;
+    text-align: center;
+  }
+  .testimonials h2 {
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+    margin: 10px 0 0;
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 36px;
+    text-align: left;
+  }
+  .testimonial-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 4px 16px rgba(43, 29, 16, 0.04);
+  }
+  .testimonial-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    display: block;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--peach);
+  }
+  .testimonial-avatar-fallback {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--peach);
+    color: var(--charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+  .testimonial-name {
+    color: var(--charcoal);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .testimonial-profession {
+    display: block;
+    color: #5A4632;
+    font-size: .8rem;
+    margin-top: 2px;
+  }
+  .stars {
+    color: var(--flame);
+    letter-spacing: .1em;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  .testimonial-problem {
+    color: #5A4632;
+    line-height: 1.55;
+    font-size: 0.93rem;
+    margin: 0 0 10px;
+  }
+  .testimonial-benefit {
+    color: var(--charcoal);
+    font-weight: 500;
+    line-height: 1.55;
+    font-size: 0.93rem;
+    margin: 0;
+  }
+  @media (max-width: 780px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

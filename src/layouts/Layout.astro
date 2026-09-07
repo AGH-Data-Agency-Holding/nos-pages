@@ -1,0 +1,166 @@
+---
+import type { ProductTheme } from '../data/products';
+
+interface Props {
+  title: string;
+  description: string;
+  theme: ProductTheme;
+  canonicalUrl?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  theme,
+  canonicalUrl = Astro.url.href,
+  ogImage = '/images/screen-recipe-detail.png',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:url" content={canonicalUrl} />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- GOOGLE ANALYTICS 4 (G-V51T1RG6YX) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V51T1RG6YX" is:inline></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V51T1RG6YX');
+  </script>
+
+  <!-- META PIXEL (923346630113614) -->
+  <script is:inline>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '923346630113614');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=923346630113614&ev=PageView&noscript=1" alt="" />
+  </noscript>
+
+  <style define:vars={{
+    cream: theme.cream,
+    peach: theme.peach,
+    ink: theme.ink,
+    charcoal: theme.charcoal,
+    flame: theme.primary,
+    flameDark: theme.primaryDark,
+    line: theme.line,
+    sage: theme.sage || '#3F9B5E',
+  }}>
+    :root {
+      --cream: var(--cream);
+      --peach: var(--peach);
+      --ink: var(--ink);
+      --charcoal: var(--charcoal);
+      --flame: var(--flame);
+      --flame-dark: var(--flameDark);
+      --line: var(--line);
+      --sage: var(--sage);
+      font-family: Inter, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    h1, h2, h3, .display {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--charcoal);
+      margin: 0;
+    }
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--flame-dark);
+      font-weight: 700;
+    }
+    a { color: inherit; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 26px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--flame);
+      color: #FFF6ED;
+      box-shadow: 0 8px 22px rgba(232, 98, 42, .35);
+      border: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(232, 98, 42, .42);
+    }
+    .btn-ghost {
+      border: 1.5px solid var(--charcoal);
+      color: var(--charcoal);
+      background: transparent;
+    }
+    .btn-ghost:hover {
+      background: var(--charcoal);
+      color: var(--cream);
+    }
+  </style>
+</head>
+<body>
+  <slot />
+
+  <!-- Script Gumroad officiel pour l'Overlay Checkout (sans rechargement de page) -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+</body>
+</html>

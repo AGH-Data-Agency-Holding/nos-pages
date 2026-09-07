@@ -1,0 +1,66 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  buttonText: string;
+  languagesText: string;
+  paymentUrl: string;
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  buttonText,
+  languagesText,
+  paymentUrl,
+} = Astro.props;
+---
+
+<section class="final-cta">
+  <div class="wrap">
+    <span class="eyebrow final-eyebrow">{eyebrow}</span>
+    <h2>{title}</h2>
+    <p>{subtitle}</p>
+    <a class="btn btn-primary btn-cta-large" href={paymentUrl} data-gumroad-overlay-checkout="true">
+      {buttonText}
+    </a>
+    <div class="lang-row">{languagesText}</div>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 90px 0;
+    text-align: center;
+  }
+  .final-eyebrow {
+    color: #F0A87C !important;
+  }
+  .final-cta h2 {
+    color: #FFF6ED;
+    font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+    margin: 12px 0 16px;
+  }
+  .final-cta p {
+    color: #E3C9AF;
+    max-width: 520px;
+    margin: 0 auto 32px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .btn-cta-large {
+    font-size: 1.05rem;
+    padding: 16px 36px;
+  }
+  .lang-row {
+    margin-top: 34px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: .78rem;
+    color: #B99C7C;
+    letter-spacing: .06em;
+  }
+</style>

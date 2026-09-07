@@ -1,0 +1,199 @@
+---
+import type { ProductPricingTier } from '../data/products';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  cardEyebrow: string;
+  priceHint: string;
+  guaranteeHint: string;
+  paymentUrl: string;
+  tiers: ProductPricingTier[];
+  featuresIncluded: string[];
+}
+
+const {
+  eyebrow,
+  title,
+  cardEyebrow,
+  priceHint,
+  guaranteeHint,
+  paymentUrl,
+  tiers,
+  featuresIncluded,
+} = Astro.props;
+---
+
+<section class="price-section" id="tarif">
+  <div class="wrap">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2>{title}</h2>
+
+    <div class="price-card">
+      <div class="card-eyebrow">{cardEyebrow}</div>
+      <p class="price-hint">{priceHint}</p>
+      <p class="price-hint guarantee-hint">{guaranteeHint}</p>
+
+      <div class="tier-list">
+        {tiers.map((tier) => (
+          <a
+            class={`tier-row ${tier.featured ? 'featured' : ''}`}
+            href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+            data-gumroad-overlay-checkout="true"
+          >
+            <div class="tier-name">
+              {tier.name}
+              {tier.badge && <span class="tier-badge">{tier.badge}</span>}
+            </div>
+            <div class="tier-right">
+              <div class="tier-price">{tier.price}</div>
+              <div class="tier-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <ul class="features-list">
+        {featuresIncluded.map((feature) => (
+          <li>
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .price-section {
+    padding: 90px 0;
+    text-align: center;
+  }
+  .price-section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+    margin-top: 10px;
+  }
+  .price-card {
+    max-width: 480px;
+    margin: 40px auto 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 36px 30px;
+    box-shadow: 0 12px 36px rgba(43, 29, 16, .06);
+    text-align: left;
+  }
+  .card-eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--flame);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .price-hint {
+    font-size: .84rem;
+    color: #8a6f52;
+    margin: 0 0 8px;
+    text-align: center;
+  }
+  .guarantee-hint {
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .tier-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0 26px;
+  }
+  .tier-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, .08);
+    background: #fff;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: border-color .15s ease, background .15s ease, transform .15s ease;
+  }
+  .tier-row:hover {
+    border-color: var(--flame);
+    background: #FFF6ED;
+    transform: translateY(-1px);
+  }
+  .tier-row.featured {
+    border: 1.5px solid var(--flame);
+    background: rgba(232, 98, 42, 0.05);
+  }
+  .tier-row.featured:hover {
+    background: rgba(232, 98, 42, 0.1);
+  }
+  .tier-name {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+  .tier-badge {
+    font-family: "JetBrains Mono", monospace;
+    font-size: .62rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--flame);
+    font-weight: 700;
+    display: block;
+    margin-top: 2px;
+  }
+  .tier-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tier-price {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--flame-dark);
+    white-space: nowrap;
+  }
+  .tier-arrow {
+    font-size: 1.1rem;
+    color: var(--flame-dark);
+    transition: transform .15s ease;
+  }
+  .tier-row:hover .tier-arrow {
+    transform: translateX(3px);
+  }
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+  }
+  .features-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    font-size: .92rem;
+    border-top: 1px solid var(--line);
+    color: #4A3A2A;
+  }
+  .features-list li:first-child {
+    border-top: none;
+  }
+  .check-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--sage);
+    flex-shrink: 0;
+  }
+</style>
