@@ -1,0 +1,743 @@
+---
+const price = "19,99 €";
+const paymentUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
+
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+// À CONFIRMER via l'onglet "Versions" du produit "Stories-of-Prophets-ai" sur Gumroad
+// avant de considérer cette intégration comme validée.
+const tiers = [
+  { name: "Savant 1 mois", price: "19,99 €", variant: "1 Month License", featured: false },
+  { name: "Savant 3 mois", price: "39,99 €", variant: "3 Months License", featured: false },
+  { name: "Savant 6 mois", price: "69,99 €", variant: "6 Months License", featured: false },
+  { name: "Savant 12 mois", price: "129,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Savant À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "NA", profile: "Nadia", profession: "Maman et éducatrice", problem: "Je cherchais une manière simple de partager ces récits avec mes enfants sans les exposer aux distractions du web.", benefit: "Qisas AI est devenu un moment calme de lecture et d'écoute dans notre routine." },
+  { initials: "YA", profile: "Yassine", profession: "Étudiant en histoire", problem: "Je voulais mieux retenir les récits et les leçons importantes sans relire de longues pages.", benefit: "Les résumés et les favoris m'aident à apprendre à mon rythme et à retrouver mes passages préférés." },
+  { initials: "LI", profile: "Lina", profession: "Animatrice jeunesse", problem: "Je pensais qu'une IA ne pourrait pas rendre ces histoires accessibles tout en restant respectueuse.", benefit: "Le contenu est clair, pratique et disponible même quand je n'ai pas de connexion." },
+];
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qisas AI — Histoire des prophètes, 100% hors-ligne pour vos enfants</title>
+  <meta name="description" content="Qisas AI (Stories of Prophets) : le compagnon islamique intelligent et 100% hors-ligne pour apprendre l'histoire des prophètes à vos enfants, sans publicité ni distraction internet." />
+  <link rel="icon" type="image/png" href="/images/histoires-prophetes/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- GOOGLE ANALYTICS 4 (G-V51T1RG6YX) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V51T1RG6YX" is:inline></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V51T1RG6YX');
+  </script>
+
+  <!-- META PIXEL (923346630113614) -->
+  <script is:inline>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '923346630113614');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=923346630113614&ev=PageView&noscript=1" alt="" />
+  </noscript>
+
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">
+        <img src="/images/histoires-prophetes/logo.png" alt="Qisas AI" class="brand-mark" />
+        <span class="brand-name">Qisas <em>AI</em></span>
+      </a>
+      <nav class="nav">
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#parcours">Comment ça marche</a>
+        <a href="#tarif">Tarif</a>
+      </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a href="#" class="btn btn-ghost btn-small">Essai gratuit 7j</a>
+      <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="ornament ornament-left" aria-hidden="true"></div>
+      <div class="ornament ornament-right" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Apprendre en famille · 100% hors-ligne</p>
+          <h1>L'histoire des<br/><span class="ink">prophètes</span>,<br/>sans écran de trop.</h1>
+          <p class="hero-sub">
+            Qisas AI transforme les récits coraniques en aventures simples et captivantes pour vos enfants — dans un environnement 100% sûr, sans publicité, sans internet requis, même en mode avion.
+          </p>
+          <div class="hero-ctas">
+            <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Télécharger Qisas AI</a>
+            <a href="#fonctionnalites" class="btn btn-ghost">Découvrir l'application</a>
+          </div>
+          <p class="hero-microcopy">Disponible en français, anglais, arabe et espagnol · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
+        </div>
+        <div class="hero-visual">
+          <img src="/images/histoires-prophetes/phone_home.png" alt="Écran d'accueil de l'application Qisas AI" class="hero-phone" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS BAND -->
+    <section class="stats-band">
+      <div class="wrap stats-inner">
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">fonctionne hors-ligne, y compris l'IA</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">0</span>
+          <span class="stat-label">publicité, aucune distraction internet</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">langues disponibles : FR, EN, AR, ES</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">0</span>
+          <span class="stat-label">abonnement caché, licence simple</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="fonctionnalites" class="features">
+      <div class="wrap">
+        <p class="eyebrow center">Fonctionnalités clés</p>
+        <h2 class="section-title center">Une bibliothèque de sagesse, pensée pour les petites mains</h2>
+      </div>
+
+      <!-- Feature 1: Home / Kids mode -->
+      <div class="feature-row wrap">
+        <div class="feature-text">
+          <span class="feature-tag">Des récits à leur portée</span>
+          <h3>Partagez des histoires qui donnent envie d'apprendre.</h3>
+          <p>Les récits des prophètes sont transformés en aventures faciles à comprendre pour les plus jeunes, avec un Mode Enfant dédié : histoires ludiques et petits quiz pensés pour leur âge.</p>
+          <ul class="feature-list">
+            <li>Mode Enfant avec histoires et quiz amusants</li>
+            <li>Verset du jour avec contexte et enseignement</li>
+            <li>Histoires recommandées à écouter ou à lire</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/histoires-prophetes/tablet_home.png" alt="Accueil de l'application Qisas AI sur tablette" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 2: Offline AI -->
+      <div class="feature-row wrap reverse">
+        <div class="feature-text">
+          <span class="feature-tag">Comprendre plus facilement</span>
+          <h3>Retrouvez l'essentiel, même sans connexion.</h3>
+          <p>Notre assistant IA intégré fonctionne entièrement hors-ligne : il génère des résumés clairs et des mini-quiz sans jamais avoir besoin de Wi-Fi. Vos enfants apprennent, concentrés, sans notification ni distraction.</p>
+          <ul class="feature-list">
+            <li>Assistant IA disponible sans connexion internet</li>
+            <li>Résumés et mini-quiz générés automatiquement</li>
+            <li>Zéro publicité, environnement 100% sécurisé</li>
+          </ul>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
+        </div>
+        <div class="feature-image">
+          <img src="/images/histoires-prophetes/phone_summary.png" alt="Résumé d'une histoire de prophète dans Qisas AI" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 3: Audio -->
+      <div class="feature-row wrap">
+        <div class="feature-text">
+          <span class="feature-tag">Un moment de calme</span>
+          <h3>Transformez l'écoute en rituel du soir.</h3>
+          <p>Chaque histoire peut être écoutée comme un livre audio, chapitre par chapitre, avec téléchargement pour une écoute hors-ligne — parfait pour accompagner le coucher de votre enfant.</p>
+          <ul class="feature-list">
+            <li>Lecture audio chapitrée de chaque histoire</li>
+            <li>Téléchargement pour écoute sans connexion</li>
+            <li>Plusieurs langues audio disponibles</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/histoires-prophetes/phone_audio.png" alt="Lecteur audio d'une histoire dans Qisas AI" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 4: Bookmarks -->
+      <div class="feature-row wrap reverse">
+        <div class="feature-text">
+          <span class="feature-tag">Gardez le fil</span>
+          <h3>Retrouvez leurs histoires préférées en un instant.</h3>
+          <p>Enregistrez les récits marquants pour les relire ou les réécouter — pratique pour construire une vraie routine de lecture du soir, sans jamais perdre le fil de l'histoire en cours.</p>
+          <ul class="feature-list">
+            <li>Liste de favoris pour les histoires et les questions</li>
+            <li>Reprise automatique là où vous vous étiez arrêté</li>
+            <li>Organisation par prophète et par chapitre</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/histoires-prophetes/phone_bookmarks.png" alt="Liste des favoris dans Qisas AI" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CALLOUT BAND -->
+    <section class="callout">
+      <div class="wrap callout-inner">
+        <h2>La tranquillité d'esprit des parents, la curiosité des enfants</h2>
+        <p>Pas d'écran perdu dans des vidéos sans fin, pas de publicité inappropriée : juste des histoires vraies, racontées avec bienveillance, accessibles partout — même sans réseau.</p>
+      </div>
+    </section>
+
+    <!-- PARCOURS / HOW IT WORKS -->
+    <section id="parcours" class="journey">
+      <div class="wrap">
+        <p class="eyebrow center">Comment ça marche</p>
+        <h2 class="section-title center">De l'installation au rituel du soir</h2>
+        <div class="journey-grid">
+          <div class="journey-card">
+            <span class="journey-mark">Étape 1</span>
+            <h4>Installez, sans compte requis</h4>
+            <p>Téléchargez Qisas AI et commencez immédiatement — aucune connexion internet nécessaire pour explorer les histoires.</p>
+          </div>
+          <div class="journey-card">
+            <span class="journey-mark">Étape 2</span>
+            <h4>Choisissez une histoire ou le Mode Enfant</h4>
+            <p>Parcourez les récits des prophètes ou laissez votre enfant explorer en autonomie grâce à l'interface pensée pour les petites mains.</p>
+          </div>
+          <div class="journey-card">
+            <span class="journey-mark">Étape 3</span>
+            <h4>Lisez, écoutez ou laissez l'IA résumer</h4>
+            <p>Texte, audio ou résumé intelligent généré hors-ligne : chacun apprend à son rythme et selon son mode préféré.</p>
+          </div>
+          <div class="journey-card">
+            <span class="journey-mark">Étape 4</span>
+            <h4>Enregistrez vos favoris pour le soir</h4>
+            <p>Marquez les histoires préférées pour en faire un vrai rituel de coucher, sans jamais perdre le fil.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="tarif" class="pricing">
+      <div class="wrap pricing-inner">
+        <p class="eyebrow center">Tarif</p>
+        <h2 class="section-title center">Choisissez la durée qui vous convient</h2>
+        <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+        <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
+
+        <div class="tier-list">
+          {tiers.map((tier) => (
+            <a
+              class={`tier-row ${tier.featured ? "featured" : ""}`}
+              href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+              data-gumroad-overlay-checkout="true"
+            >
+              <div class="tier-name">
+                {tier.name}
+                {tier.badge && <span class="tier-badge">{tier.badge}</span>}
+              </div>
+              <div class="tier-right">
+                <div class="tier-price">{tier.price}</div>
+                <div class="tier-arrow">→</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="wrap">
+        <p class="eyebrow center">Preuve sociale</p>
+        <h2 class="section-title center">Un apprentissage qui trouve sa place dans la famille.</h2>
+        <div class="testimonials-grid">
+          {testimonialProfiles.map((testimonial, index) => (
+            <article class="testimonial-card">
+              <div class="testimonial-head">
+          <img class="testimonial-avatar" src={`https://i.pravatar.cc/96?img=${25 + index}`} alt={`Photo de profil de ${testimonial.profile}`} loading="lazy" />
+                <div>
+                  <div class="testimonial-name">{testimonial.profile}</div>
+                  <span class="testimonial-profession">{testimonial.profession}</span>
+                </div>
+              </div>
+              <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+              <p>{testimonial.problem}</p>
+              <p>{testimonial.benefit}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+    <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+      <div class="wrap final-cta-inner">
+        <h2>Offrez à votre enfant une bibliothèque<br/>de sagesse, partout où vous allez.</h2>
+        <p>Sans Wi-Fi, sans publicité, sans compromis sur les valeurs que vous voulez transmettre.</p>
+        <a href={paymentUrl} class="btn btn-light" data-gumroad-overlay-checkout="true">Commencer maintenant — {price}</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <img src="/images/histoires-prophetes/logo.png" alt="Qisas AI" class="brand-mark" />
+        <span class="brand-name">Qisas <em>AI</em></span>
+      </div>
+      <p class="footer-note">Qisas AI est un outil pédagogique complémentaire et ne remplace pas l'enseignement religieux dispensé par un parent, un imam ou un établissement compétent.</p>
+      <p class="footer-copy">© {new Date().getFullYear()} AGH Data Agency Holding SA. Tous droits réservés.</p>
+    </div>
+  
+      <div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
+        <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
+        <span style="margin: 0 8px;">·</span>
+        <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
+      </div>
+    
+  </footer>
+
+  <style>
+    :root {
+      --ink: #14231B;
+      --green: #0B4423;
+      --green-deep: #062B15;
+      --gold: #C89A4A;
+      --gold-light: #FFB000;
+      --cream: #FBF7EE;
+      --paper: #FFFFFF;
+      --slate: #5B6559;
+      --line: #E6E0D0;
+      --radius: 18px;
+      --shadow: 0 12px 32px -12px rgba(11, 68, 35, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Karla', -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      margin: 0;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    p { margin: 0; color: var(--slate); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    img { max-width: 100%; display: block; }
+    em { font-style: italic; color: var(--gold); }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: 'Karla', sans-serif;
+      font-weight: 700;
+      font-size: 0.96rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 8px 20px -8px rgba(11, 68, 35, 0.55);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -8px rgba(11, 68, 35, 0.6); }
+    .btn-small { padding: 10px 20px; font-size: 0.86rem; }
+    .btn-ghost {
+      border: 1.5px solid var(--line);
+      color: var(--ink);
+      background: transparent;
+    }
+    .btn-ghost:hover { border-color: var(--green); background: rgba(11,68,35,0.05); }
+    .btn-light {
+      background: var(--gold-light);
+      color: var(--green-deep);
+      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.35);
+    }
+    .btn-light:hover { transform: translateY(-2px); }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(251, 247, 238, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark { width: 34px; height: 34px; object-fit: contain; border-radius: 50%; }
+    .brand-name { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.3rem; }
+    .nav { display: flex; gap: 30px; }
+    .nav a { font-size: 0.92rem; font-weight: 600; color: var(--slate); }
+    .nav a:hover { color: var(--green); }
+
+    /* Hero */
+    .hero { position: relative; padding: 76px 0 40px; overflow: hidden; }
+    .ornament {
+      position: absolute;
+      top: -60px;
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(200, 154, 74, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .ornament::before {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(200, 154, 74, 0.22);
+      border-radius: 50%;
+    }
+    .ornament-left { left: -130px; }
+    .ornament-right { right: -130px; top: 120px; }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .eyebrow {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .eyebrow.center { text-align: center; }
+    h1 { font-size: clamp(2.6rem, 4.4vw, 3.7rem); font-weight: 700; }
+    h1 .ink { color: var(--green); font-style: italic; }
+    .hero-sub {
+      margin-top: 22px;
+      font-size: 1.1rem;
+      max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+    .hero-microcopy {
+      margin-top: 18px;
+      font-size: 0.84rem;
+      color: #8B9186;
+    }
+
+    .hero-visual { display: flex; justify-content: center; }
+    .hero-phone {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Stats band */
+    .stats-band {
+      background: var(--green-deep);
+      padding: 40px 0;
+    }
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stat { text-align: center; color: #fff; }
+    .stat-num {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 2.4rem;
+      color: var(--gold-light);
+    }
+    .stat-label {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.84rem;
+      color: #C9D3C6;
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Features */
+    .features { padding: 90px 0 30px; }
+    .section-title {
+      font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+      font-weight: 700;
+      max-width: 660px;
+      margin: 10px auto 0;
+    }
+    .section-title.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 64px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .feature-row:last-child { border-bottom: none; }
+    .feature-row.reverse .feature-text { order: 2; }
+    .feature-row.reverse .feature-image { order: 1; }
+
+    .feature-tag {
+      display: inline-block;
+      font-family: 'Karla', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .feature-text h3 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .feature-text > p { font-size: 1.02rem; margin-bottom: 20px; }
+    .feature-list li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 12px;
+      font-size: 0.96rem;
+      color: var(--slate);
+    }
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    .feature-image img {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* Callout */
+    .callout {
+      background: var(--green);
+      padding: 70px 0;
+      margin: 40px 0;
+    }
+    .callout-inner { max-width: 780px; text-align: center; margin: 0 auto; }
+    .callout h2 {
+      color: #fff;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      font-weight: 700;
+    }
+    .callout p {
+      color: #D9E4D5;
+      margin-top: 18px;
+      font-size: 1.05rem;
+      font-family: 'Karla', sans-serif;
+    }
+
+    /* Journey */
+    .journey { padding: 30px 0 90px; }
+    .journey-grid {
+      margin-top: 44px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+    .journey-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px 22px;
+    }
+    .journey-mark {
+      display: inline-block;
+      font-family: 'Karla', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .journey-card h4 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+    .journey-card p { font-size: 0.92rem; font-family: 'Karla', sans-serif; }
+
+    /* Pricing */
+    .pricing { padding: 30px 0 90px; }
+    .price-hint { text-align: center; font-size: 0.86rem; color: #8B9186; font-family: 'Karla', sans-serif; margin-top: 10px; }
+
+    .tier-list {
+      display: flex; flex-direction: column; gap: 12px;
+      max-width: 560px; margin: 40px auto 0;
+    }
+    .tier-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 26px; border-radius: var(--radius); border: 1px solid var(--line);
+      background: var(--paper); text-decoration: none; color: inherit; cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
+      box-shadow: var(--shadow);
+    }
+    .tier-row:hover { border-color: var(--green); transform: translateY(-2px); }
+    .tier-row.featured { border: 1.5px solid var(--gold); background: #FFF8EA; }
+    .tier-row.featured:hover { background: #FFF3D9; }
+    .tier-name {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; color: var(--ink);
+    }
+    .tier-badge {
+      display: block; margin-top: 4px; font-family: 'Karla', sans-serif;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .tier-right { display: flex; align-items: center; gap: 12px; }
+    .tier-price {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.4rem; color: var(--green);
+      white-space: nowrap;
+    }
+    .tier-arrow { font-size: 1.1rem; color: var(--green); }
+
+    /* Guarantee */
+    .guarantee { padding: 0 0 90px; }
+    .guarantee-inner {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      background: #EEF2E9;
+      border-radius: var(--radius);
+      padding: 34px 40px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .guarantee-icon { color: var(--green); flex-shrink: 0; }
+    .guarantee h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+    .guarantee p { font-size: 0.92rem; font-family: 'Karla', sans-serif; }
+
+    /* Testimonials */
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: #EAF2E8; color: var(--green); font-family: 'Karla', sans-serif; font-size: .82rem; font-weight: 700; }
+    .testimonial-name { color: var(--ink); font-weight: 700; }
+    .testimonial-profession { display: block; color: var(--slate); font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--gold); letter-spacing: .1em; }
+    .testimonial-card p { color: var(--slate); line-height: 1.55; margin-top: 12px; }
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+    /* Final CTA */
+    .final-cta {
+      background: var(--green-deep);
+      padding: 90px 0;
+    }
+    .final-cta-inner { text-align: center; max-width: 640px; margin: 0 auto; }
+    .final-cta h2 { color: #fff; font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+    .final-cta p { color: #C9D3C6; margin-top: 18px; font-size: 1.05rem; font-family: 'Karla', sans-serif; }
+    .final-cta .btn { margin-top: 32px; }
+
+    /* Footer */
+    .site-footer { padding: 44px 0; }
+    .footer-inner { text-align: center; }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-note {
+      font-size: 0.82rem;
+      max-width: 520px;
+      margin: 0 auto 10px;
+      color: #8B9186;
+      font-family: 'Karla', sans-serif;
+    }
+    .footer-copy { font-size: 0.8rem; color: #A3AA9E; font-family: 'Karla', sans-serif; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { order: -1; margin-bottom: 10px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .feature-row { grid-template-columns: 1fr; gap: 30px; padding: 44px 0; }
+      .feature-row.reverse .feature-text,
+      .feature-row.reverse .feature-image { order: initial; }
+      .journey-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav { display: none; }
+      .guarantee-inner { flex-direction: column; text-align: center; }
+      .ornament { display: none; }
+    }
+    @media (max-width: 560px) {
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .journey-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      /* Sticky header responsive: hide pill badge, keep primary CTA on mobile */
+      .header-inner .btn-ghost { display: none; }
+      .header-inner .btn-primary { padding: 9px 16px; font-size: 0.84rem; white-space: nowrap; }
+    }
+    html, body { overflow-x: hidden; }
+
+  </style>
+
+  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
+</body>
+</html>

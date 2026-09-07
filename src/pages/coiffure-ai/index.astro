@@ -1,0 +1,688 @@
+---
+const price = "19,99 €";
+const paymentUrl = "https://aghhol.gumroad.com/l/haircut-hairstyle-ai";
+
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+// À CONFIRMER via l'onglet "Versions" du produit "haircut-hairstyle-ai" sur Gumroad
+// avant de considérer cette intégration comme validée.
+const tiers = [
+  { name: "Hair Icon 1 mois", price: "19,99 €", variant: "1 Month License", featured: false },
+  { name: "Hair Icon 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Hair Icon 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Hair Icon 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Hair Icon À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "SA", profile: "Sara", profession: "Chargée de communication", problem: "J'avais peur de changer de coupe sans savoir si elle m'irait vraiment.", benefit: "Je peux maintenant tester plusieurs styles avant de prendre rendez-vous." },
+  { initials: "TI", profile: "Théo", profession: "Photographe", problem: "Je changeais souvent de look sans garder une trace de ce qui me plaisait.", benefit: "L'archive m'aide à comparer mes idées et à retrouver mes favoris." },
+  { initials: "AM", profile: "Amel", profession: "Entrepreneuse", problem: "Je pensais qu'une IA ne pourrait pas comprendre ma texture de cheveux.", benefit: "Les suggestions sont plus personnalisées et m'aident à choisir avec confiance." },
+];
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hair Changer — Essayez coupes et couleurs en réalité augmentée</title>
+  <meta name="description" content="Hair Changer (Coiffure Virtual AR) : essayez des centaines de coiffures et couleurs en réalité augmentée, obtenez des recommandations IA selon votre morphologie, et réservez votre salon en un clic." />
+  <link rel="icon" type="image/png" href="/images/coiffure-ai/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- GOOGLE ANALYTICS 4 (G-V51T1RG6YX) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V51T1RG6YX" is:inline></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V51T1RG6YX');
+  </script>
+
+  <!-- META PIXEL (923346630113614) -->
+  <script is:inline>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '923346630113614');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=923346630113614&ev=PageView&noscript=1" alt="" />
+  </noscript>
+
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">
+        <img src="/images/coiffure-ai/logo.png" alt="Hair Changer" class="brand-mark" />
+        <span class="brand-name">Hair <em>Changer</em></span>
+      </a>
+      <nav class="nav">
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#salons">Salons</a>
+        <a href="#tarif">Tarif</a>
+      </nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a href="#" class="btn btn-ghost btn-small">Essai gratuit 7j</a>
+      <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Un nouveau look en confiance · IA hors-ligne</p>
+          <h1>Trouvez votre <span class="ink">match parfait</span>, sans risque.</h1>
+          <p class="hero-sub">
+            Une IA d'analyse morphologique rencontre l'expertise des meilleurs salons. Essayez des centaines de coiffures et couleurs en réalité augmentée, en temps réel, directement sur votre visage — quelle que soit votre texture de cheveux.
+          </p>
+          <div class="hero-ctas">
+            <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer ma transformation</a>
+            <a href="#fonctionnalites" class="btn btn-ghost">Voir les fonctionnalités</a>
+          </div>
+          <p class="hero-microcopy">Essayage RA 100% hors-ligne · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
+        </div>
+        <div class="hero-visual">
+          <img src="/images/coiffure-ai/frame_home.png" alt="Écran d'accueil de Hair Changer" class="hero-phone" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS BAND -->
+    <section class="stats-band">
+      <div class="wrap stats-inner">
+        <div class="stat">
+          <span class="stat-num">100+</span>
+          <span class="stat-label">coiffures et couleurs à essayer en temps réel</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">réservation de salons partenaires</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">RA</span>
+          <span class="stat-label">essayage en réalité augmentée en temps réel</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">Toutes</span>
+          <span class="stat-label">textures : lisses, ondulés, bouclés, crépus</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="fonctionnalites" class="features">
+      <div class="wrap">
+        <p class="eyebrow center">Fonctionnalités clés</p>
+        <h2 class="section-title center">De l'inspiration digitale au rendez-vous en salon</h2>
+      </div>
+
+      <!-- Feature 1: AR try-on -->
+      <div class="feature-row wrap">
+        <div class="feature-text">
+          <span class="feature-tag">Visualisez avant de choisir</span>
+          <h3>Testez votre prochain look directement sur votre visage.</h3>
+          <p>Notre moteur RA en temps réel utilise un tracking facial de haute précision pour appliquer instantanément une nouvelle coupe ou couleur sur votre visage — coupe, couleur, longueur et volume, tout est ajustable à la volée.</p>
+          <ul class="feature-list">
+            <li>Tracking facial IA en temps réel</li>
+            <li>Bibliothèque de styles, couleurs et longueurs personnalisables</li>
+            <li>Enregistrement de votre look en un tap</li>
+          </ul>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
+        </div>
+        <div class="feature-image">
+          <img src="/images/coiffure-ai/phone_ar_camera.png" alt="Essayage de coiffure en réalité augmentée dans Hair Changer" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 2: AI Suggestions -->
+      <div class="feature-row wrap reverse">
+        <div class="feature-text">
+          <span class="feature-tag">Trouvez ce qui vous va</span>
+          <h3>Recevez des idées adaptées à votre visage et à votre style.</h3>
+          <p>Notre IA analyse la symétrie de votre visage, votre sous-ton de peau et la forme de votre mâchoire pour vous proposer les coupes les plus flatteuses, avec un score de compatibilité pour chaque suggestion.</p>
+          <ul class="feature-list">
+            <li>Détection automatique de la forme du visage</li>
+            <li>Score de compatibilité pour chaque style suggéré</li>
+            <li>Recommandations mises à jour selon vos essais</li>
+          </ul>
+          <!-- TODO: visuel IA manquant pour cette section, à fournir -->
+        </div>
+        <div class="feature-image">
+          <img src="/images/coiffure-ai/frame_ai_suggestions.png" alt="Suggestions IA personnalisées dans Hair Changer" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 3: Salon booking -->
+      <div class="feature-row wrap" id="salons">
+        <div class="feature-text">
+          <span class="feature-tag">Passez à l'action</span>
+          <h3>Arrivez au salon en sachant exactement quoi demander.</h3>
+          <p>Trouvez le salon idéal grâce à la carte interactive, consultez les avis et le portfolio des coiffeurs, puis envoyez votre aperçu RA en HD avant votre rendez-vous pour un résultat exactement conforme à vos attentes.</p>
+          <ul class="feature-list">
+            <li>Carte interactive et réservation 24h/24</li>
+            <li>Avis et notes des salons partenaires</li>
+            <li>Partage de votre essai RA directement au coiffeur</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/coiffure-ai/phone_salon_booking.png" alt="Réservation de salon de coiffure dans Hair Changer" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 4: Archive -->
+      <div class="feature-row wrap reverse">
+        <div class="feature-text">
+          <span class="feature-tag">Gardez vos meilleures idées</span>
+          <h3>Comparez vos essais avant de prendre votre décision.</h3>
+          <p>Retrouvez l'historique complet de vos sessions RA, comparez plusieurs looks côte à côte et ressortez vos favoris avant de vous décider définitivement.</p>
+          <ul class="feature-list">
+            <li>Historique complet de vos essais précédents</li>
+            <li>Comparaison de looks avec score de match</li>
+            <li>Favoris sauvegardés pour y revenir facilement</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/coiffure-ai/frame_archive.png" alt="Archive esthétique dans Hair Changer" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Feature 5: Community -->
+      <div class="feature-row wrap">
+        <div class="feature-text">
+          <span class="feature-tag">Inspirez-vous</span>
+          <h3>Découvrez des looks qui donnent envie d'oser.</h3>
+          <p>Publiez vos transformations, découvrez comment d'autres réinventent leur style, et testez directement les looks qui vous inspirent dans le fil de la communauté.</p>
+          <ul class="feature-list">
+            <li>Fil communautaire avec stories et publications</li>
+            <li>Interaction avec les looks des autres membres</li>
+            <li>Essai direct des styles découverts dans le fil</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/images/coiffure-ai/frame_community.png" alt="Communauté Hair Changer" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CALLOUT -->
+    <section class="callout">
+      <div class="wrap callout-inner">
+        <h2>Ne changez plus de tête à l'aveugle</h2>
+        <p>Fini la peur d'une coupe ratée ou d'une couleur décevante : testez, ajustez, comparez — et arrivez au salon en sachant exactement ce que vous voulez.</p>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="tarif" class="pricing">
+      <div class="wrap pricing-inner">
+        <p class="eyebrow center">Tarif</p>
+        <h2 class="section-title center">Choisissez la durée qui vous convient</h2>
+        <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
+        <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
+
+        <div class="tier-list">
+          {tiers.map((tier) => (
+            <a
+              class={`tier-row ${tier.featured ? "featured" : ""}`}
+              href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+              data-gumroad-overlay-checkout="true"
+            >
+              <div class="tier-name">
+                {tier.name}
+                {tier.badge && <span class="tier-badge">{tier.badge}</span>}
+              </div>
+              <div class="tier-right">
+                <div class="tier-price">{tier.price}</div>
+                <div class="tier-arrow">→</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="wrap">
+        <p class="eyebrow center">Preuve sociale</p>
+        <h2 class="section-title center">Un changement réfléchi, sans regret.</h2>
+        <div class="testimonials-grid">
+          {testimonialProfiles.map((testimonial, index) => (
+            <article class="testimonial-card">
+              <div class="testimonial-head">
+          <img class="testimonial-avatar" src={`https://i.pravatar.cc/96?img=${7 + index}`} alt={`Photo de profil de ${testimonial.profile}`} loading="lazy" />
+                <div>
+                  <div class="testimonial-name">{testimonial.profile}</div>
+                  <span class="testimonial-profession">{testimonial.profession}</span>
+                </div>
+              </div>
+              <div class="stars" aria-label="Note : 5 sur 5">★★★★★</div>
+              <p>{testimonial.problem}</p>
+              <p>{testimonial.benefit}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+    <!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+      <div class="wrap final-cta-inner">
+        <h2>Votre prochain look vous attend.</h2>
+        <p>Essayez, comparez, réservez — changez de tête sans regret avec Hair Changer.</p>
+        <a href={paymentUrl} class="btn btn-light" data-gumroad-overlay-checkout="true">Commencer maintenant — {price}</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <img src="/images/coiffure-ai/logo.png" alt="Hair Changer" class="brand-mark" />
+        <span class="brand-name">Hair <em>Changer</em></span>
+      </div>
+      <p class="footer-note">Les rendus en réalité augmentée sont des simulations à but indicatif ; le résultat final en salon peut varier selon la technique du coiffeur et la nature du cheveu.</p>
+      <p class="footer-copy">© {new Date().getFullYear()} AGH Data Agency Holding SA. Tous droits réservés.</p>
+    </div>
+  
+      <div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
+        <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
+        <span style="margin: 0 8px;">·</span>
+        <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
+      </div>
+    
+  </footer>
+
+  <style>
+    :root {
+      --ink: #14162B;
+      --blue: #2A3FE0;
+      --purple: #941CA8;
+      --purple-deep: #5E1370;
+      --lavender: #F1DFF5;
+      --cream: #FAFAFC;
+      --paper: #FFFFFF;
+      --slate: #565A75;
+      --line: #E6E3EE;
+      --radius: 18px;
+      --shadow: 0 12px 32px -12px rgba(20, 22, 43, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Manrope', sans-serif;
+      margin: 0;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    p { margin: 0; color: var(--slate); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    img { max-width: 100%; display: block; }
+    em { font-style: normal; color: var(--purple); }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.96rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      color: #fff;
+      box-shadow: 0 8px 20px -8px rgba(148, 28, 168, 0.5);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -8px rgba(148, 28, 168, 0.55); }
+    .btn-small { padding: 10px 20px; font-size: 0.86rem; }
+    .btn-ghost {
+      border: 1.5px solid var(--line);
+      color: var(--ink);
+      background: transparent;
+    }
+    .btn-ghost:hover { border-color: var(--purple); background: rgba(148,28,168,0.05); }
+    .btn-light {
+      background: #fff;
+      color: var(--purple-deep);
+      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.3);
+    }
+    .btn-light:hover { transform: translateY(-2px); }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 250, 252, 0.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark { width: 32px; height: 32px; object-fit: contain; border-radius: 8px; }
+    .brand-name { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.05rem; }
+    .nav { display: flex; gap: 30px; }
+    .nav a { font-size: 0.92rem; font-weight: 500; color: var(--slate); }
+    .nav a:hover { color: var(--purple); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 76px 0 40px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #EFF1FE 0%, var(--lavender) 60%, #FAFAFC 100%);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .eyebrow.center { text-align: center; }
+    h1 { font-size: clamp(2.4rem, 4.2vw, 3.4rem); font-weight: 800; }
+    h1 .ink { background: linear-gradient(135deg, var(--blue), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-sub {
+      margin-top: 22px;
+      font-size: 1.1rem;
+      max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+    .hero-microcopy {
+      margin-top: 18px;
+      font-size: 0.85rem;
+      color: #8B8DA3;
+    }
+
+    .hero-visual { display: flex; justify-content: center; }
+    .hero-phone {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Stats band */
+    .stats-band {
+      background: var(--ink);
+      padding: 40px 0;
+    }
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stat { text-align: center; color: #fff; }
+    .stat-num {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 2.1rem;
+      background: linear-gradient(135deg, #7C8CFF, #E88CF5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .stat-label {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: #C2C3D6;
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Features */
+    .features { padding: 90px 0 30px; }
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 700;
+      max-width: 640px;
+      margin: 10px auto 0;
+    }
+    .section-title.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 64px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .feature-row:last-child { border-bottom: none; }
+    .feature-row.reverse .feature-text { order: 2; }
+    .feature-row.reverse .feature-image { order: 1; }
+
+    .feature-tag {
+      display: inline-block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+    .feature-text h3 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .feature-text > p { font-size: 1.02rem; margin-bottom: 20px; }
+    .feature-list li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 12px;
+      font-size: 0.96rem;
+      color: var(--slate);
+    }
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+    .feature-image { display: flex; justify-content: center; }
+    .feature-image img {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 300px;
+    }
+
+    /* Callout */
+    .callout {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      padding: 70px 0;
+      margin: 40px 0;
+    }
+    .callout-inner { max-width: 780px; text-align: center; margin: 0 auto; }
+    .callout h2 {
+      color: #fff;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      font-weight: 700;
+    }
+    .callout p {
+      color: #ECE4F6;
+      margin-top: 18px;
+      font-size: 1.05rem;
+    }
+
+    /* Pricing */
+    .pricing { padding: 30px 0 90px; }
+    .price-hint { text-align: center; font-size: 0.85rem; color: #8B8DA3; margin-top: 10px; }
+
+    .tier-list {
+      display: flex; flex-direction: column; gap: 12px;
+      max-width: 560px; margin: 40px auto 0;
+    }
+    .tier-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px; border-radius: var(--radius); border: 1px solid var(--line);
+      background: var(--paper); text-decoration: none; color: inherit; cursor: pointer;
+      transition: border-color .15s ease, transform .15s ease;
+      box-shadow: var(--shadow);
+    }
+    .tier-row:hover { border-color: var(--purple); transform: translateY(-2px); }
+    .tier-row.featured { border: 1.5px solid var(--purple); background: var(--lavender); }
+    .tier-name {
+      font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1rem; color: var(--ink);
+    }
+    .tier-badge {
+      display: block; margin-top: 4px; font-family: 'Manrope', sans-serif;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--purple);
+    }
+    .tier-right { display: flex; align-items: center; gap: 12px; }
+    .tier-price {
+      font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.25rem;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      white-space: nowrap;
+    }
+    .tier-arrow { font-size: 1.1rem; color: var(--purple); }
+
+    /* Guarantee */
+    .guarantee { padding: 0 0 90px; }
+    .guarantee-inner {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      background: var(--lavender);
+      border-radius: var(--radius);
+      padding: 34px 40px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .guarantee-icon { color: var(--purple-deep); flex-shrink: 0; }
+    .guarantee h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .guarantee p { font-size: 0.92rem; }
+
+    /* Testimonials */
+    .testimonials { padding: 0 0 90px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .testimonial-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .testimonial-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .testimonial-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--lavender); color: var(--purple-deep); font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700; }
+    .testimonial-name { color: var(--ink); font-weight: 700; }
+    .testimonial-profession { display: block; color: var(--slate); font-size: .78rem; margin-top: 3px; }
+    .testimonial-card .stars { color: var(--pink); letter-spacing: .1em; }
+    .testimonial-card p { color: var(--slate); line-height: 1.55; margin-top: 12px; }
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+    /* Final CTA */
+    .final-cta {
+      background: var(--ink);
+      padding: 90px 0;
+    }
+    .final-cta-inner { text-align: center; max-width: 640px; margin: 0 auto; }
+    .final-cta h2 { color: #fff; font-size: clamp(1.7rem, 3vw, 2.4rem); }
+    .final-cta p { color: #C2C3D6; margin-top: 18px; font-size: 1.05rem; }
+    .final-cta .btn { margin-top: 32px; }
+
+    /* Footer */
+    .site-footer { padding: 44px 0; }
+    .footer-inner { text-align: center; }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-note {
+      font-size: 0.82rem;
+      max-width: 540px;
+      margin: 0 auto 10px;
+      color: #8B8DA3;
+    }
+    .footer-copy { font-size: 0.8rem; color: #A0A2B8; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { order: -1; margin-bottom: 10px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .feature-row { grid-template-columns: 1fr; gap: 30px; padding: 44px 0; }
+      .feature-row.reverse .feature-text,
+      .feature-row.reverse .feature-image { order: initial; }
+      .nav { display: none; }
+      .guarantee-inner { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      /* Sticky header responsive: hide pill badge, keep primary CTA on mobile */
+      .header-inner .btn-ghost { display: none; }
+      .header-inner .btn-primary { padding: 9px 16px; font-size: 0.84rem; white-space: nowrap; }
+    }
+    html, body { overflow-x: hidden; }
+
+  </style>
+
+  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
+</body>
+</html>

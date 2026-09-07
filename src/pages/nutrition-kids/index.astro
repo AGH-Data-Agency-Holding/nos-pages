@@ -1,0 +1,888 @@
+---
+// Baby Food — landing page
+// Copy source: https://aghhol.gumroad.com/l/Baby-child-health (version française de la fiche Gumroad)
+
+const paymentUrl = "https://aghhol.gumroad.com/l/Baby-child-health";
+
+// Grille 5 tarifs (remplace l'ancien prix unique) — montants réels fournis pour "Nutrition Kids".
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les autres apps).
+// À CONFIRMER via l'onglet "Versions" du produit sur Gumroad avant validation finale.
+const tiers = [
+  { name: "Super Parent 1 mois", price: "29,99 €", variant: "1 Month License", featured: false },
+  { name: "Super Parent 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Super Parent 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Super Parent 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Super Parent À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "MA", profile: "Malika", profession: "Assistante administrative", problem: "Je cherchais une façon simple d'organiser les premiers repas de mon enfant.", benefit: "Le calendrier me donne des idées claires et m'aide à préparer chaque étape sereinement." },
+  { initials: "LO", profile: "Loris", profession: "Conducteur de travaux", problem: "Entre le travail et les repas, je manquais de temps pour varier les menus.", benefit: "Les recettes et le planning me font gagner du temps tout en gardant des repas adaptés." },
+  { initials: "SA", profile: "Sana", profession: "Illustratrice indépendante", problem: "J'étais sceptique sur l'utilité d'une IA pour les questions de nutrition bébé.", benefit: "L'assistant répond rapidement et m'aide à prendre de meilleures décisions au quotidien." },
+];
+---
+
+<html lang="fr">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Baby Food — Diversification Alimentaire &amp; Nutrition Bébé par IA</title>
+	<meta name="description" content="Calendrier de diversification intelligent, 800+ recettes, suivi de croissance selon les courbes OMS et nutritionniste IA 24/7 pour accompagner bébé sans stress." />
+	<link rel="icon" href="/images/nutrition-kids/logo-mark.png" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- GOOGLE ANALYTICS 4 (G-V51T1RG6YX) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V51T1RG6YX" is:inline></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V51T1RG6YX');
+  </script>
+
+  <!-- META PIXEL (923346630113614) -->
+  <script is:inline>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '923346630113614');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=923346630113614&ev=PageView&noscript=1" alt="" />
+  </noscript>
+
+</head>
+<body>
+
+	<!-- ===== HEADER ===== -->
+	<header class="site-header">
+		<div class="wrap header-inner">
+			<a href="#top" class="brand">
+				<img src="/images/nutrition-kids/logo-mark.png" alt="Baby Food" class="brand-mark" />
+				<span class="brand-name">Baby <em>Food</em></span>
+			</a>
+			<nav class="nav">
+				<a href="#diversification">Diversification</a>
+				<a href="#recettes">Recettes</a>
+				<a href="#croissance">Croissance</a>
+				<a href="#prix">Tarif</a>
+			</nav>
+      <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+      <a href="#" class="btn btn-ghost">Essai gratuit 7j</a>
+		</div>
+	</header>
+
+	<main id="top">
+
+		<!-- ===== HERO ===== -->
+		<section class="hero">
+			<span class="blob blob-hero-1" aria-hidden="true"></span>
+			<span class="blob blob-hero-2" aria-hidden="true"></span>
+			<div class="wrap hero-inner">
+				<div class="hero-copy">
+					<p class="eyebrow">Des repas plus simples, guidés par l'IA</p>
+					<h1>Accompagnez chaque repas <em>sereinement</em>.</h1>
+					<p class="hero-sub">
+						Que vous commenciez tout juste la diversification ou cherchiez à mieux organiser l'alimentation de
+						votre bébé, Baby Food vous accompagne à chaque étape. Nous associons les recommandations de l'OMS
+						à vos traditions culinaires locales, pour des repas qui correspondent vraiment à votre culture et
+						aux produits de saison.
+					</p>
+					<div class="hero-cta-row">
+						<a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer maintenant</a>
+						<span class="hero-cta-note">Fonctionne 100% hors-ligne · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</span>
+					</div>
+				</div>
+			</div>
+			<div class="hero-visual-wrap">
+				<div class="wrap">
+						<img src="/images/nutrition-kids/dashboard.png" alt="Tableau de bord Baby Food avec planning de repas du jour" class="dashboard-mock" />
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== STATS BAND ===== -->
+		<section class="stats-band">
+			<div class="wrap stats-grid">
+				<div class="stat">
+					<span class="stat-num">800+</span>
+					<span class="stat-label">recettes saines détaillées pas-à-pas</span>
+				</div>
+				<div class="stat">
+					<span class="stat-num">24/7</span>
+					<span class="stat-label">nutritionniste IA disponible à tout moment</span>
+				</div>
+				<div class="stat">
+					<span class="stat-num">OMS</span>
+					<span class="stat-label">courbes de croissance officielles</span>
+				</div>
+				<div class="stat">
+					<span class="stat-num">Dès 5,99 €</span>
+					<span class="stat-label">licence flexible, sans abonnement caché</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== FEATURE 1 — DIVERSIFICATION ===== -->
+		<section class="feature" id="diversification">
+			<div class="wrap feature-inner">
+				<div class="feature-copy">
+					<span class="feature-index">Calendrier intelligent</span>
+					<h2>Un calendrier de diversification qui s'adapte à votre enfant</h2>
+					<p>
+						Le calendrier s'ajuste automatiquement à l'âge et aux allergies de votre enfant pour vous proposer
+						le bon aliment, au bon moment. Chaque jour affiche un planning clair — petit-déjeuner, déjeuner,
+						collation, dîner — avec le nombre de calories associé à chaque repas.
+					</p>
+					<ul class="feature-list">
+						<li>Planning hebdomadaire visuel, jour par jour</li>
+						<li>Ajustement automatique selon l'âge et les allergies</li>
+						<li>Calories indiquées pour chaque repas planifié</li>
+					</ul>
+				</div>
+				<div class="feature-visual">
+					<div class="phone-frame">
+						<img src="/images/nutrition-kids/mealplan.png" alt="Écran de planification des repas Baby Food" loading="lazy" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== FEATURE 2 — RECETTES ===== -->
+		<section class="feature feature-reverse" id="recettes">
+			<div class="wrap feature-inner">
+				<div class="feature-visual">
+					<div class="phone-frame">
+						<img src="/images/nutrition-kids/recipes.png" alt="Bibliothèque de recettes Baby Food" loading="lazy" />
+					</div>
+				</div>
+				<div class="feature-copy">
+					<span class="feature-index">Bibliothèque de recettes</span>
+					<h2>Plus de 800 recettes saines, expliquées pas à pas</h2>
+					<p>
+						Purées, petits-déjeuners, plats principaux, protéines, collations : chaque recette est filtrable
+						par catégorie et affiche le temps de préparation, le niveau de difficulté et l'âge recommandé,
+						ainsi que les apports nutritionnels clés (vitamines, fibres, fer...).
+					</p>
+					<ul class="feature-list">
+						<li>Filtres par catégorie : purée, petit-déjeuner, plat principal, protéines, collation</li>
+						<li>Temps de préparation, difficulté et âge minimum indiqués pour chaque recette</li>
+						<li>Étiquettes nutritionnelles claires sur chaque fiche</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== FEATURE 3 — CROISSANCE ===== -->
+		<section class="feature" id="croissance">
+			<div class="wrap feature-inner">
+				<div class="feature-copy">
+					<span class="feature-index">Suivi de croissance</span>
+					<h2>Suivez la croissance de votre enfant avec les courbes officielles de l'OMS</h2>
+					<p>
+						Poids, taille, nombre de repas par jour : chaque mesure est comparée aux courbes de croissance
+						officielles de l'Organisation Mondiale de la Santé, avec une indication claire lorsque votre
+						enfant se situe dans la plage de croissance normale.
+					</p>
+					<ul class="feature-list">
+						<li>Suivi du poids, de la taille et de la fréquence des repas</li>
+						<li>Comparaison directe aux courbes de croissance OMS</li>
+						<li>Repère visuel "Normal Growth Range" pour rassurer au premier coup d'œil</li>
+					</ul>
+				</div>
+				<div class="feature-visual">
+					<div class="phone-frame">
+						<img src="/images/nutrition-kids/growth.png" alt="Suivi de croissance selon les courbes OMS" loading="lazy" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== FEATURE 4 — IA NUTRITIONNISTE ===== -->
+		<section class="feature feature-reverse">
+			<div class="wrap feature-inner">
+				<div class="feature-visual">
+					<div class="phone-frame">
+						<img src="/images/nutrition-kids/aichat.png" alt="Assistant nutrition IA disponible 24h/24" loading="lazy" />
+					</div>
+				</div>
+				<div class="feature-copy">
+					<span class="feature-index">Assistant IA</span>
+					<h2>Une nutritionniste IA disponible 24h/24</h2>
+					<p>
+						Une question sur une recette, un doute sur un produit, une inquiétude à poser à un pédiatre ?
+						L'assistant IA répond à tout moment, suggère des recettes adaptées, analyse les étiquettes des
+						produits pour bébé et guide vos décisions au quotidien.
+					</p>
+					<ul class="feature-list">
+						<li>Suggestions de recettes personnalisées à la demande</li>
+						<li>Scanner intelligent pour analyser les étiquettes de produits pour bébé</li>
+						<li>Questions ouvertes par texte, photo ou message vocal</li>
+					</ul>
+					<!-- TODO: visuel IA manquant pour cette section, à fournir -->
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== MOSAIC / EXTRA SCREENS ===== -->
+		<section class="mosaic">
+			<div class="wrap">
+				<h3 class="mosaic-title">Tout pour accompagner sereinement chaque repas</h3>
+				<div class="mosaic-grid">
+					<figure>
+						<img src="/images/nutrition-kids/home.png" alt="Tableau de bord de l'application Baby Food" loading="lazy" />
+						<figcaption>Tableau de bord quotidien</figcaption>
+					</figure>
+					<figure>
+						<img src="/images/nutrition-kids/onboarding.png" alt="Écran de bienvenue Baby Food" loading="lazy" />
+						<figcaption>Prise en main immédiate</figcaption>
+					</figure>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== CALLOUT BAND ===== -->
+		<section class="callout">
+			<div class="wrap callout-inner">
+				<p class="callout-text">
+					« Offrez le meilleur départ à votre enfant en toute sérénité, et faites du moment du repas un plaisir partagé. »
+				</p>
+				<p class="callout-sub">Extrait de la description officielle du produit — Baby Food</p>
+			</div>
+		</section>
+
+		<!-- ===== COMMUNITY BAND ===== -->
+		<section class="community-band">
+			<div class="wrap community-inner">
+				<div class="community-copy">
+					<h2>Une communauté sécurisée de parents</h2>
+					<p>
+						Échangez avec d'autres parents qui traversent les mêmes étapes, posez vos questions et partagez
+						vos réussites — dans un espace pensé pour rester bienveillant et confidentiel.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== PRICING ===== -->
+		<section class="pricing" id="prix">
+			<div class="wrap">
+				<h2 class="pricing-title">Choisissez la durée qui vous convient</h2>
+				<div class="pricing-card">
+					<div class="pricing-card-head">
+						<span class="pricing-name">Baby Food</span>
+						<span class="pricing-note">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</span>
+						<span class="pricing-note">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</span>
+					</div>
+					<div class="tier-list">
+						{tiers.map((tier) => (
+							<a
+								class={`tier-row ${tier.featured ? "featured" : ""}`}
+								href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+								data-gumroad-overlay-checkout="true"
+							>
+								<span class="tier-name-wrap">
+									<span class="tier-name">{tier.name}</span>
+									{tier.badge && <span class="tier-badge">{tier.badge}</span>}
+								</span>
+								<span class="tier-right">
+									<span class="tier-amount">{tier.price}</span>
+									<span class="tier-arrow">→</span>
+								</span>
+							</a>
+						))}
+					</div>
+					<ul class="pricing-list">
+						<li>Calendrier de diversification intelligent</li>
+						<li>Plus de 800 recettes détaillées pas-à-pas</li>
+						<li>Suivi de croissance selon les courbes OMS</li>
+						<li>Nutritionniste IA disponible 24h/24</li>
+						<li>Scanner d'étiquettes et communauté de parents</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- TESTIMONIALS -->
+		<section class="testimonials">
+			<div class="wrap">
+				<p class="eyebrow testimonials-eyebrow">Preuve sociale</p>
+				<h2 class="pricing-title">Des repas plus simples au quotidien.</h2>
+				<div class="testimonials-grid">
+					{testimonialProfiles.map((testimonial, index) => (
+						<article class="testimonial-card">
+							<div class="testimonial-head">
+					<img class="testimonial-avatar" src={`https://i.pravatar.cc/96?img=${34 + index}`} alt={`Photo de profil de ${testimonial.profile}`} loading="lazy" />
+								<div>
+									<strong>{testimonial.profile}</strong>
+									<span>{testimonial.profession}</span>
+								</div>
+							</div>
+							<div class="testimonial-stars" aria-label="Note : 5 sur 5">★★★★★</div>
+							<p>{testimonial.problem}</p>
+							<p>{testimonial.benefit}</p>
+						</article>
+					))}
+				</div>
+				<!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
+			</div>
+		</section>
+
+		<!-- ===== FINAL CTA ===== -->
+		<section class="final-cta">
+			<span class="blob blob-cta-1" aria-hidden="true"></span>
+			<div class="wrap final-cta-inner">
+				<h2>Prête à accompagner bébé sans stress ?</h2>
+				<p>Un calendrier adapté, des recettes prêtes, une IA toujours disponible.</p>
+				<a href={paymentUrl} class="btn btn-primary btn-lg" data-gumroad-overlay-checkout="true">Commencer maintenant</a>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- ===== FOOTER ===== -->
+	<footer class="site-footer">
+		<div class="wrap footer-inner">
+			<div class="footer-brand">
+				<img src="/images/nutrition-kids/logo-mark.png" alt="Baby Food" class="brand-mark" loading="lazy" />
+				<span class="brand-name">Baby <em>Food</em></span>
+			</div>
+			<p class="footer-note">Un produit du portefeuille AGH Data Agency Holding SA.</p>
+		</div>
+	
+      <div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
+        <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
+        <span style="margin: 0 8px;">·</span>
+        <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
+      </div>
+    
+  </footer>
+
+<style>
+	:root {
+		--mint: #6fc7a8;
+		--forest: #0e6b4f;
+		--forest-deep: #0a4d3a;
+		--coral-orange: #f0a75a;
+		--ink: #1e3b31;
+		--bg: #fbfefc;
+		--card-white: #ffffff;
+		--mist: #eaf6f1;
+		--border-soft: #dceee6;
+
+		--font-display: 'Baloo 2', sans-serif;
+		--font-body: 'Manrope', sans-serif;
+		--font-mono: 'IBM Plex Mono', monospace;
+	}
+
+	* { box-sizing: border-box; }
+	html { scroll-behavior: smooth; }
+
+	body {
+		margin: 0;
+		font-family: var(--font-body);
+		color: var(--ink);
+		background: var(--bg);
+		-webkit-font-smoothing: antialiased;
+		overflow-x: hidden;
+	}
+
+	img { max-width: 100%; display: block; }
+
+	.wrap {
+		max-width: 1120px;
+		margin: 0 auto;
+		padding: 0 28px;
+		position: relative;
+		z-index: 2;
+	}
+
+	h1, h2, h3 {
+		font-family: var(--font-display);
+		color: var(--forest-deep);
+		margin: 0;
+		line-height: 1.1;
+	}
+
+	a { color: inherit; }
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-family: var(--font-body);
+		font-weight: 700;
+		text-decoration: none;
+		border-radius: 999px;
+		padding: 13px 26px;
+		font-size: 0.95rem;
+		transition: transform 0.18s ease, box-shadow 0.18s ease;
+		white-space: nowrap;
+	}
+	.btn:hover { transform: translateY(-2px); }
+
+	.btn-primary {
+		background: linear-gradient(120deg, var(--mint), var(--forest));
+		color: #fff;
+		box-shadow: 0 10px 24px -8px rgba(14, 107, 79, 0.5);
+	}
+	.btn-primary:hover { box-shadow: 0 14px 30px -8px rgba(14, 107, 79, 0.65); }
+
+	.btn-header {
+		background: var(--forest-deep);
+		color: #fff;
+		padding: 10px 20px;
+		font-size: 0.85rem;
+	}
+
+	.btn-full { width: 100%; margin-top: 22px; }
+	.btn-lg { padding: 17px 36px; font-size: 1.05rem; }
+
+	/* ===== BLOBS — signature organic motif echoed from the app's own marketing screens ===== */
+	.blob {
+		position: absolute;
+		border-radius: 50% 50% 50% 50% / 55% 45% 55% 45%;
+		z-index: 1;
+		pointer-events: none;
+	}
+	.blob-hero-1 {
+		width: 480px; height: 480px;
+		background: var(--mint);
+		opacity: 0.35;
+		top: -180px; right: -120px;
+		border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%;
+	}
+	.blob-hero-2 {
+		width: 620px; height: 620px;
+		background: var(--forest);
+		opacity: 0.9;
+		bottom: -420px; left: -160px;
+		border-radius: 55% 45% 40% 60% / 45% 55% 45% 55%;
+	}
+	.blob-cta-1 {
+		width: 520px; height: 520px;
+		background: rgba(255,255,255,0.08);
+		top: -220px; right: -140px;
+		border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+	}
+
+	/* ===== HEADER ===== */
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: rgba(251, 254, 252, 0.88);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid var(--border-soft);
+	}
+	.header-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 14px;
+		padding-bottom: 14px;
+	}
+	.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+	.brand-mark { width: 34px; height: 34px; }
+	.brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--forest); }
+	.brand-name em { font-style: normal; color: var(--coral-orange); }
+	.nav { display: flex; gap: 28px; }
+	.nav a { text-decoration: none; font-size: 0.92rem; font-weight: 700; color: var(--forest-deep); }
+	.nav a:hover { color: var(--coral-orange); }
+
+	/* ===== HERO ===== */
+	.hero { position: relative; padding: 72px 0 0; overflow: hidden; }
+	.hero-inner { display: flex; justify-content: center; }
+	.hero-copy { max-width: 680px; text-align: center; margin: 0 auto; }
+	.eyebrow {
+		font-family: var(--font-mono);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.72rem;
+		color: var(--coral-orange);
+		font-weight: 600;
+		margin: 0 0 16px;
+	}
+	.hero-copy h1 {
+		font-size: clamp(2.3rem, 4.6vw, 3.4rem);
+		font-weight: 700;
+	}
+	.hero-copy h1 em { font-style: italic; color: var(--mint); }
+	.hero-sub {
+		font-size: 1.05rem;
+		line-height: 1.65;
+		color: #4a6b5f;
+		margin: 22px auto 30px;
+		max-width: 58ch;
+	}
+	.hero-cta-row { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+	.hero-cta-note { font-size: 0.82rem; color: var(--forest); font-weight: 700; }
+
+	.hero-visual-wrap { position: relative; margin-top: 44px; padding-bottom: 60px; }
+	.dashboard-mock {
+		border-radius: 24px;
+		box-shadow: 0 40px 80px -30px rgba(10, 77, 58, 0.4);
+		width: 100%;
+	}
+
+	/* ===== STATS BAND ===== */
+	.stats-band {
+		background: linear-gradient(120deg, var(--mint), var(--forest));
+		padding: 40px 0;
+	}
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 24px;
+		text-align: center;
+	}
+	.stat { display: flex; flex-direction: column; gap: 6px; }
+	.stat-num {
+		font-family: var(--font-mono);
+		font-size: 2rem;
+		font-weight: 600;
+		color: #fff;
+	}
+	.stat-label {
+		font-size: 0.82rem;
+		color: rgba(255,255,255,0.94);
+		font-weight: 600;
+		max-width: 20ch;
+		margin: 0 auto;
+	}
+
+	/* ===== FEATURES ===== */
+	.feature { padding: 96px 0; position: relative; }
+	.feature-inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 64px;
+		align-items: center;
+	}
+	.feature-reverse .feature-inner { direction: rtl; }
+	.feature-reverse .feature-copy,
+	.feature-reverse .feature-visual { direction: ltr; }
+
+	.feature-index {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--coral-orange);
+		font-weight: 600;
+	}
+	.feature-copy h2 {
+		font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+		font-weight: 700;
+		margin: 12px 0 18px;
+	}
+	.feature-copy p {
+		font-size: 1rem;
+		line-height: 1.7;
+		color: #4a6b5f;
+		margin: 0 0 20px;
+	}
+	.feature-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.feature-list li {
+		position: relative;
+		padding-left: 22px;
+		font-size: 0.92rem;
+		color: var(--forest-deep);
+		font-weight: 600;
+	}
+	.feature-list li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 7px;
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		background: var(--coral-orange);
+	}
+	.feature-visual { display: flex; justify-content: center; }
+	.phone-frame {
+		width: 260px;
+		border-radius: 30px;
+		overflow: hidden;
+		box-shadow: 0 30px 60px -20px rgba(14, 107, 79, 0.35);
+	}
+	.phone-frame img { border-radius: 30px; }
+
+	/* ===== MOSAIC ===== */
+	.mosaic { padding: 40px 0 100px; }
+	.mosaic-title {
+		text-align: center;
+		font-size: 1.6rem;
+		font-weight: 700;
+		margin-bottom: 40px;
+	}
+	.mosaic-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 28px;
+		max-width: 640px;
+		margin: 0 auto;
+	}
+	.mosaic-grid figure {
+		margin: 0;
+		background: var(--card-white);
+		border-radius: 22px;
+		padding: 14px 14px 18px;
+		border: 1px solid var(--border-soft);
+		box-shadow: 0 18px 40px -24px rgba(14, 107, 79, 0.25);
+	}
+	.mosaic-grid img { border-radius: 14px; }
+	.mosaic-grid figcaption {
+		text-align: center;
+		margin-top: 12px;
+		font-size: 0.85rem;
+		font-weight: 700;
+		color: var(--forest-deep);
+	}
+
+	/* ===== CALLOUT ===== */
+	.callout {
+		background: var(--forest-deep);
+		padding: 70px 0;
+	}
+	.callout-inner { text-align: center; max-width: 720px; margin: 0 auto; }
+	.callout-text {
+		font-family: var(--font-display);
+		font-style: italic;
+		font-size: clamp(1.25rem, 2.6vw, 1.7rem);
+		color: #fff;
+		line-height: 1.5;
+		margin: 0 0 16px;
+	}
+	.callout-sub {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: #a8d8c4;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+
+	/* ===== COMMUNITY BAND ===== */
+	.community-band { padding: 90px 0; }
+	.community-inner {
+		background: var(--mist);
+		border-radius: 32px;
+		padding: 56px;
+		text-align: center;
+		max-width: 720px;
+		margin: 0 auto;
+	}
+	.community-copy h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 14px; }
+	.community-copy p { font-size: 1rem; line-height: 1.7; color: #4a6b5f; margin: 0; }
+
+	/* ===== PRICING ===== */
+	.pricing { padding: 20px 0 100px; }
+	.pricing-title {
+		text-align: center;
+		font-size: 1.9rem;
+		font-weight: 700;
+		margin-bottom: 44px;
+	}
+	.pricing-card {
+		max-width: 400px;
+		margin: 0 auto;
+		background: var(--card-white);
+		border: 1px solid var(--border-soft);
+		border-radius: 28px;
+		padding: 40px 36px;
+		box-shadow: 0 30px 60px -30px rgba(14, 107, 79, 0.35);
+	}
+	.pricing-card-head { text-align: center; margin-bottom: 28px; }
+	.pricing-name {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--coral-orange);
+		font-weight: 600;
+		margin-bottom: 10px;
+	}
+	.pricing-amount {
+		font-family: var(--font-display);
+		font-size: 3.2rem;
+		font-weight: 700;
+		color: var(--forest-deep);
+	}
+	.pricing-note {
+		display: block;
+		font-size: 0.82rem;
+		color: #4a6b5f;
+		font-weight: 600;
+		margin-top: 8px;
+	}
+	.pricing-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		border-top: 1px solid var(--border-soft);
+		padding-top: 24px;
+	}
+	.pricing-list li {
+		position: relative;
+		padding-left: 24px;
+		font-size: 0.92rem;
+		color: var(--forest-deep);
+		font-weight: 600;
+	}
+	.pricing-list li::before {
+		content: '✓';
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: var(--mint);
+		font-weight: 800;
+	}
+
+	/* ===== TIER LIST (grille de tarifs cliquable) ===== */
+	.tier-list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		margin-top: 24px;
+	}
+	.tier-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 16px 20px;
+		border-radius: 14px;
+		border: 1px solid var(--border-soft);
+		background: var(--bg);
+		text-decoration: none;
+		color: inherit;
+		cursor: pointer;
+		transition: border-color .15s ease, background .15s ease, transform .15s ease;
+	}
+	.tier-row:hover { border-color: var(--forest); background: var(--mist); transform: translateY(-1px); }
+	.tier-row.featured { border: 1.5px solid var(--forest); background: rgba(14,107,79,0.06); }
+	.tier-row.featured:hover { background: rgba(14,107,79,0.1); }
+	.tier-name-wrap { display: flex; flex-direction: column; gap: 2px; }
+	.tier-name { font-weight: 700; font-size: 0.98rem; color: var(--forest-deep); }
+	.tier-badge {
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--coral-orange);
+	}
+	.tier-right { display: flex; align-items: center; gap: 10px; }
+	.tier-amount {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.2rem;
+		color: var(--forest);
+		white-space: nowrap;
+	}
+	.tier-arrow { font-size: 1.1rem; color: var(--forest); }
+
+	/* ===== TESTIMONIALS ===== */
+	.testimonials { padding: 0 0 100px; }
+	.testimonials-eyebrow { text-align: center; }
+	.testimonials-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 18px;
+	}
+	.testimonial-card {
+		background: var(--card-white);
+		border: 1px solid var(--border-soft);
+		border-radius: 22px;
+		padding: 24px;
+		box-shadow: 0 18px 40px -26px rgba(14, 107, 79, 0.28);
+	}
+	.testimonial-head { display: flex; align-items: center; gap: 12px; }
+	.testimonial-avatar {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--mist);
+		color: var(--forest-deep);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 800;
+	}
+	.testimonial-head strong,
+	.testimonial-head span { display: block; }
+	.testimonial-head strong { font-size: 0.95rem; }
+	.testimonial-head span { margin-top: 3px; color: #4a6b5f; font-size: 0.78rem; }
+	.testimonial-stars { color: var(--coral-orange); letter-spacing: 0.12em; margin: 18px 0 12px; }
+	.testimonial-card p { color: #4a6b5f; font-size: 0.9rem; line-height: 1.6; margin: 0 0 10px; }
+
+	/* ===== FINAL CTA ===== */
+	.final-cta {
+		position: relative;
+		background: linear-gradient(135deg, var(--forest-deep), var(--forest));
+		padding: 100px 0;
+		overflow: hidden;
+	}
+	.final-cta-inner { text-align: center; }
+	.final-cta h2 {
+		color: #fff;
+		font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+		font-weight: 700;
+		margin-bottom: 12px;
+	}
+	.final-cta p {
+		color: #cdeee0;
+		font-size: 1rem;
+		margin: 0 0 30px;
+	}
+
+	/* ===== FOOTER ===== */
+	.site-footer { padding: 44px 0; }
+	.footer-inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+		text-align: center;
+	}
+	.footer-brand { display: flex; align-items: center; gap: 10px; }
+	.footer-note { font-size: 0.85rem; color: #4a6b5f; margin: 0; }
+
+	/* ===== RESPONSIVE ===== */
+	@media (max-width: 860px) {
+		.nav { display: none; }
+		.stats-grid { grid-template-columns: repeat(2, 1fr); }
+		.feature-inner, .feature-reverse .feature-inner { grid-template-columns: 1fr; direction: ltr; }
+		.feature-visual { order: -1; }
+		.mosaic-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+		.community-inner { padding: 40px 28px; }
+		.testimonials-grid { grid-template-columns: 1fr; }
+	}
+</style>
+
+<!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+     is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+<script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
+</body>
+</html>

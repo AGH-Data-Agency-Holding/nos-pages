@@ -1,0 +1,857 @@
+---
+// Esthetique AI — landing page
+// Copy source: https://aghhol.gumroad.com/l/makeup-skincare-ai (French version of the Gumroad listing)
+
+const paymentUrl = "https://aghhol.gumroad.com/l/makeup-skincare-ai";
+
+// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+// À CONFIRMER via l'onglet "Versions" du produit "makeup-skincare-ai" sur Gumroad
+// avant de considérer cette intégration comme validée.
+const tiers = [
+  { name: "Dermato Guru 1 mois", price: "19,99 €", variant: "1 Month License", featured: false },
+  { name: "Dermato Guru 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
+  { name: "Dermato Guru 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
+  { name: "Dermato Guru 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
+  { name: "Dermato Guru À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+];
+
+const testimonialProfiles = [
+  { initials: "EL", profile: "Elisa", profession: "Responsable marketing", problem: "Je ne savais pas quels produits correspondaient vraiment aux besoins de ma peau.", benefit: "Le diagnostic m'aide à comprendre ma routine et à choisir des soins plus adaptés." },
+  { initials: "NO", profile: "Nora", profession: "Étudiante en architecture", problem: "Je commençais des routines sans réussir à les suivre régulièrement.", benefit: "Le suivi et les défis rendent mes soins plus simples à intégrer dans mes journées." },
+  { initials: "YA", profile: "Yanis", profession: "Photographe", problem: "Je pensais qu'une IA ne pourrait pas analyser correctement ma peau.", benefit: "Les recommandations sont claires et suffisamment personnalisées pour m'aider à avancer." },
+];
+---
+
+<html lang="fr">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Esthetique AI — Routine Visage &amp; Diagnostic Peau par IA</title>
+	<meta name="description" content="Esthetique AI révolutionne les soins du visage grâce à une IA analytique de pointe. Diagnostic dermatologique en 30 secondes, avatar 3D évolutif, routine gamifiée." />
+	<link rel="icon" href="/images/esthetique/logo-mark.png" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- GOOGLE ANALYTICS 4 (G-V51T1RG6YX) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V51T1RG6YX" is:inline></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V51T1RG6YX');
+  </script>
+
+  <!-- META PIXEL (923346630113614) -->
+  <script is:inline>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '923346630113614');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=923346630113614&ev=PageView&noscript=1" alt="" />
+  </noscript>
+
+</head>
+<body>
+
+	<!-- ===== HEADER ===== -->
+	<header class="site-header">
+		<div class="wrap header-inner">
+			<a href="#top" class="brand">
+				<img src="/images/esthetique/logo-mark.png" alt="Esthetique AI" class="brand-mark" />
+				<span class="brand-name">Esthetique AI</span>
+			</a>
+			<nav class="nav">
+				<a href="#diagnostic">Diagnostic</a>
+				<a href="#gamification">Gamification</a>
+				<a href="#marketplace">Marketplace</a>
+				<a href="#prix">Tarif</a>
+			</nav>
+			<!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
+			<a href="#" class="btn btn-ghost">Essai gratuit 7j</a>
+		</div>
+	</header>
+
+	<main id="top">
+
+		<!-- ===== HERO ===== -->
+		<section class="hero">
+			<div class="wrap hero-inner">
+				<div class="hero-copy">
+					<p class="eyebrow">Écosystème beauté gamifié — propulsé par l'IA</p>
+					<h1>Une routine qui comprend vraiment votre peau.</h1>
+					<p class="hero-sub">
+						Esthetique AI révolutionne les soins du visage grâce à une intelligence artificielle analytique de pointe.
+						Obtenez un diagnostic dermatologique précis à partir d'un simple selfie pour analyser l'acné, l'hydratation
+						et les pores — puis découvrez une routine sur mesure adaptée à votre type de peau et à votre budget.
+					</p>
+					<div class="hero-cta-row">
+						<a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer le diagnostic</a>
+						<span class="hero-cta-note">Diagnostic 100% hors-ligne · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</span>
+					</div>
+				</div>
+				<div class="hero-visual">
+					<div class="scan-frame">
+						<img src="/images/esthetique/home.png" alt="Écran d'accueil de l'application Esthetique AI" class="phone-mock" />
+						<span class="corner corner-tl"></span>
+						<span class="corner corner-tr"></span>
+						<span class="corner corner-bl"></span>
+						<span class="corner corner-br"></span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== STATS BAND ===== -->
+		<section class="stats-band">
+			<div class="wrap stats-grid">
+				<div class="stat">
+					<span class="stat-num">98%</span>
+					<span class="stat-label">précision du diagnostic IA</span>
+				</div>
+				<div class="stat">
+					<span class="stat-num">10M</span>
+					<span class="stat-label">selfies multiraciaux analysés pour entraîner le modèle</span>
+				</div>
+				<div class="stat">
+					<span class="stat-num">30 s</span>
+					<span class="stat-label">pour obtenir votre analyse complète</span>
+				</div>
+				<div class="stat">
+					<span class="stat-num">5&nbsp;000+</span>
+					<span class="stat-label">marques Clean Beauty référencées</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== FEATURE 1 — DIAGNOSTIC ===== -->
+		<section class="feature" id="diagnostic">
+			<div class="wrap feature-inner">
+				<div class="feature-copy">
+					<span class="feature-index">Diagnostic</span>
+					<h2>Un diagnostic de peau avec une précision de 98&nbsp;%</h2>
+					<p>
+						Positionnez votre visage dans le cadre, et l'IA analyse instantanément l'hydratation, le niveau d'huile,
+						l'acné, les pores et la texture — avec une précision médicale entraînée sur 10 millions de données
+						multiraciales. Le résultat s'affiche en quelques secondes, avec des repères visuels clairs sur votre écran.
+					</p>
+					<ul class="feature-list">
+						<li>Cadrage guidé et conseils de luminosité avant chaque scan</li>
+						<li>Rapport détaillé : hydratation, niveau d'huile, sévérité de l'acné</li>
+						<li>Historique de vos scans pour suivre l'évolution dans le temps</li>
+					</ul>
+					<!-- TODO: visuel IA manquant pour cette section, à fournir -->
+				</div>
+				<div class="feature-visual">
+					<div class="scan-frame scan-frame-alt">
+						<img src="/images/esthetique/skinscan.png" alt="Écran de scan IA de la peau" class="phone-mock" loading="lazy" />
+						<span class="corner corner-tl"></span>
+						<span class="corner corner-tr"></span>
+						<span class="corner corner-bl"></span>
+						<span class="corner corner-br"></span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== FEATURE 2 — AVATAR 3D ===== -->
+		<section class="feature feature-reverse">
+			<div class="wrap feature-inner">
+				<div class="feature-visual">
+					<div class="scan-frame">
+						<img src="/images/esthetique/avatarstudio.png" alt="Avatar 3D évolutif Esthetique AI" class="phone-mock" loading="lazy" />
+						<span class="corner corner-tl"></span>
+						<span class="corner corner-tr"></span>
+						<span class="corner corner-bl"></span>
+						<span class="corner corner-br"></span>
+					</div>
+				</div>
+				<div class="feature-copy">
+					<span class="feature-index">Miroir virtuel</span>
+					<h2>Un avatar 3D qui évolue avec votre peau</h2>
+					<p>
+						Chaque scan met à jour votre modèle 3D en temps réel : teint, grain de peau et zones à surveiller
+						sont reflétés visuellement. Vous voyez littéralement votre "avant / après" progresser au fil de votre
+						routine, sans avoir à comparer des photos une par une.
+					</p>
+					<ul class="feature-list">
+						<li>Personnalisation du teint, de la forme du visage, des yeux et de la chevelure</li>
+						<li>Suivi visuel dynamique de vos progrès dans le temps</li>
+						<li>Testez virtuellement un look avant de l'appliquer en vrai</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== FEATURE 3 — GAMIFICATION ===== -->
+		<section class="feature" id="gamification">
+			<div class="wrap feature-inner">
+				<div class="feature-copy">
+					<span class="feature-index">Gamification</span>
+					<h2>Des quêtes quotidiennes et des Cristaux Beauté</h2>
+					<p>
+						Chaque analyse de peau, chaque look sauvegardé, chaque partage dans la communauté rapporte de
+						l'expérience. Le système de gamification transforme la routine matinale en une expérience interactive
+						qui incite à la régularité — avec des badges à débloquer et des défis hebdomadaires.
+					</p>
+					<ul class="feature-list">
+						<li>Analyse de peau → +50 XP · Look AR essayé → +30 XP · Look partagé → +40 XP</li>
+						<li>Badges à débloquer : premier scan, créatrice de looks, exploratrice beauté</li>
+						<li>Défis avec récompenses en Cristaux Beauté</li>
+					</ul>
+				</div>
+				<div class="feature-visual">
+					<div class="scan-frame scan-frame-alt">
+						<img src="/images/esthetique/gamification.png" alt="Écran de gamification avec XP, badges et défis" class="phone-mock" loading="lazy" />
+						<span class="corner corner-tl"></span>
+						<span class="corner corner-tr"></span>
+						<span class="corner corner-bl"></span>
+						<span class="corner corner-br"></span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== FEATURE 4 — LEADERBOARD ===== -->
+		<section class="feature feature-reverse">
+			<div class="wrap feature-inner">
+				<div class="feature-visual">
+					<div class="scan-frame">
+						<img src="/images/esthetique/leaderboard.png" alt="Classement communautaire Esthetique AI" class="phone-mock" loading="lazy" />
+						<span class="corner corner-tl"></span>
+						<span class="corner corner-tr"></span>
+						<span class="corner corner-bl"></span>
+						<span class="corner corner-br"></span>
+					</div>
+				</div>
+				<div class="feature-copy">
+					<span class="feature-index">Communauté</span>
+					<h2>Un classement qui donne envie de rester régulière</h2>
+					<p>
+						Comparez votre progression à celle de la communauté et grimpez dans le classement au fil de vos
+						scans et de vos looks partagés. La compétition amicale renforce la motivation à long terme —
+						la constance devient un jeu plutôt qu'une contrainte.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== FEATURE 5 — MARKETPLACE / AR ===== -->
+		<section class="feature" id="marketplace">
+			<div class="wrap feature-inner">
+				<div class="feature-copy">
+					<span class="feature-index">Marketplace intelligente</span>
+					<h2>5&nbsp;000+ marques Clean Beauty, avec scan d'ingrédients AR</h2>
+					<p>
+						La marketplace filtre automatiquement les produits contenant des ingrédients à éviter, et ne
+						vous propose que ceux adaptés à votre type de peau et à votre budget. L'essayage AR vous permet
+						de tester rouges à lèvres, fards et teintes en temps réel avant tout achat.
+					</p>
+					<ul class="feature-list">
+						<li>Filtrage automatique des ingrédients potentiellement nocifs</li>
+						<li>Recommandations calibrées sur votre budget</li>
+						<li>Essayage AR en temps réel avant achat</li>
+					</ul>
+					<!-- TODO: visuel IA manquant pour cette section, à fournir -->
+				</div>
+				<div class="feature-visual">
+					<div class="scan-frame scan-frame-alt">
+						<img src="/images/esthetique/armakeup.png" alt="Essayage maquillage en réalité augmentée" class="phone-mock" loading="lazy" />
+						<span class="corner corner-tl"></span>
+						<span class="corner corner-tr"></span>
+						<span class="corner corner-bl"></span>
+						<span class="corner corner-br"></span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== MOSAIC / EXTRA SCREENS ===== -->
+		<section class="mosaic">
+			<div class="wrap">
+				<h3 class="mosaic-title">Tout votre suivi, dans une seule app</h3>
+				<div class="mosaic-grid">
+					<figure>
+						<img src="/images/esthetique/savedlooks.png" alt="Looks maquillage sauvegardés" loading="lazy" />
+						<figcaption>Looks sauvegardés</figcaption>
+					</figure>
+					<figure>
+						<img src="/images/esthetique/reports.png" alt="Rapport de statistiques d'utilisation" loading="lazy" />
+						<figcaption>Statistiques &amp; rapports</figcaption>
+					</figure>
+					<figure>
+						<img src="/images/esthetique/profile.png" alt="Profil utilisatrice" loading="lazy" />
+						<figcaption>Profil &amp; préférences</figcaption>
+					</figure>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== CALLOUT BAND ===== -->
+		<section class="callout">
+			<div class="wrap callout-inner">
+				<p class="callout-text">
+					« Renforce votre motivation en vous permettant de voir réellement l'amélioration de votre visage. »
+				</p>
+			</div>
+		</section>
+
+		<!-- ===== PRICING ===== -->
+		<section class="pricing" id="prix">
+			<div class="wrap">
+				<h2 class="pricing-title">Choisissez la durée qui vous convient</h2>
+				<div class="pricing-card">
+					<div class="pricing-card-head">
+						<span class="pricing-name">Tarif</span>
+						<span class="pricing-note">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</span>
+						<span class="pricing-note">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</span>
+					</div>
+					<ul class="pricing-list">
+						{tiers.map((tier) => (
+							<li class:list={["pricing-tier", tier.featured && "featured"]} style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+								<span style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--ink);">{tier.price}</span>
+								<span style="flex:1; text-align:right;">{tier.name}{tier.badge && <small class="pricing-badge">{tier.badge}</small>}</span>
+								<a
+									href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+									class="btn btn-primary btn-full"
+									style="margin-top:0; width:auto; padding: 10px 16px; font-size: 0.85rem;"
+									data-gumroad-overlay-checkout="true"
+								>Télécharger maintenant</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- TESTIMONIALS -->
+		<section class="testimonials">
+			<div class="wrap">
+				<p class="eyebrow center">Preuve sociale</p>
+				<h2 class="pricing-title">Une routine plus claire, au quotidien.</h2>
+				<div class="testimonials-grid">
+					{testimonialProfiles.map((testimonial, index) => (
+						<article class="testimonial-card">
+							<div class="testimonial-head">
+					<img class="testimonial-avatar" src={`https://i.pravatar.cc/96?img=${16 + index}`} alt={`Photo de profil de ${testimonial.profile}`} loading="lazy" />
+								<div>
+									<strong>{testimonial.profile}</strong>
+									<span>{testimonial.profession}</span>
+								</div>
+							</div>
+							<div class="testimonial-stars" aria-label="Note : 5 sur 5">★★★★★</div>
+							<p>{testimonial.problem}</p>
+							<p>{testimonial.benefit}</p>
+						</article>
+					))}
+				</div>
+				<!-- Témoignages fictifs de maquettage — remplacer par de vrais avis clients avant mise en prod -->
+			</div>
+		</section>
+
+		<!-- ===== FINAL CTA ===== -->
+		<section class="final-cta">
+			<div class="wrap final-cta-inner">
+				<h2>Prête à voir votre peau différemment ?</h2>
+				<p>30 secondes suffisent pour votre premier diagnostic.</p>
+				<a href={paymentUrl} class="btn btn-primary btn-lg" data-gumroad-overlay-checkout="true">Commencer le diagnostic</a>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- ===== FOOTER ===== -->
+	<footer class="site-footer">
+		<div class="wrap footer-inner">
+			<div class="footer-brand">
+				<img src="/images/esthetique/logo-mark.png" alt="Esthetique AI" class="brand-mark" loading="lazy" />
+				<span class="brand-name">Esthetique AI</span>
+			</div>
+			<p class="footer-note">Un produit du portefeuille AGH Data Agency Holding SA.</p>
+		</div>
+	
+      <div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
+        <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
+        <span style="margin: 0 8px;">·</span>
+        <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
+      </div>
+    
+  </footer>
+
+<style>
+	:root {
+		--pink: #f3a0c6;
+		--purple: #9b7fe0;
+		--purple-deep: #4a2e7a;
+		--ink: #2e1b4d;
+		--crystal-gold: #e0a94f;
+		--coral: #ff6f91;
+		--bg-lavender: #fbf6fc;
+		--card-white: #ffffff;
+		--mist: #f2eaf8;
+		--teal-data: #4fb8d9;
+		--border-soft: #e8dcf2;
+
+		--font-display: 'Fraunces', serif;
+		--font-body: 'Manrope', sans-serif;
+		--font-mono: 'IBM Plex Mono', monospace;
+	}
+
+	* { box-sizing: border-box; }
+
+	html { scroll-behavior: smooth; }
+
+	body {
+		margin: 0;
+		font-family: var(--font-body);
+		color: var(--ink);
+		background: var(--bg-lavender);
+		-webkit-font-smoothing: antialiased;
+	}
+
+	img { max-width: 100%; display: block; }
+
+	.wrap {
+		max-width: 1120px;
+		margin: 0 auto;
+		padding: 0 28px;
+	}
+
+	h1, h2, h3 {
+		font-family: var(--font-display);
+		color: var(--ink);
+		margin: 0;
+		line-height: 1.08;
+	}
+
+	a { color: inherit; }
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-family: var(--font-body);
+		font-weight: 700;
+		text-decoration: none;
+		border-radius: 999px;
+		padding: 13px 26px;
+		font-size: 0.95rem;
+		transition: transform 0.18s ease, box-shadow 0.18s ease;
+		white-space: nowrap;
+	}
+	.btn:hover { transform: translateY(-2px); }
+
+	.btn-primary {
+		background: linear-gradient(120deg, var(--pink), var(--purple));
+		color: #fff;
+		box-shadow: 0 10px 24px -8px rgba(139, 100, 214, 0.55);
+	}
+	.btn-primary:hover { box-shadow: 0 14px 30px -8px rgba(139, 100, 214, 0.7); }
+
+	.btn-header {
+		background: var(--ink);
+		color: #fff;
+		padding: 10px 20px;
+		font-size: 0.85rem;
+	}
+
+	.btn-full { width: 100%; margin-top: 22px; }
+	.btn-lg { padding: 17px 36px; font-size: 1.05rem; }
+
+	/* ===== HEADER ===== */
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: rgba(251, 246, 252, 0.85);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid var(--border-soft);
+	}
+	.header-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 14px;
+		padding-bottom: 14px;
+	}
+	.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+	.brand-mark { width: 34px; height: 34px; border-radius: 10px; }
+	.brand-name { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; color: var(--ink); }
+	.nav { display: flex; gap: 28px; }
+	.nav a { text-decoration: none; font-size: 0.92rem; font-weight: 600; color: var(--purple-deep); }
+	.nav a:hover { color: var(--coral); }
+
+	/* ===== HERO ===== */
+	.hero { padding: 72px 0 40px; overflow: hidden; }
+	.hero-inner {
+		display: grid;
+		grid-template-columns: 1.05fr 0.85fr;
+		gap: 56px;
+		align-items: center;
+	}
+	.eyebrow {
+		font-family: var(--font-mono);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.72rem;
+		color: var(--coral);
+		font-weight: 600;
+		margin: 0 0 16px;
+	}
+	.hero-copy h1 {
+		font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+		font-weight: 600;
+	}
+	.hero-copy h1 em { font-style: italic; color: var(--coral); }
+	.hero-sub {
+		font-size: 1.05rem;
+		line-height: 1.65;
+		color: #5c4a78;
+		max-width: 46ch;
+		margin: 22px 0 30px;
+	}
+	.hero-cta-row { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+	.hero-cta-note { font-size: 0.82rem; color: #7a6795; font-weight: 600; }
+
+	.hero-visual { display: flex; justify-content: center; }
+
+	/* scan-frame signature motif — echoes the app's own face-scan UI */
+	.scan-frame {
+		position: relative;
+		width: 280px;
+		border-radius: 34px;
+		overflow: hidden;
+		box-shadow: 0 30px 60px -20px rgba(74, 46, 122, 0.45);
+	}
+	.scan-frame img { border-radius: 34px; }
+	.corner {
+		position: absolute;
+		width: 26px;
+		height: 26px;
+		border: 2.5px dashed #ffffff;
+		opacity: 0.85;
+	}
+	.corner-tl { top: 14px; left: 14px; border-right: none; border-bottom: none; border-top-left-radius: 10px; }
+	.corner-tr { top: 14px; right: 14px; border-left: none; border-bottom: none; border-top-right-radius: 10px; }
+	.corner-bl { bottom: 14px; left: 14px; border-right: none; border-top: none; border-bottom-left-radius: 10px; }
+	.corner-br { bottom: 14px; right: 14px; border-left: none; border-top: none; border-bottom-right-radius: 10px; }
+	.scan-frame-alt .corner { border-color: var(--purple-deep); opacity: 0.5; }
+
+	/* ===== STATS BAND ===== */
+	.stats-band {
+		background: linear-gradient(120deg, var(--pink), var(--purple));
+		padding: 40px 0;
+		margin-top: 24px;
+	}
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 24px;
+		text-align: center;
+	}
+	.stat { display: flex; flex-direction: column; gap: 6px; }
+	.stat-num {
+		font-family: var(--font-mono);
+		font-size: 2rem;
+		font-weight: 600;
+		color: #fff;
+	}
+	.stat-label {
+		font-size: 0.82rem;
+		color: rgba(255,255,255,0.92);
+		font-weight: 600;
+		max-width: 20ch;
+		margin: 0 auto;
+	}
+
+	/* ===== FEATURES ===== */
+	.feature { padding: 96px 0; }
+	.feature-inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 64px;
+		align-items: center;
+	}
+	.feature-reverse .feature-inner { direction: rtl; }
+	.feature-reverse .feature-copy,
+	.feature-reverse .feature-visual { direction: ltr; }
+
+	.feature-index {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--teal-data);
+		font-weight: 600;
+	}
+	.feature-copy h2 {
+		font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+		font-weight: 600;
+		margin: 12px 0 18px;
+	}
+	.feature-copy p {
+		font-size: 1rem;
+		line-height: 1.7;
+		color: #5c4a78;
+		margin: 0 0 20px;
+	}
+	.feature-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.feature-list li {
+		position: relative;
+		padding-left: 22px;
+		font-size: 0.92rem;
+		color: var(--purple-deep);
+		font-weight: 600;
+	}
+	.feature-list li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 7px;
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		background: var(--coral);
+	}
+	.feature-visual { display: flex; justify-content: center; }
+	.feature-visual .scan-frame { width: 250px; }
+
+	/* ===== MOSAIC ===== */
+	.mosaic { padding: 60px 0 100px; }
+	.mosaic-title {
+		text-align: center;
+		font-size: 1.6rem;
+		font-weight: 600;
+		margin-bottom: 40px;
+	}
+	.mosaic-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 28px;
+	}
+	.mosaic-grid figure {
+		margin: 0;
+		background: var(--card-white);
+		border-radius: 22px;
+		padding: 14px 14px 18px;
+		border: 1px solid var(--border-soft);
+		box-shadow: 0 18px 40px -24px rgba(74, 46, 122, 0.3);
+	}
+	.mosaic-grid img { border-radius: 14px; }
+	.mosaic-grid figcaption {
+		text-align: center;
+		margin-top: 12px;
+		font-size: 0.85rem;
+		font-weight: 700;
+		color: var(--purple-deep);
+	}
+
+	/* ===== CALLOUT ===== */
+	.callout {
+		background: var(--ink);
+		padding: 70px 0;
+	}
+	.callout-inner { text-align: center; max-width: 720px; margin: 0 auto; }
+	.callout-text {
+		font-family: var(--font-display);
+		font-style: italic;
+		font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+		color: #fff;
+		line-height: 1.5;
+		margin: 0 0 16px;
+	}
+	.callout-sub {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: #c7b6e8;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+
+	/* ===== PRICING ===== */
+	.pricing { padding: 100px 0; }
+	.pricing-title {
+		text-align: center;
+		font-size: 1.9rem;
+		font-weight: 600;
+		margin-bottom: 44px;
+	}
+	.pricing-card {
+		max-width: 420px;
+		margin: 0 auto;
+		background: var(--card-white);
+		border: 1px solid var(--border-soft);
+		border-radius: 28px;
+		padding: 40px 36px;
+		box-shadow: 0 30px 60px -30px rgba(74, 46, 122, 0.4);
+	}
+	.pricing-card-head { text-align: center; margin-bottom: 28px; }
+	.pricing-name {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--coral);
+		font-weight: 600;
+		margin-bottom: 10px;
+	}
+	.pricing-note {
+		display: block;
+		font-size: 0.82rem;
+		color: #7a6795;
+		font-weight: 600;
+		margin-top: 8px;
+	}
+	.pricing-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		border-top: 1px solid var(--border-soft);
+		padding-top: 24px;
+	}
+	.pricing-tier.featured {
+		border: 1px solid var(--pink);
+		border-radius: 14px;
+		padding: 10px;
+		margin: -10px;
+	}
+	.pricing-badge {
+		display: block;
+		margin-top: 4px;
+		font-family: var(--font-body);
+		font-size: 0.68rem;
+		color: var(--coral);
+	}
+
+	/* ===== TESTIMONIALS ===== */
+	.testimonials { padding: 0 0 100px; }
+	.testimonials .eyebrow { text-align: center; }
+	.testimonials-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 18px;
+	}
+	.testimonial-card {
+		background: var(--card-white);
+		border: 1px solid var(--border-soft);
+		border-radius: 22px;
+		padding: 24px;
+		box-shadow: 0 18px 40px -26px rgba(74, 46, 122, 0.3);
+	}
+	.testimonial-head { display: flex; align-items: center; gap: 12px; }
+	.testimonial-avatar {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--mist);
+		color: var(--purple-deep);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 800;
+	}
+	.testimonial-head strong,
+	.testimonial-head span { display: block; }
+	.testimonial-head strong { font-size: 0.95rem; }
+	.testimonial-head span { margin-top: 3px; color: #7a6795; font-size: 0.78rem; }
+	.testimonial-stars { color: var(--coral); letter-spacing: 0.12em; margin: 18px 0 12px; }
+	.testimonial-card p { color: #5c4a78; font-size: 0.9rem; line-height: 1.6; margin: 0 0 10px; }
+
+	/* ===== GUARANTEE ===== */
+	.guarantee { padding-bottom: 100px; }
+	.guarantee-inner {
+		background: var(--mist);
+		border-radius: 32px;
+		padding: 52px 56px;
+		display: flex;
+		align-items: center;
+		gap: 40px;
+	}
+	.guarantee-badge {
+		flex-shrink: 0;
+		width: 110px;
+		height: 110px;
+		border-radius: 50%;
+		background: linear-gradient(120deg, var(--crystal-gold), var(--coral));
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 1.3rem;
+	}
+	.guarantee-copy h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 10px; }
+	.guarantee-copy p { font-size: 0.98rem; line-height: 1.65; color: #5c4a78; margin: 0; max-width: 58ch; }
+
+	/* ===== FINAL CTA ===== */
+	.final-cta {
+		background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+		padding: 100px 0;
+	}
+	.final-cta-inner { text-align: center; }
+	.final-cta h2 {
+		color: #fff;
+		font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+		font-weight: 600;
+		margin-bottom: 12px;
+	}
+	.final-cta p {
+		color: #e6dcf5;
+		font-size: 1rem;
+		margin: 0 0 30px;
+	}
+
+	/* ===== FOOTER ===== */
+	.site-footer { padding: 44px 0; }
+	.footer-inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+		text-align: center;
+	}
+	.footer-brand { display: flex; align-items: center; gap: 10px; }
+	.footer-note { font-size: 0.85rem; color: #7a6795; margin: 0; }
+
+	/* ===== RESPONSIVE ===== */
+	@media (max-width: 860px) {
+		.nav { display: none; }
+		.hero-inner { grid-template-columns: 1fr; gap: 40px; }
+		.hero-visual { order: -1; }
+		.stats-grid { grid-template-columns: repeat(2, 1fr); }
+		.feature-inner, .feature-reverse .feature-inner { grid-template-columns: 1fr; direction: ltr; }
+		.feature-visual { order: -1; }
+		.mosaic-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+		.guarantee-inner { flex-direction: column; text-align: center; padding: 40px 28px; }
+		.testimonials-grid { grid-template-columns: 1fr; }
+		.pricing-card { padding: 32px 22px; }
+	}
+</style>
+
+<!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
+     is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
+<script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+
+</body>
+</html>
