@@ -80,7 +80,7 @@ const theme = getMerciTheme(currentSlug || product.slug);
   <script is:inline define:vars={{ productName: product.name }}>
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
-      const orderId = urlParams.get('order_number') || urlParams.get('sale_id') || 'GUMROAD_' + Date.now();
+      const orderId = urlParams.get('order_number') || urlParams.get('sale_id') || urlParams.get('ctransreceipt') || 'ORDER_' + Date.now();
 
       // Meta Pixel Purchase Event
       if (typeof window.fbq === 'function') {
@@ -139,7 +139,7 @@ const theme = getMerciTheme(currentSlug || product.slug);
       <h1 class="merci-title">{thankYou.title}</h1>
       <p class="merci-subtitle">{thankYou.subtitle}</p>
 
-      <!-- NOTIFICATION EMAIL CLIENT (SI GUMROAD TRANSMET ?email=...) -->
+      <!-- NOTIFICATION EMAIL CLIENT (SI TRANSMIS DANS L'URL ?email=... OU ?ccustemail=...) -->
       <div id="customer-email-box" class="customer-email-box" style="display:none;">
         Un reçu détaillé et votre clé d'accès ont été expédiés à : <strong id="customer-email-text"></strong>
       </div>
@@ -181,7 +181,7 @@ const theme = getMerciTheme(currentSlug || product.slug);
           <div class="license-content">
             <strong>Activation de votre licence</strong>
             
-            <!-- Affiché si license_key est présent dans l'URL Gumroad (?license_key=...) -->
+            <!-- Affiché si la clé de licence est présente dans l'URL (?license_key=... ou ?cinfo=...) -->
             <div id="license-key-found" style="display:none;">
               <p>Voici votre clé de licence personnelle à copier dans l'application :</p>
               <div class="key-display-row">
@@ -195,7 +195,7 @@ const theme = getMerciTheme(currentSlug || product.slug);
             <!-- Affiché par défaut si aucun paramètre d'URL n'est transmis -->
             <div id="license-key-fallback">
               <p>
-                Votre reçu d'achat ainsi que votre <strong>clé de licence personnelle</strong> vous ont été envoyés par email par Gumroad.
+                Votre reçu d'achat ainsi que votre <strong>clé de licence personnelle</strong> vous ont été envoyés par email suite à votre commande.
                 Copiez cette clé pour débloquer votre accès lors du premier lancement de l'application.
               </p>
             </div>
@@ -289,12 +289,12 @@ const theme = getMerciTheme(currentSlug || product.slug);
     </footer>
   )}
 
-  <!-- SCRIPT CLIENT GUMROAD & COPIE DE LA CLÉ -->
+  <!-- SCRIPT CLIENT EXTRACTION DONNÉES DE COMMANDE & COPIE DE LA CLÉ -->
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
-      const email = params.get('email');
-      const licenseKey = params.get('license_key');
+      const email = params.get('email') || params.get('ccustemail');
+      const licenseKey = params.get('license_key') || params.get('cinfo') || params.get('ctransreceipt') || params.get('key');
 
       // 1. Affichage de l'email si présent
       if (email) {
@@ -306,7 +306,7 @@ const theme = getMerciTheme(currentSlug || product.slug);
         }
       }
 
-      // 2. Affichage dynamique de la clé de licence si transmise par Gumroad
+      // 2. Affichage dynamique de la clé de licence si transmise dans l'URL
       if (licenseKey) {
         const keyFound = document.getElementById('license-key-found');
         const keyFallback = document.getElementById('license-key-fallback');
@@ -344,8 +344,6 @@ const theme = getMerciTheme(currentSlug || product.slug);
     });
   </script>
 
-  <!-- Script Gumroad officiel -->
-  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
 </body>
 </html>
 

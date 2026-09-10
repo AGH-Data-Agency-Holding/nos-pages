@@ -1,16 +1,13 @@
 ---
-const price = "19,99 €";
-const paymentUrl = "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai";
+const price = "69,99 €";
+const paymentUrl = "https://www.jvzoo.com/b/0/448845/1";
 
-// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
-// À CONFIRMER via l'onglet "Versions" du produit "Stories-of-Prophets-ai" sur Gumroad
-// avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Savant 1 mois", price: "19,99 €", variant: "1 Month License", featured: false },
-  { name: "Savant 3 mois", price: "39,99 €", variant: "3 Months License", featured: false },
-  { name: "Savant 6 mois", price: "69,99 €", variant: "6 Months License", featured: false },
-  { name: "Savant 12 mois", price: "129,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Savant À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+  { name: "Savant 1 mois", price: "19,99 €", jvzooId: "448841", checkoutUrl: "https://www.jvzoo.com/b/0/448841/1", featured: false },
+  { name: "Savant 3 mois", price: "39,99 €", jvzooId: "448843", checkoutUrl: "https://www.jvzoo.com/b/0/448843/1", featured: false },
+  { name: "Savant 6 mois", price: "69,99 €", jvzooId: "448845", checkoutUrl: "https://www.jvzoo.com/b/0/448845/1", featured: true, badge: "Offre Spéciale JVZoo" },
+  { name: "Savant 12 mois", price: "129,99 €", jvzooId: "448847", checkoutUrl: "https://www.jvzoo.com/b/0/448847/1", featured: false },
+  { name: "Savant À vie", price: "399,99 €", jvzooId: "448849", checkoutUrl: "https://www.jvzoo.com/b/0/448849/1", featured: false },
 ];
 
 const testimonialProfiles = [
@@ -74,8 +71,8 @@ const testimonialProfiles = [
         <a href="#tarif">Tarif</a>
       </nav>
       <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
-      <a href="#" class="btn btn-ghost btn-small">Essai gratuit 7j</a>
-      <a href={paymentUrl} class="btn btn-primary btn-small" data-gumroad-overlay-checkout="true">Essayer — {price}</a>
+      <a href="#tarif" class="btn btn-ghost btn-small">Découvrir les offres</a>
+      <a href={paymentUrl} class="btn btn-primary btn-small">Commander — {price}</a>
     </div>
   </header>
 
@@ -93,9 +90,11 @@ const testimonialProfiles = [
             Qisas AI transforme les récits coraniques en aventures simples et captivantes pour vos enfants — dans un environnement 100% sûr, sans publicité, sans internet requis, même en mode avion.
           </p>
           <div class="hero-ctas">
-            <a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Télécharger Qisas AI</a>
-            <a href="#fonctionnalites" class="btn btn-ghost">Découvrir l'application</a>
+            <a href={paymentUrl} class="btn btn-primary">Accéder à Qisas AI — {price}</a>
+            <a href="#tarif" class="btn btn-ghost">Voir les offres</a>
           </div>
+          <!-- JVZoo Tracking Pixel -->
+          <img src="https://i.jvzoo.com/open/448845" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
           <p class="hero-microcopy">Disponible en français, anglais, arabe et espagnol · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
         </div>
         <div class="hero-visual">
@@ -246,15 +245,16 @@ const testimonialProfiles = [
       <div class="wrap pricing-inner">
         <p class="eyebrow center">Tarif</p>
         <h2 class="section-title center">Choisissez la durée qui vous convient</h2>
-        <p class="price-hint">Cliquez sur une licence pour ouvrir directement le paiement correspondant.</p>
-        <p class="price-hint">Essayez gratuitement pendant 7 jours · Satisfait ou remboursé sous 30 jours</p>
+        <p class="price-hint">Sélectionnez la durée de votre choix pour finaliser votre commande en toute sécurité sur JVZoo.</p>
+        <p class="price-hint">Garantie satisfait ou remboursé sous 30 jours · Accès immédiat</p>
 
         <div class="tier-list">
           {tiers.map((tier) => (
             <a
               class={`tier-row ${tier.featured ? "featured" : ""}`}
-              href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
-              data-gumroad-overlay-checkout="true"
+              href={tier.checkoutUrl}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <div class="tier-name">
                 {tier.name}
@@ -266,6 +266,20 @@ const testimonialProfiles = [
               </div>
             </a>
           ))}
+        </div>
+
+        <!-- JVZoo Hosted Buy Button Code (Product ID 448845 - 6-month subscription) -->
+        <div class="jvzoo-hosted-box" style="margin: 36px auto 0; max-width: 560px; padding: 26px 22px; background: #FFF8EA; border: 1.5px solid var(--gold); border-radius: var(--radius); text-align: center; box-shadow: var(--shadow);">
+          <span style="display: block; font-family: 'Karla', sans-serif; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px;">Bouton Officiel Sécurisé JVZoo</span>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 700; color: var(--ink); margin-bottom: 14px;">Souscription 6 Mois — AI Prophets Stories Teller</h3>
+          <div style="margin: 16px auto; display: flex; justify-content: center; align-items: center;">
+            <a href="https://www.jvzoo.com/b/0/448845/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+              <img src="https://i.jvzoo.com/b/0/448845/1" alt="Buy Now on JVZoo - AI PROPHETS STORIES TELLER OFFLINE (6-month subscription)" border="0" />
+            </a>
+          </div>
+          <!-- JVZoo Tracking Pixel -->
+          <img src="https://i.jvzoo.com/open/448845" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+          <p style="font-size: 0.85rem; color: #5B6559; margin-top: 10px; line-height: 1.5;">Paiement 100% sécurisé via JVZoo. Confirmation instantanée et clé d'accès fournie immédiatement.</p>
         </div>
       </div>
     </section>
@@ -300,7 +314,16 @@ const testimonialProfiles = [
       <div class="wrap final-cta-inner">
         <h2>Offrez à votre enfant une bibliothèque<br/>de sagesse, partout où vous allez.</h2>
         <p>Sans Wi-Fi, sans publicité, sans compromis sur les valeurs que vous voulez transmettre.</p>
-        <a href={paymentUrl} class="btn btn-light" data-gumroad-overlay-checkout="true">Commencer maintenant — {price}</a>
+        <div style="margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 18px;">
+          <a href={paymentUrl} class="btn btn-light" target="_blank" rel="noopener noreferrer">Commander maintenant (6 Mois) — {price}</a>
+          <div class="jvzoo-hosted-btn-wrap">
+            <a href="https://www.jvzoo.com/b/0/448845/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+              <img src="https://i.jvzoo.com/b/0/448845/1" alt="Buy Now on JVZoo - AI PROPHETS STORIES TELLER OFFLINE (6-month subscription)" border="0" />
+            </a>
+          </div>
+        </div>
+        <!-- JVZoo Tracking Pixel -->
+        <img src="https://i.jvzoo.com/open/448845" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
       </div>
     </section>
 
@@ -314,15 +337,31 @@ const testimonialProfiles = [
         <span class="brand-name">Qisas <em>AI</em></span>
       </div>
       <p class="footer-note">Qisas AI est un outil pédagogique complémentaire et ne remplace pas l'enseignement religieux dispensé par un parent, un imam ou un établissement compétent.</p>
+      
+      <!-- LIENS LÉGAUX OBLIGATOIRES & EARNINGS DISCLAIMER (ISSUE #4) -->
+      <div class="footer-legal-links" style="margin: 22px 0 16px; font-size: 0.95rem; font-weight: 600;">
+        <a href="/earnings-disclaimer" style="color: var(--green); text-decoration: underline;">Earnings Disclaimer</a>
+        <span style="margin: 0 10px; color: #A3AA9E;">·</span>
+        <a href="/privacy-policy" style="color: var(--slate); text-decoration: underline;">Politique de confidentialité</a>
+        <span style="margin: 0 10px; color: #A3AA9E;">·</span>
+        <a href="/terms-and-conditions" style="color: var(--slate); text-decoration: underline;">Conditions générales</a>
+      </div>
+
+      <!-- MANDATORY JVZOO DISCLAIMER (ISSUE #1) -->
+      <div class="jvzoo-mandatory-disclaimer" style="margin: 26px auto; max-width: 900px; text-align: justify; font-size: 0.88rem; line-height: 1.65; color: #374151; background: #FFFFFF; padding: 22px 26px; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
+        <p style="margin: 0; font-size: 0.88rem; line-height: 1.65; color: #374151;">
+          Disclaimer: Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.
+        </p>
+      </div>
+
       <p class="footer-copy">© {new Date().getFullYear()} AGH Data Agency Holding SA. Tous droits réservés.</p>
-    </div>
-  
+
       <div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
         <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
         <span style="margin: 0 8px;">·</span>
         <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
       </div>
-    
+    </div>
   </footer>
 
   <style>
@@ -735,9 +774,8 @@ const testimonialProfiles = [
 
   </style>
 
-  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
-       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
-  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+  <!-- JVZoo Official Tracking Pixel (Product ID 448845) -->
+  <img src="https://i.jvzoo.com/open/448845" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
 
 </body>
 </html>

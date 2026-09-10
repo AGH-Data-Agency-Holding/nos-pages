@@ -2226,7 +2226,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Qisas AI (Stories of Prophets) : le compagnon islamique intelligent et",
     "metaTitle": "Qisas AI — Histoire des prophètes, 100% hors-ligne pour vos enfants",
     "metaDescription": "Qisas AI (Stories of Prophets) : le compagnon islamique intelligent et 100% hors-ligne pour apprendre l",
-    "paymentUrl": "https://aghhol.gumroad.com/l/Stories-of-Prophets-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448845/1",
     "theme": {
       "cream": "#FBF7EE",
       "peach": "#F3DFC8",
@@ -2428,13 +2428,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
