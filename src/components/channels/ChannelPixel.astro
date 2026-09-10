@@ -1,0 +1,16 @@
+---
+import { APP_CHANNELS } from '../../data/channels';
+
+interface Props {
+  channel: 'direct' | 'jvzoo' | 'clickbank' | 'hotmart';
+  appSlug: string;
+}
+
+const { channel, appSlug } = Astro.props;
+const config = APP_CHANNELS[appSlug];
+const jvzoo = config?.jvzoo;
+---
+
+{channel === 'jvzoo' && jvzoo && (
+  <img src={`https://i.jvzoo.com/open/${jvzoo.primaryId}`} width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+)}

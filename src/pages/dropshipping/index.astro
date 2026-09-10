@@ -1,15 +1,35 @@
 ---
-const paymentUrl = "https://www.jvzoo.com/b/0/448749/1";
-// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
+import { APP_CHANNELS } from '../../data/channels';
+import ChannelPricingAddon from '../../components/channels/ChannelPricingAddon.astro';
+import ChannelFinalCta from '../../components/channels/ChannelFinalCta.astro';
+import ChannelFooter from '../../components/channels/ChannelFooter.astro';
+import ChannelPixel from '../../components/channels/ChannelPixel.astro';
 
-// avant de considérer cette intégration comme validée.
-const tiers = [
-  { name: "ECommerce Pro 1 mois", price: "39,99 €", jvzooId: "448745", checkoutUrl: "https://www.jvzoo.com/b/0/448745/1", featured: false },
-  { name: "ECommerce Pro 3 mois", price: "99,99 €", jvzooId: "448747", checkoutUrl: "https://www.jvzoo.com/b/0/448747/1", featured: false },
-  { name: "ECommerce Pro 6 mois", price: "179,99 €", jvzooId: "448749", checkoutUrl: "https://www.jvzoo.com/b/0/448749/1", featured: true, badge: "Offre Spéciale JVZoo" },
-  { name: "ECommerce Pro 12 mois", price: "299,99 €", jvzooId: "448751", checkoutUrl: "https://www.jvzoo.com/b/0/448751/1", featured: true, badge: "Le plus choisi" },
-  { name: "ECommerce Pro À vie", price: "699,99 €", jvzooId: "448753", checkoutUrl: "https://www.jvzoo.com/b/0/448753/1", featured: false },
+interface Props {
+  channel?: 'direct' | 'jvzoo' | 'clickbank' | 'hotmart';
+}
+
+const { channel = 'direct' } = Astro.props;
+const channelConfig = APP_CHANNELS['dropshipping'];
+
+const paymentUrl = channel === 'jvzoo' && channelConfig?.jvzoo
+  ? channelConfig.jvzoo.paymentUrl
+  : channelConfig?.directPaymentUrl || "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai";
+
+const rawTiers = [
+  { name: "ECommerce Pro 1 mois", price: "39,99 €", jvzooId: "448745", featured: false, variant: "1 Month License" },
+  { name: "ECommerce Pro 3 mois", price: "99,99 €", jvzooId: "448747", featured: false, variant: "3 Months License" },
+  { name: "ECommerce Pro 6 mois", price: "179,99 €", jvzooId: "448749", featured: true, badge: channel === 'jvzoo' ? "Offre Spéciale JVZoo" : "Recommandé", variant: "6 Months License" },
+  { name: "ECommerce Pro 12 mois", price: "299,99 €", jvzooId: "448751", featured: true, badge: "Le plus choisi", variant: "12 Months License" },
+  { name: "ECommerce Pro À vie", price: "699,99 €", jvzooId: "448753", featured: false, variant: "LIFETIME" },
 ];
+
+const tiers = rawTiers.map(t => ({
+  ...t,
+  checkoutUrl: channel === 'jvzoo' && t.jvzooId
+    ? `https://www.jvzoo.com/b/0/${t.jvzooId}/1`
+    : `${paymentUrl}?variant=${encodeURIComponent(t.variant)}`
+}));
 
 const testimonialProfiles = [
   { initials: "LE", profile: "Lina", profession: "Créatrice de contenu", problem: "Je ne savais pas comment repérer un produit intéressant sans passer des heures à chercher.", benefit: "L'app m'aide à trier les idées rapidement et à me concentrer sur les plus prometteuses." },
@@ -223,27 +243,8 @@ const testimonialProfiles = [
         <div class="phone-frame">
           <img src="/images/dropshipping/screen-home.png" alt="Tableau de bord Winning Items avec score de rentabilité" />
         </div>
-      
-        <!-- JVZoo Hosted Buy Button Code (Product ID 448749) -->
-        <div class="jvzoo-hosted-box" style="margin: 36px auto 0; max-width: 560px; padding: 24px 20px; background: rgba(255,255,255,0.85); border: 1.5px solid var(--line, #E0E0E0); border-radius: 16px; text-align: center; box-shadow: var(--shadow, 0 8px 24px rgba(0,0,0,0.06));">
-          <span style="display: block; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px;">Paiement Sécurisé Vérifié JVZoo</span>
-          <div style="margin: 14px auto; display: flex; justify-content: center; align-items: center;">
-            <a href="https://www.jvzoo.com/b/0/448749/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-              <img src="https://i.jvzoo.com/b/0/448749/1" alt="Buy Now on JVZoo" border="0" />
-            </a>
-          </div>
-          <img src="https://i.jvzoo.com/open/448749" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
-          <p style="font-size: 0.84rem; opacity: 0.8; margin-top: 10px; line-height: 1.5;">Paiement 100% sécurisé via JVZoo. Confirmation instantanée et activation immédiate.</p>
-        </div>
       </div>
-    
-        <div class="jvzoo-hosted-btn-wrap" style="margin-top: 20px; display: flex; justify-content: center;">
-          <a href="https://www.jvzoo.com/b/0/448749/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-            <img src="https://i.jvzoo.com/b/0/448749/1" alt="Buy Now on JVZoo" border="0" />
-          </a>
-          <img src="https://i.jvzoo.com/open/448749" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
-        </div>
-      </div>
+    </div>
   </section>
 
   <section class="stat-band">
@@ -365,6 +366,8 @@ const testimonialProfiles = [
         <li>Catégories multiples et variées</li>
         <li>Mises à jour régulières</li>
       </ul>
+    
+      <ChannelPricingAddon channel={channel} appSlug="dropshipping" />
     </div>
   </section>
 
@@ -400,38 +403,18 @@ const testimonialProfiles = [
       <p>Télécharge Winning Items et lance ta première recherche dès aujourd'hui.</p>
       <a class="btn btn-primary" href={paymentUrl}>Télécharger Winning Items</a>
       <div class="lang-row">DISPONIBLE EN FRANÇAIS · ENGLISH · العربية · ESPAÑOL</div>
+    
+      <ChannelFinalCta channel={channel} appSlug="dropshipping" />
     </div>
   </section>
 
   <footer>
     <div class="wrap">© 2026 AGH Data Agency Holding — Winning Items. Tous droits réservés.</div>
   
-      
-      <!-- LIENS LÉGAUX OBLIGATOIRES & EARNINGS DISCLAIMER -->
-      <div class="footer-legal-links" style="margin: 22px 0 16px; font-size: 0.95rem; font-weight: 600; text-align: center;">
-        <a href="/earnings-disclaimer" style="color: inherit; text-decoration: underline;">Earnings Disclaimer</a>
-        <span style="margin: 0 10px; opacity: 0.5;">·</span>
-        <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Politique de confidentialité</a>
-        <span style="margin: 0 10px; opacity: 0.5;">·</span>
-        <a href="/terms-and-conditions" style="color: inherit; text-decoration: underline;">Conditions générales</a>
-      </div>
-
-      <!-- MANDATORY JVZOO COMPLIANCE DISCLAIMER -->
-      <div class="jvzoo-mandatory-disclaimer" style="margin: 26px auto; max-width: 900px; text-align: justify; font-size: 0.88rem; line-height: 1.65; color: #374151; background: #FFFFFF; padding: 22px 26px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
-        <p style="margin: 0; font-size: 0.88rem; line-height: 1.65; color: #374151;">
-          Disclaimer: Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.
-        </p>
-      </div>
-<div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
-        <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
-        <span style="margin: 0 8px;">·</span>
-        <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
-      </div>
-    
+    <ChannelFooter channel={channel} />
   </footer>
 
-    <!-- JVZoo Official Tracking Pixel (Product ID 448749) -->
-  <img src="https://i.jvzoo.com/open/448749" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+  <ChannelPixel channel={channel} appSlug="dropshipping" />
 
 </body>
 </html>

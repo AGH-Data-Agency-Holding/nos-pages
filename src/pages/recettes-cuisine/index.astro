@@ -1,16 +1,41 @@
 ---
-const paymentUrl = "https://www.jvzoo.com/b/0/448711/1";
-// Chaque tarif = un lien de paiement direct distinct, avec sa propre variante préselectionnée.
-// ⚠️ IMPORTANT : la valeur "variant" doit correspondre EXACTEMENT au nom de la version
+import { APP_CHANNELS } from '../../data/channels';
+import ChannelPricingAddon from '../../components/channels/ChannelPricingAddon.astro';
+import ChannelFinalCta from '../../components/channels/ChannelFinalCta.astro';
+import ChannelFooter from '../../components/channels/ChannelFooter.astro';
+import ChannelPixel from '../../components/channels/ChannelPixel.astro';
+
+interface Props {
+  channel?: 'direct' | 'jvzoo' | 'clickbank' | 'hotmart';
+}
+
+const { channel = 'direct' } = Astro.props;
+const channelConfig = APP_CHANNELS['recettes-cuisine'];
+
+const paymentUrl = channel === 'jvzoo' && channelConfig?.jvzoo
+  ? channelConfig.jvzoo.paymentUrl
+  : channel === 'clickbank' && channelConfig?.clickbank
+  ? channelConfig.clickbank.paymentUrl
+  : channel === 'hotmart' && channelConfig?.hotmart
+  ? channelConfig.hotmart.paymentUrl
+  : channelConfig?.directPaymentUrl || "https://aghhol.gumroad.com";
+
 // configurée dans l'onglet "Versions" du produit sur la plateforme de paiement. Les valeurs ci-dessous sont
 // une hypothèse basée sur les libellés affichés — à vérifier/corriger avec le nom réel.
-const tiers = [
+const rawTiers = [
   { name: "Master Chef 1 mois", price: "29,99 €", jvzooId: "448705", checkoutUrl: "https://www.jvzoo.com/b/0/448705/1", featured: false },
   { name: "Master Chef 3 mois", price: "59,99 €", jvzooId: "448709", checkoutUrl: "https://www.jvzoo.com/b/0/448709/1", featured: false },
-  { name: "Master Chef 6 mois", price: "119,99 €", jvzooId: "448711", checkoutUrl: "https://www.jvzoo.com/b/0/448711/1", featured: true, badge: "Offre Spéciale JVZoo" },
+  { name: "Master Chef 6 mois", price: "119,99 €", jvzooId: "448711", checkoutUrl: "https://www.jvzoo.com/b/0/448711/1", featured: true, badge: channel === "jvzoo" ? "Offre Spéciale JVZoo" : "Recommandé" },
   { name: "Master Chef 12 mois", price: "199,99 €", jvzooId: "448713", checkoutUrl: "https://www.jvzoo.com/b/0/448713/1", featured: true, badge: "Le plus choisi" },
   { name: "Master Chef À vie", price: "399,99 €", jvzooId: "448715", checkoutUrl: "https://www.jvzoo.com/b/0/448715/1", featured: false },
 ];
+
+const tiers = rawTiers.map(t => ({
+  ...t,
+  checkoutUrl: channel === 'jvzoo' && t.jvzooId
+    ? `https://www.jvzoo.com/b/0/${t.jvzooId}/1`
+    : `${paymentUrl}?variant=${encodeURIComponent(t.variant || t.name)}`
+}));
 
 const testimonialProfiles = [
   { photo: "/images/avatar-youssef.jpg", profile: "Youssef", profession: "Technicien réseau", problem: "Je ne savais jamais quoi cuisiner avec ce qu'il me restait.", benefit: "L'app me propose des idées simples sans me demander de tout planifier." },
@@ -227,27 +252,8 @@ const testimonialProfiles = [
           </div>
           <p class="trust-line" style="color:#F3E1D2; margin: 18px 0 0;">Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</p>
         </div>
-      
-        <!-- JVZoo Hosted Buy Button Code (Product ID 448711) -->
-        <div class="jvzoo-hosted-box" style="margin: 36px auto 0; max-width: 560px; padding: 24px 20px; background: rgba(255,255,255,0.85); border: 1.5px solid var(--line, #E0E0E0); border-radius: 16px; text-align: center; box-shadow: var(--shadow, 0 8px 24px rgba(0,0,0,0.06));">
-          <span style="display: block; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px;">Paiement Sécurisé Vérifié JVZoo</span>
-          <div style="margin: 14px auto; display: flex; justify-content: center; align-items: center;">
-            <a href="https://www.jvzoo.com/b/0/448711/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-              <img src="https://i.jvzoo.com/b/0/448711/1" alt="Buy Now on JVZoo" border="0" />
-            </a>
-          </div>
-          <img src="https://i.jvzoo.com/open/448711" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
-          <p style="font-size: 0.84rem; opacity: 0.8; margin-top: 10px; line-height: 1.5;">Paiement 100% sécurisé via JVZoo. Confirmation instantanée et activation immédiate.</p>
-        </div>
       </div>
-    
-        <div class="jvzoo-hosted-btn-wrap" style="margin-top: 20px; display: flex; justify-content: center;">
-          <a href="https://www.jvzoo.com/b/0/448711/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-            <img src="https://i.jvzoo.com/b/0/448711/1" alt="Buy Now on JVZoo" border="0" />
-          </a>
-          <img src="https://i.jvzoo.com/open/448711" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
-        </div>
-      </div>
+    </div>
   </section>
 
   <section class="band-white" id="comment">
@@ -382,6 +388,8 @@ const testimonialProfiles = [
         <li>Assistant recettes hors-ligne</li>
         <li>Favoris, défis et communauté</li>
       </ul>
+    
+      <ChannelPricingAddon channel={channel} appSlug="recettes-cuisine" />
     </div>
   </section>
 
@@ -417,40 +425,23 @@ const testimonialProfiles = [
       <p>Téléchargez Recettes Cuisine et générez votre première recette dès ce soir.</p>
       <a class="btn btn-primary" href={paymentUrl}>Télécharger Recettes Cuisine</a>
       <div class="lang-row">DISPONIBLE EN FRANÇAIS · ENGLISH · العربية</div>
+    
+      <ChannelFinalCta channel={channel} appSlug="recettes-cuisine" />
     </div>
   </section>
 
   <footer>
     <div class="wrap">© 2026 AGH Data Agency Holding — Recettes Cuisine. Tous droits réservés.</div>
-  
-      
-      <!-- LIENS LÉGAUX OBLIGATOIRES & EARNINGS DISCLAIMER -->
-      <div class="footer-legal-links" style="margin: 22px 0 16px; font-size: 0.95rem; font-weight: 600; text-align: center;">
-        <a href="/earnings-disclaimer" style="color: inherit; text-decoration: underline;">Earnings Disclaimer</a>
-        <span style="margin: 0 10px; opacity: 0.5;">·</span>
-        <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Politique de confidentialité</a>
-        <span style="margin: 0 10px; opacity: 0.5;">·</span>
-        <a href="/terms-and-conditions" style="color: inherit; text-decoration: underline;">Conditions générales</a>
-      </div>
-
-      <!-- MANDATORY JVZOO COMPLIANCE DISCLAIMER -->
-      <div class="jvzoo-mandatory-disclaimer" style="margin: 26px auto; max-width: 900px; text-align: justify; font-size: 0.88rem; line-height: 1.65; color: #374151; background: #FFFFFF; padding: 22px 26px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
-        <p style="margin: 0; font-size: 0.88rem; line-height: 1.65; color: #374151;">
-          Disclaimer: Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.
-        </p>
-      </div>
-<div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
-        <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
-        <span style="margin: 0 8px;">·</span>
-        <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
-      </div>
     
+  
+    <ChannelFooter channel={channel} />
   </footer>
 
   
   <!-- is:inline est OBLIGATOIRE ici : sans ça, Astro bundle ce script externe via Vite,
-       ce qui provoque une erreur CORS au chargement (voir diagnostic DevTools). -->  <!-- JVZoo Official Tracking Pixel (Product ID 448711) -->
-  <img src="https://i.jvzoo.com/open/448711" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+       ce qui provoque une erreur CORS au chargement (voir diagnostic DevTools). -->
+
+  <ChannelPixel channel={channel} appSlug="recettes-cuisine" />
 
 </body>
 </html>

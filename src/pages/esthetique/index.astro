@@ -1,18 +1,43 @@
 ---
+import { APP_CHANNELS } from '../../data/channels';
+import ChannelPricingAddon from '../../components/channels/ChannelPricingAddon.astro';
+import ChannelFinalCta from '../../components/channels/ChannelFinalCta.astro';
+import ChannelFooter from '../../components/channels/ChannelFooter.astro';
+import ChannelPixel from '../../components/channels/ChannelPixel.astro';
+
+interface Props {
+  channel?: 'direct' | 'jvzoo' | 'clickbank' | 'hotmart';
+}
+
+const { channel = 'direct' } = Astro.props;
+const channelConfig = APP_CHANNELS['esthetique'];
+
+const paymentUrl = channel === 'jvzoo' && channelConfig?.jvzoo
+  ? channelConfig.jvzoo.paymentUrl
+  : channel === 'clickbank' && channelConfig?.clickbank
+  ? channelConfig.clickbank.paymentUrl
+  : channel === 'hotmart' && channelConfig?.hotmart
+  ? channelConfig.hotmart.paymentUrl
+  : channelConfig?.directPaymentUrl || "https://aghhol.gumroad.com";
+
 // Esthetique AI — landing page
 
 
-const paymentUrl = "https://www.jvzoo.com/b/0/448887/1";
-// ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
 
-// avant de considérer cette intégration comme validée.
-const tiers = [
+const rawTiers = [
   { name: "Dermato Guru 1 mois", price: "19,99 €", jvzooId: "448883", checkoutUrl: "https://www.jvzoo.com/b/0/448883/1", featured: false },
   { name: "Dermato Guru 3 mois", price: "59,99 €", jvzooId: "448885", checkoutUrl: "https://www.jvzoo.com/b/0/448885/1", featured: false },
-  { name: "Dermato Guru 6 mois", price: "119,99 €", jvzooId: "448887", checkoutUrl: "https://www.jvzoo.com/b/0/448887/1", featured: true, badge: "Offre Spéciale JVZoo" },
+  { name: "Dermato Guru 6 mois", price: "119,99 €", jvzooId: "448887", checkoutUrl: "https://www.jvzoo.com/b/0/448887/1", featured: true, badge: channel === "jvzoo" ? "Offre Spéciale JVZoo" : "Recommandé" },
   { name: "Dermato Guru 12 mois", price: "199,99 €", jvzooId: "448889", checkoutUrl: "https://www.jvzoo.com/b/0/448889/1", featured: true, badge: "Le plus choisi" },
   { name: "Dermato Guru À vie", price: "399,99 €", jvzooId: "448891", checkoutUrl: "https://www.jvzoo.com/b/0/448891/1", featured: false },
 ];
+
+const tiers = rawTiers.map(t => ({
+  ...t,
+  checkoutUrl: channel === 'jvzoo' && t.jvzooId
+    ? `https://www.jvzoo.com/b/0/${t.jvzooId}/1`
+    : `${paymentUrl}?variant=${encodeURIComponent(t.variant || t.name)}`
+}));
 
 const testimonialProfiles = [
   { initials: "EL", profile: "Elisa", profession: "Responsable marketing", problem: "Je ne savais pas quels produits correspondaient vraiment aux besoins de ma peau.", benefit: "Le diagnostic m'aide à comprendre ma routine et à choisir des soins plus adaptés." },
@@ -328,7 +353,9 @@ const testimonialProfiles = [
 						))}
 					</ul>
 				</div>
-			</div>
+			
+      <ChannelPricingAddon channel={channel} appSlug="esthetique" />
+    </div>
 		</section>
 
 		<!-- TESTIMONIALS -->
@@ -362,14 +389,9 @@ const testimonialProfiles = [
 				<h2>Prête à voir votre peau différemment ?</h2>
 				<p>30 secondes suffisent pour votre premier diagnostic.</p>
 				<a href={paymentUrl} class="btn btn-primary btn-lg">Commencer le diagnostic</a>
-			
-        <div class="jvzoo-hosted-btn-wrap" style="margin-top: 20px; display: flex; justify-content: center;">
-          <a href="https://www.jvzoo.com/b/0/448887/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-            <img src="https://i.jvzoo.com/b/0/448887/1" alt="Buy Now on JVZoo" border="0" />
-          </a>
-          <img src="https://i.jvzoo.com/open/448887" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
-        </div>
-      </div>
+      
+      <ChannelFinalCta channel={channel} appSlug="esthetique" />
+    </div>
 		</section>
 
 	</main>
@@ -383,29 +405,9 @@ const testimonialProfiles = [
 			</div>
 			<p class="footer-note">Un produit du portefeuille AGH Data Agency Holding SA.</p>
 		</div>
-	
-      
-      <!-- LIENS LÉGAUX OBLIGATOIRES & EARNINGS DISCLAIMER -->
-      <div class="footer-legal-links" style="margin: 22px 0 16px; font-size: 0.95rem; font-weight: 600; text-align: center;">
-        <a href="/earnings-disclaimer" style="color: inherit; text-decoration: underline;">Earnings Disclaimer</a>
-        <span style="margin: 0 10px; opacity: 0.5;">·</span>
-        <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Politique de confidentialité</a>
-        <span style="margin: 0 10px; opacity: 0.5;">·</span>
-        <a href="/terms-and-conditions" style="color: inherit; text-decoration: underline;">Conditions générales</a>
-      </div>
-
-      <!-- MANDATORY JVZOO COMPLIANCE DISCLAIMER -->
-      <div class="jvzoo-mandatory-disclaimer" style="margin: 26px auto; max-width: 900px; text-align: justify; font-size: 0.88rem; line-height: 1.65; color: #374151; background: #FFFFFF; padding: 22px 26px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
-        <p style="margin: 0; font-size: 0.88rem; line-height: 1.65; color: #374151;">
-          Disclaimer: Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.
-        </p>
-      </div>
-<div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
-        <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
-        <span style="margin: 0 8px;">·</span>
-        <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
-      </div>
     
+  
+    <ChannelFooter channel={channel} />
   </footer>
 
 <style>
@@ -870,8 +872,7 @@ const testimonialProfiles = [
 	}
 </style>
 
-  <!-- JVZoo Official Tracking Pixel (Product ID 448887) -->
-  <img src="https://i.jvzoo.com/open/448887" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+  <ChannelPixel channel={channel} appSlug="esthetique" />
 
 </body>
 </html>

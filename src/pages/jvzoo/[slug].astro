@@ -1,0 +1,59 @@
+---
+import RecettesCuisine from '../recettes-cuisine/index.astro';
+import Dropshipping from '../dropshipping/index.astro';
+import ApkRegime from '../apk-regime/index.astro';
+import AiDoctor from '../ai-doctor/index.astro';
+import CoiffureAi from '../coiffure-ai/index.astro';
+import DresserAi from '../dresser-ai/index.astro';
+import Esthetique from '../esthetique/index.astro';
+import ExamenAssistant from '../examen-assistant/index.astro';
+import FitnessCoach from '../fitness-coach/index.astro';
+import HistoiresProphetes from '../histoires-prophetes/index.astro';
+import MentalHealth from '../mental-health/index.astro';
+import MyQuran from '../my-quran/index.astro';
+import NaturalBeauty from '../natural-beauty/index.astro';
+import NutritionKids from '../nutrition-kids/index.astro';
+import RamadanHalal from '../ramadan-halal/index.astro';
+import RuqyaCharia from '../ruqya-charia/index.astro';
+import SalatHajj from '../salat-hajj/index.astro';
+import SmartDeco from '../smart-deco/index.astro';
+import VapeStopper from '../vape-stopper/index.astro';
+
+const pages: Record<string, any> = {
+  'recettes-cuisine': RecettesCuisine,
+  'dropshipping': Dropshipping,
+  'apk-regime': ApkRegime,
+  'ai-doctor': AiDoctor,
+  'coiffure-ai': CoiffureAi,
+  'dresser-ai': DresserAi,
+  'esthetique': Esthetique,
+  'examen-assistant': ExamenAssistant,
+  'fitness-coach': FitnessCoach,
+  'histoires-prophetes': HistoiresProphetes,
+  'mental-health': MentalHealth,
+  'my-quran': MyQuran,
+  'natural-beauty': NaturalBeauty,
+  'nutrition-kids': NutritionKids,
+  'ramadan-halal': RamadanHalal,
+  'ruqya-charia': RuqyaCharia,
+  'salat-hajj': SalatHajj,
+  'smart-deco': SmartDeco,
+  'vape-stopper': VapeStopper,
+};
+
+export function getStaticPaths() {
+  const slugs = [
+    'recettes-cuisine', 'dropshipping', 'apk-regime', 'ai-doctor',
+    'coiffure-ai', 'dresser-ai', 'esthetique', 'examen-assistant',
+    'fitness-coach', 'histoires-prophetes', 'mental-health', 'my-quran',
+    'natural-beauty', 'nutrition-kids', 'ramadan-halal', 'ruqya-charia',
+    'salat-hajj', 'smart-deco', 'vape-stopper'
+  ];
+  return slugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const PageComponent = pages[slug as string];
+---
+
+{PageComponent && <PageComponent channel="jvzoo" />}

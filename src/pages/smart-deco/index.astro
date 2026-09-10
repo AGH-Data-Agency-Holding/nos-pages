@@ -1,18 +1,44 @@
 ---
+import { APP_CHANNELS } from '../../data/channels';
+import ChannelPricingAddon from '../../components/channels/ChannelPricingAddon.astro';
+import ChannelFinalCta from '../../components/channels/ChannelFinalCta.astro';
+import ChannelFooter from '../../components/channels/ChannelFooter.astro';
+import ChannelPixel from '../../components/channels/ChannelPixel.astro';
+
+interface Props {
+  channel?: 'direct' | 'jvzoo' | 'clickbank' | 'hotmart';
+}
+
+const { channel = 'direct' } = Astro.props;
+const channelConfig = APP_CHANNELS['smart-deco'];
+
+const paymentUrl = channel === 'jvzoo' && channelConfig?.jvzoo
+  ? channelConfig.jvzoo.paymentUrl
+  : channel === 'clickbank' && channelConfig?.clickbank
+  ? channelConfig.clickbank.paymentUrl
+  : channel === 'hotmart' && channelConfig?.hotmart
+  ? channelConfig.hotmart.paymentUrl
+  : channelConfig?.directPaymentUrl || "https://aghhol.gumroad.com";
+
 // Smart Deco AI — landing page
 
 
-const paymentUrl = "https://www.jvzoo.com/b/0/449023/1";
 // Grille 5 tarifs (remplace l'ancien prix unique) — montants réels fournis.
-// ⚠️ Noms de "variant" par hypothèse (même schéma que les autres apps).
 
-const tiers = [
+const rawTiers = [
   { name: "Architecte 1 mois", price: "29,99 €", jvzooId: "449019", checkoutUrl: "https://www.jvzoo.com/b/0/449019/1", featured: false },
   { name: "Architecte 3 mois", price: "59,99 €", jvzooId: "449021", checkoutUrl: "https://www.jvzoo.com/b/0/449021/1", featured: false },
-  { name: "Architecte 6 mois", price: "119,99 €", jvzooId: "449023", checkoutUrl: "https://www.jvzoo.com/b/0/449023/1", featured: true, badge: "Offre Spéciale JVZoo" },
+  { name: "Architecte 6 mois", price: "119,99 €", jvzooId: "449023", checkoutUrl: "https://www.jvzoo.com/b/0/449023/1", featured: true, badge: channel === "jvzoo" ? "Offre Spéciale JVZoo" : "Recommandé" },
   { name: "Architecte 12 mois", price: "199,99 €", jvzooId: "449025", checkoutUrl: "https://www.jvzoo.com/b/0/449025/1", featured: true, badge: "Le plus choisi" },
   { name: "Architecte À vie", price: "399,99 €", jvzooId: "449027", checkoutUrl: "https://www.jvzoo.com/b/0/449027/1", featured: false },
 ];
+
+const tiers = rawTiers.map(t => ({
+  ...t,
+  checkoutUrl: channel === 'jvzoo' && t.jvzooId
+    ? `https://www.jvzoo.com/b/0/${t.jvzooId}/1`
+    : `${paymentUrl}?variant=${encodeURIComponent(t.variant || t.name)}`
+}));
 
 const testimonialProfiles = [
   { initials: "MA", profile: "Maya", profession: "Architecte d'intérieur", problem: "J'avais du mal à visualiser une ambiance cohérente avant de commencer les travaux.", benefit: "Les propositions et les rendus m'aident à choisir une direction claire dès le départ." },
@@ -115,19 +141,7 @@ const testimonialProfiles = [
 					<div class="phone-frame phone-frame-lg">
 						<img src="/images/smart-deco/home.png" alt="Tableau de bord Smart Deco AI" />
 					</div>
-				
-        <!-- JVZoo Hosted Buy Button Code (Product ID 449023) -->
-        <div class="jvzoo-hosted-box" style="margin: 36px auto 0; max-width: 560px; padding: 24px 20px; background: rgba(255,255,255,0.85); border: 1.5px solid var(--line, #E0E0E0); border-radius: 16px; text-align: center; box-shadow: var(--shadow, 0 8px 24px rgba(0,0,0,0.06));">
-          <span style="display: block; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px;">Paiement Sécurisé Vérifié JVZoo</span>
-          <div style="margin: 14px auto; display: flex; justify-content: center; align-items: center;">
-            <a href="https://www.jvzoo.com/b/0/449023/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-              <img src="https://i.jvzoo.com/b/0/449023/1" alt="Buy Now on JVZoo" border="0" />
-            </a>
-          </div>
-          <img src="https://i.jvzoo.com/open/449023" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
-          <p style="font-size: 0.84rem; opacity: 0.8; margin-top: 10px; line-height: 1.5;">Paiement 100% sécurisé via JVZoo. Confirmation instantanée et activation immédiate.</p>
-        </div>
-      </div>
+				</div>
 			</div>
 		</section>
 
@@ -307,7 +321,7 @@ const testimonialProfiles = [
 				<p class="callout-text">
 					« Intégrez des tapis berbères, du zellige ou du mobilier artisanal dans des designs contemporains. »
 				</p>
-				<p class="callout-sub">Extrait de la description officielle du produit — Smart Deco AI, fiche officielle JVZoo</p>
+				<p class="callout-sub">Extrait de la description officielle du produit — Smart Deco AI, fiche officielle</p>
 			</div>
 		</section>
 
@@ -359,7 +373,9 @@ const testimonialProfiles = [
 						<li>Planificateur de budget et de projet</li>
 					</ul>
 				</div>
-			</div>
+			
+      <ChannelPricingAddon channel={channel} appSlug="smart-deco" />
+    </div>
 		</section>
 
 		<!-- TESTIMONIALS -->
@@ -394,14 +410,9 @@ const testimonialProfiles = [
 				<h2>Prête à réinventer votre intérieur ?</h2>
 				<p>Scannez, générez, essayez en AR — puis commandez auprès d'artisans vérifiés.</p>
 				<a href={paymentUrl} class="btn btn-primary btn-lg">Créer mon design</a>
-			
-        <div class="jvzoo-hosted-btn-wrap" style="margin-top: 20px; display: flex; justify-content: center;">
-          <a href="https://www.jvzoo.com/b/0/449023/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-            <img src="https://i.jvzoo.com/b/0/449023/1" alt="Buy Now on JVZoo" border="0" />
-          </a>
-          <img src="https://i.jvzoo.com/open/449023" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
-        </div>
-      </div>
+      
+      <ChannelFinalCta channel={channel} appSlug="smart-deco" />
+    </div>
 		</section>
 
 	</main>
@@ -415,29 +426,9 @@ const testimonialProfiles = [
 			</div>
 			<p class="footer-note">Un produit du portefeuille AGH Data Agency Holding SA.</p>
 		</div>
-	
-      
-      <!-- LIENS LÉGAUX OBLIGATOIRES & EARNINGS DISCLAIMER -->
-      <div class="footer-legal-links" style="margin: 22px 0 16px; font-size: 0.95rem; font-weight: 600; text-align: center;">
-        <a href="/earnings-disclaimer" style="color: inherit; text-decoration: underline;">Earnings Disclaimer</a>
-        <span style="margin: 0 10px; opacity: 0.5;">·</span>
-        <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Politique de confidentialité</a>
-        <span style="margin: 0 10px; opacity: 0.5;">·</span>
-        <a href="/terms-and-conditions" style="color: inherit; text-decoration: underline;">Conditions générales</a>
-      </div>
-
-      <!-- MANDATORY JVZOO COMPLIANCE DISCLAIMER -->
-      <div class="jvzoo-mandatory-disclaimer" style="margin: 26px auto; max-width: 900px; text-align: justify; font-size: 0.88rem; line-height: 1.65; color: #374151; background: #FFFFFF; padding: 22px 26px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
-        <p style="margin: 0; font-size: 0.88rem; line-height: 1.65; color: #374151;">
-          Disclaimer: Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.
-        </p>
-      </div>
-<div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
-        <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
-        <span style="margin: 0 8px;">·</span>
-        <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
-      </div>
     
+  
+    <ChannelFooter channel={channel} />
   </footer>
 
 <style>
@@ -941,8 +932,7 @@ const testimonialProfiles = [
 	}
 </style>
 
-  <!-- JVZoo Official Tracking Pixel (Product ID 449023) -->
-  <img src="https://i.jvzoo.com/open/449023" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+  <ChannelPixel channel={channel} appSlug="smart-deco" />
 
 </body>
 </html>

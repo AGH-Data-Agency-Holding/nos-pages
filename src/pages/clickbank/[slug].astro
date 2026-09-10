@@ -1,0 +1,27 @@
+---
+import VapeStopper from '../vape-stopper/index.astro';
+import NaturalBeauty from '../natural-beauty/index.astro';
+import FitnessCoach from '../fitness-coach/index.astro';
+import ApkRegime from '../apk-regime/index.astro';
+
+const pages: Record<string, any> = {
+  'vape-stopper': VapeStopper,
+  'natural-beauty': NaturalBeauty,
+  'fitness-coach': FitnessCoach,
+  'apk-regime': ApkRegime,
+};
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'vape-stopper' } },
+    { params: { slug: 'natural-beauty' } },
+    { params: { slug: 'fitness-coach' } },
+    { params: { slug: 'apk-regime' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const PageComponent = pages[slug as string];
+---
+
+{PageComponent && <PageComponent channel="clickbank" />}

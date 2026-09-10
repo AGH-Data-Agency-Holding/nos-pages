@@ -1,0 +1,27 @@
+---
+import MyQuran from '../my-quran/index.astro';
+import SalatHajj from '../salat-hajj/index.astro';
+import HistoiresProphetes from '../histoires-prophetes/index.astro';
+import NutritionKids from '../nutrition-kids/index.astro';
+
+const pages: Record<string, any> = {
+  'my-quran': MyQuran,
+  'salat-hajj': SalatHajj,
+  'histoires-prophetes': HistoiresProphetes,
+  'nutrition-kids': NutritionKids,
+};
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'my-quran' } },
+    { params: { slug: 'salat-hajj' } },
+    { params: { slug: 'histoires-prophetes' } },
+    { params: { slug: 'nutrition-kids' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const PageComponent = pages[slug as string];
+---
+
+{PageComponent && <PageComponent channel="hotmart" />}

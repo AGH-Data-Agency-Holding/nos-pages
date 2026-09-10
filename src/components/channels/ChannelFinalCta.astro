@@ -1,0 +1,39 @@
+---
+import { APP_CHANNELS } from '../../data/channels';
+
+interface Props {
+  channel: 'direct' | 'jvzoo' | 'clickbank' | 'hotmart';
+  appSlug: string;
+}
+
+const { channel, appSlug } = Astro.props;
+const config = APP_CHANNELS[appSlug];
+const jvzoo = config?.jvzoo;
+const clickbank = config?.clickbank;
+const hotmart = config?.hotmart;
+---
+
+{channel === 'jvzoo' && jvzoo && (
+  <div class="jvzoo-hosted-btn-wrap" style="margin-top: 20px; display: flex; justify-content: center;">
+    <a href={`https://www.jvzoo.com/b/0/${jvzoo.primaryId}/1`} target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+      <img src={`https://i.jvzoo.com/b/0/${jvzoo.primaryId}/1`} alt="Buy Now on JVZoo" border="0" />
+    </a>
+    <img src={`https://i.jvzoo.com/open/${jvzoo.primaryId}`} width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+  </div>
+)}
+
+{channel === 'clickbank' && clickbank && (
+  <div class="clickbank-hosted-btn-wrap" style="margin-top: 20px; display: flex; justify-content: center;">
+    <a href={clickbank.paymentUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 16px 36px; font-size: 1.05rem; font-weight: 700; border-radius: 100px; text-decoration: none;">
+      Télécharger via ClickBank Sécurisé →
+    </a>
+  </div>
+)}
+
+{channel === 'hotmart' && hotmart && (
+  <div class="hotmart-hosted-btn-wrap" style="margin-top: 20px; display: flex; justify-content: center;">
+    <a href={hotmart.paymentUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 16px 36px; font-size: 1.05rem; font-weight: 700; border-radius: 100px; text-decoration: none;">
+      Télécharger via Hotmart Sécurisé →
+    </a>
+  </div>
+)}
