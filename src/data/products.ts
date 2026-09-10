@@ -136,7 +136,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Scannez ce qu",
     "metaTitle": "Recettes Cuisine — Le chef IA hors-ligne anti-gaspi",
     "metaDescription": "Scannez ce qu",
-    "paymentUrl": "https://aghhol.gumroad.com/l/cooking-chief-kitchen-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448711/1",
     "theme": {
       "cream": "#FDEEE1",
       "peach": "#FBD9BE",
@@ -350,13 +350,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -375,7 +375,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "IA hors-ligne d",
     "metaTitle": "Winning Items — Trouve tes produits gagnants, même hors-ligne",
     "metaDescription": "IA hors-ligne d",
-    "paymentUrl": "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448749/1",
     "theme": {
       "cream": "#FBF3EA",
       "peach": "#F3DFC8",
@@ -577,13 +577,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -602,7 +602,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Plans minceur 7/14/30 jours, coach IA hors-ligne, scanner de repas et ",
     "metaTitle": "AI Diet Coach — Ton coach minceur IA, même sans internet",
     "metaDescription": "Plans minceur 7/14/30 jours, coach IA hors-ligne, scanner de repas et suivi complet. Fonctionne sans connexion internet.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/DIET-COACH-ai-fitness",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448769/1",
     "theme": {
       "cream": "#FBEAD9",
       "peach": "#F4CBA0",
@@ -806,13 +806,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -831,7 +831,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "MEDICAL AI (Your Doctor AI) : assistant santé IA 24h/24 pour diagnosti",
     "metaTitle": "MEDICAL AI — Votre assistant santé IA, disponible 24h/24",
     "metaDescription": "MEDICAL AI (Your Doctor AI) : assistant santé IA 24h/24 pour diagnostic préliminaire, suivi de vos symptômes et prise de rendez-vous. Conforme RGPD et HIPAA, fonctionne à 97% hors-ligne.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/doctor-healthcare",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448993/1",
     "theme": {
       "cream": "#F7F8FC",
       "peach": "#F3DFC8",
@@ -1044,13 +1044,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -1069,7 +1069,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Hair Changer (Coiffure Virtual AR) : essayez des centaines de coiffure",
     "metaTitle": "Hair Changer — Essayez coupes et couleurs en réalité augmentée",
     "metaDescription": "Hair Changer (Coiffure Virtual AR) : essayez des centaines de coiffures et couleurs en réalité augmentée, obtenez des recommandations IA selon votre morphologie, et réservez votre salon en un clic.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/haircut-hairstyle-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448983/1",
     "theme": {
       "cream": "#FAFAFC",
       "peach": "#F3DFC8",
@@ -1282,13 +1282,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -1307,7 +1307,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Scanne ta garde-robe, génère des tenues selon la météo et l",
     "metaTitle": "Dresser AI — Ton styliste IA, même sans connexion",
     "metaDescription": "Scanne ta garde-robe, génère des tenues selon la météo et l",
-    "paymentUrl": "https://aghhol.gumroad.com/l/Styliste-Dresser-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448865/1",
     "theme": {
       "cream": "#FDFDFD",
       "peach": "#F3DFC8",
@@ -1509,13 +1509,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -1534,7 +1534,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Esthetique AI révolutionne les soins du visage grâce à une IA analytiq",
     "metaTitle": "Esthetique AI — Routine Visage & Diagnostic Peau par IA",
     "metaDescription": "Esthetique AI révolutionne les soins du visage grâce à une IA analytique de pointe. Diagnostic dermatologique en 30 secondes, avatar 3D évolutif, routine gamifiée.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/makeup-skincare-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448887/1",
     "theme": {
       "cream": "#FDFDFD",
       "peach": "#f2eaf8",
@@ -1747,13 +1747,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -1772,7 +1772,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "QCM générés par IA, tuteur 100% hors-ligne, suivi de progression intel",
     "metaTitle": "Exam Assistant — Le tuteur IA hors-ligne pour réussir tes examens",
     "metaDescription": "QCM générés par IA, tuteur 100% hors-ligne, suivi de progression intelligent. Révise sans Wi-Fi, même en mode avion.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/zclcjl",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448731/1",
     "theme": {
       "cream": "#F6F6FD",
       "peach": "#F3DFC8",
@@ -1974,13 +1974,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -1999,7 +1999,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Programmes personnalisés, coach IA conversationnel, bibliothèque de 15",
     "metaTitle": "MARCO — Ton coach fitness IA, chez toi, même hors-ligne",
     "metaDescription": "Programmes personnalisés, coach IA conversationnel, bibliothèque de 150+ exercices vidéo, adaptation au Ramadan. Aucune salle de sport requise.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/fitness-coach-smart-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448759/1",
     "theme": {
       "cream": "#F3F6FB",
       "peach": "#F3DFC8",
@@ -2201,13 +2201,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -2453,7 +2453,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Calmenow (Mindful AI) : votre compagnon IA pour le bien-être mental, d",
     "metaTitle": "Calmenow — Votre coach IA de bien-être mental, 24h/24",
     "metaDescription": "Calmenow (Mindful AI) : votre compagnon IA pour le bien-être mental, disponible 24h/24. Suivi d",
-    "paymentUrl": "https://aghhol.gumroad.com/l/mental-heath-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448877/1",
     "theme": {
       "cream": "#FAFAF8",
       "peach": "#F3DFC8",
@@ -2644,13 +2644,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -2669,7 +2669,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "My Quran : votre professeur de Tajwid par IA, 100% hors-ligne et privé",
     "metaTitle": "My Quran — Apprenez le Tajwid avec l'IA, 100% hors-ligne",
     "metaDescription": "My Quran : votre professeur de Tajwid par IA, 100% hors-ligne et privé. Correction en temps réel de votre récitation, Coran complet avec audio, mode nuit. Gratuit, sans abonnement.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/coran-ai-hifz",
+    "paymentUrl": "https://www.jvzoo.com/b/0/449233/1",
     "theme": {
       "cream": "#F7F8F5",
       "peach": "#F3DFC8",
@@ -2879,13 +2879,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -2904,7 +2904,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Recettes DIY pour la peau, les cheveux et le corps, assistant IA 100% ",
     "metaTitle": "Natural Beauty — Ta routine beauté naturelle, même hors-ligne",
     "metaDescription": "Recettes DIY pour la peau, les cheveux et le corps, assistant IA 100% hors-ligne, ingrédients simples de cuisine. Sublime ta beauté naturelle, sans connexion.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/skin-natural-beauty-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448719/1",
     "theme": {
       "cream": "#FFF6F2",
       "peach": "#F3DFC8",
@@ -3106,13 +3106,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -3131,7 +3131,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Calendrier de diversification intelligent, 800+ recettes, suivi de cro",
     "metaTitle": "Baby Food — Diversification Alimentaire & Nutrition Bébé par IA",
     "metaDescription": "Calendrier de diversification intelligent, 800+ recettes, suivi de croissance selon les courbes OMS et nutritionniste IA 24/7 pour accompagner bébé sans stress.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/Baby-child-health",
+    "paymentUrl": "https://www.jvzoo.com/b/0/449003/1",
     "theme": {
       "cream": "#fbfefc",
       "peach": "#eaf6f1",
@@ -3333,13 +3333,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -3358,7 +3358,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Coach IA prédictif pour le Suhoor et l",
     "metaTitle": "Ramadan Halal AI — Coach de jeûne, scanner halal & Zakat",
     "metaDescription": "Coach IA prédictif pour le Suhoor et l",
-    "paymentUrl": "https://aghhol.gumroad.com/l/ramadan-halal-pray-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448833/1",
     "theme": {
       "cream": "#F5F1E6",
       "peach": "#E9DFC4",
@@ -3572,13 +3572,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -3597,7 +3597,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Ruqya Charia IA : premier assistant au monde reliant sciences islamiqu",
     "metaTitle": "Ruqya Charia IA — Diagnostic spirituel et bien-être par l'IA",
     "metaDescription": "Ruqya Charia IA : premier assistant au monde reliant sciences islamiques authentiques et psychologie moderne. Analyse faciale IA, questionnaires cliniques, diagnostic spirituel précis et récitations coraniques de Ruqya personnalisées.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/rokia-charia-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/449013/1",
     "theme": {
       "cream": "#FAF9F6",
       "peach": "#F3DFC8",
@@ -3810,13 +3810,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -3835,7 +3835,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Salat & Hajj AI : rappels de prière intelligents adaptés à votre Madha",
     "metaTitle": "Salat & Hajj AI — Votre compagnon spirituel intelligent",
     "metaDescription": "Salat & Hajj AI : rappels de prière intelligents adaptés à votre Madhab, simulation 3D/RA du Hajj et de la Omra, Cheikh virtuel IA disponible 24/7, calculatrice de Zakat. 100% hors-ligne.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/salat-hajj-ai",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448973/1",
     "theme": {
       "cream": "#FAF9F5",
       "peach": "#F3DFC8",
@@ -4037,13 +4037,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -4062,7 +4062,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Le décorateur IA qui fusionne design moderne et artisanat local : scan",
     "metaTitle": "Smart Deco AI — Décoration d'Intérieur & Design 3D par IA",
     "metaDescription": "Le décorateur IA qui fusionne design moderne et artisanat local : scanner d",
-    "paymentUrl": "https://aghhol.gumroad.com/l/betob",
+    "paymentUrl": "https://www.jvzoo.com/b/0/449023/1",
     "theme": {
       "cream": "#faf6f0",
       "peach": "#f0eef9",
@@ -4275,13 +4275,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",
@@ -4300,7 +4300,7 @@ export const products: Record<string, ProductConfig> = {
     "shortTagline": "Vape Stopper : votre coach IA 24h/24 pour un sevrage progressif, durab",
     "metaTitle": "Vape Stopper — Arrêtez la vape avec un coach IA 24h/24",
     "metaDescription": "Vape Stopper : votre coach IA 24h/24 pour un sevrage progressif, durable et personnalisé de la cigarette électronique. Plan sur 8 à 12 semaines, mode SOS Craving, plus de 30 techniques validées.",
-    "paymentUrl": "https://aghhol.gumroad.com/l/bjwrxx",
+    "paymentUrl": "https://www.jvzoo.com/b/0/448855/1",
     "theme": {
       "cream": "#F7F6F2",
       "peach": "#F3DFC8",
@@ -4513,13 +4513,13 @@ export const products: Record<string, ProductConfig> = {
         {
           "number": 3,
           "title": "Activez votre licence",
-          "description": "Lancez l'application et saisissez la clé de licence personnelle reçue par email de la part de Gumroad."
+          "description": "Lancez l'application et saisissez la clé de licence reçue immédiatement après confirmation de votre commande sur JVZoo."
         }
       ],
       "faq": [
         {
           "question": "Où puis-je trouver ma clé de licence ?",
-          "answer": "Votre clé de licence vous a été envoyée automatiquement par email par Gumroad immédiatement après le paiement."
+          "answer": "Votre clé de licence vous a été transmise automatiquement par email après votre commande sur JVZoo, et est également consultable dans les détails de votre reçu d'achat JVZoo."
         },
         {
           "question": "L'application fonctionne-t-elle sans connexion ?",

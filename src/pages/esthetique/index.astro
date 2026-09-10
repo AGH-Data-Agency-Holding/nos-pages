@@ -1,18 +1,17 @@
 ---
 // Esthetique AI — landing page
-// Copy source: https://aghhol.gumroad.com/l/makeup-skincare-ai (French version of the Gumroad listing)
 
-const paymentUrl = "https://aghhol.gumroad.com/l/makeup-skincare-ai";
 
+const paymentUrl = "https://www.jvzoo.com/b/0/448887/1";
 // ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
-// À CONFIRMER via l'onglet "Versions" du produit "makeup-skincare-ai" sur Gumroad
+
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "Dermato Guru 1 mois", price: "19,99 €", variant: "1 Month License", featured: false },
-  { name: "Dermato Guru 3 mois", price: "59,99 €", variant: "3 Months License", featured: false },
-  { name: "Dermato Guru 6 mois", price: "119,99 €", variant: "6 Months License", featured: false },
-  { name: "Dermato Guru 12 mois", price: "199,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "Dermato Guru À vie", price: "399,99 €", variant: "LIFETIME", featured: false },
+  { name: "Dermato Guru 1 mois", price: "19,99 €", jvzooId: "448883", checkoutUrl: "https://www.jvzoo.com/b/0/448883/1", featured: false },
+  { name: "Dermato Guru 3 mois", price: "59,99 €", jvzooId: "448885", checkoutUrl: "https://www.jvzoo.com/b/0/448885/1", featured: false },
+  { name: "Dermato Guru 6 mois", price: "119,99 €", jvzooId: "448887", checkoutUrl: "https://www.jvzoo.com/b/0/448887/1", featured: true, badge: "Offre Spéciale JVZoo" },
+  { name: "Dermato Guru 12 mois", price: "199,99 €", jvzooId: "448889", checkoutUrl: "https://www.jvzoo.com/b/0/448889/1", featured: true, badge: "Le plus choisi" },
+  { name: "Dermato Guru À vie", price: "399,99 €", jvzooId: "448891", checkoutUrl: "https://www.jvzoo.com/b/0/448891/1", featured: false },
 ];
 
 const testimonialProfiles = [
@@ -95,7 +94,7 @@ const testimonialProfiles = [
 						et les pores — puis découvrez une routine sur mesure adaptée à votre type de peau et à votre budget.
 					</p>
 					<div class="hero-cta-row">
-						<a href={paymentUrl} class="btn btn-primary" data-gumroad-overlay-checkout="true">Commencer le diagnostic</a>
+						<a href={paymentUrl} class="btn btn-primary">Commencer le diagnostic</a>
 						<span class="hero-cta-note">Diagnostic 100% hors-ligne · Satisfait ou remboursé sous 30 jours · Essayez gratuitement pendant 7 jours</span>
 					</div>
 				</div>
@@ -321,10 +320,9 @@ const testimonialProfiles = [
 								<span style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--ink);">{tier.price}</span>
 								<span style="flex:1; text-align:right;">{tier.name}{tier.badge && <small class="pricing-badge">{tier.badge}</small>}</span>
 								<a
-									href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
+									href={tier.checkoutUrl || paymentUrl} target="_blank" rel="noopener noreferrer"
 									class="btn btn-primary btn-full"
 									style="margin-top:0; width:auto; padding: 10px 16px; font-size: 0.85rem;"
-									data-gumroad-overlay-checkout="true"
 								>Télécharger maintenant</a>
 							</li>
 						))}
@@ -363,8 +361,15 @@ const testimonialProfiles = [
 			<div class="wrap final-cta-inner">
 				<h2>Prête à voir votre peau différemment ?</h2>
 				<p>30 secondes suffisent pour votre premier diagnostic.</p>
-				<a href={paymentUrl} class="btn btn-primary btn-lg" data-gumroad-overlay-checkout="true">Commencer le diagnostic</a>
-			</div>
+				<a href={paymentUrl} class="btn btn-primary btn-lg">Commencer le diagnostic</a>
+			
+        <div class="jvzoo-hosted-btn-wrap" style="margin-top: 20px; display: flex; justify-content: center;">
+          <a href="https://www.jvzoo.com/b/0/448887/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+            <img src="https://i.jvzoo.com/b/0/448887/1" alt="Buy Now on JVZoo" border="0" />
+          </a>
+          <img src="https://i.jvzoo.com/open/448887" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+        </div>
+      </div>
 		</section>
 
 	</main>
@@ -379,7 +384,23 @@ const testimonialProfiles = [
 			<p class="footer-note">Un produit du portefeuille AGH Data Agency Holding SA.</p>
 		</div>
 	
-      <div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
+      
+      <!-- LIENS LÉGAUX OBLIGATOIRES & EARNINGS DISCLAIMER -->
+      <div class="footer-legal-links" style="margin: 22px 0 16px; font-size: 0.95rem; font-weight: 600; text-align: center;">
+        <a href="/earnings-disclaimer" style="color: inherit; text-decoration: underline;">Earnings Disclaimer</a>
+        <span style="margin: 0 10px; opacity: 0.5;">·</span>
+        <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Politique de confidentialité</a>
+        <span style="margin: 0 10px; opacity: 0.5;">·</span>
+        <a href="/terms-and-conditions" style="color: inherit; text-decoration: underline;">Conditions générales</a>
+      </div>
+
+      <!-- MANDATORY JVZOO COMPLIANCE DISCLAIMER -->
+      <div class="jvzoo-mandatory-disclaimer" style="margin: 26px auto; max-width: 900px; text-align: justify; font-size: 0.88rem; line-height: 1.65; color: #374151; background: #FFFFFF; padding: 22px 26px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
+        <p style="margin: 0; font-size: 0.88rem; line-height: 1.65; color: #374151;">
+          Disclaimer: Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.
+        </p>
+      </div>
+<div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
         <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
         <span style="margin: 0 8px;">·</span>
         <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
@@ -849,9 +870,8 @@ const testimonialProfiles = [
 	}
 </style>
 
-<!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
-     is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
-<script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+  <!-- JVZoo Official Tracking Pixel (Product ID 448887) -->
+  <img src="https://i.jvzoo.com/open/448887" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
 
 </body>
 </html>

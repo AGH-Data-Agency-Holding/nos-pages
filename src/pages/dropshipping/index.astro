@@ -1,15 +1,14 @@
 ---
-const paymentUrl = "https://aghhol.gumroad.com/l/dropshopping-winning-product-ai";
-
+const paymentUrl = "https://www.jvzoo.com/b/0/448749/1";
 // ⚠️ Noms de "variant" par hypothèse (même schéma que les apps précédentes).
-// À CONFIRMER via l'onglet "Versions" du produit "dropshopping-winning-product-ai" sur Gumroad
+
 // avant de considérer cette intégration comme validée.
 const tiers = [
-  { name: "ECommerce Pro 1 mois", price: "39,99 €", variant: "1 Month License", featured: false },
-  { name: "ECommerce Pro 3 mois", price: "99,99 €", variant: "3 Months License", featured: false },
-  { name: "ECommerce Pro 6 mois", price: "179,99 €", variant: "6 Months License", featured: false },
-  { name: "ECommerce Pro 12 mois", price: "299,99 €", variant: "12 Months License", featured: true, badge: "Le plus choisi" },
-  { name: "ECommerce Pro À vie", price: "699,99 €", variant: "LIFETIME", featured: false },
+  { name: "ECommerce Pro 1 mois", price: "39,99 €", jvzooId: "448745", checkoutUrl: "https://www.jvzoo.com/b/0/448745/1", featured: false },
+  { name: "ECommerce Pro 3 mois", price: "99,99 €", jvzooId: "448747", checkoutUrl: "https://www.jvzoo.com/b/0/448747/1", featured: false },
+  { name: "ECommerce Pro 6 mois", price: "179,99 €", jvzooId: "448749", checkoutUrl: "https://www.jvzoo.com/b/0/448749/1", featured: true, badge: "Offre Spéciale JVZoo" },
+  { name: "ECommerce Pro 12 mois", price: "299,99 €", jvzooId: "448751", checkoutUrl: "https://www.jvzoo.com/b/0/448751/1", featured: true, badge: "Le plus choisi" },
+  { name: "ECommerce Pro À vie", price: "699,99 €", jvzooId: "448753", checkoutUrl: "https://www.jvzoo.com/b/0/448753/1", featured: false },
 ];
 
 const testimonialProfiles = [
@@ -202,7 +201,7 @@ const testimonialProfiles = [
       </nav>
       <!-- Bouton essai gratuit : lien/logique à configurer par l'équipe dev, ne pas connecter au checkout existant -->
       <a class="btn btn-ghost" href="#">Essai gratuit 7j</a>
-      <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger</a>
+      <a class="btn btn-primary" href={paymentUrl}>Télécharger</a>
     </div>
   </header>
 
@@ -213,7 +212,7 @@ const testimonialProfiles = [
         <h1>Trouve ton prochain <em>produit gagnant</em>, sans y passer des heures.</h1>
         <p class="lede">Winning Items analyse les tendances du marché et te propose des idées de produits rentables grâce à une IA embarquée — aucune connexion internet requise pour chercher.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger l'app</a>
+          <a class="btn btn-primary" href={paymentUrl}>Télécharger l'app</a>
           <a class="btn btn-ghost" href="#fonctionnalites">Voir les fonctionnalités</a>
         </div>
         <p class="trust-line"><strong>fonctionne hors-ligne</strong> · Satisfait ou remboursé sous 30 jours</p>
@@ -224,8 +223,27 @@ const testimonialProfiles = [
         <div class="phone-frame">
           <img src="/images/dropshipping/screen-home.png" alt="Tableau de bord Winning Items avec score de rentabilité" />
         </div>
+      
+        <!-- JVZoo Hosted Buy Button Code (Product ID 448749) -->
+        <div class="jvzoo-hosted-box" style="margin: 36px auto 0; max-width: 560px; padding: 24px 20px; background: rgba(255,255,255,0.85); border: 1.5px solid var(--line, #E0E0E0); border-radius: 16px; text-align: center; box-shadow: var(--shadow, 0 8px 24px rgba(0,0,0,0.06));">
+          <span style="display: block; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px;">Paiement Sécurisé Vérifié JVZoo</span>
+          <div style="margin: 14px auto; display: flex; justify-content: center; align-items: center;">
+            <a href="https://www.jvzoo.com/b/0/448749/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+              <img src="https://i.jvzoo.com/b/0/448749/1" alt="Buy Now on JVZoo" border="0" />
+            </a>
+          </div>
+          <img src="https://i.jvzoo.com/open/448749" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+          <p style="font-size: 0.84rem; opacity: 0.8; margin-top: 10px; line-height: 1.5;">Paiement 100% sécurisé via JVZoo. Confirmation instantanée et activation immédiate.</p>
+        </div>
       </div>
-    </div>
+    
+        <div class="jvzoo-hosted-btn-wrap" style="margin-top: 20px; display: flex; justify-content: center;">
+          <a href="https://www.jvzoo.com/b/0/448749/1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+            <img src="https://i.jvzoo.com/b/0/448749/1" alt="Buy Now on JVZoo" border="0" />
+          </a>
+          <img src="https://i.jvzoo.com/open/448749" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
+        </div>
+      </div>
   </section>
 
   <section class="stat-band">
@@ -326,8 +344,7 @@ const testimonialProfiles = [
         {tiers.map((tier) => (
           <a
             class={`tier-row ${tier.featured ? "featured" : ""}`}
-            href={`${paymentUrl}?variant=${encodeURIComponent(tier.variant)}`}
-            data-gumroad-overlay-checkout="true"
+            href={tier.checkoutUrl || paymentUrl} target="_blank" rel="noopener noreferrer"
           >
             <div class="tier-name">
               {tier.name}
@@ -381,7 +398,7 @@ const testimonialProfiles = [
       <span class="eyebrow" style="color:#8A7658">Prêt à trouver ton best-seller ?</span>
       <h2>Ton prochain produit gagnant t'attend.</h2>
       <p>Télécharge Winning Items et lance ta première recherche dès aujourd'hui.</p>
-      <a class="btn btn-primary" href={paymentUrl} data-gumroad-overlay-checkout="true">Télécharger Winning Items</a>
+      <a class="btn btn-primary" href={paymentUrl}>Télécharger Winning Items</a>
       <div class="lang-row">DISPONIBLE EN FRANÇAIS · ENGLISH · العربية · ESPAÑOL</div>
     </div>
   </section>
@@ -389,7 +406,23 @@ const testimonialProfiles = [
   <footer>
     <div class="wrap">© 2026 AGH Data Agency Holding — Winning Items. Tous droits réservés.</div>
   
-      <div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
+      
+      <!-- LIENS LÉGAUX OBLIGATOIRES & EARNINGS DISCLAIMER -->
+      <div class="footer-legal-links" style="margin: 22px 0 16px; font-size: 0.95rem; font-weight: 600; text-align: center;">
+        <a href="/earnings-disclaimer" style="color: inherit; text-decoration: underline;">Earnings Disclaimer</a>
+        <span style="margin: 0 10px; opacity: 0.5;">·</span>
+        <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Politique de confidentialité</a>
+        <span style="margin: 0 10px; opacity: 0.5;">·</span>
+        <a href="/terms-and-conditions" style="color: inherit; text-decoration: underline;">Conditions générales</a>
+      </div>
+
+      <!-- MANDATORY JVZOO COMPLIANCE DISCLAIMER -->
+      <div class="jvzoo-mandatory-disclaimer" style="margin: 26px auto; max-width: 900px; text-align: justify; font-size: 0.88rem; line-height: 1.65; color: #374151; background: #FFFFFF; padding: 22px 26px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
+        <p style="margin: 0; font-size: 0.88rem; line-height: 1.65; color: #374151;">
+          Disclaimer: Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.
+        </p>
+      </div>
+<div style="margin-top: 14px; font-size: 0.85rem; opacity: 0.85;">
         <span>Support officiel : <a href="mailto:contact@datagenere.com" style="text-decoration: underline;">contact@datagenere.com</a></span>
         <span style="margin: 0 8px;">·</span>
         <span>WhatsApp : <a href="https://wa.me/212710911949" target="_blank" rel="noopener" style="text-decoration: underline;">+212 710-911949</a></span>
@@ -397,9 +430,8 @@ const testimonialProfiles = [
     
   </footer>
 
-  <!-- Script du prestataire de paiement : détecte les liens pointant vers le domaine de paiement et ouvre le paiement en pop-up.
-       is:inline est OBLIGATOIRE : sans ça, Astro bundle ce script externe via Vite, ce qui provoque une erreur CORS au chargement. -->
-  <script src="https://gumroad.com/js/gumroad.js" is:inline></script>
+    <!-- JVZoo Official Tracking Pixel (Product ID 448749) -->
+  <img src="https://i.jvzoo.com/open/448749" width="1" height="1" style="display:none;" alt="JVZoo Tracking Pixel" />
 
 </body>
 </html>
