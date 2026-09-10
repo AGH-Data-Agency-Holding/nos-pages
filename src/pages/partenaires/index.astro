@@ -1,0 +1,961 @@
+---
+import { APP_CHANNELS } from '../../data/channels';
+
+interface AppPartner {
+  slug: string;
+  name: string;
+  category: 'b2b' | 'health' | 'edu' | 'lifestyle';
+  categoryLabel: string;
+  primaryNetwork: 'jvzoo' | 'clickbank' | 'hotmart' | 'direct';
+  payoutRate: string;
+  dedicatedUrl: string;
+  directUrl: string;
+  bonus?: string;
+  hook: string;
+}
+
+const partnerApps: AppPartner[] = [
+  // B2B & E-COMMERCE (JVZoo / WarriorPlus)
+  {
+    slug: 'dropshipping',
+    name: 'Winning Items / Dropshipping Finder',
+    category: 'b2b',
+    categoryLabel: 'E-Commerce & B2B',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/dropshipping',
+    directUrl: 'https://datagenere.com/dropshipping',
+    hook: 'Détecteur de produits gagnants par IA hors-ligne. Alternative sans abonnement récurrent aux spy tools.'
+  },
+
+  // SANTÉ & BIEN-ÊTRE (ClickBank)
+  {
+    slug: 'vape-stopper',
+    name: 'Vape Stopper (Quit Vaping AI)',
+    category: 'health',
+    categoryLabel: 'Santé & Sevrage',
+    primaryNetwork: 'clickbank',
+    payoutRate: '55% Payout + Bonus PDF',
+    dedicatedUrl: 'https://datagenere.com/clickbank/vape-stopper',
+    directUrl: 'https://datagenere.com/vape-stopper',
+    bonus: 'Guide PDF 21 Jours Sevrage & SOS Craving inclus',
+    hook: 'Coach IA 24h/24 pour arrêter la cigarette électronique avec plan personnalisé et mode SOS craving.'
+  },
+  {
+    slug: 'natural-beauty',
+    name: 'BIO Skin Care (Natural Beauty AI)',
+    category: 'health',
+    categoryLabel: 'Beauté & Cosmétique Bio',
+    primaryNetwork: 'clickbank',
+    payoutRate: '55% Payout + Bonus PDF',
+    dedicatedUrl: 'https://datagenere.com/clickbank/natural-beauty',
+    directUrl: 'https://datagenere.com/natural-beauty',
+    bonus: 'Livre Numérique : 50 Recettes Beauté Maison inclus',
+    hook: 'Diagnostic dermatologique par IA et formulation de soins 100% naturels et biologiques.'
+  },
+  {
+    slug: 'fitness-coach',
+    name: 'Home Workout (Fitness Coach AI)',
+    category: 'health',
+    categoryLabel: 'Sport & Musculation',
+    primaryNetwork: 'clickbank',
+    payoutRate: '55% Payout + Bonus PDF',
+    dedicatedUrl: 'https://datagenere.com/clickbank/fitness-coach',
+    directUrl: 'https://datagenere.com/fitness-coach',
+    bonus: 'Guide PDF : Programmes HIIT Maison Sans Matériel',
+    hook: 'Entraînements personnalisés par IA sans aucun matériel, correction des postures en direct.'
+  },
+  {
+    slug: 'apk-regime',
+    name: 'DIET Weight Loss Coach',
+    category: 'health',
+    categoryLabel: 'Minceur & Nutrition',
+    primaryNetwork: 'clickbank',
+    payoutRate: '55% Payout + Bonus PDF',
+    dedicatedUrl: 'https://datagenere.com/clickbank/apk-regime',
+    directUrl: 'https://datagenere.com/apk-regime',
+    bonus: 'Livre Numérique : Menus Brûle-Graisses Rééquilibrage',
+    hook: 'Plan nutritionnel anti-yoyo et suivi métabolique par IA pour une perte de poids durable.'
+  },
+
+  // ÉDUCATION, LANGUES & SPIRITUALITÉ (Hotmart)
+  {
+    slug: 'my-quran',
+    name: 'Quran Majeed AI (Professeur Tajwid)',
+    category: 'edu',
+    categoryLabel: 'Spiritualité & Tajwid',
+    primaryNetwork: 'hotmart',
+    payoutRate: '50% Multi-Devises',
+    dedicatedUrl: 'https://datagenere.com/hotmart/my-quran',
+    directUrl: 'https://datagenere.com/my-quran',
+    hook: 'Professeur de Tajwid par IA avec correction vocale instantanée de la récitation, 100% hors-ligne.'
+  },
+  {
+    slug: 'salat-hajj',
+    name: 'Prayer Guide & Hajj AI',
+    category: 'edu',
+    categoryLabel: 'Spiritualité & Pratique',
+    primaryNetwork: 'hotmart',
+    payoutRate: '50% Multi-Devises',
+    dedicatedUrl: 'https://datagenere.com/hotmart/salat-hajj',
+    directUrl: 'https://datagenere.com/salat-hajj',
+    hook: 'Guide complet interactif de prière et pèlerinage avec réalité augmentée et boussole Qibla.'
+  },
+  {
+    slug: 'histoires-prophetes',
+    name: 'Prophets Stories AI Teller',
+    category: 'edu',
+    categoryLabel: 'Éducation & Jeunesse',
+    primaryNetwork: 'hotmart',
+    payoutRate: '50% Multi-Devises',
+    dedicatedUrl: 'https://datagenere.com/hotmart/histoires-prophetes',
+    directUrl: 'https://datagenere.com/histoires-prophetes',
+    hook: 'Récits coraniques narrés et illustrés pour enfants, environnement 100% sécurisé sans publicité.'
+  },
+  {
+    slug: 'nutrition-kids',
+    name: 'Baby Food & Child Nutrition AI',
+    category: 'edu',
+    categoryLabel: 'Petite Enfance & Famille',
+    primaryNetwork: 'hotmart',
+    payoutRate: '50% Multi-Devises',
+    dedicatedUrl: 'https://datagenere.com/hotmart/nutrition-kids',
+    directUrl: 'https://datagenere.com/nutrition-kids',
+    hook: 'Guide nutritionnel de diversification menée par l\'enfant et détection des allergènes par photo.'
+  },
+
+  // LIFESTYLE & PRODUCTIVITÉ (JVZoo & Direct)
+  {
+    slug: 'ai-doctor',
+    name: 'AI Doctor & Symptom Checker',
+    category: 'lifestyle',
+    categoryLabel: 'Médical & Prévention',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/ai-doctor',
+    directUrl: 'https://datagenere.com/ai-doctor',
+    hook: 'Triage médical d\'urgence et orientation clinique par IA hors-ligne en toute confidentialité.'
+  },
+  {
+    slug: 'coiffure-ai',
+    name: 'Coiffure AI (Hair Styler)',
+    category: 'lifestyle',
+    categoryLabel: 'Beauté & Coiffure',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/coiffure-ai',
+    directUrl: 'https://datagenere.com/coiffure-ai',
+    hook: 'Simulateur de coiffures et coupes en réalité augmentée avant de passer chez le coiffeur.'
+  },
+  {
+    slug: 'dresser-ai',
+    name: 'Dresser AI (Styliste & Dressing)',
+    category: 'lifestyle',
+    categoryLabel: 'Mode & Dressing',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/dresser-ai',
+    directUrl: 'https://datagenere.com/dresser-ai',
+    hook: 'Styliste personnel IA qui numérise votre garde-robe et compose vos tenues quotidiennes.'
+  },
+  {
+    slug: 'esthetique',
+    name: 'Esthétique AI (Skincare Assistant)',
+    category: 'lifestyle',
+    categoryLabel: 'Dermatologie & Soins',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/esthetique',
+    directUrl: 'https://datagenere.com/esthetique',
+    hook: 'Scanner de peau et recommandations de routines dermo-cosmétiques sur mesure.'
+  },
+  {
+    slug: 'examen-assistant',
+    name: 'Examen Assistant AI',
+    category: 'lifestyle',
+    categoryLabel: 'Éducation & Études',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/examen-assistant',
+    directUrl: 'https://datagenere.com/examen-assistant',
+    hook: 'Générateur de fiches de révision, flashcards et quiz d\'examens par IA hors-ligne.'
+  },
+  {
+    slug: 'mental-health',
+    name: 'CalmNow (Mental Health AI)',
+    category: 'lifestyle',
+    categoryLabel: 'Bien-être & Sérénité',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/mental-health',
+    directUrl: 'https://datagenere.com/mental-health',
+    hook: 'Thérapie cognitive et exercices de cohérence cardiaque guidés pour gérer le stress.'
+  },
+  {
+    slug: 'recettes-cuisine',
+    name: 'Recettes Cuisine (Chef Anti-Gaspi)',
+    category: 'lifestyle',
+    categoryLabel: 'Cuisine & Gastronomie',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/recettes-cuisine',
+    directUrl: 'https://datagenere.com/recettes-cuisine',
+    hook: 'Scannez votre réfrigérateur, l\'IA invente des recettes délicieuses avec vos restes.'
+  },
+  {
+    slug: 'ramadan-halal',
+    name: 'Ramadan & Halal Assistant AI',
+    category: 'lifestyle',
+    categoryLabel: 'Spiritualité & Jeûne',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/ramadan-halal',
+    directUrl: 'https://datagenere.com/ramadan-halal',
+    hook: 'Planification du jeûne, scanner d\'additifs alimentaires halal et suivi spirituel quotidien.'
+  },
+  {
+    slug: 'ruqya-charia',
+    name: 'Ruqya Assistant AI',
+    category: 'lifestyle',
+    categoryLabel: 'Spiritualité & Protection',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/ruqya-charia',
+    directUrl: 'https://datagenere.com/ruqya-charia',
+    hook: 'Guide complet et écoute audio des invocations protectrices selon la tradition authentique.'
+  },
+  {
+    slug: 'smart-deco',
+    name: 'Smart Déco AI (Architecte 3D)',
+    category: 'lifestyle',
+    categoryLabel: 'Design & Intérieur',
+    primaryNetwork: 'jvzoo',
+    payoutRate: '50% Commission Nette',
+    dedicatedUrl: 'https://datagenere.com/jvzoo/smart-deco',
+    directUrl: 'https://datagenere.com/smart-deco',
+    hook: 'Transformez une photo de pièce vide en design d\'intérieur meublé et réaliste en 3 secondes.'
+  }
+];
+
+const emailSwipes = [
+  {
+    id: 'swipe-b2b',
+    title: 'E-mail Swipe 1 : E-Commerce / Dropshipping (Winning Items)',
+    target: 'Public B2B, dropshippers, e-commerçants, entrepreneurs',
+    subject: 'Objet : La fin des abonnements à 99€/mois pour espionner des produits ?',
+    body: `Salut [Prénom],
+
+Si tu fais du e-commerce ou du dropshipping, tu connais la règle :
+Sans produit gagnant, tu brûles ton budget publicitaire pour rien.
+
+Le problème ?
+Tous les "spy tools" actuels coûtent entre 49€ et 199€ CHAQUE mois... et tout le monde voit exactement les mêmes produits que toi.
+
+Une nouvelle approche vient de voir le jour :
+👉 [Lien d'Affilié : Winning Items AI]
+
+C'est une application mobile Android intégrant un modèle d'IA autonome qui analyse les signaux faibles et tendances du marché directement depuis ton téléphone — sans abonnement récurrent et 100% hors-ligne.
+
+Tu payes une seule fois, tu accèdes aux données à vie.
+
+Regarde la démonstration ici :
+👉 [Lien d'Affilié : https://datagenere.com/jvzoo/dropshipping]
+
+Garantie 30 jours satisfait ou remboursé.
+
+À très vite,
+[Ton Prénom]`
+  },
+  {
+    id: 'swipe-health',
+    title: 'E-mail Swipe 2 : Santé & Sevrage Nicotinique (Vape Stopper)',
+    target: 'Listes santé, bien-être, résolutions, sevrage tabagique',
+    subject: 'Objet : Pourquoi la volonté ne suffit pas pour arrêter la vape (et ce qui marche)',
+    body: `Bonjour [Prénom],
+
+Si vous avez déjà essayé d'arrêter la cigarette électronique, vous connaissez ce moment :
+Le stress monte, le geste devient automatique... et la rechute arrive.
+
+Ce n'est pas un manque de volonté : c'est un manque d'accompagnement cognitif au moment exact où la pulsion (le craving) survient.
+
+C'est pour résoudre ce problème précis qu'a été créée l'application Vape Stopper :
+👉 [Lien d'Affilié : https://datagenere.com/clickbank/vape-stopper]
+
+Ce que l'application fait pour vous :
+1. Un bouton d'urgence "SOS Craving" avec 30 techniques de dérivation mentale validées
+2. Un suivi métabolique de votre sevrage en temps réel
+3. Une IA de soutien disponible 24h/24, même sans aucune connexion internet
+4. BONUS EXCLUSIF OFFERT : Le Protocole PDF de Sevrage & Respiration en 21 Jours
+
+Vous bénéficiez en plus de la garantie 60 jours ClickBank : si vous ne constatez pas de résultat, vous êtes remboursé à 100%.
+
+Découvrez le programme complet ici :
+👉 [Lien d'Affilié : https://datagenere.com/clickbank/vape-stopper]
+
+Prenez soin de vous,
+[Votre Prénom]`
+  },
+  {
+    id: 'swipe-edu',
+    title: 'E-mail Swipe 3 : Éducation & Spiritualité (My Quran Tajwid)',
+    target: 'Communauté musulmane, familles, apprentissage de l\'arabe/Coran',
+    subject: "Objet : Apprendre le Tajwid sans professeur particulier ? C'est possible grâce à l'IA",
+    body: `Salam aleykoum [Prénom],
+
+Pour beaucoup d'entre nous, apprendre à réciter le Coran avec les règles précises de Tajwid est un défi :
+- Manque de temps pour se déplacer à la mosquée
+- Crainte de faire des fautes de prononciation
+- Pas toujours de professeur disponible à la maison
+
+L'application My Quran résout ce problème avec une avancée technologique inédite :
+👉 [Lien d'Affilié : https://datagenere.com/hotmart/my-quran]
+
+L'IA écoute votre récitation au micro et analyse votre prononciation lettre par lettre, entièrement hors-ligne, sans envoyer votre voix sur aucun serveur distant.
+
+Pourquoi vos contacts vont l'adorer :
+- Respect total de la vie privée (100% hors-ligne)
+- Pédagogie progressive adaptée aux débutants comme aux confirmés
+- Paiement multi-devises simplifié et accès immédiat
+
+Découvrez la vidéo de démonstration :
+👉 [Lien d'Affilié : https://datagenere.com/hotmart/my-quran]
+
+Fraternellement,
+[Votre Prénom]`
+  }
+];
+---
+
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espace Partenaires & Affiliés — Gagnez jusqu'à 55% de Commission | Datagénère</title>
+  <meta name="description" content="Rejoignez le programme d'affiliation officiel de Datagénère. Accédez à la matrice des liens JVZoo, ClickBank et Hotmart, téléchargez les kits médias et swipes d'e-mails prêts à l'emploi." />
+  <link rel="icon" type="image/jpeg" href="/logo.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- GOOGLE ANALYTICS 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V51T1RG6YX" is:inline></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V51T1RG6YX');
+  </script>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="wrap header-inner">
+      <a href="/" class="brand">
+        <img src="/logo.jpg" alt="Logo Datagénère" class="brand-img" />
+        <div class="brand-text">
+          <span class="brand-title">DATAGÉNÈRE</span>
+          <span class="brand-sub">Espace Partenaires & Affiliation</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="/nos-produits" class="nav-link">Catalogue</a>
+        <a href="/aide" class="nav-link">Centre d'Aide</a>
+        <a href="#matrice" class="btn btn-sm btn-primary">Voir les Liens</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <span class="badge-hero">Programme Partenaire Officiel</span>
+        <h1>Monétisez votre audience avec des applications IA inédites.</h1>
+        <p class="hero-desc">
+          Gagnez entre <strong>50% et 55% de commission nette</strong> sur chaque vente. Produits hors-ligne uniques sur le marché, tunnels de vente ultra-optimisés sur JVZoo, ClickBank et Hotmart avec bonus numériques exclusifs.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-val">50% - 55%</span>
+            <span class="stat-lbl">Commission d'Affiliation</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-val">19 Apps</span>
+            <span class="stat-lbl">Catalogue IA 100% Offline</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-val">60 Jours</span>
+            <span class="stat-lbl">Durée de Cookie Attribué</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-val">3 Réseaux</span>
+            <span class="stat-lbl">JVZoo · ClickBank · Hotmart</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1 : MATRICE DES LIENS D'AFFILIATION -->
+    <section id="matrice" class="section">
+      <div class="wrap">
+        <div class="section-head text-center">
+          <span class="section-tag">Matrice Opérationnelle</span>
+          <h2>Liens de Vente Prêts à l'Emploi</h2>
+          <p class="section-sub">
+            Chaque tunnel est optimisé selon les standards réglementaires et commerciaux de chaque plateforme d'affiliation.
+          </p>
+
+          <div class="filter-tabs">
+            <button class="tab-btn active" data-filter="all">Toutes les Applications (19)</button>
+            <button class="tab-btn" data-filter="b2b">B2B & E-Commerce (JVZoo)</button>
+            <button class="tab-btn" data-filter="health">Santé & Bien-être (ClickBank)</button>
+            <button class="tab-btn" data-filter="edu">Éducation & Spiritualité (Hotmart)</button>
+            <button class="tab-btn" data-filter="lifestyle">IA & Lifestyle</button>
+          </div>
+        </div>
+
+        <div class="partner-grid">
+          {partnerApps.map((app) => (
+            <article class="partner-card" data-cat={app.category}>
+              <div class="partner-head">
+                <div>
+                  <span class="partner-cat">{app.categoryLabel}</span>
+                  <h3 class="partner-title">{app.name}</h3>
+                </div>
+                <span class={`net-badge net-${app.primaryNetwork}`}>
+                  {app.primaryNetwork === 'jvzoo' ? 'JVZoo 50%' : app.primaryNetwork === 'clickbank' ? 'ClickBank 55%' : app.primaryNetwork === 'hotmart' ? 'Hotmart 50%' : 'Direct'}
+                </span>
+              </div>
+
+              <p class="partner-hook">{app.hook}</p>
+
+              {app.bonus && (
+                <div class="partner-bonus">
+                  🎁 <strong>Bonus Numérique Inclus :</strong> {app.bonus}
+                </div>
+              )}
+
+              <div class="partner-links">
+                <div class="link-item">
+                  <span class="link-label">Tunnel Dédié Réseau :</span>
+                  <div class="link-box">
+                    <input type="text" readonly value={app.dedicatedUrl} class="link-input" />
+                    <button class="copy-btn" data-url={app.dedicatedUrl}>Copier</button>
+                  </div>
+                </div>
+
+                <div class="link-item">
+                  <span class="link-label">Lien Vente Directe :</span>
+                  <div class="link-box">
+                    <input type="text" readonly value={app.directUrl} class="link-input link-muted" />
+                    <button class="copy-btn" data-url={app.directUrl}>Copier</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="partner-card-foot">
+                <a href={app.dedicatedUrl} target="_blank" rel="noopener noreferrer" class="preview-link">
+                  Tester la page en direct →
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2 : SWIPES EMAILS PRÊTS À L'EMPLOI -->
+    <section id="swipes" class="section sec-light">
+      <div class="wrap">
+        <div class="section-head text-center">
+          <span class="section-tag">Ressources Marketing</span>
+          <h2>Swipes d'E-mails Prêts à Envoyer</h2>
+          <p class="section-sub">
+            Copiez-collez ces séquences e-mails testées et optimisées pour générer un taux de clic et de conversion maximum auprès de votre audience.
+          </p>
+        </div>
+
+        <div class="swipes-list">
+          {emailSwipes.map((swipe) => (
+            <div class="swipe-box">
+              <div class="swipe-head">
+                <div>
+                  <h3>{swipe.title}</h3>
+                  <span class="swipe-target">🎯 Cible : {swipe.target}</span>
+                </div>
+                <button class="btn btn-sm btn-primary copy-swipe-btn" data-target={swipe.id}>
+                  Copier l'e-mail
+                </button>
+              </div>
+
+              <div class="swipe-content" id={swipe.id}>
+                <div class="swipe-subject">{swipe.subject}</div>
+                <pre class="swipe-body">{swipe.body}</pre>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3 : KIT MÉDIA & RESSOURCES GRAPHIQUES -->
+    <section id="kit-media" class="section">
+      <div class="wrap">
+        <div class="section-head text-center">
+          <span class="section-tag">Créatifs Publicitaires</span>
+          <h2>Kit Média & Bannières Réseaux Sociaux</h2>
+          <p class="section-sub">
+            Téléchargez les visuels haute définition officiels pour vos campagnes Meta Ads, TikTok, Instagram et Google Ads.
+          </p>
+        </div>
+
+        <div class="media-grid">
+          <div class="media-card">
+            <span class="media-icon">📐</span>
+            <h3>Bannières Carrées (1:1)</h3>
+            <p>Idéales pour les publications Instagram, Facebook Feed, LinkedIn et bannières publicitaires carrées (1080x1080 px).</p>
+            <a href="/images/" class="btn btn-sm btn-ghost">Accéder aux Visuels HD</a>
+          </div>
+
+          <div class="media-card">
+            <span class="media-icon">📱</span>
+            <h3>Formats Verticaux (9:16)</h3>
+            <p>Parfaits pour les Stories Instagram/Facebook, TikTok Ads et YouTube Shorts (1080x1920 px).</p>
+            <a href="/images/" class="btn btn-sm btn-ghost">Accéder aux Formats Story</a>
+          </div>
+
+          <div class="media-card">
+            <span class="media-icon">🖼️</span>
+            <h3>Mockups Smartphones 3D</h3>
+            <p>Captures d'écran réalistes sur smartphones modernes pour valoriser l'expérience utilisateur dans vos avis et articles.</p>
+            <a href="/apps/" class="btn btn-sm btn-ghost">Télécharger les Mockups</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 : TABLEAU RÉCAPITULATIF DES COMMISSIONS -->
+    <section class="section sec-light">
+      <div class="wrap">
+        <div class="section-head text-center">
+          <span class="section-tag">Rémunération & Payouts</span>
+          <h2>Tableau Comparatif des Réseaux d'Affiliation</h2>
+        </div>
+
+        <div class="table-wrap">
+          <table class="payout-table">
+            <thead>
+              <tr>
+                <th>Réseau d'Affiliation</th>
+                <th>Thématiques Prioritaires</th>
+                <th>Taux de Commission</th>
+                <th>Bonus Numérique Inclus</th>
+                <th>Garantie Client</th>
+                <th>Modalités de Versement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>JVZoo</strong></td>
+                <td>E-Commerce, B2B, Marketing, Dropshipping</td>
+                <td><span class="badge-rate">50% Net</span></td>
+                <td>Optionnel</td>
+                <td>30 Jours</td>
+                <td>JVZooPay / PayPal / Virement bimensuel</td>
+              </tr>
+              <tr>
+                <td><strong>ClickBank</strong></td>
+                <td>Santé, Bien-être, Fitness, Nutrition, Sevrage</td>
+                <td><span class="badge-rate rate-cb">Jusqu'à 55%</span></td>
+                <td>✅ Ebook PDF Exclusif Offert</td>
+                <td>60 Jours</td>
+                <td>Paiement direct hebdomadaire ClickBank</td>
+              </tr>
+              <tr>
+                <td><strong>Hotmart</strong></td>
+                <td>Éducation, Famille, Langues, Spiritualité</td>
+                <td><span class="badge-rate rate-hm">40% à 50%</span></td>
+                <td>Inclus selon produit</td>
+                <td>30 Jours</td>
+                <td>Multi-devises (EUR, USD, BRL, MAD)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5 : RÈGLEMENT D'AFFILIATION & CONTACT -->
+    <section class="section sec-dark">
+      <div class="wrap">
+        <div class="rules-box">
+          <span class="badge-hero">Conformité & Éthique</span>
+          <h2>Règles d'Affiliation & Bonnes Pratiques</h2>
+          <div class="rules-grid">
+            <div class="rule-item">
+              <h4>✅ Méthodes Autorisées & Encouragées :</h4>
+              <ul>
+                <li>Campagnes publicitaires ciblées (Meta Ads, TikTok, Google Ads sur mots-clés d'intention).</li>
+                <li>Marketing par e-mail auprès de votre liste d'abonnés consentants (Opt-in).</li>
+                <li>Tests, revues comparatives, vidéos démo et tutoriels d'utilisation.</li>
+                <li>Bannières sur vos sites, blogs ou chaînes d'information thématiques.</li>
+              </ul>
+            </div>
+            <div class="rule-item">
+              <h4>❌ Pratiques Strictement Interdites :</h4>
+              <ul>
+                <li>Envoi d'e-mails non sollicités (SPAM direct ou listes achetées).</li>
+                <li>Enchères Google Ads sur le nom de marque exact "Datagénère" ou "AGH Holding".</li>
+                <li>Allégations médicales ou financières trompeuses non vérifiées.</li>
+                <li>Auto-affiliation (acheter via son propre lien pour obtenir une réduction).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="affiliate-support">
+            <div>
+              <strong>Besoin d'un lien d'affilié personnalisé ou d'une offre bundle spéciale ?</strong>
+              <p>Contactez notre responsable des partenariats et affiliations.</p>
+            </div>
+            <a href="https://wa.me/212710911949?text=Bonjour,%20je%20souhaite%20devenir%20affilié%20partenaire%20Datagénère" target="_blank" rel="noopener" class="btn btn-whatsapp">
+              Manager Affiliation WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast">Lien copié dans le presse-papiers !</div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>© {new Date().getFullYear()} AGH Data Agency Holding SA. Tous droits réservés.</p>
+      <div class="footer-links">
+        <a href="/">Accueil</a>
+        <a href="/nos-produits">Nos Produits</a>
+        <a href="/aide">Centre d'Aide</a>
+        <a href="/earnings-disclaimer">Earnings Disclaimer</a>
+        <a href="/privacy-policy">Confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script is:inline>
+    // Copy link buttons
+    const copyBtns = document.querySelectorAll('.copy-btn');
+    const toast = document.getElementById('toast');
+
+    function showToast(text) {
+      if (!toast) return;
+      toast.innerText = text;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    copyBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const url = btn.getAttribute('data-url');
+        if (url) {
+          navigator.clipboard.writeText(url).then(() => {
+            showToast('Lien copié dans le presse-papiers !');
+          });
+        }
+      });
+    });
+
+    // Copy swipe buttons
+    const copySwipeBtns = document.querySelectorAll('.copy-swipe-btn');
+    copySwipeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          navigator.clipboard.writeText(targetEl.innerText).then(() => {
+            showToast('Texte de l\'e-mail copié !');
+          });
+        }
+      });
+    });
+
+    // Filter tabs
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const partnerCards = document.querySelectorAll('.partner-card');
+
+    tabBtns.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabBtns.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.getAttribute('data-filter');
+
+        partnerCards.forEach(card => {
+          const cat = card.getAttribute('data-cat');
+          if (filter === 'all' || cat === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <style>
+    :root {
+      --bg: #0B132B;
+      --surface: #1E293B;
+      --card-bg: #FFFFFF;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --primary: #4F46E5;
+      --primary-hover: #4338CA;
+      --accent: #10B981;
+      --border: #E2E8F0;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      background: #F8FAFC;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* HEADER */
+    .header {
+      background: #0B132B;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-img { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
+    .brand-title { display: block; color: #FFFFFF; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.05em; }
+    .brand-sub { display: block; color: #94A3B8; font-size: 0.78rem; }
+    .nav { display: flex; align-items: center; gap: 20px; }
+    .nav-link { color: #CBD5E1; text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+    .nav-link:hover { color: #FFFFFF; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      font-size: 0.95rem;
+    }
+    .btn-sm { padding: 8px 16px; font-size: 0.85rem; }
+    .btn-primary { background: var(--primary); color: #FFFFFF; }
+    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-whatsapp { background: #16A34A; color: #FFFFFF; }
+    .btn-whatsapp:hover { background: #15803D; }
+    .btn-ghost { background: transparent; color: var(--primary); border: 1.5px solid var(--border); }
+    .btn-ghost:hover { background: #EEF2FF; border-color: var(--primary); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(180deg, #0B132B 0%, #1E293B 100%);
+      color: #FFFFFF;
+      padding: 75px 0 65px;
+      text-align: center;
+    }
+    .badge-hero {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(79, 70, 229, 0.25);
+      border: 1px solid rgba(79, 70, 229, 0.5);
+      border-radius: 100px;
+      color: #A5B4FC;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 18px;
+    }
+    .hero h1 { font-size: 2.7rem; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
+    .hero-desc { font-size: 1.15rem; color: #94A3B8; max-width: 780px; margin: 0 auto 40px; }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-val { font-size: 1.8rem; font-weight: 800; color: #FFFFFF; display: block; font-family: 'Outfit', sans-serif; }
+    .stat-lbl { font-size: 0.82rem; color: #A5B4FC; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; display: block; }
+
+    /* SECTIONS */
+    .section { padding: 80px 0; }
+    .sec-light { background: #FFFFFF; }
+    .sec-dark { background: #0B132B; color: #FFFFFF; }
+    .section-head { margin-bottom: 40px; }
+    .text-center { text-align: center; }
+    .section-tag { font-size: 0.82rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px; }
+    .section-head h2 { font-size: 2.2rem; font-weight: 800; color: #0F172A; margin-bottom: 12px; }
+    .sec-dark .section-head h2 { color: #FFFFFF; }
+    .section-sub { color: var(--text-muted); max-width: 680px; margin: 0 auto; font-size: 1.02rem; }
+
+    /* TABS */
+    .filter-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+    .tab-btn {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      padding: 9px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .tab-btn.active { background: var(--primary); color: #FFFFFF; border-color: var(--primary); }
+
+    /* PARTNER GRID */
+    .partner-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; }
+    .partner-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s;
+    }
+    .partner-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .partner-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .partner-cat { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 4px; }
+    .partner-title { font-size: 1.18rem; font-weight: 700; line-height: 1.3; }
+
+    .net-badge { font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; white-space: nowrap; }
+    .net-jvzoo { background: #FEF08A; color: #854D0E; }
+    .net-clickbank { background: #DCFCE7; color: #15803D; }
+    .net-hotmart { background: #FFEDD5; color: #9A3412; }
+    .net-direct { background: #F1F5F9; color: #475569; }
+
+    .partner-hook { color: var(--text-muted); font-size: 0.88rem; line-height: 1.45; margin-bottom: 14px; }
+    .partner-bonus { background: #F0FDF4; border: 1px dashed #86EFAC; color: #166534; font-size: 0.82rem; padding: 10px 12px; border-radius: 10px; margin-bottom: 16px; }
+
+    .partner-links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .link-item { display: flex; flex-direction: column; gap: 4px; }
+    .link-label { font-size: 0.75rem; font-weight: 700; color: #475569; text-transform: uppercase; }
+    .link-box { display: flex; gap: 6px; }
+    .link-input { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.82rem; background: #F8FAFC; color: #0F172A; }
+    .link-muted { color: #64748B; font-size: 0.78rem; }
+    .copy-btn { background: #EEF2FF; color: var(--primary); border: 1px solid #C7D2FE; font-weight: 700; border-radius: 8px; padding: 0 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+    .copy-btn:hover { background: var(--primary); color: #FFFFFF; }
+
+    .partner-card-foot { border-top: 1px solid var(--border); padding-top: 12px; }
+    .preview-link { font-size: 0.85rem; font-weight: 600; color: var(--primary); text-decoration: none; }
+    .preview-link:hover { text-decoration: underline; }
+
+    /* SWIPES */
+    .swipes-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+    .swipe-box { background: #F8FAFC; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px; }
+    .swipe-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+    .swipe-head h3 { font-size: 1.25rem; font-weight: 700; }
+    .swipe-target { font-size: 0.82rem; color: #64748B; display: block; margin-top: 4px; }
+    .swipe-subject { background: #FFFFFF; border: 1px solid var(--border); padding: 10px 14px; border-radius: 8px; font-weight: 700; font-size: 0.92rem; margin-bottom: 12px; color: #0F172A; }
+    .swipe-body { background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; padding: 16px; font-family: inherit; font-size: 0.88rem; line-height: 1.6; white-space: pre-wrap; color: #334155; }
+
+    /* MEDIA GRID */
+    .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .media-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 30px 24px; text-align: center; }
+    .media-icon { font-size: 2.6rem; display: block; margin-bottom: 14px; }
+    .media-card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+    .media-card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+
+    /* TABLE */
+    .table-wrap { max-width: 1050px; margin: 0 auto; overflow-x: auto; background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; }
+    .payout-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem; }
+    .payout-table th { background: #F8FAFC; padding: 16px 20px; font-weight: 700; color: #334155; border-bottom: 2px solid var(--border); font-family: 'Outfit', sans-serif; }
+    .payout-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+    .badge-rate { display: inline-block; background: #FEF08A; color: #854D0E; font-weight: 800; padding: 4px 10px; border-radius: 6px; font-size: 0.82rem; }
+    .rate-cb { background: #DCFCE7; color: #166534; }
+    .rate-hm { background: #FFEDD5; color: #9A3412; }
+
+    /* RULES BOX */
+    .rules-box { max-width: 950px; margin: 0 auto; }
+    .rules-box h2 { font-size: 2.2rem; margin-bottom: 24px; text-align: center; }
+    .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 36px; }
+    .rule-item { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 24px; }
+    .rule-item h4 { font-size: 1.1rem; margin-bottom: 14px; color: #FFFFFF; }
+    .rule-item ul { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.92rem; color: #CBD5E1; }
+    .rule-item li { line-height: 1.45; }
+
+    .affiliate-support {
+      background: rgba(79, 70, 229, 0.2);
+      border: 1px solid rgba(79, 70, 229, 0.4);
+      border-radius: 14px;
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      border-left: 4px solid var(--accent);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* FOOTER */
+    .footer { background: #060B1A; color: #64748B; padding: 28px 0; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.86rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { color: #94A3B8; text-decoration: none; }
+    .footer-links a:hover { color: #FFFFFF; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .nav { display: none; }
+      .affiliate-support { flex-direction: column; text-align: center; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</body>
+</html>
