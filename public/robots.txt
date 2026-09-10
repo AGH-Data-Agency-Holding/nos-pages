@@ -1,0 +1,16 @@
+# Robots.txt officiel — AGH Data Agency Holding SA (datagenere.com)
+User-agent: *
+Allow: /
+
+# Protection des accès post-achat et de la propriété intellectuelle (APK & Licences)
+Disallow: /*/merci
+Disallow: /dist/
+Disallow: /scratch/
+
+# Prévention du contenu dupliqué (Duplicate Content) pour les tunnels affiliés
+Disallow: /jvzoo/
+Disallow: /clickbank/
+Disallow: /hotmart/
+
+# Déclaration officielle du plan du site
+Sitemap: https://datagenere.com/sitemap.xml
